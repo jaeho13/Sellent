@@ -1,0 +1,10 @@
+@font-face {
+    font-family: "HANNA";
+    font-style: normal;
+    font-weight: 100;
+    src: url("./AnyConv.com__BMHANNAProOTF.woff") format("woff");
+}
+
+body {
+    font-family: "HANNA";
+}
