@@ -15,7 +15,7 @@ import javax.persistence.Id;
 @Getter
 @ToString
 @DynamicInsert
-public class user {
+public class UserList {
     //유저 메일
     @Id
     @Column(nullable = false)
@@ -23,8 +23,4 @@ public class user {
     //유저 닉네임
     @Column(nullable = false)
     private String userNm;
-    //유저 성별
-    @Column
-    private String userGender;
-
 }
