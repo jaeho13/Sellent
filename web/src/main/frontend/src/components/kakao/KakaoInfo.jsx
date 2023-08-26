@@ -18,12 +18,10 @@ const KakaoInfo = () => {
             .then((res) => {
                 const userEmail = res.data.userList.userEmail;
                 const userNick = res.data.usrList.userNm;
-                const userGender = res.data.usrList.userGender
                 // 요청이 성공한 경우 서버 응답을 처리할 수 있습니다.
                 sessionStorage.setItem("userEmail", userEmail);
                 sessionStorage.setItem("userNm", userNick);
-                sessionStorage.setItem("userGender", userGender);
-                console.log(userEmail, userNick, userGender)
+                console.log(userEmail, userNick)
             })
             .catch((error) => {
                 //요청이 실패한 경우 에러를 처리할 수 있습니다.
