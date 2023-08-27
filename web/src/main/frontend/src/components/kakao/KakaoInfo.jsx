@@ -13,11 +13,12 @@ const KakaoInfo = () => {
         //Kakao 로그인 요청을 보낼 URL
         const url = `/login/kakao/userList?token=${token}`;
 
+        //axios를 사용하여 서버에 요청 보내기
         axios
             .get(url)
             .then((res) => {
-                const userEmail = res.data.userList.userEmail;
-                const userNick = res.data.usrList.userNm;
+                const userEmail = res.data.userEmail;
+                const userNick = res.data.userNm;
                 // 요청이 성공한 경우 서버 응답을 처리할 수 있습니다.
                 navigate("/exam")
                 sessionStorage.setItem("userEmail", userEmail);
