@@ -117,7 +117,7 @@ public class NaverService {
             JsonElement element = parser.parse(result);
             JsonObject response = element.getAsJsonObject().get("response").getAsJsonObject();
 
-            String nickname = response.get("nickname").getAsString();
+            String nickname = response.get("name").getAsString();
             String email = response.get("email").getAsString();
 
             userList.setUserEmail(email);

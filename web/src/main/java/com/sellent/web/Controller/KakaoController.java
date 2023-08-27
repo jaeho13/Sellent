@@ -49,6 +49,7 @@ public class KakaoController {
             HttpSession session = request.getSession();
             session.setAttribute("userList", user);
             map.put("userList", user);
+
             System.out.println("로그인 성공!!" + user);
             return map;
         }
