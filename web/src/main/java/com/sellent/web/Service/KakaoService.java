@@ -107,24 +107,18 @@ public class KakaoService {
             String email = kakao_account.getAsJsonObject().get("email").getAsString();
             String nick = properties.getAsJsonObject().get("nickname").getAsString();
 
-            userList = userRepository.findByUserEmail(email);
+            userList.setUserEmail(email);
+            userList.setUserNm(nick);
+            
+            UserList userCheck = userRepository.findByUserEmail(email);
 
-            if (userList == null) {
+            if (userCheck == null) {
                 System.out.println("등록된 회원 아님");
-
-                // userInfo 객체 생성 및 초기화
-                userList = new UserList();
-
-                userList.setUserEmail(email);
-                userList.setUserNm(nick);
 
                 userRepository.save(userList);
 
                 return userList;
             }
-
-            userList.setUserEmail(email);
-            userList.setUserNm(nick);
 
             System.out.println("유저 정보 " + userList);
 
