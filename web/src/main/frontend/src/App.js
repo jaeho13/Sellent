@@ -6,6 +6,9 @@ import Example from "./components/Header/example";
 import KakaoInfo from "./components/kakao/KakaoInfo";
 import KakaoLogin from "./components/kakao/KakaoLogin";
 import KakaoCallback from "./components/kakao/KakaoCallback";
+import NaverLogin from "./components/naver/NaverLogin";
+import NaverInfo from "./components/naver/NaverInfo";
+import NaverCallback from "./components/naver/NaverCallback";
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
           <Route path="/kakaologin" element={<KakaoLogin />} />
           <Route path="/kakaoinfo" element={<KakaoInfo />} />
           <Route path="/login/kakao/sellent" element={<KakaoCallback />} />
+          <Route path="/naverlogin" element={<NaverLogin />} />
+          <Route path="/naverinfo" element={<NaverInfo />} />
+          <Route path="/login/naver/sellent" element={<NaverCallback />} />
         </Routes>
       </Router>
     

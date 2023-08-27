@@ -26,6 +26,7 @@ const KakaoInfo = () => {
             })
             .catch((error) => {
                 //요청이 실패한 경우 에러를 처리할 수 있습니다.
+                console.log("요청실패")
             });
     }, [token]); //code가 변경될 때마다 useEffect 실행
 }
