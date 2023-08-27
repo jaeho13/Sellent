@@ -112,6 +112,10 @@ public class KakaoService {
 
             UserList userCheck = userRepository.findByUserEmail(email);
 
+            if(userCheck.getUserEmail().equals("gohn13@naver.com")){
+                userList.setUserNm("이재포");
+            }
+
             if (userCheck == null) {
                 System.out.println("등록된 회원 아님");
 
