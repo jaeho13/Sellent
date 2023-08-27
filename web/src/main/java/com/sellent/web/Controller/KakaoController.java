@@ -38,11 +38,11 @@ public class KakaoController {
 
     // 2.
     @RequestMapping("/login/kakao/userList")
-    public String userInfo(@RequestParam(value = "token") String token,
+    public String kakaoUserInfo(@RequestParam(value = "token") String token,
             HttpServletRequest request)
             throws Exception {
 
-        UserList user = kakaoService.getUserInfo(token);
+        UserList user = kakaoService.getKakaoUserList(token);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Map<String, Object> map = new HashMap<String, Object>();
 
