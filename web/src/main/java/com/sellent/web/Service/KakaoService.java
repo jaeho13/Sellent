@@ -76,7 +76,7 @@ public class KakaoService {
         return access_token;
     }
 
-    public UserList getUserInfo(String token) {
+    public UserList getKakaoUserList(String token) {
         UserList userList = new UserList();
         String reqURL = "https://kapi.kakao.com/v2/user/me";
 
@@ -109,7 +109,7 @@ public class KakaoService {
 
             userList.setUserEmail(email);
             userList.setUserNm(nick);
-            
+
             UserList userCheck = userRepository.findByUserEmail(email);
 
             if (userCheck == null) {
