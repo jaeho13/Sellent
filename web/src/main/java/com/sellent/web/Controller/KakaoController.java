@@ -7,6 +7,7 @@ import com.sellent.web.Service.KakaoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,21 +39,20 @@ public class KakaoController {
 
     // 2.
     @RequestMapping("/login/kakao/userList")
-    public String kakaoUserInfo(@RequestParam(value = "token") String token,
-            HttpServletRequest request)
-            throws Exception {
-
+    public Map<String, Object> kakaoUserInfo(@RequestParam(value = "token") String token,
+            HttpServletRequest request) throws Exception {
+        Map<String, Object> map = new HashMap<>();
         UserList user = kakaoService.getKakaoUserList(token);
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Map<String, Object> map = new HashMap<String, Object>();
+        log.info("userInfo ={}", user);
 
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("userList", user);
             map.put("userList", user);
             System.out.println("로그인 성공!!" + user);
-            return gson.toJson(map);
+            return map;
         }
-        return "로그인에 실패하였습니다!";
+        map.put("status", HttpStatus.BAD_REQUEST.toString());
+        return map;
     }
 }
