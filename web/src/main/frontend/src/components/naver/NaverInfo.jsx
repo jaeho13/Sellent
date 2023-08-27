@@ -13,6 +13,7 @@ const NaverInfo = () => {
         //naver 로그인 요청을 보낼 URL
         const url = `/login/naver/userList?token=${token}`;
 
+        //axios를 사용하여 서버에 요청 보내기
         axios
             .get(url)
             .then((res) => {
