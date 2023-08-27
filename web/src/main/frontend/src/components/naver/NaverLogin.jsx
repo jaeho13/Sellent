@@ -7,8 +7,8 @@ const NaverLogin = () => {
 
     const RE_DIRECT = process.env.REACT_APP_NAVER_REDIRECT_URI;
 
-    const NAVER_AUTH_URL = `https://nid.naver.com/login/naver/sellent?client_id=${REST_API}&redirect_uri=${RE_DIRECT}&response_type=code&state=asd`;
-    // http://localhost:3000/login/naver/sellent
+    const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${REST_API}&redirect_uri=${RE_DIRECT}&response_type=code&state=asd`;
+
     const handleLogin = () => {
         window.location.href = NAVER_AUTH_URL
     }

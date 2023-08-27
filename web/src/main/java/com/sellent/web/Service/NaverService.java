@@ -32,7 +32,7 @@ public class NaverService {
         String state = UUID.randomUUID().toString();
 
         /* 생성한 난수 값을 session에 저장 */
-        session.setAttribute("state",state);
+        session.setAttribute("state", state);
         try {
             URL url = new URL(host);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -43,22 +43,22 @@ public class NaverService {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(urlConnection.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=uFF96bkwIoIU1ZNfOobf");
-            sb.append("&client_secret=6qC4U0iUqS");
+            sb.append("&client_id=KseDMBYnWmbIAcUIZRo9");
+            sb.append("&client_secret=MV0RxdnxLu");
             sb.append("&code=" + code);
             sb.append("&state=" + state);
 
-//            sb.append("&redirect_uri=http://localhost:4000/oauth/login/kakao"); //프 서버로 바꾸기
-
+            // sb.append("&redirect_uri=http://localhost:4000/oauth/login/kakao"); //프 서버로
+            // 바꾸기
 
             bw.write(sb.toString());
             bw.flush();
             System.out.println("통신 요청 전");
-            //결과 코드 200이면 통신 성공임!
+            // 결과 코드 200이면 통신 성공임!
             int responseCode = urlConnection.getResponseCode();
             log.info("responseCode = ", responseCode);
 
-            //요청 통해 얻은 JSON타입 Response 메세지 읽어오기
+            // 요청 통해 얻은 JSON타입 Response 메세지 읽어오기
             BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
             String line = "";
             String result = "";
@@ -68,7 +68,7 @@ public class NaverService {
             }
             log.info("response body ={}", result);
 
-            //Json 파싱 : Gson라이브러리에 포함된 클래스로 JSON 파싱 객체 생성
+            // Json 파싱 : Gson라이브러리에 포함된 클래스로 JSON 파싱 객체 생성
             JsonParser parser = new JsonParser();
             JsonElement elem = parser.parse(result);
 
@@ -92,8 +92,8 @@ public class NaverService {
 
         String reqURL = "https://openapi.naver.com/v1/nid/me";
 
-        try{
-            URL url = new URL(reqURL);  // 1. url객체 만들기
+        try {
+            URL url = new URL(reqURL); // 1. url객체 만들기
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
             // 2. url에서 url connection 만들기
@@ -101,14 +101,14 @@ public class NaverService {
             conn.setRequestProperty("Authorization", "Bearer " + token);
 
             // 키값, 속성 적용
-            int responseCode = conn.getResponseCode();  // 서버에서 보낸 http 상태 코드 반환
+            int responseCode = conn.getResponseCode(); // 서버에서 보낸 http 상태 코드 반환
             log.info("responseCode 확인 ={}", responseCode);
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
             // 버퍼를 사용하여 읽은 것
             String line = "";
             String result = "";
-            while((line = br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
                 result += line;
             }
             log.info("respone body ={}", result);
@@ -125,12 +125,12 @@ public class NaverService {
 
             UserList findUser = userRepository.findByUserEmail(email);
 
-            if(findUser == null){
+            if (findUser == null) {
                 System.out.println("등록된 회원 아님");
                 userRepository.save(userList);
             }
 
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
