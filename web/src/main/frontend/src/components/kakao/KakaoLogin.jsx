@@ -8,6 +8,10 @@ const KakaoLogin = () => {
     const RE_DIRECT = process.env.REACT_APP_KAKAO_REDIRECT_URI;
 
     const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API}&redirect_uri=${RE_DIRECT}&response_type=code`;
+    // open(
+    //     `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&
+    //     redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`
+    //     , "_self")
 
     const handleLogin = () => {
         window.location.href = KAKAO_AUTH_URL
