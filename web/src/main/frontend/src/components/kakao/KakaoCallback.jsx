@@ -12,8 +12,8 @@ const KakaoCallback = () => {
     console.log(code);
 
     useEffect(() => {
-        // Kakao 로그인 요청을 보낼 URL
-        const url = `/login/sellent?code=${code}`;
+        // Kakao 로그인 요청을 서버로 보낼 URL
+        const url = `/login/kakao/sellent?code=${code}`;
 
         // axios를 사용하여 서버에 요청 보내기
         axios
@@ -22,6 +22,7 @@ const KakaoCallback = () => {
                 // 요청이 성공한 경우 서버 응답을 처리할 수 있습니다.
                 console.log("서버 응답:", response.data);
                 localStorage.setItem('token', response.data)
+                navigate("/kakaoinfo")
             })
             .catch((error) => {
                 // 요청이 실패한 경우 에러를 처리할 수 있습니다.

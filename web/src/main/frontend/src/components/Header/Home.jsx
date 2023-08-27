@@ -2,8 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import "../fonts/Font.css";
 import { AiFillCloseCircle } from "react-icons/ai"
+import { useNavigate } from "react-router-dom"
 
 const Home = () => {
+
+    const navigate = useNavigate();
+
+    const goLogin = () => {
+        navigate("/login")
+    }
+
     return (
         <>
             <Window>
@@ -17,20 +25,22 @@ const Home = () => {
 
                     <Left>
                         <LeftTop>로고</LeftTop>
-                        <LeftBoard>메인화면</LeftBoard>
-                        <LeftBoard>재능판매</LeftBoard>
-                        <LeftBoard>재능구매</LeftBoard>
+                        <LeftBoardTitle>메인화면</LeftBoardTitle>
+                        <LeftBoard onClick={goLogin} >재능판매</LeftBoard>
+                        <LeftBoard onClick={goLogin} >재능구매</LeftBoard>
                         <Cash>25,000원</Cash>
                         <Name>이재호</Name>
                     </Left>
 
                     <Center>
                         <CenterSearch type="text" placeholder="*재능검색" />
+
                         <TagBind>
                             <Tag>#안녕</Tag>
                             <Tag1>#하세</Tag1>
                             <Tag1>#요</Tag1>
                         </TagBind>
+
                         <Chapter>최신글</Chapter>
 
                         <CenterBoardBind>
@@ -40,11 +50,43 @@ const Home = () => {
                         </CenterBoardBind>
 
                         <Chapter>전체글</Chapter>
+
                         <CenterBoardBind>
                             <CenterBoard>ㅇㅇ</CenterBoard>
                             <CenterBoard>ㅇㅇ</CenterBoard>
                             <CenterBoard>ㅇㅇ</CenterBoard>
                         </CenterBoardBind>
+
+                        <CenterBoardBind>
+                            <CenterBoard>ㅇㅇ</CenterBoard>
+                            <CenterBoard>ㅇㅇ</CenterBoard>
+                            <CenterBoard>ㅇㅇ</CenterBoard>
+                        </CenterBoardBind>
+
+                        <CenterBoardBind>
+                            <CenterBoard>ㅇㅇ</CenterBoard>
+                            <CenterBoard>ㅇㅇ</CenterBoard>
+                            <CenterBoard>ㅇㅇ</CenterBoard>
+                        </CenterBoardBind>
+
+
+                        {/* <ScrollBind>
+                            <Scroll>ㅇㅇ</Scroll>
+                            <Scroll>ㅇㅇ</Scroll>
+                            <Scroll>ㅇㅇ</Scroll>
+                        </ScrollBind>
+
+                        <ScrollBind>
+                            <Scroll>ㅇㅇ</Scroll>
+                            <Scroll>ㅇㅇ</Scroll>
+                            <Scroll>ㅇㅇ</Scroll>
+                        </ScrollBind>
+
+                        <ScrollBind>
+                            <Scroll>ㅇㅇ</Scroll>
+                            <Scroll>ㅇㅇ</Scroll>
+                            <Scroll>ㅇㅇ</Scroll>
+                        </ScrollBind> */}
 
                     </Center>
 
@@ -103,6 +145,17 @@ const LeftTop = styled.div`
     border: 2px solid black;
 `
 
+const LeftBoardTitle = styled.div`
+    width: 80%;
+    height: 6vh;
+    border: 2px solid blue;
+    margin: 0 auto;
+    margin-top: 2rem;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+`
+
 const LeftBoard = styled.div`
     width: 80%;
     height: 6vh;
@@ -112,6 +165,7 @@ const LeftBoard = styled.div`
     font-size: 2rem;
     display: flex;
     align-items: center;
+    cursor: pointer;
 `
 
 const Cash = styled.div`
@@ -141,6 +195,8 @@ const Center = styled.div`
     width: 60%;
     height: 85vh;
     border: 2px solid red;
+    overflow: auto; /* 스크롤 추가 */
+    overflow-x: hidden; /* 가로 스크롤 제거 */
 `
 
 const CenterSearch = styled.input`
@@ -170,6 +226,7 @@ const Tag = styled.div`
     display: flex;
     /* justify-content: center; */
     align-items: center;
+    background-color: skyblue;
 `
 
 const Tag1 = styled.div`
@@ -181,6 +238,7 @@ const Tag1 = styled.div`
     display: flex;
     /* justify-content: center; */
     align-items: center;
+    background-color: lightgreen;
 `
 
 const Chapter = styled.div`
@@ -188,7 +246,7 @@ const Chapter = styled.div`
     height: 6vh;
     border: 2px solid black;
     font-size: 2.5rem;
-    margin-left: 2rem;
+    margin-left: 3rem;
     margin-top: 1rem;
     display: flex;
     align-items: center;
@@ -196,8 +254,9 @@ const Chapter = styled.div`
 
 const CenterBoardBind = styled.div`
     display: flex;
-    justify-content: row;
+    justify-content: column;
     justify-content: space-around;
+    margin-bottom: 2rem;
 `
 
 const CenterBoard = styled.div`
@@ -205,6 +264,22 @@ const CenterBoard = styled.div`
     height: 20vh;
     border: 2px solid blue;
     margin-top: 2rem;
+    margin-left: 1rem;
+`
+
+const ScrollBind = styled.div`
+    display: flex;
+    justify-content: column;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+`
+
+const Scroll = styled.div`
+    width: 25%;
+    height: 20vh;
+    border: 2px solid blue;
+    margin-top: 1rem;
+    margin-left: 1rem;
 `
 
 const Right = styled.div`

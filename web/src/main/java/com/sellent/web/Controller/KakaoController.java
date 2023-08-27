@@ -25,10 +25,11 @@ public class KakaoController {
     @Autowired
     KakaoService kakaoService;
 
-    //카카오 로그인
-    //1. 카카오 인가코드 받기
-    @RequestMapping("login/kakao") // 확인 필요
+    // 카카오 로그인
+    // 1. 카카오 인가코드 받기
+    @RequestMapping("login/kakao/sellent") // 확인 필요
     public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
+        System.out.println("요청 성공");
         String access_token = kakaoService.getToken(code);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -38,7 +39,7 @@ public class KakaoController {
     // 2.
     @RequestMapping("/login/kakao/userList")
     public String userInfo(@RequestParam(value = "token") String token,
-                           HttpServletRequest request)
+            HttpServletRequest request)
             throws Exception {
 
         UserList user = kakaoService.getUserInfo(token);
