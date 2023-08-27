@@ -17,8 +17,8 @@ const KakaoInfo = () => {
         axios
             .get(url)
             .then((res) => {
-                const userEmail = res.data.userEmail;
-                const userNick = res.data.userNm;
+                const userEmail = res.data.userList.userEmail;
+                const userNick = res.data.userList.userNm;
                 // 요청이 성공한 경우 서버 응답을 처리할 수 있습니다.
                 navigate("/exam")
                 sessionStorage.setItem("userEmail", userEmail);
