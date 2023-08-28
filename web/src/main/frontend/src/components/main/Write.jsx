@@ -2,16 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import "../fonts/Font.css";
 import { AiFillCloseCircle } from "react-icons/ai"
-import { useNavigate } from "react-router-dom"
 
-const Home = () => {
-
-    const navigate = useNavigate();
-
-    const goLogin = () => {
-        navigate("/login")
-    }
-
+const Write = () => {
     return (
         <>
             <Window>
@@ -22,71 +14,16 @@ const Home = () => {
 
             <Back>
                 <Bind>
-
                     <Left>
                         <LeftTop>SELLENT</LeftTop>
                         <LeftBoardTitle>메인화면</LeftBoardTitle>
-                        <LeftBoard onClick={goLogin} >재능판매</LeftBoard>
-                        <LeftBoard onClick={goLogin} >재능구매</LeftBoard>
+                        <LeftBoard>재능판매</LeftBoard>
+                        <LeftBoard>재능구매</LeftBoard>
                         <Cash>25,000원</Cash>
                         <Name>이재호</Name>
                     </Left>
 
                     <Center>
-                        <CenterSearch type="text" placeholder="*재능검색" />
-
-                        <TagBind>
-                            <Tag>#안녕</Tag>
-                            <Tag1>#하세</Tag1>
-                            <Tag1>#요</Tag1>
-                        </TagBind>
-
-                        <Chapter>최신글</Chapter>
-
-                        <CenterBoardBind>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                        </CenterBoardBind>
-
-                        <Chapter>전체글</Chapter>
-
-                        <CenterBoardBind>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                        </CenterBoardBind>
-
-                        <CenterBoardBind>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                        </CenterBoardBind>
-
-                        <CenterBoardBind>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                        </CenterBoardBind>
-
-
-                        {/* <ScrollBind>
-                            <Scroll>ㅇㅇ</Scroll>
-                            <Scroll>ㅇㅇ</Scroll>
-                            <Scroll>ㅇㅇ</Scroll>
-                        </ScrollBind>
-
-                        <ScrollBind>
-                            <Scroll>ㅇㅇ</Scroll>
-                            <Scroll>ㅇㅇ</Scroll>
-                            <Scroll>ㅇㅇ</Scroll>
-                        </ScrollBind>
-
-                        <ScrollBind>
-                            <Scroll>ㅇㅇ</Scroll>
-                            <Scroll>ㅇㅇ</Scroll>
-                            <Scroll>ㅇㅇ</Scroll>
-                        </ScrollBind> */}
 
                     </Center>
 
@@ -97,14 +34,13 @@ const Home = () => {
                         <RightBoard />
                         <RightBoard />
                     </Right>
-
                 </Bind>
             </Back>
         </>
     );
 }
 
-export default Home;
+export default Write;
 
 const Window = styled.div`
     width: 85%;
@@ -114,12 +50,6 @@ const Window = styled.div`
     margin-top: 4vh;
 `
 
-const Close = styled.div`
-    font-size: 3rem;
-    display: flex;
-    justify-content: right;
-`
-
 const Back = styled.div`
     width: 85%;
     height: 85vh;
@@ -127,6 +57,13 @@ const Back = styled.div`
     margin: 0 auto;
     /* margin-top: 8vh; */
 `
+
+const Close = styled.div`
+    font-size: 3rem;
+    display: flex;
+    justify-content: right;
+`
+
 
 const Bind = styled.div`
     display: flex;
