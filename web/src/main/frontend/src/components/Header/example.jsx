@@ -26,8 +26,8 @@ const Example = () => {
 export default Example;
 
 const Exam = styled.div`
-    width: 80%;
-    height: 50rem;
+    width: 70%;
+    height: 25em;
     margin: 0 auto;
-    margin-top: 5rem;
+    margin-top: 2em;
 `;
