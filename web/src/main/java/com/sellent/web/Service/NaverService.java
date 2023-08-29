@@ -110,7 +110,7 @@ public class NaverService {
             String result = "";
             while ((line = br.readLine()) != null) {
                 result += line;
-            }
+            } 
             log.info("respone body ={}", result);
 
             JsonParser parser = new JsonParser();
