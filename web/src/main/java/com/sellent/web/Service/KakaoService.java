@@ -112,6 +112,7 @@ public class KakaoService {
 
             UserList userCheck = userRepository.findByUserEmail(email);
 
+
             if (userCheck == null) {
                 System.out.println("등록된 회원 아님");
 
