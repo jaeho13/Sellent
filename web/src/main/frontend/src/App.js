@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Header/Home";
-import Login from "./components/user/Login";
+import Login from "./components/login/Login";
 import Example from "./components/Header/example";
 import KakaoInfo from "./components/kakao/KakaoInfo";
 import KakaoLogin from "./components/kakao/KakaoLogin";
