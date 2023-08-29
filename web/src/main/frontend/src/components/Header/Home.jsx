@@ -208,8 +208,8 @@ const CenterSearch = styled.input`
     height: 5vh;
     border: 2px solid black;
     font-size: 2rem;
-    margin-left: 2rem;
     margin-top: 1rem;
+    margin-left: 2rem;
 `
 
 const TagBind = styled.div`
