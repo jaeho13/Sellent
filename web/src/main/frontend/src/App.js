@@ -11,6 +11,7 @@ import NaverInfo from "./components/naver/NaverInfo";
 import NaverCallback from "./components/naver/NaverCallback";
 import Write from "./components/main/Write";
 import MyPage from "./components/Header/MyPage";
+import Chatting from "./components/Header/Chatting";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/login/naver/sellent" element={<NaverCallback />} />
           <Route path="/write" element={<Write />} />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/chatting" element={<Chatting />} />
         </Routes>
       </Router>
     
