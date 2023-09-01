@@ -41,7 +41,7 @@ const Home = () => {
                             <Tag1>#요</Tag1>
                         </TagBind>
 
-                        <Chapter>최신글</Chapter>
+                        <Chapter>인기글</Chapter>
 
                         <CenterBoardBind>
                             <CenterBoard>ㅇㅇ</CenterBoard>
@@ -112,6 +112,7 @@ const Window = styled.div`
     border: 2px solid red;
     margin: 0 auto;
     margin-top: 4vh;
+    background-color: lightgrey;
 `
 
 const Close = styled.div`
@@ -137,6 +138,7 @@ const Left = styled.div`
     width: 15%;
     height: 85vh;
     border: 2px solid black;
+    background-color: white;
 `
 
 const LeftTop = styled.div`
@@ -201,6 +203,7 @@ const Center = styled.div`
     border: 2px solid red;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
+    background-color: white;
 `
 
 const CenterSearch = styled.input`
@@ -292,6 +295,7 @@ const Right = styled.div`
     border: 2px solid blue;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
+    background-color: white;
 `
 
 const RightTop = styled.div`
