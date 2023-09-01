@@ -2,7 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import "../fonts/Font.css";
 import { AiFillCloseCircle } from "react-icons/ai"
+import { FcLike } from "react-icons/fc"
 import { useNavigate } from "react-router-dom"
+import axios from "axios";
 
 const Home = () => {
 
@@ -19,6 +21,7 @@ const Home = () => {
     const goMypage = () => {
         navigate("/mypage")
     }
+
 
     return (
         <>
@@ -59,6 +62,12 @@ const Home = () => {
                                 </BoardImg>
                                 <BoardTitle>
                                     게시물 제목
+                                    <BoardLike>
+                                        <FcLike />
+                                        <LikeScore>
+                                            3
+                                        </LikeScore>
+                                    </BoardLike>
                                 </BoardTitle>
                             </CenterBoard>
                         </CenterBoardBind>
@@ -259,9 +268,30 @@ const BoardImg = styled.div`
 
 const BoardTitle = styled.div`
     width: 100%;
-    height: 5vh;
+    height: 4vh;
     border: 2px solid red;
+    display: flex;
+    justify-content: space-between;
 `
+
+const BoardLike = styled.div`
+    width: 30%;
+    height: 4vh;
+    /* border: 2px solid green; */
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+`
+
+const LikeScore = styled.div`
+    width: 30%;
+    height: 4vh;
+    /* border: 2px solid black; */
+    display: flex;
+    align-items: center;
+`
+
 
 const ScrollBind = styled.div`
     display: flex;
