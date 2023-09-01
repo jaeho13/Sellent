@@ -12,11 +12,19 @@ const Home = () => {
         navigate("/login")
     }
 
+    const goBack = () => {
+        navigate("/background")
+    }
+
+    const goMypage = () => {
+        navigate("/mypage")
+    }
+
     return (
         <>
             <Window>
                 <Close>
-                    <AiFillCloseCircle />
+                    <AiFillCloseCircle onClick={goBack} />
                 </Close>
             </Window>
 
@@ -28,6 +36,7 @@ const Home = () => {
                         <LeftBoardTitle>메인화면</LeftBoardTitle>
                         <LeftBoard onClick={goLogin} >재능판매</LeftBoard>
                         <LeftBoard onClick={goLogin} >재능구매</LeftBoard>
+                        <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
                         <Cash>25,000원</Cash>
                         <Name>이재호</Name>
                     </Left>
@@ -44,49 +53,17 @@ const Home = () => {
                         <Chapter>인기글</Chapter>
 
                         <CenterBoardBind>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
+                            <CenterBoard>
+                                <BoardImg>
+                                    이미지 넣기
+                                </BoardImg>
+                                <BoardTitle>
+                                    게시물 제목
+                                </BoardTitle>
+                            </CenterBoard>
                         </CenterBoardBind>
 
                         <Chapter>전체글</Chapter>
-
-                        <CenterBoardBind>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                        </CenterBoardBind>
-
-                        <CenterBoardBind>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                        </CenterBoardBind>
-
-                        <CenterBoardBind>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                            <CenterBoard>ㅇㅇ</CenterBoard>
-                        </CenterBoardBind>
-
-
-                        {/* <ScrollBind>
-                            <Scroll>ㅇㅇ</Scroll>
-                            <Scroll>ㅇㅇ</Scroll>
-                            <Scroll>ㅇㅇ</Scroll>
-                        </ScrollBind>
-
-                        <ScrollBind>
-                            <Scroll>ㅇㅇ</Scroll>
-                            <Scroll>ㅇㅇ</Scroll>
-                            <Scroll>ㅇㅇ</Scroll>
-                        </ScrollBind>
-
-                        <ScrollBind>
-                            <Scroll>ㅇㅇ</Scroll>
-                            <Scroll>ㅇㅇ</Scroll>
-                            <Scroll>ㅇㅇ</Scroll>
-                        </ScrollBind> */}
 
                     </Center>
 
@@ -179,7 +156,7 @@ const Cash = styled.div`
     height: 7vh;
     border: 2px solid red;
     margin: 0 auto;
-    margin-top: 18rem;
+    margin-top: 12rem;
     font-size: 3rem;
     display: flex;
     justify-content: center;
@@ -272,6 +249,18 @@ const CenterBoard = styled.div`
     border: 2px solid blue;
     margin-top: 2rem;
     margin-left: 1rem;
+`
+
+const BoardImg = styled.div`
+    width: 100%;
+    height: 15vh;
+    border: 2px solid red;
+`
+
+const BoardTitle = styled.div`
+    width: 100%;
+    height: 5vh;
+    border: 2px solid red;
 `
 
 const ScrollBind = styled.div`

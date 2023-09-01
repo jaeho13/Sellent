@@ -13,6 +13,10 @@ const Chatting = () => {
         navigate("/login")
     }
 
+    const goMypage = () => {
+        navigate("/mypage")
+    }
+
     return (
         <>
             <Window>
@@ -28,6 +32,7 @@ const Chatting = () => {
                         <LeftBoardTitle>메인화면</LeftBoardTitle>
                         <LeftBoard onClick={goLogin} >재능판매</LeftBoard>
                         <LeftBoard onClick={goLogin} >재능구매</LeftBoard>
+                        <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
                         <Cash>25,000원</Cash>
                         <Name>이재호</Name>
                     </Left>
@@ -61,6 +66,7 @@ const Window = styled.div`
     border: 2px solid red;
     margin: 0 auto;
     margin-top: 4vh;
+    background-color: lightgrey;
 `
 
 const Back = styled.div`
@@ -87,6 +93,7 @@ const Left = styled.div`
     width: 15%;
     height: 85vh;
     border: 2px solid black;
+    background-color: white;
 `
 
 const LeftTop = styled.div`
@@ -127,7 +134,7 @@ const Cash = styled.div`
     height: 7vh;
     border: 2px solid red;
     margin: 0 auto;
-    margin-top: 18rem;
+    margin-top: 12rem;
     font-size: 3rem;
     display: flex;
     justify-content: center;
@@ -149,6 +156,7 @@ const Center = styled.div`
     width: 60%;
     height: 85vh;
     border: 2px solid red;
+    background-color: white;
 `
 
 const Chat = styled.div`
@@ -166,9 +174,8 @@ const ChatInput = styled.input`
     border: 2px solid blue;
     margin: 0 auto;
     display: flex;
+    font-size: 2em;
 `
-
-
 
 const Right = styled.div`
     width: 25%;
@@ -176,6 +183,7 @@ const Right = styled.div`
     border: 2px solid blue;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
+    background-color: white;
 `
 
 const RightTop = styled.div`
