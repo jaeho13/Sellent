@@ -10,16 +10,24 @@ const Home = () => {
 
     const navigate = useNavigate();
 
+    const goHome = () => {
+        navigate("/")
+    }
+
     const goLogin = () => {
         navigate("/login")
     }
 
-    const goBack = () => {
-        navigate("/background")
-    }
-
     const goMypage = () => {
         navigate("/mypage")
+    }
+
+    const goChat = () => {
+        navigate("/chatting")
+    }
+
+    const goBack = () => {
+        navigate("/background")
     }
 
 
@@ -36,9 +44,10 @@ const Home = () => {
 
                     <Left>
                         <LeftTop>SELLENT</LeftTop>
-                        <LeftBoardTitle>메인화면</LeftBoardTitle>
+                        <LeftBoardTitle onClick={goHome} >메인화면</LeftBoardTitle>
                         <LeftBoard onClick={goLogin} >재능판매</LeftBoard>
                         <LeftBoard onClick={goLogin} >재능구매</LeftBoard>
+                        <LeftBoard onClick={goChat} >채팅</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
                         <Cash>25,000원</Cash>
                         <Name>이재호</Name>
@@ -165,7 +174,7 @@ const Cash = styled.div`
     height: 7vh;
     border: 2px solid red;
     margin: 0 auto;
-    margin-top: 12rem;
+    margin-top: 5rem;
     font-size: 3rem;
     display: flex;
     justify-content: center;
@@ -277,7 +286,7 @@ const BoardTitle = styled.div`
 const BoardLike = styled.div`
     width: 30%;
     height: 4vh;
-    /* border: 2px solid green; */
+    border: 2px solid green;
     font-size: 2em;
     display: flex;
     align-items: center;
@@ -287,7 +296,7 @@ const BoardLike = styled.div`
 const LikeScore = styled.div`
     width: 30%;
     height: 4vh;
-    /* border: 2px solid black; */
+    border: 2px solid black;
     display: flex;
     align-items: center;
 `

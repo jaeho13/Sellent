@@ -8,12 +8,21 @@ import { BsBrowserChrome } from "react-icons/bs"
 import { RiKakaoTalkFill } from "react-icons/ri"
 import { FcOpenedFolder } from "react-icons/fc"
 import { TbBrandVscode } from "react-icons/tb"
+import { useNavigate } from "react-router-dom";
 
 const Background = () => {
+
+    const navigate = useNavigate();
+
+    const goHome = () => {
+        navigate("/")
+    }
+
     return (
         <>
             <Back>
-
+                <BackgroundImg src="/images/BackgroundImage.png" alt="배경화면">
+                </BackgroundImg>
                 <ChromeIcon>
                     <BsBrowserChrome />
                 </ChromeIcon>
@@ -30,7 +39,7 @@ const Background = () => {
                 <IconName>VsCode</IconName>
 
                 <SellentIcon>
-                    <TbBrandVscode />
+                    <TbBrandVscode onClick={goHome} />
                 </SellentIcon>
                 <IconName>Sellent</IconName>
 
@@ -79,6 +88,11 @@ const Back = styled.div`
     border: 2px solid black;
     margin: 0 auto;
     margin-top: 8vh;
+`
+
+const BackgroundImg = styled.img`
+    width: 100%;
+    height: 85vh;
 `
 
 const ChromeIcon = styled.div`
