@@ -9,6 +9,10 @@ const MyPage = () => {
 
     const navigate = useNavigate();
 
+    const goHome = () => {
+        navigate("/")
+    }
+
     const goLogin = () => {
         navigate("/login")
     }
@@ -17,11 +21,20 @@ const MyPage = () => {
         navigate("/mypage")
     }
 
+    const goChat = () => {
+        navigate("/chatting")
+    }
+
+    const goBack = () => {
+        navigate("/background")
+    }
+
+
     return (
         <>
             <Window>
                 <Close>
-                    <AiFillCloseCircle />
+                    <AiFillCloseCircle onClick={goBack} />
                 </Close>
             </Window>
 
@@ -29,9 +42,10 @@ const MyPage = () => {
                 <Bind>
                     <Left>
                         <LeftTop>SELLENT</LeftTop>
-                        <LeftBoardTitle>메인화면</LeftBoardTitle>
+                        <LeftBoardTitle onClick={goHome} >메인화면</LeftBoardTitle>
                         <LeftBoard onClick={goLogin} >재능판매</LeftBoard>
                         <LeftBoard onClick={goLogin} >재능구매</LeftBoard>
+                        <LeftBoard onClick={goChat} >채팅</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
                         <Cash>25,000원</Cash>
                         <Name>이재호</Name>
@@ -142,15 +156,15 @@ const LeftBoard = styled.div`
 `
 
 const Cash = styled.div`
-    width: 80%;
-    height: 7vh;
-    border: 2px solid red;
-    margin: 0 auto;
-    margin-top: 12rem;
-    font-size: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+width: 80%;
+height: 7vh;
+border: 2px solid red;
+margin: 0 auto;
+margin-top: 5rem;
+font-size: 3rem;
+display: flex;
+justify-content: center;
+align-items: center;
 `
 
 const Name = styled.div`
