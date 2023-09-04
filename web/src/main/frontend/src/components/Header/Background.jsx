@@ -38,8 +38,8 @@ const Background = () => {
                 </VsCodeIcon>
                 <IconName>VsCode</IconName>
 
-                <SellentIcon>
-                    <TbBrandVscode onClick={goHome} />
+                <SellentIcon onClick={goHome}>
+                    S
                 </SellentIcon>
                 <IconName>Sellent</IconName>
 
@@ -91,14 +91,16 @@ const Back = styled.div`
 `
 
 const BackgroundImg = styled.img`
-    width: 100%;
+    width: 85%;
     height: 85vh;
+    position: absolute;
+    z-index: -1;
 `
 
 const ChromeIcon = styled.div`
     width: 5%;
     height: 6vh;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     font-size: 3rem;
     display: flex;
     justify-content: center;
@@ -109,7 +111,7 @@ const ChromeIcon = styled.div`
 const KaKaoIcon = styled.div`
     width: 5%;
     height: 6vh;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     font-size: 3rem;
     display: flex;
     justify-content: center;
@@ -121,7 +123,7 @@ const KaKaoIcon = styled.div`
 const VsCodeIcon = styled.div`
     width: 5%;
     height: 6vh;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     font-size: 3rem;
     display: flex;
     justify-content: center;
@@ -133,19 +135,19 @@ const VsCodeIcon = styled.div`
 const SellentIcon = styled.div`
     width: 5%;
     height: 6vh;
-    border: 2px solid red;
-    font-size: 3rem;
+    font-size: 3em;
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: blue;
     margin-top: 0.5em;
+    cursor: pointer;
 `
 
 const IconName = styled.div`
     width: 5%;
     height: 3vh;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -154,12 +156,13 @@ const IconName = styled.div`
 const Bottom = styled.div`
     width: 100%;
     height: 5vh;
-    border: 2px solid green;
+    /* border: 2px solid green; */
     margin: 0 auto;
-    margin-top: 33vh;
+    margin-top: 36.5vh;
     display: flex;
     justify-content: row;
     justify-content: center;
+    background-color: #696969;
 `
 
 const BottomWindow = styled.div`
