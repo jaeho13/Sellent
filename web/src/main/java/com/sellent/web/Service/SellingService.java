@@ -25,8 +25,9 @@ public class SellingService {
 
         // 글 목록 저장
         result.put("sellList", sellingRepository.findBySelling());
+
         // 글 댓글 수 저장
-        result.put("sellCmtCnt", sellingCmtRepository.countByCmt());
+        //result.put("sellCmtCnt", sellingCmtRepository.countByCmt());
 
         return result;
     }

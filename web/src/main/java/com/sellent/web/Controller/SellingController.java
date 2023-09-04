@@ -36,8 +36,7 @@ public class SellingController {
 
     // 글 읽기
     @GetMapping("/selling")
-    public Map<String, Object> getSellingContent(@RequestParam String sellIdx , HttpServletRequest request) throws Exception {
-        UserList userList = userSession(request);
+    public Map<String, Object> getSellingContent(@RequestParam String sellIdx) throws Exception {
         Map<String, Object> result = sellingService.getSellingContent(sellIdx);
 
         return result;

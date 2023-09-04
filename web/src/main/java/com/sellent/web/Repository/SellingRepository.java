@@ -15,14 +15,11 @@ public interface SellingRepository extends JpaRepository<Selling, Integer> {
     @Query(value = "SELECT * FROM Selling", nativeQuery = true)
     List<Selling> findBySelling();
 
-    @Query(value = "SELECT new com.sellent.web.Dto.SellingDTO(" +
-            "s.sellIdx, s.sellTitle, s.sellContent, u.userEmail," +
-            "s.sellDate, s.sellPrice, s.sellHashTag, s.sellLocation)" +
+    @Query(value = "SELECT s.sellIdx, s.sellTitle, s.sellContent, u.userEmail, s.sellDate, s.sellPrice, s.sellHashTag, s.sellLocation " +
             "FROM Selling s " +
             "JOIN s.userListVO u " +
             "WHERE s.sellIdx = :sellIdx", nativeQuery = true)
     SellingDTO getSellingContentWithSellIdx(@Param("sellIdx") int sellIdx);
-
 
 
 

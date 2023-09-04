@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface SellingCmtRepository extends JpaRepository<SellingCmt, Integer> {
 
-    @Query(value = "select (select count(*) from SellingCmt c where s.sellIdx = c.sellIdx) as cmtCnt from Selling s ordeer by s.sellIdx desc", nativeQuery = true)
-    List<Integer> countByCmt();
+    @Query(value = "select s.sellIdx, (select count(*) from SellingCmt c where s.sellIdx = c.sellIdx) as cmtCnt from Selling s order by s.sellIdx desc", nativeQuery = true)
+    List<SellingCmt> countByCmt();
 
 }
