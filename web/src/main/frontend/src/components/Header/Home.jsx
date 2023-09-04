@@ -183,29 +183,59 @@ const LeftBoard = styled.div`
     display: flex;
     align-items: center;
     cursor: pointer;
+    
+    @media (max-width: 1280px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1.5em; /* 글씨 크기를 줄임 */
+    }
+    
+    @media (max-width: 900px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1em; /* 글씨 크기를 줄임 */
+    }
 `
 
 const Cash = styled.div`
     width: 80%;
-    height: 7vh;
+    height: 3vh;
     border: 2px solid red;
     margin: 0 auto;
-    margin-top: 5rem;
-    font-size: 3rem;
+    margin-top: 3em;
+    font-size: 2em;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 1400px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1.5em; /* 글씨 크기를 줄임 */
+    }
+    
+    @media (max-width: 1080px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1em; /* 글씨 크기를 줄임 */
+    }
 `
 
 const Name = styled.div`
     width: 80%;
-    height: 4vh;
+    height: 3vh;
     border: 2px solid red;
     margin: 0 auto;
     font-size: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 1280px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1.5em; /* 글씨 크기를 줄임 */
+    }
+    
+    @media (max-width: 900px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1em; /* 글씨 크기를 줄임 */
+    }
 `
 
 const Center = styled.div`
