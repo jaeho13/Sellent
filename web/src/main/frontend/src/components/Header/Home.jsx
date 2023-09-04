@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "../fonts/Font.css";
 import { AiFillCloseCircle } from "react-icons/ai"
@@ -29,6 +29,22 @@ const Home = () => {
     const goBack = () => {
         navigate("/background")
     }
+
+    const [sellList, setSellList] = useState([]);
+
+    useEffect(() => {
+        const load = async () => {
+            try {
+                const response = await axios.get("/list");
+                setSellList(response.data);
+                console.log("제목 불러오기 성공")
+            } catch (error) {
+                console.log("제목 불러오기 실패");
+            }
+        };
+
+        load();
+    }, []);
 
 
     return (
@@ -70,7 +86,7 @@ const Home = () => {
                                     이미지 넣기
                                 </BoardImg>
                                 <BoardTitle>
-                                    게시물 제목
+                                    {sellList.sellTitle}
                                     <BoardLike>
                                         <FcLike />
                                         <LikeScore>
