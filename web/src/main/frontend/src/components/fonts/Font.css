@@ -11,6 +11,8 @@ body {
     /* background-color: lightgreen; */
     /* background-color: #6eec68; */
     /* background-color: #66d843; */
+    min-width: 768px;
+    /* 최소 화면 너비 설정 */
 }
 
 /* 절대 바꿔주지 말 것 */
