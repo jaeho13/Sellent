@@ -35,9 +35,14 @@ public class SellingService {
         Map<String, Object> map = new HashMap<>();
         int sellIdx = Integer.parseInt(num);
 
-        SellingDTO sellingDTO = sellingRepository.getSellingContentWithSellIdx(sellIdx);
-
-        map.put("sellingContent",sellingDTO);
-        return map;
+        try {
+            SellingDTO sellingDTO = sellingRepository.getSellingContentWithSellIdx(sellIdx);
+            map.put("sellingContent",sellingDTO);
+            return map;
+        }
+        catch (NullPointerException e ) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 }

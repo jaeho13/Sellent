@@ -29,7 +29,7 @@ public class SellingController {
     }
 
     // 글 목록 조회하기
-    @GetMapping("/selling")
+    @GetMapping("/list")
     public Map<String, Object> getSellingList() {
         return sellingService.getSellingList();
     }
