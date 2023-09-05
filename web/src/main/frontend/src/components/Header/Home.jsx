@@ -36,7 +36,7 @@ const Home = () => {
         const load = async () => {
             try {
                 const response = await axios.get("/list");
-                setSellList(response.data);
+                setSellList(response.data.sellList);
                 console.log("제목 불러오기 성공")
                 console.log(response.data)
             } catch (error) {
@@ -81,22 +81,6 @@ const Home = () => {
 
                         <Chapter>인기글</Chapter>
 
-                        {/* <CenterBoard>
-                            <BoardImg>
-                                이미지 넣기
-                            </BoardImg>
-                            <BoardTitle>
-                                {sellList.sellTitle}
-                                ㅇㅇ
-                                <BoardLike>
-                                    <FcLike />
-                                    <LikeScore>
-                                        3
-                                    </LikeScore>
-                                </BoardLike>
-                            </BoardTitle>
-                        </CenterBoard> */}
-
                         {sellList.length > 0 && sellList.map((item, index) => {
                             return (
                                 <CenterBoardBind key={item.sellIdx}>
@@ -106,12 +90,12 @@ const Home = () => {
                                         </BoardImg>
                                         <BoardTitle>
                                             {item.sellTitle}
-                                            {/* <BoardLike>
+                                            <BoardLike>
                                                 <FcLike />
                                                 <LikeScore>
                                                     3
                                                 </LikeScore>
-                                            </BoardLike> */}
+                                            </BoardLike>
                                         </BoardTitle>
                                     </CenterBoard>
                                 </CenterBoardBind>
@@ -121,20 +105,7 @@ const Home = () => {
 
                         <Chapter>전체글</Chapter>
                         <CenterBoardBind>
-                            <CenterBoard>
-                                <BoardImg>
-                                    이미지 넣기
-                                </BoardImg>
-                                <BoardTitle>
-                                    {sellList.sellTitle}
-                                    <BoardLike>
-                                        <FcLike />
-                                        <LikeScore>
-                                            3
-                                        </LikeScore>
-                                    </BoardLike>
-                                </BoardTitle>
-                            </CenterBoard>
+
                             <CenterBoard>
                                 <BoardImg>
                                     이미지 넣기
@@ -376,7 +347,7 @@ const CenterBoardBind = styled.div`
 `
 
 const CenterBoard = styled.div`
-    width: 25%;
+    width: 40%;
     height: 20vh;
     border: 2px solid blue;
     margin-top: 2rem;
@@ -393,8 +364,10 @@ const BoardTitle = styled.div`
     width: 100%;
     height: 4vh;
     border: 2px solid red;
+    font-size: 2em;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
 `
 
 const BoardLike = styled.div`
