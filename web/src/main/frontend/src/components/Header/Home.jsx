@@ -80,6 +80,52 @@ const Home = () => {
 
                         <Chapter>인기글</Chapter>
 
+                        {sellList.length > 0 && sellList.map((item, index) => {
+                            return (
+                                <CenterBoardBind>
+                                    <CenterBoard key={item.sellIdx}>
+                                        <BoardImg>
+                                            이미지 넣기
+                                        </BoardImg>
+                                        <BoardTitle>
+                                            {item.sellTitle}
+                                            ㅇㅇ
+                                            <BoardLike>
+                                                <FcLike />
+                                                <LikeScore>
+                                                    3
+                                                </LikeScore>
+                                            </BoardLike>
+                                        </BoardTitle>
+                                    </CenterBoard>
+                                </CenterBoardBind>
+                            );
+                        })}
+                        <CenterBoard>
+                            <BoardImg>
+                                이미지 넣기
+                            </BoardImg>
+                            <BoardTitle>
+                                {sellList.sellTitle}
+                                ㅇㅇ
+                                <BoardLike>
+                                    <FcLike />
+                                    <LikeScore>
+                                        3
+                                    </LikeScore>
+                                </BoardLike>
+                            </BoardTitle>
+                        </CenterBoard>
+
+
+
+
+
+
+
+
+
+                        <Chapter>전체글</Chapter>
                         <CenterBoardBind>
                             <CenterBoard>
                                 <BoardImg>
@@ -95,9 +141,36 @@ const Home = () => {
                                     </BoardLike>
                                 </BoardTitle>
                             </CenterBoard>
-                        </CenterBoardBind>
+                            <CenterBoard>
+                                <BoardImg>
+                                    이미지 넣기
+                                </BoardImg>
+                                <BoardTitle>
+                                    {sellList.sellTitle}
+                                    <BoardLike>
+                                        <FcLike />
+                                        <LikeScore>
+                                            3
+                                        </LikeScore>
+                                    </BoardLike>
+                                </BoardTitle>
+                            </CenterBoard>
+                            <CenterBoard>
+                                <BoardImg>
+                                    이미지 넣기
+                                </BoardImg>
+                                <BoardTitle>
+                                    {sellList.sellTitle}
+                                    <BoardLike>
+                                        <FcLike />
+                                        <LikeScore>
+                                            3
+                                        </LikeScore>
+                                    </BoardLike>
+                                </BoardTitle>
+                            </CenterBoard>
 
-                        <Chapter>전체글</Chapter>
+                        </CenterBoardBind>
 
                     </Center>
 
@@ -171,6 +244,7 @@ const LeftBoardTitle = styled.div`
     font-size: 2rem;
     display: flex;
     align-items: center;
+    cursor: pointer;
 `
 
 const LeftBoard = styled.div`
@@ -294,7 +368,7 @@ const Chapter = styled.div`
     height: 6vh;
     border: 2px solid black;
     font-size: 2.5rem;
-    margin-left: 3rem;
+    margin-left: 2rem;
     margin-top: 1rem;
     display: flex;
     align-items: center;

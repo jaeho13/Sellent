@@ -8,8 +8,24 @@ const Write = () => {
 
     const navigate = useNavigate();
 
+    const goHome = () => {
+        navigate("/")
+    }
+
     const goLogin = () => {
         navigate("/login")
+    }
+
+    const goMypage = () => {
+        navigate("/mypage")
+    }
+
+    const goChat = () => {
+        navigate("/chatting")
+    }
+
+    const goBack = () => {
+        navigate("/background")
     }
 
     return (
@@ -24,9 +40,11 @@ const Write = () => {
                 <Bind>
                     <Left>
                         <LeftTop>SELLENT</LeftTop>
-                        <LeftBoardTitle>메인화면</LeftBoardTitle>
+                        <LeftBoardTitle onClick={goHome}>메인화면</LeftBoardTitle>
                         <LeftBoard onClick={goLogin} >재능판매</LeftBoard>
                         <LeftBoard onClick={goLogin} >재능구매</LeftBoard>
+                        <LeftBoard onClick={goChat} >채팅</LeftBoard>
+                        <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
                         <Cash>25,000원</Cash>
                         <Name>이재호</Name>
                     </Left>
@@ -87,6 +105,13 @@ const Window = styled.div`
     border: 2px solid red;
     margin: 0 auto;
     margin-top: 4vh;
+    background-color: lightgrey;
+`
+
+const Close = styled.div`
+    font-size: 3rem;
+    display: flex;
+    justify-content: right;
 `
 
 const Back = styled.div`
@@ -97,13 +122,6 @@ const Back = styled.div`
     /* margin-top: 8vh; */
 `
 
-const Close = styled.div`
-    font-size: 3rem;
-    display: flex;
-    justify-content: right;
-`
-
-
 const Bind = styled.div`
     display: flex;
     justify-content: row;
@@ -113,6 +131,7 @@ const Left = styled.div`
     width: 15%;
     height: 85vh;
     border: 2px solid black;
+    background-color: white;
 `
 
 const LeftTop = styled.div`
@@ -134,6 +153,7 @@ const LeftBoardTitle = styled.div`
     font-size: 2rem;
     display: flex;
     align-items: center;
+    cursor: pointer;
 `
 
 const LeftBoard = styled.div`
@@ -150,11 +170,11 @@ const LeftBoard = styled.div`
 
 const Cash = styled.div`
     width: 80%;
-    height: 7vh;
+    height: 3vh;
     border: 2px solid red;
     margin: 0 auto;
-    margin-top: 18rem;
-    font-size: 3rem;
+    margin-top: 3em;
+    font-size: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -162,7 +182,7 @@ const Cash = styled.div`
 
 const Name = styled.div`
     width: 80%;
-    height: 4vh;
+    height: 3vh;
     border: 2px solid red;
     margin: 0 auto;
     font-size: 2rem;
@@ -175,6 +195,7 @@ const Center = styled.div`
     width: 60%;
     height: 85vh;
     border: 2px solid red;
+    background-color: white;
 `
 
 const CenterTop = styled.div`
@@ -288,6 +309,7 @@ const Right = styled.div`
     border: 2px solid blue;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
+    background-color: white;
 `
 
 const RightTop = styled.div`
