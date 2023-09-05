@@ -38,6 +38,7 @@ const Home = () => {
                 const response = await axios.get("/list");
                 setSellList(response.data);
                 console.log("제목 불러오기 성공")
+                console.log(response.data)
             } catch (error) {
                 console.log("제목 불러오기 실패");
             }
@@ -89,19 +90,21 @@ const Home = () => {
                                         </BoardImg>
                                         <BoardTitle>
                                             {item.sellTitle}
-                                            ㅇㅇ
-                                            <BoardLike>
+
+                                            {/* <BoardLike>
                                                 <FcLike />
                                                 <LikeScore>
                                                     3
                                                 </LikeScore>
-                                            </BoardLike>
+                                            </BoardLike> */}
                                         </BoardTitle>
                                     </CenterBoard>
                                 </CenterBoardBind>
                             );
                         })}
-                        <CenterBoard>
+
+
+                        {/* <CenterBoard>
                             <BoardImg>
                                 이미지 넣기
                             </BoardImg>
@@ -115,7 +118,7 @@ const Home = () => {
                                     </LikeScore>
                                 </BoardLike>
                             </BoardTitle>
-                        </CenterBoard>
+                        </CenterBoard> */}
 
 
 
