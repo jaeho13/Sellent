@@ -81,29 +81,6 @@ const Home = () => {
 
                         <Chapter>인기글</Chapter>
 
-                        {sellList.length > 0 && sellList.map((item, index) => {
-                            return (
-                                <CenterBoardBind>
-                                    <CenterBoard key={item.sellIdx}>
-                                        <BoardImg>
-                                            이미지 넣기
-                                        </BoardImg>
-                                        <BoardTitle>
-                                            {item.sellTitle}
-
-                                            {/* <BoardLike>
-                                                <FcLike />
-                                                <LikeScore>
-                                                    3
-                                                </LikeScore>
-                                            </BoardLike> */}
-                                        </BoardTitle>
-                                    </CenterBoard>
-                                </CenterBoardBind>
-                            );
-                        })}
-
-
                         {/* <CenterBoard>
                             <BoardImg>
                                 이미지 넣기
@@ -120,12 +97,26 @@ const Home = () => {
                             </BoardTitle>
                         </CenterBoard> */}
 
-
-
-
-
-
-
+                        {sellList.length > 0 && sellList.map((item, index) => {
+                            return (
+                                <CenterBoardBind key={item.sellIdx}>
+                                    <CenterBoard>
+                                        <BoardImg>
+                                            이미지 넣기
+                                        </BoardImg>
+                                        <BoardTitle>
+                                            {item.sellTitle}
+                                            {/* <BoardLike>
+                                                <FcLike />
+                                                <LikeScore>
+                                                    3
+                                                </LikeScore>
+                                            </BoardLike> */}
+                                        </BoardTitle>
+                                    </CenterBoard>
+                                </CenterBoardBind>
+                            );
+                        })}
 
 
                         <Chapter>전체글</Chapter>
@@ -213,7 +204,7 @@ const Back = styled.div`
     height: 85vh;
     border: 2px solid green;
     margin: 0 auto;
-    /* margin-top: 8vh; */
+    box-shadow: 1em 1em 1em 1em #6E6E6E;
 `
 
 const Bind = styled.div`
@@ -389,7 +380,7 @@ const CenterBoard = styled.div`
     height: 20vh;
     border: 2px solid blue;
     margin-top: 2rem;
-    margin-left: 1rem;
+    /* margin-left: 1rem; */
 `
 
 const BoardImg = styled.div`
