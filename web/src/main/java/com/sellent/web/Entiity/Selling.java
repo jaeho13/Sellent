@@ -1,6 +1,5 @@
 package com.sellent.web.Entiity;
 
-
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import javax.persistence.*;
@@ -27,7 +26,7 @@ public class Selling {
     @Column(nullable = false, length = 3000)
     private String sellContent; // 글 내용
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userEmail", nullable = false)
     private UserList userListVO; // 글 작성자
 
