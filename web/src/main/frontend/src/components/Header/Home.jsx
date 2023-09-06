@@ -31,9 +31,10 @@ const Home = () => {
     }
 
     const [sellList, setSellList] = useState([]);
+    const [likeCount, setLikeCount] = useState([]);
 
     useEffect(() => {
-        const load = async () => {
+        const titleLoad = async () => {
             try {
                 const response = await axios.get("/list");
                 setSellList(response.data.sellList);
@@ -44,9 +45,23 @@ const Home = () => {
             }
         };
 
-        load();
+        titleLoad();
     }, []);
 
+    useEffect(() => {
+        const likeLoad = async () => {
+            try {
+                const response = await axios.get("/list");
+                setLikeCount(response.data.sellList);
+                console.log("하트 불러오기 성공")
+                console.log(response.data)
+            } catch (error) {
+                console.log("하트 불러오기 실패");
+            }
+        };
+
+        likeLoad();
+    }, []);
 
     return (
         <>
@@ -81,6 +96,59 @@ const Home = () => {
 
                         <Chapter>인기글</Chapter>
 
+                        <CenterBoardBind>
+                            <CenterBoard>
+                                <BoardImg>
+                                    이미지 넣기
+                                </BoardImg>
+                                <BoardTitle>
+                                    ㅇㅇㅇ
+                                    {sellList.sellTitle}
+                                    <BoardLike>
+                                        <FcLike />
+                                        <LikeScore>
+                                            3
+                                        </LikeScore>
+                                    </BoardLike>
+                                </BoardTitle>
+                            </CenterBoard>
+
+                            <CenterBoard>
+                                <BoardImg>
+                                    이미지 넣기
+                                </BoardImg>
+                                <BoardTitle>
+                                    ㅇㅇㅇ
+                                    {sellList.sellTitle}
+                                    <BoardLike>
+                                        <FcLike />
+                                        <LikeScore>
+                                            3
+                                        </LikeScore>
+                                    </BoardLike>
+                                </BoardTitle>
+                            </CenterBoard>
+
+                            <CenterBoard>
+                                <BoardImg>
+                                    이미지 넣기
+                                </BoardImg>
+                                <BoardTitle>
+                                    ㅇㅇㅇ
+                                    {sellList.sellTitle}
+                                    <BoardLike>
+                                        <FcLike />
+                                        <LikeScore>
+                                            3
+                                        </LikeScore>
+                                    </BoardLike>
+                                </BoardTitle>
+                            </CenterBoard>
+                        </CenterBoardBind>
+
+                        <Chapter>전체글</Chapter>
+
+
                         {sellList.length > 0 && sellList.map((item, index) => {
                             return (
                                 <CenterBoardBind key={item.sellIdx}>
@@ -93,7 +161,7 @@ const Home = () => {
                                             <BoardLike>
                                                 <FcLike />
                                                 <LikeScore>
-                                                    3
+                                                    {item.sellLike}
                                                 </LikeScore>
                                             </BoardLike>
                                         </BoardTitle>
@@ -101,41 +169,6 @@ const Home = () => {
                                 </CenterBoardBind>
                             );
                         })}
-
-
-                        <Chapter>전체글</Chapter>
-                        <CenterBoardBind>
-
-                            <CenterBoard>
-                                <BoardImg>
-                                    이미지 넣기
-                                </BoardImg>
-                                <BoardTitle>
-                                    {sellList.sellTitle}
-                                    <BoardLike>
-                                        <FcLike />
-                                        <LikeScore>
-                                            3
-                                        </LikeScore>
-                                    </BoardLike>
-                                </BoardTitle>
-                            </CenterBoard>
-                            <CenterBoard>
-                                <BoardImg>
-                                    이미지 넣기
-                                </BoardImg>
-                                <BoardTitle>
-                                    {sellList.sellTitle}
-                                    <BoardLike>
-                                        <FcLike />
-                                        <LikeScore>
-                                            3
-                                        </LikeScore>
-                                    </BoardLike>
-                                </BoardTitle>
-                            </CenterBoard>
-
-                        </CenterBoardBind>
 
                     </Center>
 
@@ -158,7 +191,7 @@ export default Home;
 const Window = styled.div`
     width: 85%;
     height: 3rem;
-    border: 2px solid red;
+    border: 2px solid black;
     margin: 0 auto;
     margin-top: 4vh;
     background-color: lightgrey;
@@ -173,7 +206,7 @@ const Close = styled.div`
 const Back = styled.div`
     width: 85%;
     height: 85vh;
-    border: 2px solid green;
+    /* border: 2px solid green; */
     margin: 0 auto;
     box-shadow: 1em 1em 1em 1em #6E6E6E;
 `
@@ -339,15 +372,22 @@ const Chapter = styled.div`
     align-items: center;
 `
 
-const CenterBoardBind = styled.div`
+const CenterContents = styled.div`
     display: flex;
-    justify-content: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* 넘치는 경우 줄바꿈 */
+`
+
+const CenterBoardBind = styled.div`
+    /* width: 50%; */
+    display: flex;
     justify-content: space-around;
     margin-bottom: 2rem;
 `
 
 const CenterBoard = styled.div`
-    width: 40%;
+    width: 25%;
     height: 20vh;
     border: 2px solid blue;
     margin-top: 2rem;
@@ -366,24 +406,24 @@ const BoardTitle = styled.div`
     border: 2px solid red;
     font-size: 2em;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 `
 
 const BoardLike = styled.div`
     width: 30%;
     height: 4vh;
-    border: 2px solid green;
-    font-size: 2em;
+    /* border: 2px solid green; */
+    font-size: 1em;
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: right;
 `
 
 const LikeScore = styled.div`
-    width: 30%;
+    width: 60%;
     height: 4vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     display: flex;
     align-items: center;
 `
