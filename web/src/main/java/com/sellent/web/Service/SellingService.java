@@ -23,11 +23,13 @@ public class SellingService {
     public Map<String, Object> getSellingList() {
         Map<String, Object> result = new HashMap<>();
 
-        // 글 목록 저장
+        // 전체 글 목록 저장
         result.put("sellList", sellingRepository.findBySelling());
-
+        result.put("likeList", sellingRepository.findPopular());
         // 글 댓글 수 저장
         //result.put("sellCmtCnt", sellingCmtRepository.countByCmt());
+        System.out.println(result.get("sellList"));
+        System.out.println(result.get("likeList"));
 
         return result;
     }

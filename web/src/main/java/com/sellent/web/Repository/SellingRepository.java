@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface SellingRepository extends JpaRepository<Selling, Integer> {
 
-    @Query(value = "SELECT * FROM Selling", nativeQuery = true)
+    @Query(value = "SELECT * FROM SELLING", nativeQuery = true)
     List<Selling> findBySelling();
 
     @Query(value = "SELECT s.sellIdx, s.sellTitle, s.sellContent, u.userEmail, s.sellDate, s.sellPrice, s.sellHashTag, s.sellLocation " +
@@ -21,7 +21,6 @@ public interface SellingRepository extends JpaRepository<Selling, Integer> {
             "WHERE s.sellIdx = :sellIdx", nativeQuery = true)
     SellingDTO getSellingContentWithSellIdx(@Param("sellIdx") int sellIdx);
 
-
-
-
+    @Query(value = "SELECT * FROM (SELECT * FROM SELLING ORDER BY SELL_LIKE DESC, SELL_DATE DESC) WHERE ROWNUM <= 3", nativeQuery = true)
+    List<Selling> findPopular();
 }
