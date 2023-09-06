@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Header/Home";
 import Login from "./components/login/Login";
+//import Example from "./components/Header/Example";
 import Example from "./components/Header/Example";
 import KakaoInfo from "./components/kakao/KakaoInfo";
 import KakaoLogin from "./components/kakao/KakaoLogin";
@@ -21,6 +22,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+//          <Route path="/exam" element={<Example />} />]
+
           <Route path="/exam" element={<Example />} />
           <Route path="/kakaologin" element={<KakaoLogin />} />
           <Route path="/kakaoinfo" element={<KakaoInfo />} />
