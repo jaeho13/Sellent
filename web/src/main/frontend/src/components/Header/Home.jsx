@@ -30,37 +30,40 @@ const Home = () => {
         navigate("/background")
     }
 
-    const [sellList, setSellList] = useState([]);
-    const [likeCount, setLikeCount] = useState([]);
+    const [likeList, setLikeList] = useState([]);
 
     useEffect(() => {
-        const titleLoad = async () => {
+        const likeBoardLoad = async () => {
+            try {
+                const response = await axios.get("/list");
+                setLikeList(response.data.likeList);
+                console.log("좋아요 많은 글 불러오기 성공")
+                console.log(response.data)
+            } catch (error) {
+                console.log("좋아요 많은 글 불러오기 실패");
+            }
+        };
+
+        likeBoardLoad();
+    }, []);
+
+
+
+    const [sellList, setSellList] = useState([]);
+
+    useEffect(() => {
+        const boardLoad = async () => {
             try {
                 const response = await axios.get("/list");
                 setSellList(response.data.sellList);
-                console.log("제목 불러오기 성공")
+                console.log("글 불러오기 성공")
                 console.log(response.data)
             } catch (error) {
-                console.log("제목 불러오기 실패");
+                console.log("글 불러오기 실패");
             }
         };
 
-        titleLoad();
-    }, []);
-
-    useEffect(() => {
-        const likeLoad = async () => {
-            try {
-                const response = await axios.get("/list");
-                setLikeCount(response.data.sellList);
-                console.log("하트 불러오기 성공")
-                console.log(response.data)
-            } catch (error) {
-                console.log("하트 불러오기 실패");
-            }
-        };
-
-        likeLoad();
+        boardLoad();
     }, []);
 
     return (
@@ -86,6 +89,7 @@ const Home = () => {
                     </Left>
 
                     <Center>
+                        <CenterTop>재능판매</CenterTop>
                         <CenterSearch type="text" placeholder="*재능검색" />
 
                         <TagBind>
@@ -96,84 +100,58 @@ const Home = () => {
 
                         <Chapter>인기글</Chapter>
 
-                        <CenterBoardBind>
-                            <CenterBoard>
-                                <BoardImg>
-                                    이미지 넣기
-                                </BoardImg>
-                                <BoardTitle>
-                                    ㅇㅇㅇ
-                                    {sellList.sellTitle}
-                                    <BoardLike>
-                                        <FcLike />
-                                        <LikeScore>
-                                            3
-                                        </LikeScore>
-                                    </BoardLike>
-                                </BoardTitle>
-                            </CenterBoard>
-
-                            <CenterBoard>
-                                <BoardImg>
-                                    이미지 넣기
-                                </BoardImg>
-                                <BoardTitle>
-                                    ㅇㅇㅇ
-                                    {sellList.sellTitle}
-                                    <BoardLike>
-                                        <FcLike />
-                                        <LikeScore>
-                                            3
-                                        </LikeScore>
-                                    </BoardLike>
-                                </BoardTitle>
-                            </CenterBoard>
-
-                            <CenterBoard>
-                                <BoardImg>
-                                    이미지 넣기
-                                </BoardImg>
-                                <BoardTitle>
-                                    ㅇㅇㅇ
-                                    {sellList.sellTitle}
-                                    <BoardLike>
-                                        <FcLike />
-                                        <LikeScore>
-                                            3
-                                        </LikeScore>
-                                    </BoardLike>
-                                </BoardTitle>
-                            </CenterBoard>
-                        </CenterBoardBind>
+                        <CenterContents>
+                            {likeList.length > 0 && likeList.map((item, index) => {
+                                return (
+                                    <CenterBoardBind key={item.sellIdx}>
+                                        <CenterBoard>
+                                            <BoardImg>
+                                                이미지 넣기
+                                            </BoardImg>
+                                            <BoardTitle>
+                                                {item.sellTitle}
+                                                <BoardLike>
+                                                    <FcLike />
+                                                    <LikeScore>
+                                                        {item.sellLike}
+                                                    </LikeScore>
+                                                </BoardLike>
+                                            </BoardTitle>
+                                        </CenterBoard>
+                                    </CenterBoardBind>
+                                );
+                            })}
+                        </CenterContents>
 
                         <Chapter>전체글</Chapter>
 
-
-                        {sellList.length > 0 && sellList.map((item, index) => {
-                            return (
-                                <CenterBoardBind key={item.sellIdx}>
-                                    <CenterBoard>
-                                        <BoardImg>
-                                            이미지 넣기
-                                        </BoardImg>
-                                        <BoardTitle>
-                                            {item.sellTitle}
-                                            <BoardLike>
-                                                <FcLike />
-                                                <LikeScore>
-                                                    {item.sellLike}
-                                                </LikeScore>
-                                            </BoardLike>
-                                        </BoardTitle>
-                                    </CenterBoard>
-                                </CenterBoardBind>
-                            );
-                        })}
+                        <CenterContents>
+                            {sellList.length > 0 && sellList.map((noItem, index) => {
+                                return (
+                                    <CenterBoardBind key={noItem.sellIdx}>
+                                        <CenterBoard>
+                                            <BoardImg>
+                                                이미지 넣기
+                                            </BoardImg>
+                                            <BoardTitle>
+                                                {noItem.sellTitle}
+                                                <BoardLike>
+                                                    <FcLike />
+                                                    <LikeScore>
+                                                        {noItem.sellLike}
+                                                    </LikeScore>
+                                                </BoardLike>
+                                            </BoardTitle>
+                                        </CenterBoard>
+                                    </CenterBoardBind>
+                                );
+                            })}
+                        </CenterContents>
 
                     </Center>
 
                     <Right>
-                        <RightTop>재능구함</RightTop>
+                        <RightTop>재능구매</RightTop>
                         <RightBoard />
                         <RightBoard />
                         <RightBoard />
@@ -319,6 +297,18 @@ const Center = styled.div`
     background-color: white;
 `
 
+const CenterTop = styled.div`
+    width: 50%;
+    height: 6vh;
+    /* border: 2px solid black; */
+    font-size: 2.5rem;
+    margin-left: 2rem;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    font-weight: bolder;
+`
+
 const CenterSearch = styled.input`
     width: 70%;
     height: 5vh;
@@ -365,7 +355,7 @@ const Chapter = styled.div`
     width: 50%;
     height: 6vh;
     border: 2px solid black;
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-left: 2rem;
     margin-top: 1rem;
     display: flex;
@@ -376,21 +366,23 @@ const CenterContents = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    /* justify-content: space-around; */
+    justify-content: left;
     /* 넘치는 경우 줄바꿈 */
 `
 
 const CenterBoardBind = styled.div`
-    /* width: 50%; */
+    width: 30%;
     display: flex;
-    justify-content: space-around;
     margin-bottom: 2rem;
 `
 
 const CenterBoard = styled.div`
-    width: 25%;
+    width: 100%;
     height: 20vh;
     border: 2px solid blue;
     margin-top: 2rem;
+    margin-left: 5rem;
     /* margin-left: 1rem; */
 `
 
@@ -404,7 +396,7 @@ const BoardTitle = styled.div`
     width: 100%;
     height: 4vh;
     border: 2px solid red;
-    font-size: 2em;
+    font-size: 1.5em;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -457,7 +449,7 @@ const RightTop = styled.div`
     width: 40%;
     height: 8vh;
     /* border: 2px solid black; */
-    font-size: 2rem;
+    font-size: 2.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
