@@ -66,6 +66,23 @@ const Home = () => {
         boardLoad();
     }, []);
 
+    const [purList, setPurList] = useState([]);
+
+    useEffect(() => {
+        const purchaseLoad = async () => {
+            try {
+                const response = await axios.get("/list");
+                setPurList(response.data.purList);
+                console.log("재능 구매 불러오기 성공")
+                console.log(response.data)
+            } catch (error) {
+                console.log("재능 구매 불러오기 실패");
+            }
+        };
+
+        purchaseLoad();
+    }, []);
+
     return (
         <>
             <Window>
@@ -152,10 +169,9 @@ const Home = () => {
 
                     <Right>
                         <RightTop>재능구매</RightTop>
-                        <RightBoard />
-                        <RightBoard />
-                        <RightBoard />
-                        <RightBoard />
+                        <RightBoard>
+                            바퀴벌레 제발 좀 잡아주실 분
+                        </RightBoard>
                     </Right>
 
                 </Bind>
@@ -459,10 +475,15 @@ const RightTop = styled.div`
 `
 
 const RightBoard = styled.div`
-    width: 60%;
-    height: 20vh;
+    width: 80%;
+    height: 5vh;
     border: 2px solid red;
+    font-size: 2em;
     margin: 0 auto;
-    margin-top: 1.5rem;
+    margin-top: 3rem;
     margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: pre-wrap; /*한 줄 꽉 차면 줄 바꿈*/
 `
