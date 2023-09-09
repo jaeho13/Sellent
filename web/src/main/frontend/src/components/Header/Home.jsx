@@ -169,10 +169,27 @@ const Home = () => {
 
                     <Right>
                         <RightTop>재능구매</RightTop>
-                        <RightBoard>
-                            바퀴벌레 제발 좀 잡아주실 분
-                        </RightBoard>
+                        {/* {purList.length > 0 && purList.map((purItem, index) => {
+                            return (
+                                <RightBoard key={purItem.sellIdx} />
+                            )
+                        })} */}
                     </Right>
+
+
+                    {/* <Right>
+                        <RightTop>재능구매</RightTop>
+                        <RightBoardBind>
+                            <RightBoard>바퀴벌레 제발 좀 잡아주실 분
+                                <BoardLike>
+                                    <FcLike />
+                                    <LikeScore>
+                                        33
+                                    </LikeScore>
+                                </BoardLike>
+                            </RightBoard>
+                        </RightBoardBind>
+                    </Right> */}
 
                 </Bind>
             </Back>
@@ -474,16 +491,18 @@ const RightTop = styled.div`
     padding-left: 0.5rem;
 `
 
+const RightBoardBind = styled.div`
+    
+`
+
 const RightBoard = styled.div`
     width: 80%;
     height: 5vh;
     border: 2px solid red;
-    font-size: 2em;
+    font-size: 2rem;
     margin: 0 auto;
     margin-top: 3rem;
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    white-space: pre-wrap; /*한 줄 꽉 차면 줄 바꿈*/
 `
