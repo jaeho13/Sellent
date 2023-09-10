@@ -26,10 +26,13 @@ public class SellingService {
         // 전체 글 목록 저장
         result.put("sellList", sellingRepository.findBySelling());
         result.put("likeList", sellingRepository.findPopular());
+        result.put("purList", sellingRepository.findByPurchase());
         // 글 댓글 수 저장
         //result.put("sellCmtCnt", sellingCmtRepository.countByCmt());
         System.out.println(result.get("sellList"));
         System.out.println(result.get("likeList"));
+        System.out.println(result.get("purList"));
+
 
         return result;
     }
