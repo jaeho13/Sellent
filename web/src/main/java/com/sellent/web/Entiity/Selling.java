@@ -40,8 +40,11 @@ public class Selling {
     private int sellHashTag; // 해시태그
 
     @Column
-    private String sellLocation; // 판매 장소
+    private String sellLocation; // 장소
 
     @Column
     private int sellLike; // 좋아요
+
+    @Column(nullable = false)
+    private int sellType; // 0: 판매 1: 구매
 }
