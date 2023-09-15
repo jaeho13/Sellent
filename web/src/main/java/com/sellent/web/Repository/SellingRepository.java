@@ -21,7 +21,7 @@ public interface SellingRepository extends JpaRepository<Selling, Integer> {
             "WHERE s.sellIdx = :sellIdx", nativeQuery = true)
     SellingDTO getSellingContentWithSellIdx(@Param("sellIdx") int sellIdx);
 
-    @Query(value = "SELECT * FROM (SELECT * FROM SELLING ORDER BY SELL_LIKE DESC, SELL_DATE DESC) WHERE ROWNUM <= 3", nativeQuery = true)
+    @Query(value = "SELECT * FROM (SELECT * FROM SELLING ORDER BY SELL_LIKE DESC, SELL_DATE DESC) WHERE ROWNUM <= 3 AND SELL_TYPE = 0", nativeQuery = true)
     List<Selling> findPopular();
 
     @Query(value = "SELECT * FROM SELLING WHERE SELL_TYPE = 1", nativeQuery = true)
