@@ -109,11 +109,12 @@ const Home = () => {
                         <CenterTop>재능판매</CenterTop>
                         <CenterSearch type="text" placeholder="*재능검색" />
 
-                        <TagBind>
+
+                        {/* <TagBind>
                             <Tag>#안녕</Tag>
                             <Tag1>#하세</Tag1>
                             <Tag1>#요</Tag1>
-                        </TagBind>
+                        </TagBind> */}
 
                         <Chapter>인기글</Chapter>
 
@@ -337,6 +338,13 @@ const CenterSearch = styled.input`
     margin-top: 1rem;
     margin-left: 2rem;
 `
+
+const CenterSearchEnter = styled.div`
+    width: 10%;
+    height: 5vh;
+    
+`
+
 
 const TagBind = styled.div`
     width: 70%;
