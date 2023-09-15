@@ -169,28 +169,15 @@ const Home = () => {
 
                     <Right>
                         <RightTop>재능구매</RightTop>
-                        {/* {purList.length > 0 && purList.map((purItem, index) => {
+                        {purList.length > 0 && purList.map((purItem, index) => {
                             return (
-                                <RightBoard key={purItem.sellIdx} />
+                                <RightBoard key={purItem.sellIdx}>
+                                    {purItem.sellTitle}
+                                </RightBoard>
+
                             )
-                        })} */}
+                        })}
                     </Right>
-
-
-                    {/* <Right>
-                        <RightTop>재능구매</RightTop>
-                        <RightBoardBind>
-                            <RightBoard>바퀴벌레 제발 좀 잡아주실 분
-                                <BoardLike>
-                                    <FcLike />
-                                    <LikeScore>
-                                        33
-                                    </LikeScore>
-                                </BoardLike>
-                            </RightBoard>
-                        </RightBoardBind>
-                    </Right> */}
-
                 </Bind>
             </Back>
         </>
@@ -489,10 +476,6 @@ const RightTop = styled.div`
     font-weight: bolder;
     padding-top: 0.5rem;
     padding-left: 0.5rem;
-`
-
-const RightBoardBind = styled.div`
-    
 `
 
 const RightBoard = styled.div`
