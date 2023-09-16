@@ -1,6 +1,7 @@
 package com.sellent.web.Repository;
 
-import com.sellent.web.Dto.SellingDTO;
+import com.sellent.web.Dto.ContentDTO;
+import com.sellent.web.Dto.ListDTO;
 import com.sellent.web.Entiity.Selling;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,18 +13,31 @@ import java.util.List;
 @Repository
 public interface SellingRepository extends JpaRepository<Selling, Integer> {
 
-    @Query(value = "SELECT * FROM SELLING WHERE SELL_TYPE = 0", nativeQuery = true)
-    List<Selling> findBySelling();
-
-    @Query(value = "SELECT s.sellIdx, s.sellTitle, s.sellContent, u.userEmail, s.sellDate, s.sellPrice, s.sellHashTag, s.sellLocation " +
+    // sellIdx = ? 글 가져오기
+    @Query(value = "SELECT new com.sellent.web.Dto.ContentDTO(s.sellIdx, s.sellTitle, s.sellContent, s.userListVO.userNm, s.sellDate, s.sellPrice, s.sellHashTag, s.sellLocation, s.sellLike, s.sellType) " +
             "FROM Selling s " +
-            "JOIN s.userListVO u " +
-            "WHERE s.sellIdx = :sellIdx", nativeQuery = true)
-    SellingDTO getSellingContentWithSellIdx(@Param("sellIdx") int sellIdx);
+            "WHERE s.sellIdx = :sellIdx")
+    ContentDTO getSellingContent(@Param("sellIdx") int sellIdx);
 
-    @Query(value = "SELECT * FROM (SELECT * FROM SELLING ORDER BY SELL_LIKE DESC, SELL_DATE DESC) WHERE ROWNUM <= 3 AND SELL_TYPE = 0", nativeQuery = true)
-    List<Selling> findPopular();
+    // 판매 글 가져오기
+    @Query(value = "SELECT new com.sellent.web.Dto.ListDTO(s.sellIdx, s.sellTitle, s.sellLike, s.sellDate) " +
+            "FROM Selling s " +
+            "WHERE s.sellType = 0 " +
+            "ORDER BY s.sellDate DESC")
+    List<ListDTO> findBySelling();
 
-    @Query(value = "SELECT * FROM SELLING WHERE SELL_TYPE = 1", nativeQuery = true)
-    List<Selling> findByPurchase();
+    // 판매 글 + 인기 글 가져오기
+    @Query(value = "SELECT new com.sellent.web.Dto.ListDTO(s.sellIdx, s.sellTitle, s.sellLike, s.sellDate) " +
+            "FROM Selling s " +
+            "WHERE s.sellType = 0 " +
+            "ORDER BY s.sellLike DESC, s.sellDate DESC")
+    List<ListDTO> findPopular();
+
+
+    // 구매 글 가져오기
+    @Query(value = "SELECT new com.sellent.web.Dto.ListDTO(s.sellIdx, s.sellTitle, s.sellLike, s.sellDate) " +
+            "FROM Selling s " +
+            "WHERE s.sellType = 1 " +
+            "ORDER BY s.sellDate DESC")
+    List<ListDTO> findByPurchase();
 }

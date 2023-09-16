@@ -26,7 +26,7 @@ public class Selling {
     @Column(nullable = false, length = 3000)
     private String sellContent; // 글 내용
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userEmail", nullable = false)
     private UserList userListVO; // 글 작성자
 
