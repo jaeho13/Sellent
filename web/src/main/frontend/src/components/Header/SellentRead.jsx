@@ -4,6 +4,7 @@ import "../fonts/Font.css";
 import { AiFillCloseCircle } from "react-icons/ai"
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import Example from "./Example";
 
 const SellentRead = () => {
 
@@ -51,8 +52,8 @@ const SellentRead = () => {
         loadBoard();
     }, [sellIdx]);
 
-    const type = sellentRead.sellType;
-    const test = "";
+    // const type = sellentRead.sellType;
+    // const test = "";
 
     return (
         <>
@@ -77,9 +78,14 @@ const SellentRead = () => {
                     </Left>
 
                     <Center>
-                        <CenterTopic>{type === 0 ? "재능 판매일까 구매일까 재호야" : "재능 구매일까 판매일까 재호야"}</CenterTopic>
+                        <CenterTopic>{sellentRead.sellType === 0 ? "재능 판매" : "재능 구매"}</CenterTopic>
                         <CenterTitle>{sellentRead.sellTitle}</CenterTitle>
-                        <CenterContents>{sellentRead.sellContent}</CenterContents>
+                        <CenterBottomBind>
+                            <CenterContents>{sellentRead.sellContent}</CenterContents>
+                            <CenterComments>댓글</CenterComments>
+                        </CenterBottomBind>
+                        <CenterWhere>거래 희망장소</CenterWhere>
+                        <Example />
                     </Center>
                 </Bind>
             </Back>
@@ -187,6 +193,8 @@ const Center = styled.div`
     height: 85vh;
     border: 2px solid red;
     background-color: white;
+    overflow: auto; /* 스크롤 추가 */
+    overflow-x: hidden; /* 가로 스크롤 제거 */
 `
 
 const Chat = styled.div`
@@ -239,7 +247,7 @@ const RightBoard = styled.div`
 `
 
 const CenterTopic = styled.div`
-    width: 50%;
+    width: 40%;
     height: 5vh;
     border: 2px solid red;
     font-size: 2.5em;
@@ -261,12 +269,38 @@ const CenterTitle = styled.div`
     margin-left: 1em;
 `
 
+const CenterBottomBind = styled.div`
+    display: flex;
+    flex-direction: row;
+`
+
 const CenterContents = styled.div`
-    width: 80%;
+    width: 40%;
     height: 50vh;
     border: 2px solid red;
     font-size: 2.5em;
     display: flex;
+    margin-top: 1em;
+    margin-left: 1em;
+`
+
+const CenterComments = styled.div`
+    width: 40%;
+    height: 50vh;
+    border: 2px solid red;
+    font-size: 2.5em;
+    display: flex;
+    margin-top: 1em;
+    margin-left: 1em;
+`
+
+const CenterWhere = styled.div`
+    width: 40%;
+    height: 5vh;
+    border: 2px solid red;
+    font-size: 2.5em;
+    display: flex;
+    align-items: center;
     margin-top: 1em;
     margin-left: 1em;
 `
