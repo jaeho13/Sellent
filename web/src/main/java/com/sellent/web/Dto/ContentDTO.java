@@ -8,15 +8,18 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class SellingDTO {
+@Data
+public class ContentDTO {
 
     private int sellIdx;
     private String sellTitle;
     private String sellContent;
-    private String userEmail;
+    private String userNm;
     private Date sellDate;
     private int sellPrice;
     private int sellHashTag;
     private String sellLocation;
+    private int sellLike;
+    private int sellType;
 
 }

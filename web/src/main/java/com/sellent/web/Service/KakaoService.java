@@ -3,6 +3,7 @@ package com.sellent.web.Service;
 import com.sellent.web.Entiity.UserList;
 import com.sellent.web.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -16,6 +17,12 @@ public class KakaoService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Value("#{sellentProperty['kakao.client-id']}")
+    private String clientId;
+
+    @Value("#{sellentProperty['kakao.redirect_uri']}")
+    private String redirectUri;
 
     // (카카오 로그인)
     // 프론트에서 보내준 코드로 카카오에서 인증 토큰 얻어오기
@@ -35,8 +42,8 @@ public class KakaoService {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(urlConnection.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=ee24b35eca48daeea571fe2b7a9dbb54");
-            sb.append("&redirect_uri=http://localhost:3000/login/kakao/sellent"); // 프 서버로 바꾸기
+            sb.append("&client_id=" + clientId);
+            sb.append("&redirect_uri=" + redirectUri); // 프 서버로 바꾸기
             sb.append("&code=" + code);
 
             bw.write(sb.toString());
