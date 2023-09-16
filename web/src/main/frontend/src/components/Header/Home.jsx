@@ -111,64 +111,62 @@ const Home = () => {
 
                     <Center>
                         <CenterTop>재능판매</CenterTop>
-                        {/* <CenterSearch type="text" placeholder="*재능검색" /> */}
 
+                        <CenterHalfTop>
+                            <LiveChapter>실시간 인기글</LiveChapter>
 
-                        {/* <TagBind>
-                            <Tag>#안녕</Tag>
-                            <Tag1>#하세</Tag1>
-                            <Tag1>#요</Tag1>
-                        </TagBind> */}
-
-                        <Chapter>실시간 인기글</Chapter>
-
-                        <CenterContents>
-                            {likeList.length > 0 && likeList.map((item, index) => {
-                                return (
-                                    <CenterBoardBind key={item.sellIdx}>
-                                        <CenterBoard>
-                                            <BoardImg>
-                                                이미지 넣기
-                                            </BoardImg>
-                                            <BoardTitle>
-                                                {item.sellTitle}
-                                                <BoardLike>
-                                                    <FcLike />
-                                                    <LikeScore>
-                                                        {item.sellLike}
-                                                    </LikeScore>
-                                                </BoardLike>
-                                            </BoardTitle>
-                                        </CenterBoard>
-                                    </CenterBoardBind>
-                                );
-                            })}
-                        </CenterContents>
+                            <CenterContents>
+                                {likeList.length > 0 && likeList.map((item, index) => {
+                                    return (
+                                        <CenterBoardBind key={item.sellIdx}>
+                                            <CenterBoard>
+                                                <BoardImg>
+                                                    이미지 넣기
+                                                </BoardImg>
+                                                <BoardTitle>
+                                                    {item.sellTitle}
+                                                    <BoardLike>
+                                                        <FcLike />
+                                                        <LikeScore>
+                                                            {item.sellLike}
+                                                        </LikeScore>
+                                                    </BoardLike>
+                                                </BoardTitle>
+                                            </CenterBoard>
+                                        </CenterBoardBind>
+                                    );
+                                })}
+                            </CenterContents>
+                        </CenterHalfTop>
 
                         <Chapter>전체글</Chapter>
+                        <CenterHalfBottom>
 
-                        <CenterContents>
-                            {sellList.length > 0 && sellList.map((noItem, index) => {
-                                return (
-                                    <CenterBoardBind key={noItem.sellIdx}>
-                                        <CenterBoard>
-                                            <BoardImg>
-                                                이미지 넣기
-                                            </BoardImg>
-                                            <BoardTitle>
-                                                {noItem.sellTitle}
-                                                <BoardLike>
-                                                    <FcLike />
-                                                    <LikeScore>
-                                                        {noItem.sellLike}
-                                                    </LikeScore>
-                                                </BoardLike>
-                                            </BoardTitle>
-                                        </CenterBoard>
-                                    </CenterBoardBind>
-                                );
-                            })}
-                        </CenterContents>
+                            <CenterContents>
+                                {sellList.length > 0 && sellList.map((noItem, index) => {
+                                    return (
+                                        <CenterBoardBind key={noItem.sellIdx}>
+                                            <CenterBoard>
+                                                <BoardImg>
+                                                    이미지 넣기
+                                                </BoardImg>
+                                                <BoardTitle>
+                                                    {noItem.sellTitle}
+                                                    <BoardLike>
+                                                        <FcLike />
+                                                        <LikeScore>
+                                                            {noItem.sellLike}
+                                                        </LikeScore>
+                                                    </BoardLike>
+                                                </BoardTitle>
+                                            </CenterBoard>
+                                        </CenterBoardBind>
+                                    );
+                                })}
+                            </CenterContents>
+                        </CenterHalfBottom>
+
+
 
                     </Center>
 
@@ -322,77 +320,57 @@ const Center = styled.div`
     background-color: white;
 `
 
+const CenterHalfTop = styled.div`
+    width: 100%;
+    height: 35vh;
+    /* border: 2px solid black; */
+    overflow: auto; /* 스크롤 추가 */
+    overflow-x: hidden; /* 가로 스크롤 제거 */
+`
+
+const CenterHalfBottom = styled.div`
+    width: 100%;
+    height: 35vh;
+    /* border: 2px solid black; */
+    /* margin-top: 1em; */
+    overflow: auto; /* 스크롤 추가 */
+    overflow-x: hidden; /* 가로 스크롤 제거 */
+`
+
 const CenterTop = styled.div`
     width: 50%;
-    height: 6vh;
+    height: 5vh;
     /* border: 2px solid black; */
     font-size: 2.5rem;
-    margin-left: 2rem;
+    margin-left: 1rem;
     margin-top: 1rem;
     display: flex;
     align-items: center;
     font-weight: bolder;
 `
 
-const CenterSearch = styled.input`
-    width: 70%;
+const LiveChapter = styled.div`
+    width: 50%;
     height: 5vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     font-size: 2rem;
+    margin-left: 1rem;
     margin-top: 1rem;
-    margin-left: 2rem;
-`
-
-const CenterSearchEnter = styled.div`
-    width: 10%;
-    height: 5vh;
-    
-`
-
-
-const TagBind = styled.div`
-    width: 70%;
-    height: 5vh;
-    border: 2px solid red;
-    margin-top: 1rem;
-    margin-left: 2rem;
     display: flex;
-    justify-content: row;
-`
-
-const Tag = styled.div`
-    width: 20%;
-    height: 5vh;
-    border: 2px solid black;
-    font-size: 2rem;
-    display: flex;
-    /* justify-content: center; */
     align-items: center;
-    background-color: skyblue;
-`
-
-const Tag1 = styled.div`
-    width: 20%;
-    height: 5vh;
-    border: 2px solid black;
-    font-size: 2rem;
-    margin-left: 2rem;
-    display: flex;
-    /* justify-content: center; */
-    align-items: center;
-    background-color: lightgreen;
 `
 
 const Chapter = styled.div`
     width: 50%;
-    height: 6vh;
-    border: 2px solid black;
+    height: 5vh;
+    /* border: 2px solid black; */
     font-size: 2rem;
-    margin-left: 2rem;
-    margin-top: 1rem;
+    margin-left: 1rem;
+    /* margin-top: 1rem; */
     display: flex;
     align-items: center;
 `
+
 
 const CenterContents = styled.div`
     display: flex;

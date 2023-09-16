@@ -65,6 +65,23 @@ const Search = () => {
         boardLoad();
     }, []);
 
+    const [purList, setPurList] = useState([]);
+
+    useEffect(() => {
+        const purchaseLoad = async () => {
+            try {
+                const response = await axios.get("/list");
+                setPurList(response.data.purList);
+                console.log("재능 구매 불러오기 성공")
+                console.log(response.data)
+            } catch (error) {
+                console.log("재능 구매 불러오기 실패");
+            }
+        };
+
+        purchaseLoad();
+    }, []);
+
 
     return (
         <>
@@ -88,32 +105,73 @@ const Search = () => {
                     </Left>
 
                     <Center>
+
                         <CenterSearch type="text" placeholder="*재능검색" />
-
+                        <SearchEnter>버튼</SearchEnter>
                         <CenterTop>재능판매</CenterTop>
+                        <CenterHalfTop>
+                            <CenterContents>
+                                {sellList.length > 0 && sellList.map((noItem, index) => {
+                                    return (
+                                        <CenterBoardBind key={noItem.sellIdx}>
+                                            <CenterBoard>
+                                                <BoardImg>
+                                                    이미지 넣기
+                                                </BoardImg>
+                                                <BoardTitle>
+                                                    {noItem.sellTitle}
+                                                    <BoardLike>
+                                                        <FcLike />
+                                                        <LikeScore>
+                                                            {noItem.sellLike}
+                                                        </LikeScore>
+                                                    </BoardLike>
+                                                </BoardTitle>
+                                            </CenterBoard>
+                                        </CenterBoardBind>
+                                    );
+                                })}
+                            </CenterContents>
+                        </CenterHalfTop>
 
-                        <CenterContents>
-                            {sellList.length > 0 && sellList.map((noItem, index) => {
+                        <CenterTop>재능구매</CenterTop>
+                        <CenterHalfBottom>
+
+                            <CenterContents>
+                                {sellList.length > 0 && sellList.map((noItem, index) => {
+                                    return (
+                                        <CenterBoardBind key={noItem.sellIdx}>
+                                            <CenterBoard>
+                                                <BoardImg>
+                                                    이미지 넣기
+                                                </BoardImg>
+                                                <BoardTitle>
+                                                    {noItem.sellTitle}
+                                                    <BoardLike>
+                                                        <FcLike />
+                                                        <LikeScore>
+                                                            {noItem.sellLike}
+                                                        </LikeScore>
+                                                    </BoardLike>
+                                                </BoardTitle>
+                                            </CenterBoard>
+                                        </CenterBoardBind>
+                                    );
+                                })}
+                            </CenterContents>
+
+                            {/* {purList.length > 0 && purList.map((purItem, index) => {
                                 return (
-                                    <CenterBoardBind key={noItem.sellIdx}>
-                                        <CenterBoard>
-                                            <BoardImg>
-                                                이미지 넣기
-                                            </BoardImg>
-                                            <BoardTitle>
-                                                {noItem.sellTitle}
-                                                <BoardLike>
-                                                    <FcLike />
-                                                    <LikeScore>
-                                                        {noItem.sellLike}
-                                                    </LikeScore>
-                                                </BoardLike>
-                                            </BoardTitle>
-                                        </CenterBoard>
-                                    </CenterBoardBind>
-                                );
-                            })}
-                        </CenterContents>
+                                    <RightBoard key={purItem.sellIdx}>
+                                        {purItem.sellTitle}
+                                    </RightBoard>
+
+                                )
+                            })} */}
+                        </CenterHalfBottom>
+
+
+
                     </Center>
 
                 </Bind>
@@ -223,35 +281,51 @@ const Center = styled.div`
     background-color: white;
 `
 
-const CenterTop = styled.div`
-    width: 50%;
-    height: 5vh;
-    border: 2px solid black;
-    font-size: 2rem;
-    margin-top: 1rem;
-    margin-left: 2rem;
-    display: flex;
-    align-items: center;
-`
-
 const CenterSearch = styled.input`
     width: 70%;
     height: 5vh;
     border: 2px solid black;
     font-size: 2rem;
     margin-top: 1rem;
-    margin-left: 2rem;
+    margin-left: 1rem;
 `
 
-const Chapter = styled.div`
-    width: 50%;
+const SearchEnter = styled.button`
+    width: 10%;
     height: 6vh;
     border: 2px solid black;
     font-size: 2rem;
-    margin-left: 2rem;
     margin-top: 1rem;
+    margin-left: 2rem;
+`
+
+const CenterTop = styled.div`
+    width: 50%;
+    height: 5vh;
+    border: 2px solid black;
+    font-size: 2rem;
+    margin-top: 1rem;
+    margin-left: 1rem;
     display: flex;
     align-items: center;
+`
+
+const CenterHalfTop = styled.div`
+    width: 100%;
+    height: 30vh;
+    border: 2px solid black;
+    overflow: auto; /* 스크롤 추가 */
+    overflow-x: hidden; /* 가로 스크롤 제거 */
+`
+
+
+const CenterHalfBottom = styled.div`
+    width: 100%;
+    height: 30vh;
+    /* border: 2px solid black; */
+    /* margin-top: 1em; */
+    overflow: auto; /* 스크롤 추가 */
+    overflow-x: hidden; /* 가로 스크롤 제거 */
 `
 
 const CenterContents = styled.div`
@@ -262,7 +336,6 @@ const CenterContents = styled.div`
     justify-content: left;
     /* 넘치는 경우 줄바꿈 */
 `
-
 
 const CenterBoardBind = styled.div`
     width: 21%;
