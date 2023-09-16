@@ -4,13 +4,10 @@ import com.sellent.web.Dto.ContentDTO;
 import com.sellent.web.Dto.ListDTO;
 import com.sellent.web.Entiity.Selling;
 import com.sellent.web.Entiity.UserList;
-import com.sellent.web.Repository.SellingCmtRepository;
 import com.sellent.web.Repository.SellingRepository;
 import com.sellent.web.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -58,11 +55,13 @@ public class SellingService {
             throw e;
         }
     }
-    // Param : sellTitle, sellContent, userEmail, sellType, sellPrice, sellLocation, sellType
+
     public void postContent(Map<String, Object> content, UserList userList) {
         Selling selling = new Selling();
+
         String userEmail = (String) userList.getUserEmail();
         UserList userVO = userRepository.findByUserEmail(userEmail);
+
         selling.setUserListVO(userVO);
         selling.setSellTitle((String) content.get("sellTitle"));
         selling.setSellContent((String) content.get("sellContent"));
