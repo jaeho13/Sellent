@@ -17,7 +17,6 @@ public class ContentDTO {
     private String userNm;
     private Date sellDate;
     private int sellPrice;
-    private int sellHashTag;
     private String sellLocation;
     private int sellLike;
     private int sellType;
