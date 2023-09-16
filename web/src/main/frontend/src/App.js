@@ -14,6 +14,7 @@ import Write from "./components/Header/Write";
 import MyPage from "./components/Header/MyPage";
 import Chatting from "./components/Header/Chatting";
 import Background from "./components/Header/Background";
+import Search from "./components/Header/Search";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-//          <Route path="/exam" element={<Example />} />]
+//          <Route path="/exam" element={<Example />} />
 
           <Route path="/exam" element={<Example />} />
           <Route path="/kakaologin" element={<KakaoLogin />} />
@@ -35,6 +36,7 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/chatting" element={<Chatting />} />
           <Route path="/background" element={<Background />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </Router>
     
