@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -28,19 +29,28 @@ public class SellingController {
         return user;
     }
 
-    // 글 목록 조회하기
+    // 전체 글 목록 조회하기
     @GetMapping("/list")
-    public Map<String, Object> getSellingList() {
-        return sellingService.getSellingList();
+    public Map<String, Object> getList() {
+        return sellingService.getList();
     }
 
+    // Method : GET/selling
+    // Param : sellIdx
     // 글 읽기
-    @GetMapping("/selling")
-    public Map<String, Object> getSellingContent(@RequestParam String sellIdx) throws Exception {
-        Map<String, Object> result = sellingService.getSellingContent(sellIdx);
+    @GetMapping("/sellent")
+    public Map<String, Object> getContent(@RequestParam String sellIdx) throws Exception {
+        Map<String, Object> result = sellingService.getContent(sellIdx);
 
         return result;
     }
 
-
+    // Method : POST
+    // Param : sellTitle, sellContent, userEmail, sellType, sellPrice, sellLocation, sellType
+    // 글 작성
+    @PostMapping("/sellent")
+    public void postContent(@RequestBody Map<String, Object> content, HttpServletRequest request) throws ParseException {
+        UserList userList = userSession(request);
+        sellingService.postContent(content, userList);
+    }
 }

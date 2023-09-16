@@ -2,15 +2,16 @@ package com.sellent.web.Service;
 
 import com.sellent.web.Dto.ContentDTO;
 import com.sellent.web.Dto.ListDTO;
+import com.sellent.web.Entiity.Selling;
+import com.sellent.web.Entiity.UserList;
 import com.sellent.web.Repository.SellingCmtRepository;
 import com.sellent.web.Repository.SellingRepository;
+import com.sellent.web.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,10 +21,10 @@ public class SellingService {
     SellingRepository sellingRepository;
 
     @Autowired
-    SellingCmtRepository sellingCmtRepository;
+    UserRepository userRepository;
 
     // 판매 글 전체 가져오기
-    public Map<String, Object> getSellingList() {
+    public Map<String, Object> getList() {
         Map<String, Object> result = new HashMap<>();
 
         // 판매 글 목록 저장
@@ -40,13 +41,10 @@ public class SellingService {
 
         result.put("likeList", topLikeList);
 
-        // 글 댓글 수 저장
-        //result.put("sellCmtCnt", sellingCmtRepository.countByCmt());
-
         return result;
     }
 
-    public Map<String, Object> getSellingContent(String num) {
+    public Map<String, Object> getContent(String num) {
         Map<String, Object> map = new HashMap<>();
         int sellIdx = Integer.parseInt(num);
 
@@ -60,4 +58,30 @@ public class SellingService {
             throw e;
         }
     }
+    // Param : sellTitle, sellContent, userEmail, sellType, sellPrice, sellLocation, sellType
+    public void postContent(Map<String, Object> content, UserList userList) {
+        Selling selling = new Selling();
+        String userEmail = (String) userList.getUserEmail();
+        UserList userVO = userRepository.findByUserEmail(userEmail);
+        selling.setUserListVO(userVO);
+        selling.setSellTitle((String) content.get("sellTitle"));
+        selling.setSellContent((String) content.get("sellContent"));
+        selling.setSellDate(new Date());
+        selling.setSellLocation((String) content.get("sellLocation"));
+        selling.setSellType((int) content.get("sellType"));
+        selling.setSellPrice((int) content.get("sellPrice"));
+        selling.setSellLike(0);
+
+        sellingRepository.save(selling);
+    }
 }
+
+
+
+
+
+
+
+
+
+

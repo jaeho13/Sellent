@@ -37,9 +37,6 @@ public class Selling {
     private int sellPrice; // 판매 가격
 
     @Column
-    private int sellHashTag; // 해시태그
-
-    @Column
     private String sellLocation; // 장소
 
     @Column
