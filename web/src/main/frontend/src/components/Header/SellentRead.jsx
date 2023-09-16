@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "../fonts/Font.css";
 import { AiFillCloseCircle } from "react-icons/ai"
-import { useNavigate } from "react-router-dom";
-import Example from "./Example";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
-const Chatting = () => {
+const SellentRead = () => {
 
     const navigate = useNavigate();
 
@@ -34,6 +34,27 @@ const Chatting = () => {
         navigate("/search")
     }
 
+    const { sellIdx } = useParams();
+    const [sellentRead, setSellentRead] = useState({});
+
+    useEffect(() => {
+        const loadBoard = async () => {
+            try {
+                const response = await axios.get(`/sellent?sellIdx=${sellIdx}`);
+                setSellentRead(response.data.Content);
+                console.log("게시물 불러오기 성공", sellentRead)
+            } catch (error) {
+                console.log("게시물 불러오기 실패", error);
+            }
+        };
+
+        loadBoard();
+    }, [sellIdx]);
+
+    // const type = { sellentRead.sellType };
+
+    const test = "";
+
     return (
         <>
             <Window>
@@ -57,27 +78,18 @@ const Chatting = () => {
                     </Left>
 
                     <Center>
-                        <Chat>채팅창</Chat>
-                        <ChatInput type="text" placeholder="*메세지 보내기" />
+                        <CenterTopic>{sellentRead.sellentType === 0 ? "재능판매" : "재능구매"}</CenterTopic>
 
-
-
+                        <CenterTitle>{sellentRead.sellTitle}</CenterTitle>
+                        <CenterContents>{sellentRead.sellContent}</CenterContents>
                     </Center>
-
-                    <Right>
-                        <RightTop>재능구함</RightTop>
-                        <RightBoard />
-                        <RightBoard />
-                        <RightBoard />
-                        <RightBoard />
-                    </Right>
                 </Bind>
             </Back>
         </>
     );
 }
 
-export default Chatting;
+export default SellentRead;
 
 const Window = styled.div`
     width: 85%;
@@ -173,7 +185,7 @@ const Name = styled.div`
 `
 
 const Center = styled.div`
-    width: 60%;
+    width: 85%;
     height: 85vh;
     border: 2px solid red;
     background-color: white;
@@ -226,4 +238,37 @@ const RightBoard = styled.div`
     margin: 0 auto;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
+`
+
+const CenterTopic = styled.div`
+    width: 50%;
+    height: 5vh;
+    border: 2px solid red;
+    font-size: 2.5em;
+    display: flex;
+    align-items: center;
+    margin-top: 1em;
+    margin-left: 1em;
+    font-weight: bolder;
+`
+
+const CenterTitle = styled.div`
+    width: 80%;
+    height: 5vh;
+    border: 2px solid red;
+    font-size: 2.5em;
+    display: flex;
+    align-items: center;
+    margin-top: 1em;
+    margin-left: 1em;
+`
+
+const CenterContents = styled.div`
+    width: 80%;
+    height: 50vh;
+    border: 2px solid red;
+    font-size: 2.5em;
+    display: flex;
+    margin-top: 1em;
+    margin-left: 1em;
 `

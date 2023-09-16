@@ -15,6 +15,7 @@ import MyPage from "./components/Header/MyPage";
 import Chatting from "./components/Header/Chatting";
 import Background from "./components/Header/Background";
 import Search from "./components/Header/Search";
+import SellentRead from "./components/Header/SellentRead";
 
 function App() {
   return (
@@ -37,6 +38,9 @@ function App() {
           <Route path="/chatting" element={<Chatting />} />
           <Route path="/background" element={<Background />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/sellentRead" element={<SellentRead />} />
+          <Route path="/sellentRead/:sellIdx" element={<SellentRead />} />
+          
         </Routes>
       </Router>
     
