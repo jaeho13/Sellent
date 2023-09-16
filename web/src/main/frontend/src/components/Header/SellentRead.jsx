@@ -4,7 +4,7 @@ import "../fonts/Font.css";
 import { AiFillCloseCircle } from "react-icons/ai"
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import Example from "./Example";
+import Map from "./Map";
 
 const SellentRead = () => {
 
@@ -82,11 +82,12 @@ const SellentRead = () => {
                         <CenterTitle>{sellentRead.sellTitle}</CenterTitle>
                         <CenterBottomBind>
                             <CenterContents>{sellentRead.sellContent}</CenterContents>
-                            <CenterComments>댓글</CenterComments>
                         </CenterBottomBind>
                         <CenterWhere>거래 희망장소</CenterWhere>
-                        <Example />
+                        <Map />
                     </Center>
+
+                    <Right></Right>
                 </Bind>
             </Back>
         </>
@@ -189,7 +190,7 @@ const Name = styled.div`
 `
 
 const Center = styled.div`
-    width: 85%;
+    width: 60%;
     height: 85vh;
     border: 2px solid red;
     background-color: white;
@@ -275,7 +276,7 @@ const CenterBottomBind = styled.div`
 `
 
 const CenterContents = styled.div`
-    width: 40%;
+    width: 80%;
     height: 50vh;
     border: 2px solid red;
     font-size: 2.5em;
@@ -285,7 +286,7 @@ const CenterContents = styled.div`
 `
 
 const CenterComments = styled.div`
-    width: 40%;
+    width: 20%;
     height: 50vh;
     border: 2px solid red;
     font-size: 2.5em;

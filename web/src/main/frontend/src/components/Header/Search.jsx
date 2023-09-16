@@ -4,7 +4,7 @@ import "../fonts/Font.css";
 import { AiFillCloseCircle } from "react-icons/ai"
 import { FcLike } from "react-icons/fc"
 import { useNavigate } from "react-router-dom";
-import Example from "./Example";
+import Map from "./Map";
 import axios from "axios";
 
 const Search = () => {
