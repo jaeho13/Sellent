@@ -29,6 +29,9 @@ const MyPage = () => {
         navigate("/background")
     }
 
+    const goSearch = () => {
+        navigate("/search")
+    }
 
     return (
         <>
@@ -44,7 +47,7 @@ const MyPage = () => {
                         <LeftTop>SELLENT</LeftTop>
                         <LeftBoardTitle onClick={goHome} >메인화면</LeftBoardTitle>
                         <LeftBoard onClick={goLogin} >재능판매</LeftBoard>
-                        <LeftBoard onClick={goLogin} >재능구매</LeftBoard>
+                        <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
                         <LeftBoard onClick={goChat} >채팅</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
                         <Cash>25,000원</Cash>
@@ -66,7 +69,7 @@ const MyPage = () => {
                             <Charege>포인트 충전</Charege>
                         </DetailsBind>
 
-                        <Where>판매 지역</Where>
+                        <Where>내 지역</Where>
                         <Example />
 
                     </Center>

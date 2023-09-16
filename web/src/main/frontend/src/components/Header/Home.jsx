@@ -87,6 +87,10 @@ const Home = () => {
         purchaseLoad();
     }, []);
 
+    const handleSellentRead = (sellIdx) => {
+        navigate(`/sellentRead/${sellIdx}`); //sellIdx에 해당하는 글 읽기 페이지 이동
+    }
+
     return (
         <>
             <Window>
@@ -123,7 +127,7 @@ const Home = () => {
                                                 <BoardImg>
                                                     이미지 넣기
                                                 </BoardImg>
-                                                <BoardTitle>
+                                                <BoardTitle onClick={() => handleSellentRead(item.sellIdx)}>
                                                     {item.sellTitle}
                                                     <BoardLike>
                                                         <FcLike />
@@ -321,7 +325,7 @@ const Center = styled.div`
 `
 
 const CenterHalfTop = styled.div`
-    width: 100%;
+    width: 95%;
     height: 35vh;
     /* border: 2px solid black; */
     overflow: auto; /* 스크롤 추가 */
@@ -410,6 +414,7 @@ const BoardTitle = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 `
 
 const BoardLike = styled.div`

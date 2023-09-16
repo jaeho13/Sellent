@@ -31,6 +31,10 @@ const Search = () => {
         navigate("/background")
     }
 
+    const goSearch = () => {
+        navigate("/search")
+    }
+
     const [likeList, setLikeList] = useState([]);
 
     useEffect(() => {
@@ -97,7 +101,7 @@ const Search = () => {
                         <LeftTop>SELLENT</LeftTop>
                         <LeftBoardTitle onClick={goHome} >메인화면</LeftBoardTitle>
                         <LeftBoard onClick={goLogin} >재능판매</LeftBoard>
-                        <LeftBoard onClick={goLogin} >재능구매</LeftBoard>
+                        <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
                         <LeftBoard onClick={goChat} >채팅</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
                         <Cash>25,000원</Cash>
@@ -138,19 +142,19 @@ const Search = () => {
                         <CenterHalfBottom>
 
                             <CenterContents>
-                                {sellList.length > 0 && sellList.map((noItem, index) => {
+                                {purList.length > 0 && purList.map((purItem, index) => {
                                     return (
-                                        <CenterBoardBind key={noItem.sellIdx}>
+                                        <CenterBoardBind key={purItem.sellIdx}>
                                             <CenterBoard>
                                                 <BoardImg>
                                                     이미지 넣기
                                                 </BoardImg>
                                                 <BoardTitle>
-                                                    {noItem.sellTitle}
+                                                    {purItem.sellTitle}
                                                     <BoardLike>
                                                         <FcLike />
                                                         <LikeScore>
-                                                            {noItem.sellLike}
+                                                            {purItem.sellLike}
                                                         </LikeScore>
                                                     </BoardLike>
                                                 </BoardTitle>
@@ -159,15 +163,6 @@ const Search = () => {
                                     );
                                 })}
                             </CenterContents>
-
-                            {/* {purList.length > 0 && purList.map((purItem, index) => {
-                                return (
-                                    <RightBoard key={purItem.sellIdx}>
-                                        {purItem.sellTitle}
-                                    </RightBoard>
-
-                                )
-                            })} */}
                         </CenterHalfBottom>
 
 
@@ -302,7 +297,7 @@ const SearchEnter = styled.button`
 const CenterTop = styled.div`
     width: 50%;
     height: 5vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     font-size: 2rem;
     margin-top: 1rem;
     margin-left: 1rem;
@@ -313,7 +308,7 @@ const CenterTop = styled.div`
 const CenterHalfTop = styled.div`
     width: 100%;
     height: 30vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
 `
