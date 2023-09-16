@@ -42,7 +42,7 @@ const SellentRead = () => {
             try {
                 const response = await axios.get(`/sellent?sellIdx=${sellIdx}`);
                 setSellentRead(response.data.Content);
-                console.log("게시물 불러오기 성공", sellentRead)
+                console.log("게시물 불러오기 성공", sellentRead);
             } catch (error) {
                 console.log("게시물 불러오기 실패", error);
             }
@@ -51,8 +51,7 @@ const SellentRead = () => {
         loadBoard();
     }, [sellIdx]);
 
-    // const type = { sellentRead.sellType };
-
+    const type = sellentRead.sellType;
     const test = "";
 
     return (
@@ -78,8 +77,7 @@ const SellentRead = () => {
                     </Left>
 
                     <Center>
-                        <CenterTopic>{sellentRead.sellentType === 0 ? "재능판매" : "재능구매"}</CenterTopic>
-
+                        <CenterTopic>{type === 0 ? "재능 판매일까 구매일까 재호야" : "재능 구매일까 판매일까 재호야"}</CenterTopic>
                         <CenterTitle>{sellentRead.sellTitle}</CenterTitle>
                         <CenterContents>{sellentRead.sellContent}</CenterContents>
                     </Center>

@@ -41,7 +41,6 @@ public class SellingController {
     @GetMapping("/sellent")
     public Map<String, Object> getContent(@RequestParam String sellIdx) throws Exception {
         Map<String, Object> result = sellingService.getContent(sellIdx);
-
         return result;
     }
 
@@ -53,4 +52,8 @@ public class SellingController {
         UserList userList = userSession(request);
         sellingService.postContent(content, userList);
     }
+
+    // Method : PUT
+    // Param : sellTitle, sellContent, userEmail, sellPrice, sellLocation
+
 }
