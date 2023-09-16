@@ -8,6 +8,7 @@ import com.sellent.web.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,12 @@ import java.util.UUID;
 public class NaverService {
     @Autowired
     UserRepository userRepository;
+
+    @Value("#{sellentProperty['naver.client-id']}")
+    private String clientId;
+
+    @Value("#{sellentProperty['naver.client-secret']}")
+    private String secret;
 
     public String getToken(String code, HttpSession session) {
         String host = "https://nid.naver.com/oauth2.0/token";
@@ -43,8 +50,8 @@ public class NaverService {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(urlConnection.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=KseDMBYnWmbIAcUIZRo9");
-            sb.append("&client_secret=MV0RxdnxLu");
+            sb.append("&client_id=" + clientId);
+            sb.append("&client_secret=" + secret);
             sb.append("&code=" + code);
             sb.append("&state=" + state);
 
