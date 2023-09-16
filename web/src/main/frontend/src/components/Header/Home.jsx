@@ -30,6 +30,10 @@ const Home = () => {
         navigate("/background")
     }
 
+    const goSearch = () => {
+        navigate("/search")
+    }
+
     const [likeList, setLikeList] = useState([]);
 
     useEffect(() => {
@@ -98,7 +102,7 @@ const Home = () => {
                         <LeftTop>SELLENT</LeftTop>
                         <LeftBoardTitle onClick={goHome} >메인화면</LeftBoardTitle>
                         <LeftBoard onClick={goLogin} >재능판매</LeftBoard>
-                        <LeftBoard onClick={goLogin} >재능구매</LeftBoard>
+                        <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
                         <LeftBoard onClick={goChat} >채팅</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
                         <Cash>25,000원</Cash>
@@ -107,7 +111,7 @@ const Home = () => {
 
                     <Center>
                         <CenterTop>재능판매</CenterTop>
-                        <CenterSearch type="text" placeholder="*재능검색" />
+                        {/* <CenterSearch type="text" placeholder="*재능검색" /> */}
 
 
                         {/* <TagBind>
@@ -116,7 +120,7 @@ const Home = () => {
                             <Tag1>#요</Tag1>
                         </TagBind> */}
 
-                        <Chapter>인기글</Chapter>
+                        <Chapter>실시간 인기글</Chapter>
 
                         <CenterContents>
                             {likeList.length > 0 && likeList.map((item, index) => {

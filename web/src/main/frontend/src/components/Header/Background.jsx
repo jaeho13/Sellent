@@ -162,7 +162,7 @@ const Bottom = styled.div`
     display: flex;
     justify-content: row;
     justify-content: center;
-    background-color: #696969;
+    background-color: #959595;
 `
 
 const BottomWindow = styled.div`
@@ -173,7 +173,7 @@ const BottomWindow = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: blue;
+    color: skyblue;
 `
 
 const BottomInput = styled.div`
