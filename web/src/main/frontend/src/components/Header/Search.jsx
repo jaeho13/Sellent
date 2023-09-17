@@ -128,7 +128,7 @@ const Search = () => {
                             onChange={handleSearchChange}
                         />
 
-                        <SearchEnter>버튼</SearchEnter>
+                        {/* <SearchEnter>버튼</SearchEnter> */}
                         <CenterTop>재능판매</CenterTop>
                         <CenterHalfTop>
                             <CenterContents>
