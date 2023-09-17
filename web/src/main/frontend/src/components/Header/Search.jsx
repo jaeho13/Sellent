@@ -86,6 +86,17 @@ const Search = () => {
         purchaseLoad();
     }, []);
 
+    const [searchText, setSearchText] = useState('');
+
+    const handleSearchChange = (e) => {
+        const searchText = e.target.value;
+        setSearchText(searchText);
+    };
+
+    const handleSellentRead = (sellIdx) => {
+        navigate(`/sellentRead/${sellIdx}`); //sellIdx에 해당하는 글 읽기 페이지 이동
+    }
+
 
     return (
         <>
@@ -110,31 +121,39 @@ const Search = () => {
 
                     <Center>
 
-                        <CenterSearch type="text" placeholder="*재능검색" />
+                        <CenterSearch
+                            type="text"
+                            placeholder=" * 재능검색"
+                            value={searchText}
+                            onChange={handleSearchChange}
+                        />
+
                         <SearchEnter>버튼</SearchEnter>
                         <CenterTop>재능판매</CenterTop>
                         <CenterHalfTop>
                             <CenterContents>
-                                {sellList.length > 0 && sellList.map((noItem, index) => {
-                                    return (
-                                        <CenterBoardBind key={noItem.sellIdx}>
-                                            <CenterBoard>
-                                                <BoardImg>
-                                                    이미지 넣기
-                                                </BoardImg>
-                                                <BoardTitle>
-                                                    {noItem.sellTitle}
-                                                    <BoardLike>
-                                                        <FcLike />
-                                                        <LikeScore>
-                                                            {noItem.sellLike}
-                                                        </LikeScore>
-                                                    </BoardLike>
-                                                </BoardTitle>
-                                            </CenterBoard>
-                                        </CenterBoardBind>
-                                    );
-                                })}
+                                {sellList.length > 0 && sellList
+                                    .filter((item) => item.sellTitle.includes(searchText))
+                                    .map((noItem, index) => {
+                                        return (
+                                            <CenterBoardBind key={noItem.sellIdx}>
+                                                <CenterBoard>
+                                                    <BoardImg>
+                                                        이미지 넣기
+                                                    </BoardImg>
+                                                    <BoardTitle onClick={() => handleSellentRead(noItem.sellIdx)}>
+                                                        {noItem.sellTitle}
+                                                        <BoardLike>
+                                                            <FcLike />
+                                                            <LikeScore>
+                                                                {noItem.sellLike}
+                                                            </LikeScore>
+                                                        </BoardLike>
+                                                    </BoardTitle>
+                                                </CenterBoard>
+                                            </CenterBoardBind>
+                                        );
+                                    })}
                             </CenterContents>
                         </CenterHalfTop>
 
@@ -142,26 +161,28 @@ const Search = () => {
                         <CenterHalfBottom>
 
                             <CenterContents>
-                                {purList.length > 0 && purList.map((purItem, index) => {
-                                    return (
-                                        <CenterBoardBind key={purItem.sellIdx}>
-                                            <CenterBoard>
-                                                <BoardImg>
-                                                    이미지 넣기
-                                                </BoardImg>
-                                                <BoardTitle>
-                                                    {purItem.sellTitle}
-                                                    <BoardLike>
-                                                        <FcLike />
-                                                        <LikeScore>
-                                                            {purItem.sellLike}
-                                                        </LikeScore>
-                                                    </BoardLike>
-                                                </BoardTitle>
-                                            </CenterBoard>
-                                        </CenterBoardBind>
-                                    );
-                                })}
+                                {purList.length > 0 && purList
+                                    .filter((item) => item.sellTitle.includes(searchText))
+                                    .map((purItem, index) => {
+                                        return (
+                                            <CenterBoardBind key={purItem.sellIdx}>
+                                                <CenterBoard>
+                                                    <BoardImg>
+                                                        이미지 넣기
+                                                    </BoardImg>
+                                                    <BoardTitle onClick={() => handleSellentRead(purItem.sellIdx)}>
+                                                        {purItem.sellTitle}
+                                                        <BoardLike>
+                                                            <FcLike />
+                                                            <LikeScore>
+                                                                {purItem.sellLike}
+                                                            </LikeScore>
+                                                        </BoardLike>
+                                                    </BoardTitle>
+                                                </CenterBoard>
+                                            </CenterBoardBind>
+                                        );
+                                    })}
                             </CenterContents>
                         </CenterHalfBottom>
 
@@ -361,6 +382,7 @@ const BoardTitle = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 `
 
 const BoardLike = styled.div`

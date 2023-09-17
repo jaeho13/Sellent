@@ -37,12 +37,14 @@ const SellentRead = () => {
 
     const { sellIdx } = useParams();
     const [sellentRead, setSellentRead] = useState({});
+    const [sellentCommentRead, setSellentRCommentRead] = useState({});
 
     useEffect(() => {
         const loadBoard = async () => {
             try {
                 const response = await axios.get(`/sellent?sellIdx=${sellIdx}`);
                 setSellentRead(response.data.Content);
+                setSellentRCommentRead(response.data.Comment);
                 console.log("게시물 불러오기 성공", sellentRead);
             } catch (error) {
                 console.log("게시물 불러오기 실패", error);
@@ -52,8 +54,7 @@ const SellentRead = () => {
         loadBoard();
     }, [sellIdx]);
 
-    // const type = sellentRead.sellType;
-    // const test = "";
+
 
     return (
         <>
@@ -87,7 +88,26 @@ const SellentRead = () => {
                         <Map />
                     </Center>
 
-                    <Right></Right>
+                    <RightBind>
+                        <Right>
+                            <RightTop>댓글</RightTop>
+                            {/* <RightBoard>푸하하푸하하푸하하푸하하푸하하푸하하</RightBoard>
+                            <RightBoard>푸하하푸하하푸하하푸하하푸하하푸하하</RightBoard> */}
+                            {sellentCommentRead.length > 0 && sellentCommentRead.map((Comment, index) => {
+                                return (
+                                    <RightBoard key={Comment.sellIdx}>
+                                        {Comment.sellCmtContent}
+                                    </RightBoard>
+                                );
+                            })}
+                        </Right>
+
+                        <RightBottomBind>
+                            <RightBottom />
+                            <RightComments>확인</RightComments>
+                        </RightBottomBind>
+
+                    </RightBind>
                 </Bind>
             </Back>
         </>
@@ -216,39 +236,76 @@ const ChatInput = styled.input`
     font-size: 2em;
 `
 
+const RightBind = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+
 const Right = styled.div`
-    width: 25%;
-    height: 85vh;
-    border: 2px solid blue;
+    width: 102%;
+    height: 70vh;
+    /* border: 2px solid blue; */
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
     background-color: white;
 `
 
+const RightBottomBind = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 102%;
+`
+
+const RightBottom = styled.textarea`
+    width: 80%;
+    height: 14.5vh;
+    /* border: 2px solid red; */
+    overflow: auto; /* 스크롤 추가 */
+    overflow-x: hidden; /* 가로 스크롤 제거 */
+    background-color: white;
+    resize: none;
+    font-size: 2em;
+
+`
+
+const RightComments = styled.div`
+    width: 20%;
+    height: 15vh;
+    border: 2px solid green;
+    background-color: white;
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+`
+
 const RightTop = styled.div`
-    width: 40%;
-    height: 8vh;
-    /* border: 2px solid black; */
-    font-size: 2rem;
+    width: 100%;
+    height: 5vh;
+    border: 2px solid black;
+    font-size: 2.5em;
+    margin-top: 0.5em;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bolder;
-    padding-top: 0.5rem;
-    padding-left: 0.5rem;
 `
 
 const RightBoard = styled.div`
-    width: 60%;
-    height: 20vh;
+    width: 90%;
+    height: 10vh;
     border: 2px solid red;
+    font-size: 1.5em;
     margin: 0 auto;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
+    overflow: auto; /* 스크롤 추가 */
+    overflow-x: hidden; /* 가로 스크롤 제거 */
 `
 
 const CenterTopic = styled.div`
-    width: 40%;
+    width: 80%;
     height: 5vh;
     border: 2px solid red;
     font-size: 2.5em;
