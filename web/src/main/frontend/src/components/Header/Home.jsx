@@ -325,9 +325,9 @@ const Center = styled.div`
 `
 
 const CenterHalfTop = styled.div`
-    width: 95%;
+    width: 100%;
     height: 35vh;
-    /* border: 2px solid black; */
+    border: 2px solid black;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
 `
@@ -335,8 +335,7 @@ const CenterHalfTop = styled.div`
 const CenterHalfBottom = styled.div`
     width: 100%;
     height: 35vh;
-    /* border: 2px solid black; */
-    /* margin-top: 1em; */
+    border: 2px solid black;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
 `
@@ -344,7 +343,7 @@ const CenterHalfBottom = styled.div`
 const CenterTop = styled.div`
     width: 50%;
     height: 5vh;
-    /* border: 2px solid black; */
+    border: 2px solid black;
     font-size: 2.5rem;
     margin-left: 1rem;
     margin-top: 1rem;
@@ -356,7 +355,7 @@ const CenterTop = styled.div`
 const LiveChapter = styled.div`
     width: 50%;
     height: 5vh;
-    /* border: 2px solid black; */
+    border: 2px solid black;
     font-size: 2rem;
     margin-left: 1rem;
     margin-top: 1rem;
@@ -367,7 +366,7 @@ const LiveChapter = styled.div`
 const Chapter = styled.div`
     width: 50%;
     height: 5vh;
-    /* border: 2px solid black; */
+    border: 2px solid black;
     font-size: 2rem;
     margin-left: 1rem;
     /* margin-top: 1rem; */
@@ -380,7 +379,6 @@ const CenterContents = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /* justify-content: space-around; */
     justify-content: left;
     /* 넘치는 경우 줄바꿈 */
 `
@@ -409,7 +407,7 @@ const BoardImg = styled.div`
 const BoardTitle = styled.div`
     width: 100%;
     height: 4vh;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     font-size: 1.5em;
     display: flex;
     justify-content: space-between;
@@ -420,7 +418,7 @@ const BoardTitle = styled.div`
 const BoardLike = styled.div`
     width: 30%;
     height: 4vh;
-    /* border: 2px solid green; */
+    border: 2px solid green;
     font-size: 1em;
     display: flex;
     justify-content: center;
@@ -428,7 +426,7 @@ const BoardLike = styled.div`
 `
 
 const LikeScore = styled.div`
-    width: 60%;
+    width: 30%;
     height: 4vh;
     /* border: 2px solid black; */
     display: flex;
@@ -436,20 +434,20 @@ const LikeScore = styled.div`
 `
 
 
-const ScrollBind = styled.div`
-    display: flex;
-    justify-content: column;
-    justify-content: space-around;
-    margin-bottom: 2rem;
-`
+// const ScrollBind = styled.div`
+//     display: flex;
+//     justify-content: column;
+//     justify-content: space-around;
+//     margin-bottom: 2rem;
+// `
 
-const Scroll = styled.div`
-    width: 25%;
-    height: 20vh;
-    border: 2px solid blue;
-    margin-top: 1rem;
-    margin-left: 1rem;
-`
+// const Scroll = styled.div`
+//     width: 25%;
+//     height: 20vh;
+//     border: 2px solid blue;
+//     margin-top: 1rem;
+//     margin-left: 1rem;
+// `
 
 const Right = styled.div`
     width: 25%;
