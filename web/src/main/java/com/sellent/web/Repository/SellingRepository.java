@@ -39,4 +39,8 @@ public interface SellingRepository extends JpaRepository<Selling, Integer> {
             "WHERE s.sellType = 1 " +
             "ORDER BY s.sellDate DESC")
     List<ListDTO> findByPurchase();
+
+
+    @Query(value = "SELECT * FROM Selling WHERE SELL_IDX = :sellIdx", nativeQuery = true)
+    Selling findPatchContent(@Param("sellIdx") int sellIdx);
 }

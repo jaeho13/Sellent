@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
-import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -55,5 +54,11 @@ public class SellingController {
 
     // Method : PUT
     // Param : sellTitle, sellContent, userEmail, sellPrice, sellLocation
+    @PatchMapping("/sellent")
+    public Map<String, Object> patchContent(@RequestBody Map<String, Object> content, HttpServletRequest request) throws ParseException {
+        UserList userList = userSession(request);
+        sellingService.patchContent(content, userList);
 
+        return null;
+    }
 }

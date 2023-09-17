@@ -67,11 +67,17 @@ public class SellingService {
         selling.setSellContent((String) content.get("sellContent"));
         selling.setSellDate(new Date());
         selling.setSellLocation((String) content.get("sellLocation"));
-        selling.setSellType((int) content.get("sellType"));
-        selling.setSellPrice((int) content.get("sellPrice"));
+        selling.setSellType(Integer.parseInt((String) content.get("sellType")));
+        selling.setSellPrice(Integer.parseInt((String) content.get("sellPrice")));
         selling.setSellLike(0);
 
         sellingRepository.save(selling);
+    }
+
+    public void patchContent(Map<String, Object> content, UserList userList) {
+        int sellIdx = (int) content.get(Integer.parseInt((String) "sellIdx"));
+        Selling selling = sellingRepository.findPatchContent(sellIdx);
+        System.out.println(selling);
     }
 }
 
