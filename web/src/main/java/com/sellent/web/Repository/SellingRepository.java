@@ -42,5 +42,5 @@ public interface SellingRepository extends JpaRepository<Selling, Integer> {
 
 
     @Query(value = "SELECT * FROM Selling WHERE SELL_IDX = :sellIdx", nativeQuery = true)
-    Selling findPatchContent(@Param("sellIdx") int sellIdx);
+    Selling findContent(@Param("sellIdx") int sellIdx);
 }

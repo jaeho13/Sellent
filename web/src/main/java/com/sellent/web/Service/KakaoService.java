@@ -16,7 +16,8 @@ import java.net.URL;
 public class KakaoService {
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
+
 
     @Value("#{sellentProperty['kakao.client-id']}")
     private String clientId;
@@ -117,18 +118,16 @@ public class KakaoService {
             userList.setUserEmail(email);
             userList.setUserNm(nick);
 
-            UserList userCheck = userRepository.findByUserEmail(email);
+            UserList userCheck = userService.findUserVO(email);
 
-
+            //회원정보 없으면 회원가입 처리
             if (userCheck == null) {
                 System.out.println("등록된 회원 아님");
-
-                userRepository.save(userList);
-
+                userService.saveUserVO(userList);
                 return userList;
             }
 
-            System.out.println("유저 정보 " + userList);
+            System.out.println("유저 정보 " + userCheck);
 
         } catch (Exception e) {
             e.printStackTrace();
