@@ -83,6 +83,7 @@ public class SellingService {
     public void updateContent(Map<String, Object> content, UserList userList) {
         int sellIdx = (int) content.get(Integer.parseInt((String) "sellIdx"));
         Selling selling = sellingRepository.findContent(sellIdx);
+        //작성자 확인
 
     }
 
