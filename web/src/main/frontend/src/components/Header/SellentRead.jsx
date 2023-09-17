@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import "../fonts/Font.css";
 import { AiFillCloseCircle } from "react-icons/ai"
@@ -55,6 +55,13 @@ const SellentRead = () => {
     }, [sellIdx]);
 
 
+    const rightBoardRef = useRef(null);
+
+    useEffect(() => {
+        if (rightBoardRef.current) {
+            rightBoardRef.current.style.height = rightBoardRef.current.scrollHeight + "px";
+        }
+    }, [sellentCommentRead]);
 
     return (
         <>
@@ -81,6 +88,7 @@ const SellentRead = () => {
                     <Center>
                         <CenterTopic>{sellentRead.sellType === 0 ? "재능 판매" : "재능 구매"}</CenterTopic>
                         <CenterTitle>{sellentRead.sellTitle}</CenterTitle>
+                        <CenterTitle>닉네임 : {sellentRead.userNm}</CenterTitle>
                         <CenterBottomBind>
                             <CenterContents>{sellentRead.sellContent}</CenterContents>
                         </CenterBottomBind>
@@ -91,11 +99,12 @@ const SellentRead = () => {
                     <RightBind>
                         <Right>
                             <RightTop>댓글</RightTop>
-                            {/* <RightBoard>푸하하푸하하푸하하푸하하푸하하푸하하</RightBoard>
-                            <RightBoard>푸하하푸하하푸하하푸하하푸하하푸하하</RightBoard> */}
                             {sellentCommentRead.length > 0 && sellentCommentRead.map((Comment, index) => {
                                 return (
-                                    <RightBoard key={Comment.sellIdx}>
+                                    <RightBoard key={Comment.sellIdx} ref={rightBoardRef}>
+                                        <RightBoardNick>
+                                            닉네임 : {Comment.userNm}
+                                        </RightBoardNick>
                                         {Comment.sellCmtContent}
                                     </RightBoard>
                                 );
@@ -242,7 +251,7 @@ const RightBind = styled.div`
 `
 
 const Right = styled.div`
-    width: 102%;
+    width: 100%;
     height: 70vh;
     /* border: 2px solid blue; */
     overflow: auto; /* 스크롤 추가 */
@@ -251,9 +260,9 @@ const Right = styled.div`
 `
 
 const RightBottomBind = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: row;
-    width: 102%;
 `
 
 const RightBottom = styled.textarea`
@@ -271,12 +280,13 @@ const RightBottom = styled.textarea`
 const RightComments = styled.div`
     width: 20%;
     height: 15vh;
-    border: 2px solid green;
+    /* border: 2px solid green; */
     background-color: white;
     font-size: 2em;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
 `
 
@@ -294,14 +304,23 @@ const RightTop = styled.div`
 
 const RightBoard = styled.div`
     width: 90%;
-    height: 10vh;
+    max-height: 100vh; /* 최대 높이 설정 */
     border: 2px solid red;
     font-size: 1.5em;
     margin: 0 auto;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
+    white-space: pre-wrap;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
+`
+
+const RightBoardNick = styled.div`
+    width: 100%;
+    height: 3vh;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
 `
 
 const CenterTopic = styled.div`
@@ -323,7 +342,7 @@ const CenterTitle = styled.div`
     font-size: 2.5em;
     display: flex;
     align-items: center;
-    margin-top: 1em;
+    margin-top: 0.5em;
     margin-left: 1em;
 `
 
@@ -338,7 +357,7 @@ const CenterContents = styled.div`
     border: 2px solid red;
     font-size: 2.5em;
     display: flex;
-    margin-top: 1em;
+    margin-top: 0.5em;
     margin-left: 1em;
 `
 
@@ -359,6 +378,6 @@ const CenterWhere = styled.div`
     font-size: 2.5em;
     display: flex;
     align-items: center;
-    margin-top: 1em;
+    margin-top: 0.5em;
     margin-left: 1em;
 `
