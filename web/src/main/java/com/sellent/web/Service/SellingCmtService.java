@@ -4,6 +4,7 @@ import com.sellent.web.Entiity.SellingCmt;
 import com.sellent.web.Entiity.UserList;
 import com.sellent.web.Repository.SellingCmtRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.ParseException;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -35,7 +36,6 @@ public class SellingCmtService {
     public Boolean deleteComment(int sellentCmtIdx, UserList userList) {
         //회원이 작성한 댓글인지 확인
         String userEmail = userList.getUserEmail();
-
         String originWriter = sellingCmtRepository.getWriter(sellentCmtIdx);
         System.out.println("글쓴이" + originWriter);
 
