@@ -104,6 +104,7 @@ public class SellingController {
         System.out.println("삭제 요청 유저 : "+userList);
         int sellentCmtIdx = Integer.parseInt(sellCmtIdx);
         Boolean result = sellingCmtService.deleteComment(sellentCmtIdx, userList);
+        
         return result;
     }
 }
