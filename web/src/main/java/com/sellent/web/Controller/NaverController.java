@@ -40,14 +40,14 @@ public class NaverController {
             HttpServletRequest request) throws Exception {
         Map<String, Object> map = new HashMap<>();
         UserList userList = naverService.getNaverUserList(token);
-        log.info("userInfo ={}", userList);
+        log.info("userList ={}", userList);
 
         if (userList != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("userInfo", userList);
+            session.setAttribute("userList", userList);
             map.put("userList", userList);
 
-            log.info("로그인 성공!!!, userinfo={}", userList);
+            log.info("로그인 성공!!!, userList={}", userList);
             return map;
         }
         map.put("status", HttpStatus.BAD_REQUEST.toString());
