@@ -37,14 +37,14 @@ const SellentRead = () => {
 
     const { sellIdx } = useParams();
     const [sellentRead, setSellentRead] = useState({});
-    const [sellentCommentRead, setSellentRCommentRead] = useState({});
+    const [sellentCommentRead, setSellentCommentRead] = useState({});
 
     useEffect(() => {
         const loadBoard = async () => {
             try {
                 const response = await axios.get(`/sellent?sellIdx=${sellIdx}`);
                 setSellentRead(response.data.Content);
-                setSellentRCommentRead(response.data.Comment);
+                setSellentCommentRead(response.data.Comment);
                 console.log("게시물 불러오기 성공", sellentRead);
             } catch (error) {
                 console.log("게시물 불러오기 실패", error);
