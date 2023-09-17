@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -98,13 +100,18 @@ public class SellingController {
     // Method : Delete
     // Param : sellCmtIdx
     @DeleteMapping("/sellentCmt")
-    public Boolean deleteComment (@RequestParam String sellCmtIdx, HttpServletRequest request) throws ParseException {
+    public ResponseEntity<String> deleteComment(@RequestParam String sellCmtIdx, HttpServletRequest request) {
         System.out.println("댓글 삭제 요청");
         UserList userList = userSession(request);
-        System.out.println("삭제 요청 유저 : "+userList);
+        System.out.println("삭제 요청 유저: " + userList);
+
         int sellentCmtIdx = Integer.parseInt(sellCmtIdx);
         Boolean result = sellingCmtService.deleteComment(sellentCmtIdx, userList);
-        
-        return result;
+
+        if (result) {
+            return ResponseEntity.status(HttpStatus.OK).body("삭제되었습니다.");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("삭제 실패하였습니다.");
+        }
     }
 }
