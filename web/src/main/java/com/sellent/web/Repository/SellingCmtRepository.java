@@ -20,4 +20,7 @@ public interface SellingCmtRepository extends JpaRepository<SellingCmt, Integer>
             "WHERE c.sellingVO.sellIdx = :sellIdx " +
             "ORDER BY c.sellCmtDate ASC")
     List<CommentDTO> getSellingComment(@Param("sellIdx") int sellIdx);
+
+    @Query(value = "SELECT c.userEmail FROM SellingCmt c WHERE c.sellCmtIdx = :sellentCmtIdx", nativeQuery = true)
+    String getWriter(@Param("sellentCmtIdx") int sellentCmtIdx);
 }
