@@ -6,6 +6,7 @@ import com.sellent.web.Service.SellingCmtService;
 import com.sellent.web.Service.SellingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,5 +75,15 @@ public class SellingController {
     public void insertComment (@RequestBody Map<String, Object> comment, HttpServletRequest request) throws ParseException {
         UserList userList = userSession(request);
         sellingCmtService.insertComment(comment, userList);
+    }
+
+    // 댓글 삭제
+    // Method : Delete
+    // Param : sellCmtIdx
+    @DeleteMapping("/sellentCmt")
+    public void deleteComment (@RequestParam String sellCmtIdx, HttpServletRequest request) throws ParseException {
+        UserList userList = userSession(request);
+        int sellentCmtIdx = Integer.parseInt(sellCmtIdx);
+        sellingCmtService.deleteComment(sellentCmtIdx, userList);
     }
 }

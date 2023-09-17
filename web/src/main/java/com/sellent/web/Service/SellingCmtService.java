@@ -31,4 +31,12 @@ public class SellingCmtService {
 
         sellingCmtRepository.save(sellingCmt);
     }
+
+    public void deleteComment(int sellentCmtIdx, UserList userList) {
+        //1. 회원이 작성한 댓글인지 확인
+        String userEmail = userList.getUserEmail();
+
+        String originWriter = sellingCmtRepository.getWriter(sellentCmtIdx);
+        System.out.println("글쓴이" + originWriter);
+    }
 }
