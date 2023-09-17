@@ -49,10 +49,12 @@ public class SellingController {
     }
 
     // Method : POST
-    // Param : sellTitle, sellContent, userEmail, sellType, sellPrice, sellLocation, sellType
+    // Param : sellTitle, sellContent, userEmail, sellType, sellPrice, sellLocation,
+    // sellType
     // 글 작성
     @PostMapping("/sellent")
-    public void insertContent(@RequestBody Map<String, Object> content, HttpServletRequest request) throws ParseException {
+    public void insertContent(@RequestBody Map<String, Object> content, HttpServletRequest request)
+            throws ParseException {
         UserList userList = userSession(request);
         sellingService.insertContent(content, userList);
     }
@@ -60,20 +62,21 @@ public class SellingController {
     // Method : PATCH
     // Param : sellTitle, sellContent, sellPrice, sellLocation
     @PatchMapping("/sellent")
-    public Map<String, Object> updateContent(@RequestBody Map<String, Object> content, HttpServletRequest request) throws ParseException {
+    public Map<String, Object> updateContent(@RequestBody Map<String, Object> content, HttpServletRequest request)
+            throws ParseException {
         UserList userList = userSession(request);
         sellingService.updateContent(content, userList);
 
         return null;
     }
 
-
-    //------------------------------------------------
+    // ------------------------------------------------
     // 댓글 작성
     // Method : POST
     // Param : sellIdx, sellCmtContent
     @PostMapping("/sellntCmt")
-    public void insertComment (@RequestBody Map<String, Object> comment, HttpServletRequest request) throws ParseException {
+    public void insertComment(@RequestBody Map<String, Object> comment, HttpServletRequest request)
+            throws ParseException {
         System.out.println("=====요청 성공=====");
         UserList userList = userSession(request);
         sellingCmtService.insertComment(comment, userList);
@@ -83,7 +86,7 @@ public class SellingController {
     // Method : Delete
     // Param : sellCmtIdx
     @DeleteMapping("/sellentCmt")
-    public Boolean deleteComment (@RequestParam String sellCmtIdx, HttpServletRequest request) throws ParseException {
+    public Boolean deleteComment(@RequestParam String sellCmtIdx, HttpServletRequest request) throws ParseException {
         UserList userList = userSession(request);
         int sellentCmtIdx = Integer.parseInt(sellCmtIdx);
         Boolean result = sellingCmtService.deleteComment(sellentCmtIdx, userList);
