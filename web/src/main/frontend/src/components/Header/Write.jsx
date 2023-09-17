@@ -3,6 +3,7 @@ import styled from "styled-components";
 import "../fonts/Font.css";
 import { AiFillCloseCircle } from "react-icons/ai"
 import { useNavigate } from "react-router-dom";
+import Map from "./Map";
 
 const Write = () => {
 
@@ -54,20 +55,6 @@ const Write = () => {
                         <CenterTop>글제목</CenterTop>
                         <CenterTitle type="text" placeholder="*제목을 입력하세요" />
 
-                        <HashBind>
-                            <CenterHash>
-                                <HashTag type="checkbox" />
-                                안녕하세요
-                            </CenterHash>
-                            <CenterHash>
-                                <HashTag type="checkbox" />
-                                안녕하세요
-                            </CenterHash>
-                            <CenterHash>
-                                <HashTag type="checkbox" />
-                                안녕하세요
-                            </CenterHash>
-                        </HashBind>
 
                         <CenterTop>글내용</CenterTop>
                         <CenterBoard type="text" placeholder="*글을 입력하세요" />
@@ -82,6 +69,9 @@ const Write = () => {
                             <Cancle>취소하기</Cancle>
                         </ButtonBind>
 
+
+                        <CenterWhere>거래 희망장소</CenterWhere>
+                        <Map />
                     </Center>
 
                     <Right>
@@ -196,6 +186,8 @@ const Center = styled.div`
     height: 85vh;
     border: 2px solid red;
     background-color: white;
+    overflow: auto; /* 스크롤 추가 */
+    overflow-x: hidden; /* 가로 스크롤 제거 */
 `
 
 const CenterTop = styled.div`
@@ -204,7 +196,7 @@ const CenterTop = styled.div`
     border: 2px solid black;
     font-size: 2rem;
     margin-top: 1rem;
-    margin-left: 2rem;
+    margin-left: 1rem;
     display: flex;
     align-items: center;
 `
@@ -215,28 +207,7 @@ const CenterTitle = styled.input`
     border: 2px solid black;
     font-size: 2rem;
     margin-top: 1rem;
-    margin-left: 2rem;
-`
-
-const HashBind = styled.div`
-    display: flex;
-    justify-content: row;
-`
-
-const CenterHash = styled.div`
-    width: 20%;
-    height: 5vh;
-    border: 2px solid black;
-    font-size: 2rem;
-    margin-top: 1rem;
-    margin-left: 2rem;
-    display: flex;
-    align-items: center;
-`
-
-const HashTag = styled.input`
-    width: 20%;
-    height: 3vh;
+    margin-left: 1rem;
 `
 
 const CenterBoard = styled.textarea`
@@ -245,7 +216,9 @@ const CenterBoard = styled.textarea`
     border: 2px solid black;
     font-size: 2rem;
     margin-top: 1rem;
-    margin-left: 2rem;
+    margin-left: 1rem;
+    overflow: auto; /* 스크롤 추가 */
+    overflow-x: hidden; /* 가로 스크롤 제거 */
 `
 
 const PictureBind = styled.div`
@@ -268,11 +241,16 @@ const PictureUpload = styled.div`
     width: 15%;
     height: 5vh;
     border: 2px solid green;
-    margin-left: 1.5em;
+    margin-left: 1em;
     font-size: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+`
+
+const FileInput = styled.input`
+  display: none;
 `
 
 const ButtonBind = styled.div`
@@ -332,4 +310,15 @@ const RightBoard = styled.div`
     margin: 0 auto;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
+`
+
+const CenterWhere = styled.div`
+    width: 40%;
+    height: 5vh;
+    border: 2px solid red;
+    font-size: 2.5em;
+    display: flex;
+    align-items: center;
+    margin-top: 0.5em;
+    margin-left: 1em;
 `

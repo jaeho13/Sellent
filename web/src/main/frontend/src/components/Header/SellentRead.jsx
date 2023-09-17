@@ -88,6 +88,22 @@ const SellentRead = () => {
             });
     }
 
+    const onDelete = async (sellCmtIdx) => {
+        if (window.confirm("정말 삭제하시겠습니까??")) {
+            try {
+                await axios.delete(`/sellentCmt?sellCmtIdx=${sellCmtIdx}`)
+                alert("삭제되었습니다.");
+                const response = await axios.get("/sellentCmt");
+                setSellCmtContent(response.data);
+            } catch (error) {
+                console.log("삭제 실패", error);
+            }
+        } else {
+            alert("취소되었습니다.");
+        }
+    };
+
+
     return (
         <>
             <Window>
@@ -127,9 +143,12 @@ const SellentRead = () => {
                             {sellentCommentRead.length > 0 && sellentCommentRead.map((Comment, index) => {
                                 return (
                                     <RightBoard key={Comment.sellCmtIdx} ref={rightBoardRef}>
-                                        <RightBoardNick>
-                                            닉네임 : {Comment.userNm}
-                                        </RightBoardNick>
+                                        <RightBoardBind>
+                                            <RightBoardNick>
+                                                닉네임 : {Comment.userNm}
+                                            </RightBoardNick>
+                                            <RightBoardDelete onClick={() => onDelete(Comment.sellCmtIdx)} >X</RightBoardDelete>
+                                        </RightBoardBind>
                                         {Comment.sellCmtContent}
                                     </RightBoard>
                                 );
@@ -334,7 +353,7 @@ const RightTop = styled.div`
 const RightBoard = styled.div`
     width: 90%;
     max-height: 100vh; /* 최대 높이 설정 */
-    border: 2px solid red;
+    border: 2px solid black;
     font-size: 1.5em;
     margin: 0 auto;
     margin-top: 1.5rem;
@@ -344,12 +363,29 @@ const RightBoard = styled.div`
     overflow-x: hidden; /* 가로 스크롤 제거 */
 `
 
+const RightBoardBind = styled.div`
+    display: flex;
+    flex-direction: row;
+`
+
 const RightBoardNick = styled.div`
-    width: 100%;
+    width: 85%;
     height: 3vh;
     font-size: 1em;
     display: flex;
     align-items: center;
+    border: 1px solid red;
+`
+
+const RightBoardDelete = styled.div`
+    width: 15%;
+    height: 3vh;
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid blue;
+    cursor: pointer;
 `
 
 const CenterTopic = styled.div`
