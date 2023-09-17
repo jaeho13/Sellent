@@ -4,6 +4,7 @@ import com.sellent.web.Entiity.Selling;
 import com.sellent.web.Entiity.UserList;
 import com.sellent.web.Service.SellingCmtService;
 import com.sellent.web.Service.SellingService;
+import com.sellent.web.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.catalina.User;
@@ -23,14 +24,17 @@ public class SellingController {
 
     @Autowired
     SellingService sellingService;
-
     @Autowired
     SellingCmtService sellingCmtService;
+    @Autowired
+    UserService userService;
 
     public UserList userSession(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        UserList user = (UserList) session.getAttribute("userList");
-        return user;
+
+        String user = (String) session.getAttribute("userEmail");
+        UserList userList = userService.findUserVO(user);
+        return userList;
     }
 
     // 전체 글 목록 조회하기
@@ -79,6 +83,7 @@ public class SellingController {
             throws ParseException {
         System.out.println("=====요청 성공=====");
         UserList userList = userSession(request);
+        System.out.println("====="+userList);
         sellingCmtService.insertComment(comment, userList);
     }
 
