@@ -18,6 +18,6 @@ public interface SellingCmtRepository extends JpaRepository<SellingCmt, Integer>
     @Query(value = "SELECT new com.sellent.web.Dto.CommentDTO(c.sellCmtIdx, c.sellingVO.sellIdx, c.sellCmtDate, c.sellCmtContent, c.userListVO.userNm) " +
             "FROM SellingCmt c " +
             "WHERE c.sellingVO.sellIdx = :sellIdx " +
-            "ORDER BY c.sellCmtDate DESC")
+            "ORDER BY c.sellCmtDate ASC")
     List<CommentDTO> getSellingComment(@Param("sellIdx") int sellIdx);
 }
