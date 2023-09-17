@@ -63,6 +63,31 @@ const SellentRead = () => {
         }
     }, [sellentCommentRead]);
 
+    const [sellCmtContent, setSellCmtContent] = useState("");
+
+    const handleTitleChange = (e) => {
+        setSellCmtContent(e.target.value);
+    };
+
+    const commentsSubmit = (e) => {
+        e.preventDefault();
+
+        axios({
+            url: "/sellntCmt",
+            method: "post",
+            data: {
+                sellIdx,
+                sellCmtContent,
+            }
+        })
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
     return (
         <>
             <Window>
@@ -101,7 +126,7 @@ const SellentRead = () => {
                             <RightTop>댓글</RightTop>
                             {sellentCommentRead.length > 0 && sellentCommentRead.map((Comment, index) => {
                                 return (
-                                    <RightBoard key={Comment.sellIdx} ref={rightBoardRef}>
+                                    <RightBoard key={Comment.sellCmtIdx} ref={rightBoardRef}>
                                         <RightBoardNick>
                                             닉네임 : {Comment.userNm}
                                         </RightBoardNick>
@@ -112,10 +137,14 @@ const SellentRead = () => {
                         </Right>
 
                         <RightBottomBind>
-                            <RightBottom />
-                            <RightComments>확인</RightComments>
+                            <RightBottom
+                                type="text"
+                                placeholder="*댓글을 입력하세요"
+                                value={sellCmtContent}
+                                onChange={(e) => setSellCmtContent(e.target.value)}
+                            />
+                            <RightComments onClick={commentsSubmit} >확인</RightComments>
                         </RightBottomBind>
-
                     </RightBind>
                 </Bind>
             </Back>
@@ -277,7 +306,7 @@ const RightBottom = styled.textarea`
 
 `
 
-const RightComments = styled.div`
+const RightComments = styled.button`
     width: 20%;
     height: 15vh;
     /* border: 2px solid green; */
