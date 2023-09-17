@@ -154,7 +154,7 @@ const Home = () => {
                                                 <BoardImg>
                                                     이미지 넣기
                                                 </BoardImg>
-                                                <BoardTitle>
+                                                <BoardTitle onClick={() => handleSellentRead(noItem.sellIdx)}>
                                                     {noItem.sellTitle}
                                                     <BoardLike>
                                                         <FcLike />
@@ -178,7 +178,7 @@ const Home = () => {
                         <RightTop>재능구매</RightTop>
                         {purList.length > 0 && purList.map((purItem, index) => {
                             return (
-                                <RightBoard key={purItem.sellIdx}>
+                                <RightBoard onClick={() => handleSellentRead(purItem.sellIdx)} key={purItem.sellIdx}>
                                     {purItem.sellTitle}
                                 </RightBoard>
 

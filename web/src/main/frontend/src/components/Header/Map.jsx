@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 
-const Example = () => {
+const Map = () => {
 
     useEffect(() => {
         const kakao = window['kakao'];
@@ -23,11 +23,14 @@ const Example = () => {
     );
 }
 
-export default Example;
+export default Map;
 
 const Exam = styled.div`
-    width: 70%;
-    height: 25em;
-    margin: 0 auto;
+    width: 80%;
+    height: 20em;
+    /* margin: 0 auto; */
+    /* margin-top: 2em; */
     margin-top: 2em;
+    margin-left: 3em;
+    margin-bottom: 5em;
 `;

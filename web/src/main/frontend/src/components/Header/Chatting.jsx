@@ -3,7 +3,7 @@ import styled from "styled-components";
 import "../fonts/Font.css";
 import { AiFillCloseCircle } from "react-icons/ai"
 import { useNavigate } from "react-router-dom";
-import Example from "./Example";
+import Map from "./Map";
 
 const Chatting = () => {
 

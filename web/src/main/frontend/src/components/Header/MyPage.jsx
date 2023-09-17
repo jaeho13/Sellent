@@ -3,7 +3,7 @@ import styled from "styled-components";
 import "../fonts/Font.css";
 import { AiFillCloseCircle } from "react-icons/ai"
 import { useNavigate } from "react-router-dom";
-import Example from "./Example";
+import Map from "./Map";
 
 const MyPage = () => {
 
@@ -70,7 +70,7 @@ const MyPage = () => {
                         </DetailsBind>
 
                         <Where>내 지역</Where>
-                        <Example />
+                        <Map />
 
                     </Center>
 
