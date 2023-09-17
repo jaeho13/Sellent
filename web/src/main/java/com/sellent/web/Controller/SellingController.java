@@ -2,6 +2,7 @@ package com.sellent.web.Controller;
 
 import com.sellent.web.Entiity.Selling;
 import com.sellent.web.Entiity.UserList;
+import com.sellent.web.Service.SellingCmtService;
 import com.sellent.web.Service.SellingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
-import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -23,6 +23,9 @@ public class SellingController {
     @Autowired
     SellingService sellingService;
 
+    @Autowired
+    SellingCmtService sellingCmtService;
+
     public UserList userSession(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         UserList user = (UserList) session.getAttribute("userList");
@@ -31,16 +34,16 @@ public class SellingController {
 
     // 전체 글 목록 조회하기
     @GetMapping("/list")
-    public Map<String, Object> getList() {
-        return sellingService.getList();
+    public Map<String, Object> selectList() {
+        return sellingService.selectList();
     }
 
     // Method : GET/selling
     // Param : sellIdx
     // 글 읽기
     @GetMapping("/sellent")
-    public Map<String, Object> getContent(@RequestParam String sellIdx) throws Exception {
-        Map<String, Object> result = sellingService.getContent(sellIdx);
+    public Map<String, Object> selectContent(@RequestParam String sellIdx) throws Exception {
+        Map<String, Object> result = sellingService.selectContent(sellIdx);
         return result;
     }
 
@@ -48,12 +51,28 @@ public class SellingController {
     // Param : sellTitle, sellContent, userEmail, sellType, sellPrice, sellLocation, sellType
     // 글 작성
     @PostMapping("/sellent")
-    public void postContent(@RequestBody Map<String, Object> content, HttpServletRequest request) throws ParseException {
+    public void insertContent(@RequestBody Map<String, Object> content, HttpServletRequest request) throws ParseException {
         UserList userList = userSession(request);
-        sellingService.postContent(content, userList);
+        sellingService.insertContent(content, userList);
     }
 
     // Method : PUT
-    // Param : sellTitle, sellContent, userEmail, sellPrice, sellLocation
+    // Param : sellTitle, sellContent, sellPrice, sellLocation
+    @PatchMapping("/sellent")
+    public Map<String, Object> updateContent(@RequestBody Map<String, Object> content, HttpServletRequest request) throws ParseException {
+        UserList userList = userSession(request);
+        sellingService.updateContent(content, userList);
 
+        return null;
+    }
+
+
+    // 댓글 작성
+    // Method : POST
+    // Param : sellIdx, sellCmtContent
+    @PostMapping("/sellntCmt")
+    public void insertComment (@RequestBody Map<String, Object> comment, HttpServletRequest request) throws ParseException {
+        UserList userList = userSession(request);
+        sellingCmtService.insertComment(comment, userList);
+    }
 }
