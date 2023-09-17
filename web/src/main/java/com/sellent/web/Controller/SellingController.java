@@ -57,7 +57,7 @@ public class SellingController {
         sellingService.insertContent(content, userList);
     }
 
-    // Method : PUT
+    // Method : PATCH
     // Param : sellTitle, sellContent, sellPrice, sellLocation
     @PatchMapping("/sellent")
     public Map<String, Object> updateContent(@RequestBody Map<String, Object> content, HttpServletRequest request) throws ParseException {
@@ -68,11 +68,13 @@ public class SellingController {
     }
 
 
+    //------------------------------------------------
     // 댓글 작성
     // Method : POST
     // Param : sellIdx, sellCmtContent
     @PostMapping("/sellntCmt")
     public void insertComment (@RequestBody Map<String, Object> comment, HttpServletRequest request) throws ParseException {
+        System.out.println("=====요청 성공=====");
         UserList userList = userSession(request);
         sellingCmtService.insertComment(comment, userList);
     }
@@ -81,9 +83,10 @@ public class SellingController {
     // Method : Delete
     // Param : sellCmtIdx
     @DeleteMapping("/sellentCmt")
-    public void deleteComment (@RequestParam String sellCmtIdx, HttpServletRequest request) throws ParseException {
+    public Boolean deleteComment (@RequestParam String sellCmtIdx, HttpServletRequest request) throws ParseException {
         UserList userList = userSession(request);
         int sellentCmtIdx = Integer.parseInt(sellCmtIdx);
-        sellingCmtService.deleteComment(sellentCmtIdx, userList);
+        Boolean result = sellingCmtService.deleteComment(sellentCmtIdx, userList);
+        return result;
     }
 }
