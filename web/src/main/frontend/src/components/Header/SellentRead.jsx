@@ -64,6 +64,7 @@ const SellentRead = () => {
     }, [sellentCommentRead]);
 
     const [sellCmtContent, setSellCmtContent] = useState("");
+    const [userNm, setUserNm] = useState("");
 
     const handleTitleChange = (e) => {
         setSellCmtContent(e.target.value);
@@ -89,12 +90,7 @@ const SellentRead = () => {
         })
             .then((response) => {
                 console.log(response);
-                setSellentCommentRead([...sellentCommentRead, {
-                    sellCmtIdx: response.data.sellCmtIdx,
-                    // userNm: response.data.userNm,
-                    // userNm: "이재포",
-                    sellCmtContent,
-                }]);
+                window.location.reload();
                 // 댓글 입력 필드 초기화
                 setSellCmtContent("");
             })
@@ -117,6 +113,7 @@ const SellentRead = () => {
             try {
                 await axios.delete(`/sellentCmt?sellCmtIdx=${sellCmtIdx}`)
                 alert("삭제되었습니다.");
+                window.location.reload();
             } catch (error) {
                 alert("자신이 작성한 댓글만 삭제할 수 있습니다.");
             }
