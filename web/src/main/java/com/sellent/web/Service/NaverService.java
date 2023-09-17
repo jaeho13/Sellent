@@ -21,8 +21,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Service
 public class NaverService {
+
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @Value("#{sellentProperty['naver.client-id']}")
     private String clientId;
@@ -130,11 +131,12 @@ public class NaverService {
             userList.setUserEmail(email);
             userList.setUserNm(nickname);
 
-            UserList findUser = userRepository.findByUserEmail(email);
+            UserList findUser = userService.findUserVO(email);
 
+            //회원정보 없으면 회원가입 처리
             if (findUser == null) {
                 System.out.println("등록된 회원 아님");
-                userRepository.save(userList);
+                userService.saveUserVO(userList);
             }
 
         } catch (Exception e) {
