@@ -10,7 +10,6 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
@@ -31,11 +30,17 @@ public class SellingController {
 
     public UserList userSession(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-
-        String user = (String) session.getAttribute("userEmail");
-        UserList userList = userService.findUserVO(user);
-        return userList;
+        if (session != null) {
+            UserList userList = (UserList) session.getAttribute("userList");
+            if (userList != null) {
+                System.out.println("UserList found in session: " + userList);
+                return userList;
+            }
+        }
+        System.out.println("UserList not found in session.");
+        return null;
     }
+
 
     // 전체 글 목록 조회하기
     @GetMapping("/list")
@@ -47,8 +52,10 @@ public class SellingController {
     // Param : sellIdx
     // 글 읽기
     @GetMapping("/sellent")
-    public Map<String, Object> selectContent(@RequestParam String sellIdx) throws Exception {
+    public Map<String, Object> selectContent(@RequestParam String sellIdx,HttpServletRequest request) throws Exception {
+        UserList userList = userSession(request);
         Map<String, Object> result = sellingService.selectContent(sellIdx);
+
         return result;
     }
 
@@ -91,8 +98,10 @@ public class SellingController {
     // Method : Delete
     // Param : sellCmtIdx
     @DeleteMapping("/sellentCmt")
-    public Boolean deleteComment(@RequestParam String sellCmtIdx, HttpServletRequest request) throws ParseException {
+    public Boolean deleteComment (@RequestParam String sellCmtIdx, HttpServletRequest request) throws ParseException {
+        System.out.println("댓글 삭제 요청");
         UserList userList = userSession(request);
+        System.out.println("삭제 요청 유저 : "+userList);
         int sellentCmtIdx = Integer.parseInt(sellCmtIdx);
         Boolean result = sellingCmtService.deleteComment(sellentCmtIdx, userList);
         return result;

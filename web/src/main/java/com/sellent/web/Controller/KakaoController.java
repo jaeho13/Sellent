@@ -43,16 +43,19 @@ public class KakaoController {
             HttpServletRequest request) throws Exception {
         Map<String, Object> map = new HashMap<>();
         UserList user = kakaoService.getKakaoUserList(token);
-        log.info("userInfo ={}", user);
+        log.info("userList ={}", user);
 
         if (user != null) {
+            // Set the user information in the session
             HttpSession session = request.getSession();
             session.setAttribute("userList", user);
-            map.put("userList", user);
 
+            // Populate the response map
+            map.put("userList", user);
             System.out.println("로그인 성공!!" + user);
             return map;
         }
+
         map.put("status", HttpStatus.BAD_REQUEST.toString());
         return map;
     }
