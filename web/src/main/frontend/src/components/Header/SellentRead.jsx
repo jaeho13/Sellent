@@ -37,7 +37,7 @@ const SellentRead = () => {
 
     const { sellIdx } = useParams();
     const [sellentRead, setSellentRead] = useState({});
-    const [sellentCommentRead, setSellentCommentRead] = useState({});
+    const [sellentCommentRead, setSellentCommentRead] = useState([]);
 
     useEffect(() => {
         const loadBoard = async () => {
@@ -72,6 +72,13 @@ const SellentRead = () => {
     const commentsSubmit = (e) => {
         e.preventDefault();
 
+        if (!sellCmtContent) {
+            alert("내용을 입력해주세요.");
+            return;
+        }
+
+        navigate(`/sellentRead/${sellIdx}`)
+
         axios({
             url: "/sellntCmt",
             method: "post",
@@ -82,21 +89,36 @@ const SellentRead = () => {
         })
             .then((response) => {
                 console.log(response);
+                setSellentCommentRead([...sellentCommentRead, {
+                    sellCmtIdx: response.data.sellCmtIdx,
+                    // userNm: response.data.userNm,
+                    // userNm: "이재포",
+                    sellCmtContent,
+                }]);
+                // 댓글 입력 필드 초기화
+                setSellCmtContent("");
             })
             .catch((error) => {
                 console.log(error);
             });
     }
 
+    const nickSubmit = (e) => {
+        e.preventDefault();
+
+        axios({
+
+        })
+    }
+
+
     const onDelete = async (sellCmtIdx) => {
         if (window.confirm("정말 삭제하시겠습니까??")) {
             try {
                 await axios.delete(`/sellentCmt?sellCmtIdx=${sellCmtIdx}`)
                 alert("삭제되었습니다.");
-                const response = await axios.get("/sellentCmt");
-                setSellCmtContent(response.data);
             } catch (error) {
-                console.log("삭제 실패", error);
+                alert("자신이 작성한 댓글만 삭제할 수 있습니다.");
             }
         } else {
             alert("취소되었습니다.");
@@ -142,7 +164,7 @@ const SellentRead = () => {
                             <RightTop>댓글</RightTop>
                             {sellentCommentRead.length > 0 && sellentCommentRead.map((Comment, index) => {
                                 return (
-                                    <RightBoard key={Comment.sellCmtIdx} ref={rightBoardRef}>
+                                    <RightBoard key={index} ref={rightBoardRef}>
                                         <RightBoardBind>
                                             <RightBoardNick>
                                                 닉네임 : {Comment.userNm}
