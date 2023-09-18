@@ -52,6 +52,43 @@ const Write = () => {
         navigate(`/sellentRead/${sellIdx}`); //sellIdx에 해당하는 글 읽기 페이지 이동
     }
 
+    const [sellTitle, setSellTitle] = useState("");
+    const [sellContent, setSellContent] = useState("");
+
+    const handleTitleChange = (e) => {
+        setSellTitle(e.target.value);
+    };
+
+    const handleContentChange = (e) => {
+        setSellContent(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (!sellTitle || !sellContent) {
+            alert("제목과 내용을 모두 입력해주세요.");
+            return;
+        }
+
+        axios({
+            url: "/", //주소 넣어줘야합니당 흑흑
+            method: "post",
+            data: {
+                sellTitle,
+                sellContent,
+            },
+        })
+            .then((response) => {
+                console.log(response);
+                navigate("/");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+
     return (
         <>
             <Window>
@@ -76,21 +113,33 @@ const Write = () => {
                     <Center>
 
                         <CenterTop>글제목</CenterTop>
-                        <CenterTitle type="text" placeholder="*제목을 입력하세요" />
+                        <form onSubmit={handleSubmit}>
+                            <CenterTitle
+                                type="text"
+                                placeholder="*제목을 입력하세요"
+                                onChange={handleTitleChange}
+                                value={sellTitle}
+                            />
 
+                            <CenterTop>글내용</CenterTop>
+                            <CenterBoard
+                                type="text"
+                                placeholder="*글을 입력하세요"
+                                onChange={handleContentChange}
+                                value={sellContent}
+                            />
 
-                        <CenterTop>글내용</CenterTop>
-                        <CenterBoard type="text" placeholder="*글을 입력하세요" />
+                            <PictureBind>
+                                <Picture placeholder="*파일을 올리세요" />
+                                <PictureUpload>찾아보기</PictureUpload>
+                            </PictureBind>
 
-                        <PictureBind>
-                            <Picture placeholder="*파일을 올리세요" />
-                            <PictureUpload>찾아보기</PictureUpload>
-                        </PictureBind>
-
-                        <ButtonBind>
-                            <Upload>글올리기</Upload>
-                            <Cancle>취소하기</Cancle>
-                        </ButtonBind>
+                            <ButtonBind>
+                                <Upload type="submit">글올리기</Upload>
+                                <Cancle>취소하기</Cancle>
+                                //이동해야하는 주소 넣어주기
+                            </ButtonBind>
+                        </form>
 
 
                         <CenterWhere>거래 희망장소</CenterWhere>
@@ -286,14 +335,16 @@ const ButtonBind = styled.div`
     margin-top: 3em;
 `
 
-const Upload = styled.div`
+const Upload = styled.button`
     width: 15%;
     height: 5vh;
     border: 2px solid red;
-    font-size: 2em;
+    font-size: 1.8em;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: bold;
+    cursor: pointer;
 `
 
 const Cancle = styled.div`
