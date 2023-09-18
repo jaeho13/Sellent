@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "../fonts/Font.css";
 import { AiFillCloseCircle } from "react-icons/ai"
 import { useNavigate } from "react-router-dom";
 import Map from "./Map";
+import axios from "axios";
 
 const Write = () => {
 
@@ -27,6 +28,28 @@ const Write = () => {
 
     const goBack = () => {
         navigate("/background")
+    }
+
+
+    const [purList, setPurList] = useState([]);
+
+    useEffect(() => {
+        const purchaseLoad = async () => {
+            try {
+                const response = await axios.get("/list");
+                setPurList(response.data.purList);
+                console.log("재능 구매 불러오기 성공")
+                console.log(response.data)
+            } catch (error) {
+                console.log("재능 구매 불러오기 실패");
+            }
+        };
+
+        purchaseLoad();
+    }, []);
+
+    const handleSellentRead = (sellIdx) => {
+        navigate(`/sellentRead/${sellIdx}`); //sellIdx에 해당하는 글 읽기 페이지 이동
     }
 
     return (
@@ -75,11 +98,15 @@ const Write = () => {
                     </Center>
 
                     <Right>
-                        <RightTop>재능구함</RightTop>
-                        <RightBoard />
-                        <RightBoard />
-                        <RightBoard />
-                        <RightBoard />
+                        <RightTop>재능구매</RightTop>
+                        {purList.length > 0 && purList.map((purItem, index) => {
+                            return (
+                                <RightBoard onClick={() => handleSellentRead(purItem.sellIdx)} key={purItem.sellIdx}>
+                                    {purItem.sellTitle}
+                                </RightBoard>
+
+                            )
+                        })}
                     </Right>
                 </Bind>
             </Back>
@@ -294,7 +321,7 @@ const RightTop = styled.div`
     width: 40%;
     height: 8vh;
     /* border: 2px solid black; */
-    font-size: 2rem;
+    font-size: 2.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -304,12 +331,15 @@ const RightTop = styled.div`
 `
 
 const RightBoard = styled.div`
-    width: 60%;
-    height: 20vh;
+    width: 80%;
+    height: 5vh;
     border: 2px solid red;
+    font-size: 2rem;
     margin: 0 auto;
-    margin-top: 1.5rem;
+    margin-top: 3rem;
     margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
 `
 
 const CenterWhere = styled.div`
