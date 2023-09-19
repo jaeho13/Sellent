@@ -54,6 +54,9 @@ const Write = () => {
 
     const [sellTitle, setSellTitle] = useState("");
     const [sellContent, setSellContent] = useState("");
+    const [sellType, setSellType] = useState("");
+    const [sellPrice, SetSellPrice] = useState("");
+    const [sellLocation, setSellLocation] = useState("");
 
     const handleTitleChange = (e) => {
         setSellTitle(e.target.value);
@@ -77,6 +80,9 @@ const Write = () => {
             data: {
                 sellTitle,
                 sellContent,
+                sellType,
+                sellPrice,
+                sellLocation,
             },
         })
             .then((response) => {
@@ -129,16 +135,17 @@ const Write = () => {
                                 value={sellContent}
                             />
 
-                            <PictureBind>
-                                <Picture placeholder="*파일을 올리세요" />
-                                <PictureUpload>찾아보기</PictureUpload>
-                            </PictureBind>
-
                             <ButtonBind>
+                                <Price />
                                 <Upload type="submit">글올리기</Upload>
                                 <Cancle>취소하기</Cancle>
                                 //이동해야하는 주소 넣어주기
                             </ButtonBind>
+
+                            <PictureBind>
+                                <Picture placeholder="*파일을 올리세요" />
+                                <PictureUpload>찾아보기</PictureUpload>
+                            </PictureBind>
                         </form>
 
 
@@ -272,7 +279,7 @@ const CenterTop = styled.div`
     border: 2px solid black;
     font-size: 2rem;
     margin-top: 1rem;
-    margin-left: 1rem;
+    margin-left: 0.5em;
     display: flex;
     align-items: center;
 `
@@ -283,7 +290,7 @@ const CenterTitle = styled.input`
     border: 2px solid black;
     font-size: 2rem;
     margin-top: 1rem;
-    margin-left: 1rem;
+    margin-left: 0.5em;
 `
 
 const CenterBoard = styled.textarea`
@@ -292,7 +299,7 @@ const CenterBoard = styled.textarea`
     border: 2px solid black;
     font-size: 2rem;
     margin-top: 1rem;
-    margin-left: 1rem;
+    margin-left: 0.5em;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
 `
@@ -307,7 +314,7 @@ const Picture = styled.input`
     width: 70%;
     height: 5vh;
     border: 2px solid blue;
-    margin-left: 2rem;
+    margin-left: 0.5em;
     font-size: 2rem;
     display: flex;
     align-items: center;
@@ -331,8 +338,20 @@ const FileInput = styled.input`
 
 const ButtonBind = styled.div`
     display: flex;
-    justify-content: right;
-    margin-top: 3em;
+    justify-content: row;
+    margin-top: 1em;
+`
+
+const Price = styled.input`
+    width: 30%;
+    height: 5vh;
+    border: 2px solid black;
+    margin-left: 0.5em;
+    font-size: 1.8em;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    font-weight: bold;
 `
 
 const Upload = styled.button`
@@ -340,6 +359,7 @@ const Upload = styled.button`
     height: 5vh;
     border: 2px solid red;
     font-size: 1.8em;
+    margin-left: 3em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -353,7 +373,6 @@ const Cancle = styled.div`
     border: 2px solid red;
     font-size: 2em;
     margin-left: 1em;
-    margin-right: 2em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -401,5 +420,5 @@ const CenterWhere = styled.div`
     display: flex;
     align-items: center;
     margin-top: 0.5em;
-    margin-left: 1em;
+    margin-left: 0.5em;
 `
