@@ -154,10 +154,9 @@ const SellentRead = () => {
                         </CenterBottomBind>
 
                         <ButtonBind>
-                            <Price
-                            />
-                            <Cancle>취소하기</Cancle>
-                            <Upload type="submit">수정하기</Upload>
+                            <Price />
+                            <Upload >수정하기</Upload>
+                            <Cancle>삭제하기</Cancle>
                         </ButtonBind>
 
                         <CenterWhere>거래 희망장소</CenterWhere>
@@ -418,7 +417,7 @@ const RightBoardDelete = styled.div`
 `
 
 const CenterTopic = styled.div`
-    width: 80%;
+    width: 90%;
     height: 5vh;
     border: 2px solid red;
     font-size: 2.5em;
@@ -430,7 +429,7 @@ const CenterTopic = styled.div`
 `
 
 const CenterTitle = styled.div`
-    width: 80%;
+    width: 90%;
     height: 5vh;
     border: 2px solid red;
     font-size: 2.5em;
@@ -446,7 +445,7 @@ const CenterBottomBind = styled.div`
 `
 
 const CenterContents = styled.div`
-    width: 80%;
+    width: 90%;
     height: 50vh;
     border: 2px solid red;
     font-size: 2.5em;
@@ -455,19 +454,6 @@ const CenterContents = styled.div`
     margin-left: 0.5em;
 `
 
-
-
-const CenterComments = styled.div`
-    width: 20%;
-    height: 50vh;
-    border: 2px solid red;
-    font-size: 2.5em;
-    display: flex;
-    margin-top: 1em;
-    margin-left: 1em;
-`
-
-
 const ButtonBind = styled.div`
     display: flex;
     justify-content: row;
@@ -475,7 +461,7 @@ const ButtonBind = styled.div`
 `
 
 const Price = styled.div`
-    width: 30%;
+    width: 50%;
     height: 5vh;
     border: 2px solid black;
     margin-left: 0.7em;
@@ -490,7 +476,20 @@ const Upload = styled.button`
     width: 15%;
     height: 5vh;
     border: 2px solid red;
-    font-size: 1.8em;
+    font-size: 1.5em;
+    margin-left: 2.7em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+`
+
+const Cancle = styled.button`
+    width: 15%;
+    height: 5vh;
+    border: 2px solid red;
+    font-size: 1.5em;
     margin-left: 1em;
     display: flex;
     justify-content: center;
@@ -499,19 +498,8 @@ const Upload = styled.button`
     cursor: pointer;
 `
 
-const Cancle = styled.div`
-    width: 15%;
-    height: 5vh;
-    border: 2px solid red;
-    font-size: 2em;
-    margin-left: 4.5em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
-
 const CenterWhere = styled.div`
-    width: 40%;
+    width: 50%;
     height: 5vh;
     border: 2px solid red;
     font-size: 2.5em;

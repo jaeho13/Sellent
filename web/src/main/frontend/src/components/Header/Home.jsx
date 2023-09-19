@@ -18,6 +18,10 @@ const Home = () => {
         navigate("/login")
     }
 
+    const goWrite = () => {
+        navigate("/write")
+    }
+
     const goMypage = () => {
         navigate("/mypage")
     }
@@ -103,11 +107,11 @@ const Home = () => {
                 <Bind>
 
                     <Left>
-                        <LeftTop>SELLENT</LeftTop>
-                        <LeftBoardTitle onClick={goHome} >메인화면</LeftBoardTitle>
-                        <LeftBoard onClick={goLogin} >재능판매</LeftBoard>
+                        <LeftTop onClick={goHome}>SELLENT</LeftTop>
+                        <LeftBoardTitle onClick={goLogin}>로그인</LeftBoardTitle>
+                        <LeftBoard onClick={goWrite}>재능판매</LeftBoard>
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
-                        <LeftBoard onClick={goChat} >채팅</LeftBoard>
+                        <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
                         <Cash>25,000원</Cash>
                         <Name>이재호</Name>
@@ -176,14 +180,29 @@ const Home = () => {
 
                     <Right>
                         <RightTop>재능구매</RightTop>
-                        {purList.length > 0 && purList.map((purItem, index) => {
-                            return (
-                                <RightBoard onClick={() => handleSellentRead(purItem.sellIdx)} key={purItem.sellIdx}>
-                                    {purItem.sellTitle}
-                                </RightBoard>
+                        <RightContents>
+                            {purList.length > 0 && purList.map((purItem, index) => {
+                                return (
+                                    <RightBoardBind key={purItem.sellIdx}>
+                                        <RightBoard>
+                                            <BoardImg>
+                                                {purItem.sellTitle}
+                                            </BoardImg>
+                                            <BoardTitle onClick={() => handleSellentRead(purItem.sellIdx)}>
+                                                {purItem.sellTitle}
+                                                <BoardLike>
+                                                    <FcLike />
+                                                    <LikeScore>
+                                                        {purItem.sellLike}
+                                                    </LikeScore>
+                                                </BoardLike>
+                                            </BoardTitle>
+                                        </RightBoard>
 
-                            )
-                        })}
+                                    </RightBoardBind>
+                                )
+                            })}
+                        </RightContents>
                     </Right>
                 </Bind>
             </Back>
@@ -197,9 +216,11 @@ const Window = styled.div`
     width: 85%;
     height: 3rem;
     border: 2px solid black;
+    border-bottom: none;
     margin: 0 auto;
     margin-top: 4vh;
     background-color: lightgrey;
+    box-shadow: 1em 1em 1em 1em #6E6E6E;
 `
 
 const Close = styled.div`
@@ -211,7 +232,8 @@ const Close = styled.div`
 const Back = styled.div`
     width: 85%;
     height: 85vh;
-    /* border: 2px solid green; */
+    border: 2px solid black;
+    border-top: none;
     margin: 0 auto;
     box-shadow: 1em 1em 1em 1em #6E6E6E;
 `
@@ -224,41 +246,47 @@ const Bind = styled.div`
 const Left = styled.div`
     width: 15%;
     height: 85vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
+    border-right: 2px solid black;
     background-color: white;
 `
 
 const LeftTop = styled.div`
     width: 100%;
     height: 13vh;
-    border: 2px solid black;
+    border-bottom: 2px solid black;
     font-size: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 `
 
 const LeftBoardTitle = styled.div`
     width: 80%;
     height: 6vh;
-    border: 2px solid blue;
+    border: 2px solid black;
+    border-radius: 0.5em;
     margin: 0 auto;
     margin-top: 2rem;
     font-size: 2rem;
     display: flex;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
 `
 
 const LeftBoard = styled.div`
     width: 80%;
     height: 6vh;
-    border: 2px solid blue;
+    border: 2px solid black;
+    border-radius: 0.5em;
     margin: 0 auto;
     margin-top: 2rem;
     font-size: 2rem;
     display: flex;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
     
     @media (max-width: 1280px) {
@@ -275,9 +303,9 @@ const LeftBoard = styled.div`
 const Cash = styled.div`
     width: 80%;
     height: 3vh;
-    border: 2px solid red;
+    border: 2px solid black;
     margin: 0 auto;
-    margin-top: 3em;
+    margin-top: 4em;
     font-size: 2em;
     display: flex;
     justify-content: center;
@@ -297,7 +325,7 @@ const Cash = styled.div`
 const Name = styled.div`
     width: 80%;
     height: 3vh;
-    border: 2px solid red;
+    border: 2px solid black;
     margin: 0 auto;
     font-size: 2rem;
     display: flex;
@@ -316,9 +344,9 @@ const Name = styled.div`
 `
 
 const Center = styled.div`
-    width: 60%;
+    width: 55%;
     height: 85vh;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
     background-color: white;
@@ -327,7 +355,9 @@ const Center = styled.div`
 const CenterHalfTop = styled.div`
     width: 100%;
     height: 35vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
 `
@@ -335,7 +365,7 @@ const CenterHalfTop = styled.div`
 const CenterHalfBottom = styled.div`
     width: 100%;
     height: 35vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
 `
@@ -343,22 +373,26 @@ const CenterHalfBottom = styled.div`
 const CenterTop = styled.div`
     width: 50%;
     height: 5vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     font-size: 2.5rem;
-    margin-left: 1rem;
-    margin-top: 1rem;
+    /* margin-left: 1rem; */
+    padding-left: 0.5em;
+    margin-top: 0.5em;
     display: flex;
     align-items: center;
     font-weight: bolder;
 `
 
 const LiveChapter = styled.div`
-    width: 50%;
+    width: 100%;
     height: 5vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
+    /* border-bottom: 2px solid black; */
     font-size: 2rem;
-    margin-left: 1rem;
-    margin-top: 1rem;
+    padding-left: 0.5em;
+    /* margin-left: 1rem; */
+    /* margin-top: 1rem; */
+    margin-top: 0.5em;
     display: flex;
     align-items: center;
 `
@@ -366,7 +400,7 @@ const LiveChapter = styled.div`
 const Chapter = styled.div`
     width: 50%;
     height: 5vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     font-size: 2rem;
     margin-left: 1rem;
     /* margin-top: 1rem; */
@@ -392,7 +426,7 @@ const CenterBoardBind = styled.div`
 const CenterBoard = styled.div`
     width: 100%;
     height: 20vh;
-    border: 2px solid blue;
+    border: 2px solid black;
     margin-top: 2rem;
     margin-left: 5rem;
     /* margin-left: 1rem; */
@@ -401,13 +435,14 @@ const CenterBoard = styled.div`
 const BoardImg = styled.div`
     width: 100%;
     height: 15vh;
-    border: 2px solid red;
+    /* border: 2px solid red; */
 `
 
 const BoardTitle = styled.div`
     width: 100%;
     height: 4vh;
     /* border: 2px solid red; */
+    border-top: 2px solid black;
     font-size: 1.5em;
     display: flex;
     justify-content: space-between;
@@ -418,7 +453,7 @@ const BoardTitle = styled.div`
 const BoardLike = styled.div`
     width: 30%;
     height: 4vh;
-    border: 2px solid green;
+    /* border: 2px solid green; */
     font-size: 1em;
     display: flex;
     justify-content: center;
@@ -450,35 +485,50 @@ const LikeScore = styled.div`
 // `
 
 const Right = styled.div`
-    width: 25%;
+    width: 30%;
     height: 85vh;
-    border: 2px solid blue;
+    border: 2px solid black;
+    border-top: none;
+    border-right: none;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
     background-color: white;
 `
 
 const RightTop = styled.div`
-    width: 40%;
-    height: 8vh;
+    width: 100%;
+    height: 5vh;
     /* border: 2px solid black; */
+    border-bottom: 2px solid black;
     font-size: 2.5rem;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     font-weight: bolder;
-    padding-top: 0.5rem;
+    padding-top: 0.5em;
     padding-left: 0.5rem;
 `
 
-const RightBoard = styled.div`
-    width: 80%;
-    height: 5vh;
-    border: 2px solid red;
-    font-size: 2rem;
-    margin: 0 auto;
-    margin-top: 3rem;
-    margin-bottom: 1.5rem;
+const RightContents = styled.div`
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* 넘치는 경우 줄바꿈 */
+`
+
+const RightBoardBind = styled.div`
+    width: 50%;
+    display: flex;
+    margin-bottom: 2rem;
+`
+
+const RightBoard = styled.div`
+    width: 100%;
+    height: 20vh;
+    border: 2px solid black;
+    margin-top: 2rem;
+    /* margin-left: 5rem; */
+    margin-left: 1rem;
+    margin-right: 1rem;
 `
