@@ -73,10 +73,14 @@ public class SellingService {
         selling.setSellTitle((String) content.get("sellTitle"));
         selling.setSellContent((String) content.get("sellContent"));
         selling.setSellDate(new Date());
-        selling.setSellLocation((String) content.get("sellLocation"));
-        selling.setSellType(Integer.parseInt((String) content.get("sellType")));
-        selling.setSellPrice(Integer.parseInt((String) content.get("sellPrice")));
+        selling.setSellType(0);
+        selling.setSellLocation("광주광역시 남구 백운동");
+        selling.setSellPrice(2000);
         selling.setSellLike(0);
+
+//        selling.setSellLocation((String) content.get("sellLocation"));
+//        selling.setSellType(Integer.parseInt((String) content.get("sellType")));
+//        selling.setSellPrice(Integer.parseInt((String) content.get("sellPrice")));
 
         sellingRepository.save(selling);
     }
