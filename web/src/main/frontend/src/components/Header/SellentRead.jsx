@@ -152,6 +152,14 @@ const SellentRead = () => {
                         <CenterBottomBind>
                             <CenterContents>{sellentRead.sellContent}</CenterContents>
                         </CenterBottomBind>
+
+                        <ButtonBind>
+                            <Price
+                            />
+                            <Cancle>취소하기</Cancle>
+                            <Upload type="submit">수정하기</Upload>
+                        </ButtonBind>
+
                         <CenterWhere>거래 희망장소</CenterWhere>
                         <Map />
                     </Center>
@@ -286,7 +294,7 @@ const Name = styled.div`
 `
 
 const Center = styled.div`
-    width: 60%;
+    width: 55%;
     height: 85vh;
     border: 2px solid red;
     background-color: white;
@@ -315,6 +323,8 @@ const ChatInput = styled.input`
 const RightBind = styled.div`
     display: flex;
     flex-direction: column;
+    width: 30%;
+    border: 2px solid red;
 `
 
 const Right = styled.div`
@@ -414,8 +424,8 @@ const CenterTopic = styled.div`
     font-size: 2.5em;
     display: flex;
     align-items: center;
-    margin-top: 1em;
-    margin-left: 1em;
+    margin-top: 0.5em;
+    margin-left: 0.5em;
     font-weight: bolder;
 `
 
@@ -427,7 +437,7 @@ const CenterTitle = styled.div`
     display: flex;
     align-items: center;
     margin-top: 0.5em;
-    margin-left: 1em;
+    margin-left: 0.5em;
 `
 
 const CenterBottomBind = styled.div`
@@ -442,8 +452,10 @@ const CenterContents = styled.div`
     font-size: 2.5em;
     display: flex;
     margin-top: 0.5em;
-    margin-left: 1em;
+    margin-left: 0.5em;
 `
+
+
 
 const CenterComments = styled.div`
     width: 20%;
@@ -455,6 +467,49 @@ const CenterComments = styled.div`
     margin-left: 1em;
 `
 
+
+const ButtonBind = styled.div`
+    display: flex;
+    justify-content: row;
+    margin-top: 1em;
+`
+
+const Price = styled.div`
+    width: 30%;
+    height: 5vh;
+    border: 2px solid black;
+    margin-left: 0.7em;
+    font-size: 1.8em;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    font-weight: bold;
+`
+
+const Upload = styled.button`
+    width: 15%;
+    height: 5vh;
+    border: 2px solid red;
+    font-size: 1.8em;
+    margin-left: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+`
+
+const Cancle = styled.div`
+    width: 15%;
+    height: 5vh;
+    border: 2px solid red;
+    font-size: 2em;
+    margin-left: 4.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
 const CenterWhere = styled.div`
     width: 40%;
     height: 5vh;
@@ -463,5 +518,5 @@ const CenterWhere = styled.div`
     display: flex;
     align-items: center;
     margin-top: 0.5em;
-    margin-left: 1em;
+    margin-left: 0.5em;
 `
