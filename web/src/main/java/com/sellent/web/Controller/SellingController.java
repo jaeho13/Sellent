@@ -1,6 +1,7 @@
 package com.sellent.web.Controller;
 
 import com.sellent.web.Entiity.Selling;
+import com.sellent.web.Entiity.SellingCmt;
 import com.sellent.web.Entiity.UserList;
 import com.sellent.web.Service.SellingCmtService;
 import com.sellent.web.Service.SellingService;
@@ -14,7 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.sql.ResultSet;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -43,27 +46,27 @@ public class SellingController {
         return null;
     }
 
-
     // 전체 글 목록 조회하기
     @GetMapping("/list")
-    public Map<String, Object> selectList() {
+    public Map<String, Object> selectList()
+            throws Exception {
         return sellingService.selectList();
     }
 
-    // Method : GET/selling
+    // Method : GET/sellent
     // Param : sellIdx
     // 글 읽기
     @GetMapping("/sellent")
-    public Map<String, Object> selectContent(@RequestParam String sellIdx,HttpServletRequest request) throws Exception {
+    public Map<String, Object> selectContent(@RequestParam String sellIdx, HttpServletRequest request)
+            throws Exception {
         UserList userList = userSession(request);
         Map<String, Object> result = sellingService.selectContent(sellIdx);
 
         return result;
     }
 
-    // Method : POST
-    // Param : sellTitle, sellContent, userEmail, sellType, sellPrice, sellLocation,
-    // sellType
+    // Method : POST/sellent
+    // Param : sellTitle, sellContent, sellType, sellPrice, sellLocation,
     // 글 작성
     @PostMapping("/sellent")
     public void insertContent(@RequestBody Map<String, Object> content, HttpServletRequest request)
@@ -72,16 +75,28 @@ public class SellingController {
         sellingService.insertContent(content, userList);
     }
 
-    // Method : PATCH
+    // Method : PATCH/sellent
     // Param : sellTitle, sellContent, sellPrice, sellLocation
+    // 글 수정
     @PatchMapping("/sellent")
-    public Map<String, Object> updateContent(@RequestBody Map<String, Object> content, HttpServletRequest request)
+    public void updateContent(@RequestBody Map<String, Object> content, HttpServletRequest request)
             throws ParseException {
         UserList userList = userSession(request);
         sellingService.updateContent(content, userList);
-
-        return null;
     }
+
+
+    // Method : DELETE/sellent
+    // Param : sellIdx
+    // 글 삭제
+    @DeleteMapping("/sellent")
+    public void deleteContent(@RequestParam String sellIdx, HttpServletRequest request)
+            throws Exception {
+        UserList userList = userSession(request);
+
+        sellingService.deleteContent(sellIdx, userList);
+    }
+
 
     // ------------------------------------------------
     // 댓글 작성
@@ -90,10 +105,12 @@ public class SellingController {
     @PostMapping("/sellntCmt")
     public void insertComment(@RequestBody Map<String, Object> comment, HttpServletRequest request)
             throws ParseException {
-        System.out.println("=====요청 성공=====");
         UserList userList = userSession(request);
-        System.out.println("====="+userList);
-        sellingCmtService.insertComment(comment, userList);
+        int sellIdx = Integer.parseInt((String) comment.get("sellIdx"));
+
+        Selling sellingVO = sellingService.findContent(sellIdx);
+        UserList userListVO = userService.findUserVO(userList.getUserEmail());
+        sellingCmtService.insertCmt(comment, sellingVO, userListVO);
     }
 
     // 댓글 삭제
@@ -101,12 +118,9 @@ public class SellingController {
     // Param : sellCmtIdx
     @DeleteMapping("/sellentCmt")
     public ResponseEntity<String> deleteComment(@RequestParam String sellCmtIdx, HttpServletRequest request) {
-        System.out.println("댓글 삭제 요청");
         UserList userList = userSession(request);
-        System.out.println("삭제 요청 유저: " + userList);
-
         int sellentCmtIdx = Integer.parseInt(sellCmtIdx);
-        Boolean result = sellingCmtService.deleteComment(sellentCmtIdx, userList);
+        Boolean result = sellingCmtService.deleteCmt(sellentCmtIdx, userList);
 
         if (result) {
             return ResponseEntity.status(HttpStatus.OK).body("삭제되었습니다.");

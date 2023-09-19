@@ -72,7 +72,7 @@ const Write = () => {
         }
 
         axios({
-            url: "/", //주소 넣어줘야합니당 흑흑
+            url: "/sellent", //주소 넣어줘야합니당 흑흑
             method: "post",
             data: {
                 sellTitle,

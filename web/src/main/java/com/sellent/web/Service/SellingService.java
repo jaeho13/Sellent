@@ -4,10 +4,9 @@ import com.sellent.web.Dto.CommentDTO;
 import com.sellent.web.Dto.ContentDTO;
 import com.sellent.web.Dto.ListDTO;
 import com.sellent.web.Entiity.Selling;
+import com.sellent.web.Entiity.SellingCmt;
 import com.sellent.web.Entiity.UserList;
-import com.sellent.web.Repository.SellingCmtRepository;
 import com.sellent.web.Repository.SellingRepository;
-import com.sellent.web.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.*;
@@ -19,11 +18,11 @@ public class SellingService {
     @Autowired
     SellingRepository sellingRepository;
     @Autowired
-    SellingCmtRepository sellingCmtRepository;
-    @Autowired
     UserService userService;
+    @Autowired
+    SellingCmtService sellingCmtService;
 
-    // 판매 글 전체 가져오기
+    // 글 전체 가져오기
     public Map<String, Object> selectList() {
         Map<String, Object> result = new HashMap<>();
 
@@ -44,13 +43,14 @@ public class SellingService {
         return result;
     }
 
+    // 글 읽기
     public Map<String, Object> selectContent(String num) {
         Map<String, Object> map = new HashMap<>();
         int sellIdx = Integer.parseInt(num);
 
         try {
             ContentDTO contentDTO = sellingRepository.getSellingContent(sellIdx);
-            List<CommentDTO> commentDTO = sellingCmtRepository.getSellingComment(sellIdx);
+            List<CommentDTO> commentDTO = sellingCmtService.getSellingCmt(sellIdx);
 
             map.put("Content",contentDTO);
             map.put("Comment",commentDTO);
@@ -63,6 +63,7 @@ public class SellingService {
         }
     }
 
+    // 글 작성
     public void insertContent(Map<String, Object> content, UserList userList) {
         Selling selling = new Selling();
 
@@ -80,17 +81,64 @@ public class SellingService {
         sellingRepository.save(selling);
     }
 
+    // 글 수정
+    // sellTitle, sellContent, sellPrice, sellLocation
     public void updateContent(Map<String, Object> content, UserList userList) {
-        int sellIdx = (int) content.get(Integer.parseInt((String) "sellIdx"));
-        Selling selling = sellingRepository.findContent(sellIdx);
-        //작성자 확인
 
+        int sellIdx = Integer.parseInt((String) content.get("sellIdx"));
+        Selling selling = sellingRepository.findContent(sellIdx);
+
+        //작성자 확인
+        String oldWriter = selling.getUserListVO().getUserEmail();
+        String newWriter = userList.getUserEmail();
+
+        if(!oldWriter.equals(newWriter)) {
+            return;
+        }else {
+            selling.setSellTitle((String) content.get("sellTitle"));
+            selling.setSellContent((String) content.get("sellContent"));
+            selling.setSellPrice(Integer.parseInt((String) content.get("sellPrice")));
+            selling.setSellLocation((String) content.get("sellLocation"));
+
+            sellingRepository.save(selling);
+        }
     }
 
-    //원 글 찾기
+    // 글 삭제
+    public void deleteContent(String param, UserList userList) {
+        int sellIdx = Integer.parseInt(param);
+
+        try {
+            // 원 글쓴이 확인
+            String userVO = sellingRepository.findContent(sellIdx).getUserListVO().getUserEmail();
+
+            if(userList.getUserEmail().equals(userVO)) {
+                // 댓글 먼저 지우기
+                sellingCmtService.deleteAllCmt(sellIdx);
+
+                // 글 지우기
+                sellingRepository.deleteById(sellIdx);
+            }
+        }catch (NullPointerException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    // 원 글 찾기
     public Selling findContent(int sellIdx) {
         Selling selling = sellingRepository.findContent(sellIdx);
+
         return selling;
+    }
+    // 댓글 작성
+    public void insertCmt(Map<String, Object> comment, UserList userList) {
+        int sellIdx = Integer.parseInt((String) comment.get("sellIdx"));
+
+        Selling sellingVO = findContent(sellIdx);
+        UserList userVO = userService.findUserVO(userList.getUserEmail());
+
+        sellingCmtService.insertCmt(comment, sellingVO, userVO);
     }
 }
 
