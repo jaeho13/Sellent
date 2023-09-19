@@ -136,10 +136,11 @@ const Write = () => {
                             />
 
                             <ButtonBind>
-                                <Price />
+                                <Price
+                                    placeholder=" ₩"
+                                />
                                 <Upload type="submit">글올리기</Upload>
                                 <Cancle>취소하기</Cancle>
-                                //이동해야하는 주소 넣어주기
                             </ButtonBind>
 
                             <PictureBind>
@@ -149,20 +150,11 @@ const Write = () => {
                         </form>
 
 
-                        <CenterWhere>거래 희망장소</CenterWhere>
-                        <Map />
                     </Center>
 
                     <Right>
-                        <RightTop>재능구매</RightTop>
-                        {purList.length > 0 && purList.map((purItem, index) => {
-                            return (
-                                <RightBoard onClick={() => handleSellentRead(purItem.sellIdx)} key={purItem.sellIdx}>
-                                    {purItem.sellTitle}
-                                </RightBoard>
-
-                            )
-                        })}
+                        <CenterWhere>거래 희망장소</CenterWhere>
+                        <Map />
                     </Right>
                 </Bind>
             </Back>
@@ -265,7 +257,7 @@ const Name = styled.div`
 `
 
 const Center = styled.div`
-    width: 60%;
+    width: 55%;
     height: 85vh;
     border: 2px solid red;
     background-color: white;
@@ -356,8 +348,8 @@ const Price = styled.input`
 
 const Upload = styled.button`
     width: 15%;
-    height: 5vh;
-    border: 2px solid red;
+    height: 5.5vh;
+    border: 3px solid red;
     font-size: 1.8em;
     margin-left: 3em;
     display: flex;
@@ -379,7 +371,7 @@ const Cancle = styled.div`
 `
 
 const Right = styled.div`
-    width: 25%;
+    width: 30%;
     height: 85vh;
     border: 2px solid blue;
     overflow: auto; /* 스크롤 추가 */
@@ -413,7 +405,7 @@ const RightBoard = styled.div`
 `
 
 const CenterWhere = styled.div`
-    width: 40%;
+    width: 90%;
     height: 5vh;
     border: 2px solid red;
     font-size: 2.5em;
