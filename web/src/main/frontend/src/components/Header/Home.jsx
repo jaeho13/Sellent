@@ -147,8 +147,8 @@ const Home = () => {
                             </CenterContents>
                         </CenterHalfTop>
 
-                        <Chapter>전체글</Chapter>
                         <CenterHalfBottom>
+                            <Chapter>전체글</Chapter>
 
                             <CenterContents>
                                 {sellList.length > 0 && sellList.map((noItem, index) => {
@@ -347,8 +347,6 @@ const Center = styled.div`
     width: 55%;
     height: 85vh;
     /* border: 2px solid red; */
-    overflow: auto; /* 스크롤 추가 */
-    overflow-x: hidden; /* 가로 스크롤 제거 */
     background-color: white;
 `
 
@@ -357,15 +355,15 @@ const CenterHalfTop = styled.div`
     height: 35vh;
     /* border: 2px solid black; */
     border-top: 2px solid black;
-    border-bottom: 2px solid black;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
 `
 
 const CenterHalfBottom = styled.div`
     width: 100%;
-    height: 35vh;
+    height: 40vh;
     /* border: 2px solid black; */
+    border-top: 2px solid black;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
 `
@@ -384,7 +382,7 @@ const CenterTop = styled.div`
 `
 
 const LiveChapter = styled.div`
-    width: 100%;
+    width: 50%;
     height: 5vh;
     /* border: 2px solid black; */
     /* border-bottom: 2px solid black; */
@@ -402,7 +400,8 @@ const Chapter = styled.div`
     height: 5vh;
     /* border: 2px solid black; */
     font-size: 2rem;
-    margin-left: 1rem;
+    padding-left: 0.5em;
+    margin-top: 0.5em;
     /* margin-top: 1rem; */
     display: flex;
     align-items: center;
