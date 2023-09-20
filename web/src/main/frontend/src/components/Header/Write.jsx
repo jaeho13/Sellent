@@ -32,6 +32,8 @@ const Write = () => {
 
 
     const [purList, setPurList] = useState([]);
+    const [locationX, setLocationX] = useState(null);
+    const [locationY, setLocationY] = useState(null);
 
     useEffect(() => {
         const purchaseLoad = async () => {
@@ -167,7 +169,7 @@ const Write = () => {
                                 onChange={handleContentChange}
                                 value={sellContent}
                             />
-<PictureBind>
+                        <PictureBind>
                             <Picture placeholder="*파일을 올리세요" />
                                 <PictureUpload>찾아보기</PictureUpload>
                             </PictureBind>
@@ -192,7 +194,7 @@ const Write = () => {
                             onChange={handleLocationChange}
                             value={sellLocation}
                         />
-                        <Map />
+                        <Map locationX="33.450701" locationY="126.570667" />
                     </Right>
                 </Bind>
             </Back>
