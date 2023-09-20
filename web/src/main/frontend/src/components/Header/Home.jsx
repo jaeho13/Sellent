@@ -128,7 +128,9 @@ const Home = () => {
                                                     이미지 넣기
                                                 </BoardImg>
                                                 <BoardTitle onClick={() => handleSellentRead(item.sellIdx)}>
-                                                    {item.sellTitle}
+                                                    {item.sellTitle.length > 5
+                                                            ? `${item.sellTitle.slice(0, 5)}...`
+                                                            : item.sellTitle}
                                                     <BoardLike>
                                                         <FcLike />
                                                         <LikeScore>
@@ -155,7 +157,10 @@ const Home = () => {
                                                     이미지 넣기
                                                 </BoardImg>
                                                 <BoardTitle onClick={() => handleSellentRead(noItem.sellIdx)}>
-                                                    {noItem.sellTitle}
+                                                    {noItem.sellTitle.length > 5
+                                                    ? `${noItem.sellTitle.slice(0, 5)}...`
+                                                    : noItem.sellTitle}
+
                                                     <BoardLike>
                                                         <FcLike />
                                                         <LikeScore>
@@ -179,7 +184,9 @@ const Home = () => {
                         {purList.length > 0 && purList.map((purItem, index) => {
                             return (
                                 <RightBoard onClick={() => handleSellentRead(purItem.sellIdx)} key={purItem.sellIdx}>
-                                    {purItem.sellTitle}
+                                    {purItem.sellTitle.length > 5
+                                    ? `${purItem.sellTitle.slice(0, 5)}...`
+                                    : purItem.sellTitle}
                                 </RightBoard>
 
                             )
