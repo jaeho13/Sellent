@@ -20,6 +20,11 @@ const SellentRead = () => {
         navigate("/login")
     }
 
+
+    const goWrite = () => {
+        navigate("/write")
+    }
+
     const goMypage = () => {
         navigate("/mypage")
     }
@@ -65,16 +70,16 @@ const SellentRead = () => {
         navigate(`/sellentUpdate/${sellIdx}`);
     };
 
-   const sellentDelete = async () => {
-       try {
-           await axios.delete(`/sellent?sellIdx=${sellIdx}`);
-           alert("글이 성공적으로 삭제되었습니다.");
-           navigate("/");
-       } catch (error) {
-           alert("글 삭제에 실패했습니다. 자신이 작성한 글만 삭제할 수 있습니다.");
-           console.error("글 삭제 실패", error);
-       }
-   };
+    const sellentDelete = async () => {
+        try {
+            await axios.delete(`/sellent?sellIdx=${sellIdx}`);
+            alert("글이 성공적으로 삭제되었습니다.");
+            navigate("/");
+        } catch (error) {
+            alert("본인이 작성한 글만 삭제할 수 있습니다.");
+            console.error("글 삭제 실패", error);
+        }
+    };
 
     const rightBoardRef = useRef(null);
 
@@ -156,11 +161,11 @@ const SellentRead = () => {
             <Back>
                 <Bind>
                     <Left>
-                        <LeftTop>SELLENT</LeftTop>
-                        <LeftBoardTitle onClick={goHome} >메인화면</LeftBoardTitle>
-                        <LeftBoard onClick={goLogin} >재능판매</LeftBoard>
+                        <LeftTop onClick={goHome}>SELLENT</LeftTop>
+                        <LeftBoardTitle onClick={goLogin}>로그인</LeftBoardTitle>
+                        <LeftBoard onClick={goWrite}>재능판매</LeftBoard>
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
-                        <LeftBoard onClick={goChat} >채팅</LeftBoard>
+                        <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
                         <Cash>25,000원</Cash>
                         <Name>이재호</Name>
@@ -177,8 +182,7 @@ const SellentRead = () => {
                         <ButtonBind>
                             <Price> 거래 가격 : {sellentRead.sellPrice}</Price>
                             <Upload onClick={sellentUpdate}>수정하기</Upload>
-                            <Cancle onClick={sellentDelete}>삭제하기</Cancle>
-
+                            <Cancel onClick={sellentDelete}>삭제하기</Cancel>
                         </ButtonBind>
 
                         <CenterWhere>거래 장소 : {sellentRead.sellLocation}</CenterWhere>
@@ -508,7 +512,7 @@ const Upload = styled.button`
     cursor: pointer;
 `
 
-const Cancle = styled.button`
+const Cancel = styled.button`
     width: 15%;
     height: 5vh;
     border: 2px solid red;
@@ -522,7 +526,7 @@ const Cancle = styled.button`
 `
 
 const CenterWhere = styled.div`
-    width: 50%;
+    width: 90%;
     height: 5vh;
     border: 2px solid red;
     font-size: 2.5em;

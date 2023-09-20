@@ -132,8 +132,8 @@ const Home = () => {
                                                 </BoardImg>
                                                 <BoardTitle onClick={() => handleSellentRead(item.sellIdx)}>
                                                     {item.sellTitle.length > 5
-                                                            ? `${item.sellTitle.slice(0, 5)}...`
-                                                            : item.sellTitle}
+                                                        ? `${item.sellTitle.slice(0, 5)}...`
+                                                        : item.sellTitle}
                                                     <BoardLike>
                                                         <FcLike />
                                                         <LikeScore>
@@ -160,8 +160,8 @@ const Home = () => {
                                                 </BoardImg>
                                                 <BoardTitle onClick={() => handleSellentRead(noItem.sellIdx)}>
                                                     {noItem.sellTitle.length > 5
-                                                    ? `${noItem.sellTitle.slice(0, 5)}...`
-                                                    : noItem.sellTitle}
+                                                        ? `${noItem.sellTitle.slice(0, 5)}...`
+                                                        : noItem.sellTitle}
 
                                                     <BoardLike>
                                                         <FcLike />
@@ -191,8 +191,8 @@ const Home = () => {
                                             </BoardImg>
                                             <BoardTitle onClick={() => handleSellentRead(purItem.sellIdx)}>
                                                 {purItem.sellTitle.length > 5
-                                                ? `${purItem.sellTitle.slice(0, 5)}...`
-                                                : purItem.sellTitle}
+                                                    ? `${purItem.sellTitle.slice(0, 5)}...`
+                                                    : purItem.sellTitle}
                                                 <BoardLike>
                                                     <FcLike />
                                                     <LikeScore>
@@ -237,7 +237,7 @@ const Back = styled.div`
     border: 2px solid black;
     border-top: none;
     margin: 0 auto;
-    box-shadow: 2em 0.1em 5em 1em #EBFBFF;
+    box-shadow: 1em 1em 1em 1em #6E6E6E;
 `
 
 const Bind = styled.div`

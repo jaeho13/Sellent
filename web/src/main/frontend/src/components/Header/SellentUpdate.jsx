@@ -39,25 +39,25 @@ const SellentUpdate = () => {
     const [sellentRead, setSellentRead] = useState({});
 
     useEffect(() => {
-            const loadBoard = async () => {
-                try {
-                    const response = await axios.get(`/sellent?sellIdx=${sellIdx}`);
-                    setSellentRead(response.data.Content);
+        const loadBoard = async () => {
+            try {
+                const response = await axios.get(`/sellent?sellIdx=${sellIdx}`);
+                setSellentRead(response.data.Content);
 
-                    // 이전에 작성된 데이터 받아와 수정 가능하도록 셋팅
-                    setSellTitle(response.data.Content.sellTitle || '');
-                    setSellContent(response.data.Content.sellContent || '');
-                    setSellPrice(response.data.Content.sellPrice || '');
-                    setSellLocation(response.data.Content.sellLocation || '');
+                // 이전에 작성된 데이터 받아와 수정 가능하도록 셋팅
+                setSellTitle(response.data.Content.sellTitle || '');
+                setSellContent(response.data.Content.sellContent || '');
+                setSellPrice(response.data.Content.sellPrice || '');
+                setSellLocation(response.data.Content.sellLocation || '');
 
-                    console.log("게시물 불러오기 성공", sellentRead);
-                } catch (error) {
-                    console.log("게시물 불러오기 실패", error);
-                }
-            };
+                console.log("게시물 불러오기 성공", sellentRead);
+            } catch (error) {
+                console.log("게시물 불러오기 실패", error);
+            }
+        };
 
-            loadBoard();
-        }, [sellIdx]);
+        loadBoard();
+    }, [sellIdx]);
 
 
     const handleTitleChange = (e) => {
@@ -70,12 +70,12 @@ const SellentUpdate = () => {
 
     // 거래 금액
     const handlePriceChange = (e) => {
-            setSellPrice(e.target.value);
+        setSellPrice(e.target.value);
     };
 
     // 거래 장소
     const handleLocationChange = (e) => {
-                setSellLocation(e.target.value);
+        setSellLocation(e.target.value);
     };
 
 
@@ -148,13 +148,13 @@ const SellentUpdate = () => {
 
                             <ButtonBind>
                                 <Price
-                                    type="number" // 숫자만 들어갈 수 있게 Number로 설정
+                                    type="text" // 숫자만 들어갈 수 있게 Number로 설정
                                     placeholder=" ₩"
                                     onChange={handlePriceChange}
                                     value={sellPrice}
                                 />
                                 <Upload type="submit">글올리기</Upload>
-                                <Cancle>취소하기</Cancle>
+                                <Cancel>취소하기</Cancel>
                             </ButtonBind>
 
                             <PictureBind>
@@ -285,32 +285,36 @@ const Center = styled.div`
 `
 
 const CenterTop = styled.div`
-    width: 50%;
+    width: 90%;
     height: 5vh;
-    border: 2px solid black;
-    font-size: 2rem;
-    margin-top: 1rem;
-    margin-left: 0.5em;
+    border: 2px solid red;
+    font-size: 2.5em;
     display: flex;
     align-items: center;
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+    font-weight: bolder;
 `
 
 const CenterTitle = styled.input`
     width: 90%;
     height: 5vh;
-    border: 2px solid black;
-    font-size: 2rem;
-    margin-top: 1rem;
+    border: 2px solid red;
+    font-size: 2.5em;
+    display: flex;
+    align-items: center;
+    margin-top: 0.5em;
     margin-left: 0.5em;
 `
 
 const CenterBoard = styled.textarea`
     width: 90%;
-    height: 30vh;
-    border: 2px solid black;
-    font-size: 2rem;
-    margin-top: 1rem;
-    margin-left: 0.5em;
+    height: 50vh;
+    border: 2px solid red;
+    font-size: 2.5em;
+    display: flex;
+    margin-top: 0.5em;
+    margin-left: 0.6em;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
 `
@@ -325,7 +329,7 @@ const Picture = styled.input`
     width: 70%;
     height: 5vh;
     border: 2px solid blue;
-    margin-left: 0.5em;
+    margin-left: 0.6em;
     font-size: 2rem;
     display: flex;
     align-items: center;
@@ -335,16 +339,13 @@ const PictureUpload = styled.div`
     width: 15%;
     height: 5vh;
     border: 2px solid green;
-    margin-left: 1em;
+    margin-left: 1.3em;
+    margin-bottom: 1em;
     font-size: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-`
-
-const FileInput = styled.input`
-  display: none;
 `
 
 const ButtonBind = styled.div`
@@ -354,10 +355,10 @@ const ButtonBind = styled.div`
 `
 
 const Price = styled.input`
-    width: 30%;
+    width: 50%;
     height: 5vh;
     border: 2px solid black;
-    margin-left: 0.5em;
+    margin-left: 0.7em;
     font-size: 1.8em;
     display: flex;
     /* justify-content: center; */
@@ -367,10 +368,10 @@ const Price = styled.input`
 
 const Upload = styled.button`
     width: 15%;
-    height: 5.5vh;
-    border: 3px solid red;
-    font-size: 1.8em;
-    margin-left: 3em;
+    height: 5vh;
+    border: 2px solid red;
+    font-size: 1.5em;
+    margin-left: 2.7em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -378,15 +379,17 @@ const Upload = styled.button`
     cursor: pointer;
 `
 
-const Cancle = styled.div`
+const Cancel = styled.button`
     width: 15%;
     height: 5vh;
     border: 2px solid red;
-    font-size: 2em;
+    font-size: 1.5em;
     margin-left: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: bold;
+    cursor: pointer;
 `
 
 const Right = styled.div`
