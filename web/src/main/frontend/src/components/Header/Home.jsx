@@ -263,7 +263,6 @@ const LeftTop = styled.div`
     align-items: center;
     cursor: pointer;
     font-family: 'Lilita One', cursive;
-
 `
 
 const LeftBoardTitle = styled.div`
