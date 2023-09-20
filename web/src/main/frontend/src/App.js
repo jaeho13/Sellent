@@ -16,6 +16,7 @@ import Background from "./components/Header/Background";
 import Search from "./components/Header/Search";
 import SellentRead from "./components/Header/SellentRead";
 import SellentUpdate from "./components/Header/SellentUpdate";
+import Post from "./components/Header/Post";
 
 function App() {
   return (
@@ -40,6 +41,8 @@ function App() {
           <Route path="/sellentRead/:sellIdx" element={<SellentRead />} />
           <Route path="/sellentUpdate" element={<SellentUpdate />} />
           <Route path="/sellentUpdate/:sellIdx" element={<SellentUpdate />} />
+          <Route path="/Post" element={<Post />} />
+
         </Routes>
       </Router>
     

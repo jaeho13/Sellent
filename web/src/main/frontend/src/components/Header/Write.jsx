@@ -4,7 +4,9 @@ import "../fonts/Font.css";
 import { AiFillCloseCircle } from "react-icons/ai"
 import { useNavigate } from "react-router-dom";
 import Map from "./Map";
+import Post from "./Post";
 import axios from "axios";
+import DaumPostcode from 'react-daum-postcode';
 
 const Write = () => {
 
@@ -40,6 +42,8 @@ const Write = () => {
 
 
     const [purList, setPurList] = useState([]);
+    const [locationX, setLocationX] = useState(null);
+    const [locationY, setLocationY] = useState(null);
 
     useEffect(() => {
         const purchaseLoad = async () => {
@@ -86,6 +90,26 @@ const Write = () => {
     const handleSellTypeChange = (e) => {
         setSellType(e.target.value);
     };
+    const handleSaveLocation = (e) => {
+
+    }
+
+    const [enroll_company, setEnroll_company] = useState({
+    	address:'',
+    });
+
+    const [popup, setPopup] = useState(false);
+
+    const handleInput = (e) => {
+    	setEnroll_company({
+        	...enroll_company,
+            [e.target.name]:e.target.value,
+        })
+    }
+    const handleComplete = (data) => {
+        setPopup(!popup);
+    }
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -195,17 +219,25 @@ const Write = () => {
 
                     <Right>
                         <CenterWhere>거래 희망장소</CenterWhere>
+                        <div className="address_search" >
+                            <input className="user_enroll_text" placeholder="주소"  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
+                            <button onClick={handleComplete}>주소 찾기</button>
+                            <button onClick={handleSaveLocation}>주소저장</button>
+                            {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
+                        </div>
+
                         <Location
                             type="text"
                             onChange={handleLocationChange}
                             value={sellLocation}
                         />
-                        <Map />
+                        <Map locationX="33.450701" locationY="126.570667" />
                     </Right>
                 </Bind>
             </Back>
         </>
     );
+
 }
 
 export default Write;

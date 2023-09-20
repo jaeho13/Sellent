@@ -37,6 +37,8 @@ const SellentUpdate = () => {
     const [sellPrice, setSellPrice] = useState("");
     const [sellLocation, setSellLocation] = useState("");
     const [sellentRead, setSellentRead] = useState({});
+    const [locationX, setLocationX] = useState(null);
+    const [locationY, setLocationY] = useState(null);
 
     useEffect(() => {
         const loadBoard = async () => {
@@ -44,17 +46,18 @@ const SellentUpdate = () => {
                 const response = await axios.get(`/sellent?sellIdx=${sellIdx}`);
                 setSellentRead(response.data.Content);
 
-                // 이전에 작성된 데이터 받아와 수정 가능하도록 셋팅
-                setSellTitle(response.data.Content.sellTitle || '');
-                setSellContent(response.data.Content.sellContent || '');
-                setSellPrice(response.data.Content.sellPrice || '');
-                setSellLocation(response.data.Content.sellLocation || '');
-
-                console.log("게시물 불러오기 성공", sellentRead);
-            } catch (error) {
-                console.log("게시물 불러오기 실패", error);
-            }
-        };
+                    // 이전에 작성된 데이터 받아와 수정 가능하도록 셋팅
+                    setSellTitle(response.data.Content.sellTitle || '');
+                    setSellContent(response.data.Content.sellContent || '');
+                    setSellPrice(response.data.Content.sellPrice || '');
+                    setSellLocation(response.data.Content.sellLocation || '');
+                    setLocationX(response.data.Location.x);
+                    setLocationY(response.data.Location.y);
+                    console.log("게시물 불러오기 성공", sellentRead);
+                } catch (error) {
+                    console.log("게시물 불러오기 실패", error);
+                }
+            };
 
         loadBoard();
     }, [sellIdx]);
@@ -173,7 +176,7 @@ const SellentUpdate = () => {
                             onChange={handleLocationChange}
                             value={sellLocation}
                         />
-                        <Map />
+                        <Map locationX={locationX} locationY={locationY} />
                     </Right>
                 </Bind>
             </Back>
