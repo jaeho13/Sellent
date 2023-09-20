@@ -90,11 +90,19 @@ public class SellingController {
     // Param : sellIdx
     // 글 삭제
     @DeleteMapping("/sellent")
-    public void deleteContent(@RequestParam String sellIdx, HttpServletRequest request)
-            throws Exception {
-        UserList userList = userSession(request);
+    public ResponseEntity<String> deleteContent(@RequestParam String sellIdx, HttpServletRequest request) {
+        try {
+            UserList userList = userSession(request);
+            Boolean isDeleted = sellingService.deleteContent(sellIdx, userList);
 
-        sellingService.deleteContent(sellIdx, userList);
+            if (isDeleted) {
+                return ResponseEntity.ok("글이 성공적으로 삭제되었습니다.");
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("자신이 작성한 글만 삭제할 수 있습니다.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("글 삭제에 실패했습니다.");
+        }
     }
 
 

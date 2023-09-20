@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import "../fonts/Font.css";
+import "../fonts/Title.css";
 import { AiFillCloseCircle } from "react-icons/ai"
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -35,6 +36,7 @@ const SellentRead = () => {
         navigate("/search")
     }
 
+
     const { sellIdx } = useParams();
     const [sellentRead, setSellentRead] = useState({});
     const [sellentCommentRead, setSellentCommentRead] = useState([]);
@@ -54,6 +56,20 @@ const SellentRead = () => {
         loadBoard();
     }, [sellIdx]);
 
+    const sellentUpdate = () => {
+        navigate(`/sellentUpdate/${sellIdx}`);
+    };
+
+   const sellentDelete = async () => {
+       try {
+           await axios.delete(`/sellent?sellIdx=${sellIdx}`);
+           alert("글이 성공적으로 삭제되었습니다.");
+           navigate("/");
+       } catch (error) {
+           alert("글 삭제에 실패했습니다. 자신이 작성한 글만 삭제할 수 있습니다.");
+           console.error("글 삭제 실패", error);
+       }
+   };
 
     const rightBoardRef = useRef(null);
 
@@ -152,6 +168,14 @@ const SellentRead = () => {
                         <CenterBottomBind>
                             <CenterContents>{sellentRead.sellContent}</CenterContents>
                         </CenterBottomBind>
+
+                        <ButtonBind>
+                            <Price> 거래 가격 : {sellentRead.sellPrice}</Price>
+                            <Upload onClick={sellentUpdate}>수정하기</Upload>
+                            <Cancle onClick={sellentDelete}>삭제하기</Cancle>
+
+                        </ButtonBind>
+
                         <CenterWhere>거래 희망장소</CenterWhere>
                         <Map />
                     </Center>
@@ -286,7 +310,7 @@ const Name = styled.div`
 `
 
 const Center = styled.div`
-    width: 60%;
+    width: 55%;
     height: 85vh;
     border: 2px solid red;
     background-color: white;
@@ -315,6 +339,8 @@ const ChatInput = styled.input`
 const RightBind = styled.div`
     display: flex;
     flex-direction: column;
+    width: 30%;
+    border: 2px solid red;
 `
 
 const Right = styled.div`
@@ -408,26 +434,26 @@ const RightBoardDelete = styled.div`
 `
 
 const CenterTopic = styled.div`
-    width: 80%;
-    height: 5vh;
-    border: 2px solid red;
-    font-size: 2.5em;
-    display: flex;
-    align-items: center;
-    margin-top: 1em;
-    margin-left: 1em;
-    font-weight: bolder;
-`
-
-const CenterTitle = styled.div`
-    width: 80%;
+    width: 90%;
     height: 5vh;
     border: 2px solid red;
     font-size: 2.5em;
     display: flex;
     align-items: center;
     margin-top: 0.5em;
-    margin-left: 1em;
+    margin-left: 0.5em;
+    font-weight: bolder;
+`
+
+const CenterTitle = styled.div`
+    width: 90%;
+    height: 5vh;
+    border: 2px solid red;
+    font-size: 2.5em;
+    display: flex;
+    align-items: center;
+    margin-top: 0.5em;
+    margin-left: 0.5em;
 `
 
 const CenterBottomBind = styled.div`
@@ -436,32 +462,66 @@ const CenterBottomBind = styled.div`
 `
 
 const CenterContents = styled.div`
-    width: 80%;
+    width: 90%;
     height: 50vh;
     border: 2px solid red;
     font-size: 2.5em;
     display: flex;
     margin-top: 0.5em;
-    margin-left: 1em;
+    margin-left: 0.5em;
 `
 
-const CenterComments = styled.div`
-    width: 20%;
-    height: 50vh;
-    border: 2px solid red;
-    font-size: 2.5em;
+const ButtonBind = styled.div`
     display: flex;
+    justify-content: row;
     margin-top: 1em;
+`
+
+const Price = styled.div`
+    width: 50%;
+    height: 5vh;
+    border: 2px solid black;
+    margin-left: 0.7em;
+    font-size: 1.8em;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    font-weight: bold;
+`
+
+const Upload = styled.button`
+    width: 15%;
+    height: 5vh;
+    border: 2px solid red;
+    font-size: 1.5em;
+    margin-left: 2.7em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+`
+
+const Cancle = styled.button`
+    width: 15%;
+    height: 5vh;
+    border: 2px solid red;
+    font-size: 1.5em;
     margin-left: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
 `
 
 const CenterWhere = styled.div`
-    width: 40%;
+    width: 50%;
     height: 5vh;
     border: 2px solid red;
     font-size: 2.5em;
     display: flex;
     align-items: center;
     margin-top: 0.5em;
-    margin-left: 1em;
+    margin-left: 0.5em;
 `

@@ -27,7 +27,7 @@ public class SellingService {
         Map<String, Object> result = new HashMap<>();
 
         // 판매 글 목록 저장
-        result.put("sellList" , sellingRepository.findBySelling());
+        result.put("sellList", sellingRepository.findBySelling());
 
         // 구매 글 목록 저장
         result.put("purList", sellingRepository.findByPurchase());
@@ -35,7 +35,7 @@ public class SellingService {
         // 판매글 중 좋아요 수 최상위 3개만 가져오기
         List<ListDTO> beforeLikeList = sellingRepository.findPopular();
         List<ListDTO> topLikeList = beforeLikeList.stream()
-                .limit(3)
+                .limit(6)
                 .collect(Collectors.toList());
 
         result.put("likeList", topLikeList);
@@ -52,12 +52,11 @@ public class SellingService {
             ContentDTO contentDTO = sellingRepository.getSellingContent(sellIdx);
             List<CommentDTO> commentDTO = sellingCmtService.getSellingCmt(sellIdx);
 
-            map.put("Content",contentDTO);
-            map.put("Comment",commentDTO);
+            map.put("Content", contentDTO);
+            map.put("Comment", commentDTO);
 
             return map;
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             e.printStackTrace();
             throw e;
         }
@@ -73,14 +72,9 @@ public class SellingService {
         selling.setSellTitle((String) content.get("sellTitle"));
         selling.setSellContent((String) content.get("sellContent"));
         selling.setSellDate(new Date());
-        selling.setSellType(0);
-        selling.setSellLocation("광주광역시 남구 백운동");
-        selling.setSellPrice(2000);
-        selling.setSellLike(0);
-
-//        selling.setSellLocation((String) content.get("sellLocation"));
-//        selling.setSellType(Integer.parseInt((String) content.get("sellType")));
-//        selling.setSellPrice(Integer.parseInt((String) content.get("sellPrice")));
+        selling.setSellLocation((String) content.get("sellLocation"));
+        selling.setSellType(Integer.parseInt((String) content.get("sellType")));
+        selling.setSellPrice(Integer.parseInt((String) content.get("sellPrice")));
 
         sellingRepository.save(selling);
     }
@@ -92,16 +86,16 @@ public class SellingService {
         int sellIdx = Integer.parseInt((String) content.get("sellIdx"));
         Selling selling = sellingRepository.findContent(sellIdx);
 
-        //작성자 확인
+        // 작성자 확인
         String oldWriter = selling.getUserListVO().getUserEmail();
         String newWriter = userList.getUserEmail();
 
-        if(!oldWriter.equals(newWriter)) {
+        if (!oldWriter.equals(newWriter)) {
             return;
-        }else {
+        } else {
             selling.setSellTitle((String) content.get("sellTitle"));
             selling.setSellContent((String) content.get("sellContent"));
-            selling.setSellPrice(Integer.parseInt((String) content.get("sellPrice")));
+            selling.setSellPrice((Integer) content.get("sellPrice"));
             selling.setSellLocation((String) content.get("sellLocation"));
 
             sellingRepository.save(selling);
@@ -109,21 +103,25 @@ public class SellingService {
     }
 
     // 글 삭제
-    public void deleteContent(String param, UserList userList) {
+    public Boolean deleteContent(String param, UserList userList) {
         int sellIdx = Integer.parseInt(param);
 
         try {
             // 원 글쓴이 확인
             String userVO = sellingRepository.findContent(sellIdx).getUserListVO().getUserEmail();
 
-            if(userList.getUserEmail().equals(userVO)) {
+            if (userList.getUserEmail().equals(userVO)) {
                 // 댓글 먼저 지우기
                 sellingCmtService.deleteAllCmt(sellIdx);
 
                 // 글 지우기
                 sellingRepository.deleteById(sellIdx);
+
+                return true;
             }
-        }catch (NullPointerException e) {
+
+            return false;
+        } catch (NullPointerException e) {
             e.printStackTrace();
             throw e;
         }
@@ -135,6 +133,7 @@ public class SellingService {
 
         return selling;
     }
+
     // 댓글 작성
     public void insertCmt(Map<String, Object> comment, UserList userList) {
         int sellIdx = Integer.parseInt((String) comment.get("sellIdx"));
@@ -145,13 +144,3 @@ public class SellingService {
         sellingCmtService.insertCmt(comment, sellingVO, userVO);
     }
 }
-
-
-
-
-
-
-
-
-
-
