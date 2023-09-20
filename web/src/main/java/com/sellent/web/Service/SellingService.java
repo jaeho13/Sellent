@@ -4,7 +4,6 @@ import com.sellent.web.Dto.CommentDTO;
 import com.sellent.web.Dto.ContentDTO;
 import com.sellent.web.Dto.ListDTO;
 import com.sellent.web.Entiity.Selling;
-import com.sellent.web.Entiity.SellingCmt;
 import com.sellent.web.Entiity.UserList;
 import com.sellent.web.Repository.SellingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,8 @@ public class SellingService {
     SellingRepository sellingRepository;
     @Autowired
     UserService userService;
+    @Autowired
+    AddressService addressService;
     @Autowired
     SellingCmtService sellingCmtService;
 
@@ -54,6 +55,7 @@ public class SellingService {
 
             map.put("Content", contentDTO);
             map.put("Comment", commentDTO);
+            map.put("Location", addressService.getAddress(contentDTO.getSellLocation()));
 
             return map;
         } catch (NullPointerException e) {
@@ -95,7 +97,7 @@ public class SellingService {
         } else {
             selling.setSellTitle((String) content.get("sellTitle"));
             selling.setSellContent((String) content.get("sellContent"));
-            selling.setSellPrice((Integer) content.get("sellPrice"));
+            selling.setSellPrice(Integer.parseInt( (String) content.get("sellPrice")));
             selling.setSellLocation((String) content.get("sellLocation"));
 
             sellingRepository.save(selling);

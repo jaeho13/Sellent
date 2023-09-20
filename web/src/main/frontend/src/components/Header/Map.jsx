@@ -7,7 +7,7 @@ const Map = () => {
         const kakao = window['kakao'];
         kakao.maps.load(() => {
             const mapContainer = document.getElementById('map');
-            const location = new kakao.maps.LatLng(37.568228238811, 126.81350044801);
+            const location = new kakao.maps.LatLng(37.4953666908089, 127.03306536185);
             const options = {
                 center: location,
                 level: 3
