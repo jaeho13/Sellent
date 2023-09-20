@@ -148,24 +148,24 @@ const Write = () => {
                                 value={sellTitle}
                             />
                             <RadioGroup>
-                                <label>
-                                    <input
-                                        type="radio"
+                                <CheckLabel>
+                                    <CheckRadio
+                                        type="checkbox"
                                         value="0"
                                         checked={sellType === "0"}
                                         onChange={(e) => setSellType(e.target.value)}
                                     />
                                     재능판매
-                                </label>
-                                <label>
-                                    <input
-                                        type="radio"
+                                </CheckLabel>
+                                <CheckLabel>
+                                    <CheckRadio
+                                        type="checkbox"
                                         value="1"
                                         checked={sellType === "1"}
                                         onChange={(e) => setSellType(e.target.value)}
                                     />
                                     재능구매
-                                </label>
+                                </CheckLabel>
                             </RadioGroup>
 
                             <CenterTop>글내용</CenterTop>
@@ -175,21 +175,21 @@ const Write = () => {
                                 onChange={handleContentChange}
                                 value={sellContent}
                             />
-                            <PictureBind>
-                                <Picture placeholder="*파일을 올리세요" />
-                                <PictureUpload>찾아보기</PictureUpload>
-                            </PictureBind>
-
                             <ButtonBind>
                                 <Price
-                                    type="number"
+                                    type="text"
                                     placeholder=" ₩"
                                     onChange={handlePriceChange}
                                     value={sellPrice}
                                 />
                                 <Upload type="submit">글올리기</Upload>
-                                <Cancle>취소하기</Cancle>
+                                <Cancel>취소하기</Cancel>
                             </ButtonBind>
+
+                            <PictureBind>
+                                <Picture placeholder="*파일을 올리세요" />
+                                <PictureUpload>찾아보기</PictureUpload>
+                            </PictureBind>
                         </form>
                     </Center>
 
@@ -348,32 +348,36 @@ const Center = styled.div`
 `
 
 const CenterTop = styled.div`
-    width: 50%;
+    width: 90%;
     height: 5vh;
-    border: 2px solid black;
-    font-size: 2rem;
-    margin-top: 1rem;
-    margin-left: 0.5em;
+    border: 2px solid red;
+    font-size: 2.5em;
     display: flex;
     align-items: center;
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+    font-weight: bolder;
 `
 
 const CenterTitle = styled.input`
     width: 90%;
     height: 5vh;
-    border: 2px solid black;
-    font-size: 2rem;
-    margin-top: 1rem;
+    border: 2px solid red;
+    font-size: 2.5em;
+    display: flex;
+    align-items: center;
+    margin-top: 0.5em;
     margin-left: 0.5em;
 `
 
 const CenterBoard = styled.textarea`
     width: 90%;
-    height: 30vh;
-    border: 2px solid black;
-    font-size: 2rem;
-    margin-top: 1rem;
-    margin-left: 0.5em;
+    height: 50vh;
+    border: 2px solid red;
+    font-size: 2.5em;
+    display: flex;
+    margin-top: 0.5em;
+    margin-left: 0.6em;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
 `
@@ -398,7 +402,8 @@ const PictureUpload = styled.div`
     width: 15%;
     height: 5vh;
     border: 2px solid green;
-    margin-left: 1em;
+    margin-left: 1.3em;
+    margin-bottom: 1em;
     font-size: 2rem;
     display: flex;
     justify-content: center;
@@ -406,9 +411,6 @@ const PictureUpload = styled.div`
     cursor: pointer;
 `
 
-const FileInput = styled.input`
-  display: none;
-`
 
 const ButtonBind = styled.div`
     display: flex;
@@ -417,10 +419,10 @@ const ButtonBind = styled.div`
 `
 
 const Price = styled.input`
-    width: 30%;
+    width: 50%;
     height: 5vh;
     border: 2px solid black;
-    margin-left: 0.5em;
+    margin-left: 0.7em;
     font-size: 1.8em;
     display: flex;
     /* justify-content: center; */
@@ -430,10 +432,10 @@ const Price = styled.input`
 
 const Upload = styled.button`
     width: 15%;
-    height: 5.5vh;
-    border: 3px solid red;
-    font-size: 1.8em;
-    margin-left: 3em;
+    height: 5vh;
+    border: 2px solid red;
+    font-size: 1.5em;
+    margin-left: 2.7em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -441,15 +443,17 @@ const Upload = styled.button`
     cursor: pointer;
 `
 
-const Cancle = styled.div`
+const Cancel = styled.button`
     width: 15%;
     height: 5vh;
     border: 2px solid red;
-    font-size: 2em;
+    font-size: 1.5em;
     margin-left: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: bold;
+    cursor: pointer;
 `
 
 const Right = styled.div`
@@ -519,4 +523,20 @@ const RadioGroup = styled.div`
         margin-right: 0.3rem;
         }
     }
+`
+
+const CheckRadio = styled.input`
+    border: 2px solid red;
+    width: 10%;
+    height: 2em;
+    display: flex;
+`
+
+const CheckLabel = styled.label`
+    width: 30%;
+    border: 2px solid red;
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    margin-left: 0.2em;
 `
