@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "../fonts/Font.css";
 import { AiFillCloseCircle } from "react-icons/ai"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Map from "./Map";
 import axios from "axios";
 
-const Write = () => {
+const SellentUpdate = () => {
 
     const navigate = useNavigate();
 
@@ -30,33 +30,35 @@ const Write = () => {
         navigate("/background")
     }
 
-
-    const [purList, setPurList] = useState([]);
-
-    useEffect(() => {
-        const purchaseLoad = async () => {
-            try {
-                const response = await axios.get("/list");
-                setPurList(response.data.purList);
-                console.log("재능 구매 불러오기 성공")
-                console.log(response.data)
-            } catch (error) {
-                console.log("재능 구매 불러오기 실패");
-            }
-        };
-
-        purchaseLoad();
-    }, []);
-
-    const handleSellentRead = (sellIdx) => {
-        navigate(`/sellentRead/${sellIdx}`); //sellIdx에 해당하는 글 읽기 페이지 이동
-    }
-
+    const { sellIdx } = useParams();
     const [sellTitle, setSellTitle] = useState("");
     const [sellContent, setSellContent] = useState("");
     const [sellType, setSellType] = useState("");
     const [sellPrice, setSellPrice] = useState("");
     const [sellLocation, setSellLocation] = useState("");
+    const [sellentRead, setSellentRead] = useState({});
+
+    useEffect(() => {
+            const loadBoard = async () => {
+                try {
+                    const response = await axios.get(`/sellent?sellIdx=${sellIdx}`);
+                    setSellentRead(response.data.Content);
+
+                    // 이전에 작성된 데이터 받아와 수정 가능하도록 셋팅
+                    setSellTitle(response.data.Content.sellTitle || '');
+                    setSellContent(response.data.Content.sellContent || '');
+                    setSellPrice(response.data.Content.sellPrice || '');
+                    setSellLocation(response.data.Content.sellLocation || '');
+
+                    console.log("게시물 불러오기 성공", sellentRead);
+                } catch (error) {
+                    console.log("게시물 불러오기 실패", error);
+                }
+            };
+
+            loadBoard();
+        }, [sellIdx]);
+
 
     const handleTitleChange = (e) => {
         setSellTitle(e.target.value);
@@ -68,16 +70,14 @@ const Write = () => {
 
     // 거래 금액
     const handlePriceChange = (e) => {
-        setSellPrice(e.target.value);
+            setSellPrice(e.target.value);
     };
+
     // 거래 장소
     const handleLocationChange = (e) => {
-        setSellLocation(e.target.value);
+                setSellLocation(e.target.value);
     };
-    // 거래 타입
-    const handleSellTypeChange = (e) => {
-        setSellType(e.target.value);
-    };
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -88,12 +88,12 @@ const Write = () => {
         }
 
         axios({
-            url: "/sellent", //주소 넣어줘야합니당 흑흑
-            method: "post",
+            url: "/sellent",
+            method: "patch",
             data: {
+                sellIdx,
                 sellTitle,
                 sellContent,
-                sellType,
                 sellPrice,
                 sellLocation,
             },
@@ -135,46 +135,20 @@ const Write = () => {
                         <form onSubmit={handleSubmit}>
                             <CenterTitle
                                 type="text"
-                                placeholder="*제목을 입력하세요"
                                 onChange={handleTitleChange}
                                 value={sellTitle}
-                            />
-                        <RadioGroup>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            value="0"
-                                            checked={sellType === "0"}
-                                            onChange={(e) => setSellType(e.target.value)}
-                                        />
-                                        재능판매
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            value="1"
-                                            checked={sellType === "1"}
-                                            onChange={(e) => setSellType(e.target.value)}
-                                        />
-                                        재능구매
-                                    </label>
-                                </RadioGroup>
+                            ></CenterTitle>
 
                             <CenterTop>글내용</CenterTop>
                             <CenterBoard
                                 type="text"
-                                placeholder="*글을 입력하세요"
                                 onChange={handleContentChange}
                                 value={sellContent}
                             />
-<PictureBind>
-                            <Picture placeholder="*파일을 올리세요" />
-                                <PictureUpload>찾아보기</PictureUpload>
-                            </PictureBind>
 
                             <ButtonBind>
                                 <Price
-                                    type="number"
+                                    type="number" // 숫자만 들어갈 수 있게 Number로 설정
                                     placeholder=" ₩"
                                     onChange={handlePriceChange}
                                     value={sellPrice}
@@ -182,7 +156,14 @@ const Write = () => {
                                 <Upload type="submit">글올리기</Upload>
                                 <Cancle>취소하기</Cancle>
                             </ButtonBind>
+
+                            <PictureBind>
+                                <Picture placeholder="*파일을 올리세요" />
+                                <PictureUpload>찾아보기</PictureUpload>
+                            </PictureBind>
                         </form>
+
+
                     </Center>
 
                     <Right>
@@ -200,7 +181,7 @@ const Write = () => {
     );
 }
 
-export default Write;
+export default SellentUpdate;
 
 const Window = styled.div`
     width: 85%;
@@ -460,19 +441,4 @@ const Location = styled.input`
     font-size: 2rem;
     margin-top: 1rem;
     margin-left: 0.5em;
-`
-// 재능 판매, 구매 라디오 버튼
-const RadioGroup = styled.div`
-    display: flex;
-    flex-direction: row;
-    font-size: 1.5rem;
-    margin-left: 0.5em;
-    margin-top: 0.8em;
-    color: #595959;
-    label {
-        margin-right: 1rem;
-        input[type="radio"] {
-        margin-right: 0.3rem;
-        }
-    }
 `

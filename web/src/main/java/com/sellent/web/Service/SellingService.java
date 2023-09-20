@@ -72,14 +72,9 @@ public class SellingService {
         selling.setSellTitle((String) content.get("sellTitle"));
         selling.setSellContent((String) content.get("sellContent"));
         selling.setSellDate(new Date());
-        selling.setSellType(0);
-        selling.setSellLocation("광주광역시 남구 백운동");
-        selling.setSellPrice(2000);
-        selling.setSellLike(0);
-
-        // selling.setSellLocation((String) content.get("sellLocation"));
-        // selling.setSellType(Integer.parseInt((String) content.get("sellType")));
-        // selling.setSellPrice(Integer.parseInt((String) content.get("sellPrice")));
+        selling.setSellLocation((String) content.get("sellLocation"));
+        selling.setSellType(Integer.parseInt((String) content.get("sellType")));
+        selling.setSellPrice(Integer.parseInt((String) content.get("sellPrice")));
 
         sellingRepository.save(selling);
     }
@@ -100,7 +95,7 @@ public class SellingService {
         } else {
             selling.setSellTitle((String) content.get("sellTitle"));
             selling.setSellContent((String) content.get("sellContent"));
-            selling.setSellPrice(Integer.parseInt((String) content.get("sellPrice")));
+            selling.setSellPrice((Integer) content.get("sellPrice"));
             selling.setSellLocation((String) content.get("sellLocation"));
 
             sellingRepository.save(selling);
@@ -108,7 +103,7 @@ public class SellingService {
     }
 
     // 글 삭제
-    public void deleteContent(String param, UserList userList) {
+    public Boolean deleteContent(String param, UserList userList) {
         int sellIdx = Integer.parseInt(param);
 
         try {
@@ -121,7 +116,11 @@ public class SellingService {
 
                 // 글 지우기
                 sellingRepository.deleteById(sellIdx);
+
+                return true;
             }
+
+            return false;
         } catch (NullPointerException e) {
             e.printStackTrace();
             throw e;

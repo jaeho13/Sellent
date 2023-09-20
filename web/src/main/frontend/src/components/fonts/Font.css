@@ -1,13 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
 @font-face {
-    font-family: "HANNA";
+    font-family: 'Do Hyeon', sans-serif;
     font-style: normal;
     font-weight: 100;
-    src: url("./AnyConv.com__BMHANNAProOTF.woff") format("woff");
 }
 
 body {
-    font-family: "HANNA";
-    background-color: #beefff;
+    font-family: 'Do Hyeon', sans-serif;
+    /*FF7A85*/
+    background-color: #FF607F;
     /* background-color: lightgreen; */
     /* background-color: #6eec68; */
     /* background-color: #66d843; */

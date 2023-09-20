@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import "../fonts/Font.css";
+import "../fonts/Title.css";
 import { AiFillCloseCircle } from "react-icons/ai"
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -35,6 +36,7 @@ const SellentRead = () => {
         navigate("/search")
     }
 
+
     const { sellIdx } = useParams();
     const [sellentRead, setSellentRead] = useState({});
     const [sellentCommentRead, setSellentCommentRead] = useState([]);
@@ -54,6 +56,20 @@ const SellentRead = () => {
         loadBoard();
     }, [sellIdx]);
 
+    const sellentUpdate = () => {
+        navigate(`/sellentUpdate/${sellIdx}`);
+    };
+
+   const sellentDelete = async () => {
+       try {
+           await axios.delete(`/sellent?sellIdx=${sellIdx}`);
+           alert("글이 성공적으로 삭제되었습니다.");
+           navigate("/");
+       } catch (error) {
+           alert("글 삭제에 실패했습니다. 자신이 작성한 글만 삭제할 수 있습니다.");
+           console.error("글 삭제 실패", error);
+       }
+   };
 
     const rightBoardRef = useRef(null);
 
@@ -154,9 +170,10 @@ const SellentRead = () => {
                         </CenterBottomBind>
 
                         <ButtonBind>
-                            <Price />
-                            <Upload >수정하기</Upload>
-                            <Cancle>삭제하기</Cancle>
+                            <Price> 거래 가격 : {sellentRead.sellPrice}</Price>
+                            <Upload onClick={sellentUpdate}>수정하기</Upload>
+                            <Cancle onClick={sellentDelete}>삭제하기</Cancle>
+
                         </ButtonBind>
 
                         <CenterWhere>거래 희망장소</CenterWhere>

@@ -162,7 +162,7 @@ const Bottom = styled.div`
     display: flex;
     justify-content: row;
     justify-content: center;
-    background-color: #959595;
+    background-color: #dcdcdc;
 `
 
 const BottomWindow = styled.div`

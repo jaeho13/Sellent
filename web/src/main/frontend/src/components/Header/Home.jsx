@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "../fonts/Font.css";
+import "../fonts/Title.css";
 import { AiFillCloseCircle } from "react-icons/ai"
 import { FcLike } from "react-icons/fc"
 import { useNavigate } from "react-router-dom"
 import axios from "axios";
+import NoImage from "../Image/no_img.png";
 
 const Home = () => {
 
@@ -126,10 +128,12 @@ const Home = () => {
                                         <CenterBoardBind key={item.sellIdx}>
                                             <CenterBoard>
                                                 <BoardImg>
-                                                    이미지 넣기
+                                                    <img src={NoImage} alt="No Image" />
                                                 </BoardImg>
                                                 <BoardTitle onClick={() => handleSellentRead(item.sellIdx)}>
-                                                    {item.sellTitle}
+                                                    {item.sellTitle.length > 5
+                                                            ? `${item.sellTitle.slice(0, 5)}...`
+                                                            : item.sellTitle}
                                                     <BoardLike>
                                                         <FcLike />
                                                         <LikeScore>
@@ -152,10 +156,13 @@ const Home = () => {
                                         <CenterBoardBind key={noItem.sellIdx}>
                                             <CenterBoard>
                                                 <BoardImg>
-                                                    이미지 넣기
+                                                    <img src={NoImage} alt="No Image" />
                                                 </BoardImg>
                                                 <BoardTitle onClick={() => handleSellentRead(noItem.sellIdx)}>
-                                                    {noItem.sellTitle}
+                                                    {noItem.sellTitle.length > 5
+                                                    ? `${noItem.sellTitle.slice(0, 5)}...`
+                                                    : noItem.sellTitle}
+
                                                     <BoardLike>
                                                         <FcLike />
                                                         <LikeScore>
@@ -173,16 +180,19 @@ const Home = () => {
 
                     <Right>
                         <RightTop>재능구매</RightTop>
+
                         <RightContents>
                             {purList.length > 0 && purList.map((purItem, index) => {
                                 return (
                                     <RightBoardBind key={purItem.sellIdx}>
                                         <RightBoard>
                                             <BoardImg>
-                                                {purItem.sellTitle}
+                                                <img src={NoImage} alt="No Image" />
                                             </BoardImg>
                                             <BoardTitle onClick={() => handleSellentRead(purItem.sellIdx)}>
-                                                {purItem.sellTitle}
+                                                {purItem.sellTitle.length > 5
+                                                ? `${purItem.sellTitle.slice(0, 5)}...`
+                                                : purItem.sellTitle}
                                                 <BoardLike>
                                                     <FcLike />
                                                     <LikeScore>
@@ -211,7 +221,7 @@ const Window = styled.div`
     border-bottom: none;
     margin: 0 auto;
     margin-top: 4vh;
-    background-color: lightgrey;
+    background-color: #dcdcdc;
     box-shadow: 1em 1em 1em 1em #6E6E6E;
 `
 
@@ -227,7 +237,7 @@ const Back = styled.div`
     border: 2px solid black;
     border-top: none;
     margin: 0 auto;
-    box-shadow: 1em 1em 1em 1em #6E6E6E;
+    box-shadow: 2em 0.1em 5em 1em #EBFBFF;
 `
 
 const Bind = styled.div`
@@ -247,11 +257,13 @@ const LeftTop = styled.div`
     width: 100%;
     height: 13vh;
     border-bottom: 2px solid black;
-    font-size: 3rem;
+    font-size: 3.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    font-family: 'Lilita One', cursive;
+
 `
 
 const LeftBoardTitle = styled.div`
@@ -371,7 +383,8 @@ const CenterTop = styled.div`
     display: flex;
     align-items: center;
     font-weight: bolder;
-`
+    color: #595959;
+font-family: 'Do Hyeon', sans-serif;`
 
 const LiveChapter = styled.div`
     width: 50%;
@@ -426,6 +439,11 @@ const CenterBoard = styled.div`
 const BoardImg = styled.div`
     width: 100%;
     height: 15vh;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
     /* border: 2px solid red; */
 `
 
@@ -498,6 +516,7 @@ const RightTop = styled.div`
     font-weight: bolder;
     padding-top: 0.5em;
     padding-left: 0.5rem;
+    color: #595959;
 `
 
 const RightContents = styled.div`
