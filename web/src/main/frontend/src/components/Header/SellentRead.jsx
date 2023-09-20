@@ -45,6 +45,8 @@ const SellentRead = () => {
     const { sellIdx } = useParams();
     const [sellentRead, setSellentRead] = useState({});
     const [sellentCommentRead, setSellentCommentRead] = useState([]);
+    const [locationX, setLocationX] = useState(null);
+    const [locationY, setLocationY] = useState(null);
 
     useEffect(() => {
         const loadBoard = async () => {
@@ -52,6 +54,9 @@ const SellentRead = () => {
                 const response = await axios.get(`/sellent?sellIdx=${sellIdx}`);
                 setSellentRead(response.data.Content);
                 setSellentCommentRead(response.data.Comment);
+                setLocationX(response.data.Location.x);
+                setLocationY(response.data.Location.y);
+
                 console.log("게시물 불러오기 성공", sellentRead);
             } catch (error) {
                 console.log("게시물 불러오기 실패", error);
@@ -180,8 +185,8 @@ const SellentRead = () => {
                             <Cancel onClick={sellentDelete}>삭제하기</Cancel>
                         </ButtonBind>
 
-                        <CenterWhere>거래 희망장소</CenterWhere>
-                        <Map />
+                        <CenterWhere>거래 장소 : {sellentRead.sellLocation}</CenterWhere>
+                        <Map locationX={locationX} locationY={locationY} />
                     </Center>
 
                     <RightBind>
@@ -189,6 +194,7 @@ const SellentRead = () => {
                             <RightTop>댓글</RightTop>
                             {sellentCommentRead.length > 0 && sellentCommentRead.map((Comment, index) => {
                                 return (
+                               
                                     <RightBoard key={index} ref={rightBoardRef}>
                                         <RightBoardBind>
                                             <RightBoardNick>
