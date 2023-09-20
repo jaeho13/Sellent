@@ -20,6 +20,10 @@ const SellentRead = () => {
         navigate("/login")
     }
 
+    const goWrite = () => {
+        navigate("/write")
+    }
+
     const goMypage = () => {
         navigate("/mypage")
     }
@@ -65,16 +69,16 @@ const SellentRead = () => {
         navigate(`/sellentUpdate/${sellIdx}`);
     };
 
-   const sellentDelete = async () => {
-       try {
-           await axios.delete(`/sellent?sellIdx=${sellIdx}`);
-           alert("글이 성공적으로 삭제되었습니다.");
-           navigate("/");
-       } catch (error) {
-           alert("글 삭제에 실패했습니다. 자신이 작성한 글만 삭제할 수 있습니다.");
-           console.error("글 삭제 실패", error);
-       }
-   };
+    const sellentDelete = async () => {
+        try {
+            await axios.delete(`/sellent?sellIdx=${sellIdx}`);
+            alert("글이 성공적으로 삭제되었습니다.");
+            navigate("/");
+        } catch (error) {
+            alert("본인이 작성한 글만 삭제할 수 있습니다.");
+            console.error("글 삭제 실패", error);
+        }
+    };
 
     const rightBoardRef = useRef(null);
 
@@ -156,11 +160,11 @@ const SellentRead = () => {
             <Back>
                 <Bind>
                     <Left>
-                        <LeftTop>SELLENT</LeftTop>
-                        <LeftBoardTitle onClick={goHome} >메인화면</LeftBoardTitle>
-                        <LeftBoard onClick={goLogin} >재능판매</LeftBoard>
+                        <LeftTop onClick={goHome}>SELLENT</LeftTop>
+                        <LeftBoardTitle onClick={goLogin}>로그인</LeftBoardTitle>
+                        <LeftBoard onClick={goWrite}>재능판매</LeftBoard>
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
-                        <LeftBoard onClick={goChat} >채팅</LeftBoard>
+                        <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
                         <Cash>25,000원</Cash>
                         <Name>이재호</Name>
@@ -177,8 +181,7 @@ const SellentRead = () => {
                         <ButtonBind>
                             <Price> 거래 가격 : {sellentRead.sellPrice}</Price>
                             <Upload onClick={sellentUpdate}>수정하기</Upload>
-                            <Cancle onClick={sellentDelete}>삭제하기</Cancle>
-
+                            <Cancel onClick={sellentDelete}>삭제하기</Cancel>
                         </ButtonBind>
 
                         <CenterWhere>거래 장소 : {sellentRead.sellLocation}</CenterWhere>
@@ -190,7 +193,7 @@ const SellentRead = () => {
                             <RightTop>댓글</RightTop>
                             {sellentCommentRead.length > 0 && sellentCommentRead.map((Comment, index) => {
                                 return (
-                               
+
                                     <RightBoard key={index} ref={rightBoardRef}>
                                         <RightBoardBind>
                                             <RightBoardNick>
@@ -261,58 +264,94 @@ const Left = styled.div`
 const LeftTop = styled.div`
     width: 100%;
     height: 13vh;
-    border: 2px solid black;
-    font-size: 3rem;
+    border-bottom: 2px solid black;
+    font-size: 3.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    font-family: 'Lilita One', cursive;
 `
 
 const LeftBoardTitle = styled.div`
     width: 80%;
     height: 6vh;
-    border: 2px solid blue;
+    border: 2px solid black;
+    border-radius: 0.5em;
     margin: 0 auto;
     margin-top: 2rem;
     font-size: 2rem;
     display: flex;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
 `
 
 const LeftBoard = styled.div`
     width: 80%;
     height: 6vh;
-    border: 2px solid blue;
+    border: 2px solid black;
+    border-radius: 0.5em;
     margin: 0 auto;
     margin-top: 2rem;
     font-size: 2rem;
     display: flex;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
+    
+    @media (max-width: 1280px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1.5em; /* 글씨 크기를 줄임 */
+    }
+    
+    @media (max-width: 900px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1em; /* 글씨 크기를 줄임 */
+    }
 `
 
 const Cash = styled.div`
     width: 80%;
-    height: 7vh;
-    border: 2px solid red;
+    height: 3vh;
+    border: 2px solid black;
     margin: 0 auto;
-    margin-top: 5rem;
-    font-size: 3rem;
+    margin-top: 4em;
+    font-size: 2em;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 1400px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1.5em; /* 글씨 크기를 줄임 */
+    }
+    
+    @media (max-width: 1080px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1em; /* 글씨 크기를 줄임 */
+    }
 `
 
 const Name = styled.div`
     width: 80%;
-    height: 4vh;
-    border: 2px solid red;
+    height: 3vh;
+    border: 2px solid black;
     margin: 0 auto;
     font-size: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 1280px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1.5em; /* 글씨 크기를 줄임 */
+    }
+    
+    @media (max-width: 900px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1em; /* 글씨 크기를 줄임 */
+    }
 `
 
 const Center = styled.div`
@@ -508,7 +547,7 @@ const Upload = styled.button`
     cursor: pointer;
 `
 
-const Cancle = styled.button`
+const Cancel = styled.button`
     width: 15%;
     height: 5vh;
     border: 2px solid red;
@@ -522,7 +561,7 @@ const Cancle = styled.button`
 `
 
 const CenterWhere = styled.div`
-    width: 50%;
+    width: 90%;
     height: 5vh;
     border: 2px solid red;
     font-size: 2.5em;
