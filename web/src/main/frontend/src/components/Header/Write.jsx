@@ -18,6 +18,10 @@ const Write = () => {
         navigate("/login")
     }
 
+    const goWrite = () => {
+        navigate("/write")
+    }
+
     const goMypage = () => {
         navigate("/mypage")
     }
@@ -28,6 +32,10 @@ const Write = () => {
 
     const goBack = () => {
         navigate("/background")
+    }
+
+    const goSearch = () => {
+        navigate("/search")
     }
 
 
@@ -119,11 +127,11 @@ const Write = () => {
             <Back>
                 <Bind>
                     <Left>
-                        <LeftTop>SELLENT</LeftTop>
-                        <LeftBoardTitle onClick={goHome}>메인화면</LeftBoardTitle>
-                        <LeftBoard onClick={goLogin} >재능판매</LeftBoard>
-                        <LeftBoard onClick={goLogin} >재능구매</LeftBoard>
-                        <LeftBoard onClick={goChat} >채팅</LeftBoard>
+                        <LeftTop onClick={goHome}>SELLENT</LeftTop>
+                        <LeftBoardTitle onClick={goLogin}>로그인</LeftBoardTitle>
+                        <LeftBoard onClick={goWrite}>재능판매</LeftBoard>
+                        <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
+                        <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
                         <Cash>25,000원</Cash>
                         <Name>이재호</Name>
@@ -139,26 +147,26 @@ const Write = () => {
                                 onChange={handleTitleChange}
                                 value={sellTitle}
                             />
-                        <RadioGroup>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            value="0"
-                                            checked={sellType === "0"}
-                                            onChange={(e) => setSellType(e.target.value)}
-                                        />
-                                        재능판매
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            value="1"
-                                            checked={sellType === "1"}
-                                            onChange={(e) => setSellType(e.target.value)}
-                                        />
-                                        재능구매
-                                    </label>
-                                </RadioGroup>
+                            <RadioGroup>
+                                <label>
+                                    <input
+                                        type="radio"
+                                        value="0"
+                                        checked={sellType === "0"}
+                                        onChange={(e) => setSellType(e.target.value)}
+                                    />
+                                    재능판매
+                                </label>
+                                <label>
+                                    <input
+                                        type="radio"
+                                        value="1"
+                                        checked={sellType === "1"}
+                                        onChange={(e) => setSellType(e.target.value)}
+                                    />
+                                    재능구매
+                                </label>
+                            </RadioGroup>
 
                             <CenterTop>글내용</CenterTop>
                             <CenterBoard
@@ -167,8 +175,8 @@ const Write = () => {
                                 onChange={handleContentChange}
                                 value={sellContent}
                             />
-<PictureBind>
-                            <Picture placeholder="*파일을 올리세요" />
+                            <PictureBind>
+                                <Picture placeholder="*파일을 올리세요" />
                                 <PictureUpload>찾아보기</PictureUpload>
                             </PictureBind>
 
@@ -240,58 +248,94 @@ const Left = styled.div`
 const LeftTop = styled.div`
     width: 100%;
     height: 13vh;
-    border: 2px solid black;
-    font-size: 3rem;
+    border-bottom: 2px solid black;
+    font-size: 3.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    font-family: 'Lilita One', cursive;
 `
 
 const LeftBoardTitle = styled.div`
     width: 80%;
     height: 6vh;
-    border: 2px solid blue;
+    border: 2px solid black;
+    border-radius: 0.5em;
     margin: 0 auto;
     margin-top: 2rem;
     font-size: 2rem;
     display: flex;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
 `
 
 const LeftBoard = styled.div`
     width: 80%;
     height: 6vh;
-    border: 2px solid blue;
+    border: 2px solid black;
+    border-radius: 0.5em;
     margin: 0 auto;
     margin-top: 2rem;
     font-size: 2rem;
     display: flex;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
+    
+    @media (max-width: 1280px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1.5em; /* 글씨 크기를 줄임 */
+    }
+    
+    @media (max-width: 900px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1em; /* 글씨 크기를 줄임 */
+    }
 `
 
 const Cash = styled.div`
     width: 80%;
     height: 3vh;
-    border: 2px solid red;
+    border: 2px solid black;
     margin: 0 auto;
-    margin-top: 3em;
-    font-size: 2rem;
+    margin-top: 4em;
+    font-size: 2em;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 1400px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1.5em; /* 글씨 크기를 줄임 */
+    }
+    
+    @media (max-width: 1080px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1em; /* 글씨 크기를 줄임 */
+    }
 `
 
 const Name = styled.div`
     width: 80%;
     height: 3vh;
-    border: 2px solid red;
+    border: 2px solid black;
     margin: 0 auto;
     font-size: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 1280px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1.5em; /* 글씨 크기를 줄임 */
+    }
+    
+    @media (max-width: 900px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1em; /* 글씨 크기를 줄임 */
+    }
 `
 
 const Center = styled.div`
