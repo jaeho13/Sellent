@@ -95,7 +95,7 @@ public class SellingService {
         } else {
             selling.setSellTitle((String) content.get("sellTitle"));
             selling.setSellContent((String) content.get("sellContent"));
-            selling.setSellPrice((Integer) content.get("sellPrice"));
+            selling.setSellPrice(Integer.parseInt((String) content.get("sellPrice")));
             selling.setSellLocation((String) content.get("sellLocation"));
 
             sellingRepository.save(selling);
