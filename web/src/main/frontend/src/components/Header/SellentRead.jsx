@@ -6,11 +6,11 @@ import { AiFillCloseCircle } from "react-icons/ai"
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Map from "./Map";
+import Swal from "sweetalert2";
 
 const SellentRead = () => {
 
     const navigate = useNavigate();
-
 
     const goHome = () => {
         navigate("/")
@@ -40,12 +40,16 @@ const SellentRead = () => {
         navigate("/search")
     }
 
+/* //////////////////////////////////////////////////////////////////////////////////// */
 
-    const { sellIdx } = useParams();
+    const {sellIdx} = useParams();
     const [sellentRead, setSellentRead] = useState({});
     const [sellentCommentRead, setSellentCommentRead] = useState([]);
     const [locationX, setLocationX] = useState(null);
     const [locationY, setLocationY] = useState(null);
+    const [sellCmtContent, setSellCmtContent] = useState("");
+    const [userNm, setUserNm] = useState("");
+    const rightBoardRef = useRef(null);
 
     useEffect(() => {
         const loadBoard = async () => {
@@ -65,22 +69,40 @@ const SellentRead = () => {
         loadBoard();
     }, [sellIdx]);
 
+/* </초기 값 불러오기 끝> */
+
+/* <확인> */
+
     const sellentUpdate = () => {
-        navigate(`/sellentUpdate/${sellIdx}`);
+        sellentRead.userNm == sessionStorage.getItem("userNm") ?
+            navigate(`/sellentUpdate/${sellIdx}`) :
+	        Swal.fire('내가 작성한 글만 수정할 수 있습니다.' , '', 'error');
     };
 
     const sellentDelete = async () => {
         try {
-            await axios.delete(`/sellent?sellIdx=${sellIdx}`);
-            alert("글이 성공적으로 삭제되었습니다.");
-            navigate("/");
+            const result = await Swal.fire({
+                title: '글을 삭제하시겠습니까?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '확인',
+                cancelButtonText: '취소'
+            });
+            if (result.isConfirmed) {
+                await axios.delete(`/sellent?sellIdx=${sellIdx}`);
+                Swal.fire({
+                    title: '삭제되었습니다.',
+                    icon: 'success'
+                }).then(() => {
+                    navigate("/");
+                });
+            }
         } catch (error) {
-            alert("본인이 작성한 글만 삭제할 수 있습니다.");
-            console.error("글 삭제 실패", error);
+            Swal.fire('내가 작성한 글만 삭제할 수 있습니다.', '', 'error');
         }
     };
-
-    const rightBoardRef = useRef(null);
 
     useEffect(() => {
         if (rightBoardRef.current) {
@@ -88,23 +110,17 @@ const SellentRead = () => {
         }
     }, [sellentCommentRead]);
 
-    const [sellCmtContent, setSellCmtContent] = useState("");
-    const [userNm, setUserNm] = useState("");
-
     const handleTitleChange = (e) => {
         setSellCmtContent(e.target.value);
     };
 
     const commentsSubmit = (e) => {
         e.preventDefault();
-
         if (!sellCmtContent) {
-            alert("내용을 입력해주세요.");
+	        Swal.fire('내용을 입력해주세요.');
             return;
         }
-
         navigate(`/sellentRead/${sellIdx}`)
-
         axios({
             url: "/sellntCmt",
             method: "post",
@@ -113,40 +129,50 @@ const SellentRead = () => {
                 sellCmtContent,
             }
         })
-            .then((response) => {
-                console.log(response);
-                window.location.reload();
-                // 댓글 입력 필드 초기화
-                setSellCmtContent("");
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        .then((response) => {
+            console.log(response);
+            window.location.reload();
+            // 댓글 입력 필드 초기화
+            setSellCmtContent("");
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     }
 
     const nickSubmit = (e) => {
         e.preventDefault();
-
         axios({
-
         })
     }
 
-
     const onDelete = async (sellCmtIdx) => {
-        if (window.confirm("정말 삭제하시겠습니까??")) {
-            try {
-                await axios.delete(`/sellentCmt?sellCmtIdx=${sellCmtIdx}`)
-                alert("삭제되었습니다.");
-                window.location.reload();
-            } catch (error) {
-                alert("자신이 작성한 댓글만 삭제할 수 있습니다.");
+        try {
+            const result = await Swal.fire({
+                title: '댓글을 삭제하시겠습니까?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '확인',
+                cancelButtonText: '취소'
+            });
+            if (result.isConfirmed) {
+                await axios.delete(`/sellentCmt?sellCmtIdx=${sellCmtIdx}`);
+                Swal.fire({
+                    title: '댓글이 삭제되었습니다.',
+                    icon: 'success'
+                }).then(() => {
+                    window.location.reload();
+                });
             }
-        } else {
-            alert("취소되었습니다.");
+        }
+        catch (error) {
+            Swal.fire('내가 작성한 댓글만 삭제할 수 있습니다.', '', 'error');
         }
     };
 
+/* //////////////////////////////////////////////////////////////////////////////////// */
 
     return (
         <>
@@ -155,7 +181,6 @@ const SellentRead = () => {
                     <AiFillCloseCircle onClick={goBack} />
                 </Close>
             </Window>
-
 
             <Back>
                 <Bind>
@@ -177,36 +202,31 @@ const SellentRead = () => {
                         <CenterBottomBind>
                             <CenterContents>{sellentRead.sellContent}</CenterContents>
                         </CenterBottomBind>
-
                         <ButtonBind>
                             <Price> 거래 가격 : {sellentRead.sellPrice}</Price>
                             <Upload onClick={sellentUpdate}>수정하기</Upload>
                             <Cancel onClick={sellentDelete}>삭제하기</Cancel>
                         </ButtonBind>
-
                         <CenterWhere>거래 장소 : {sellentRead.sellLocation}</CenterWhere>
                         <Map locationX={locationX} locationY={locationY} />
                     </Center>
-
                     <RightBind>
                         <Right>
                             <RightTop>댓글</RightTop>
-                            {sellentCommentRead.length > 0 && sellentCommentRead.map((Comment, index) => {
-                                return (
-
-                                    <RightBoard key={index} ref={rightBoardRef}>
-                                        <RightBoardBind>
-                                            <RightBoardNick>
-                                                닉네임 : {Comment.userNm}
-                                            </RightBoardNick>
-                                            <RightBoardDelete onClick={() => onDelete(Comment.sellCmtIdx)} >X</RightBoardDelete>
-                                        </RightBoardBind>
-                                        {Comment.sellCmtContent}
-                                    </RightBoard>
-                                );
-                            })}
+                                {sellentCommentRead.length > 0 && sellentCommentRead.map((Comment, index) => {
+                                    return (
+                                        <RightBoard key={index} ref={rightBoardRef}>
+                                            <RightBoardBind>
+                                                <RightBoardNick>
+                                                    닉네임 : {Comment.userNm}
+                                                </RightBoardNick>
+                                                <RightBoardDelete onClick={() => onDelete(Comment.sellCmtIdx)} >X</RightBoardDelete>
+                                            </RightBoardBind>
+                                            {Comment.sellCmtContent}
+                                        </RightBoard>
+                                    );
+                                })}
                         </Right>
-
                         <RightBottomBind>
                             <RightBottom
                                 type="text"
@@ -222,8 +242,9 @@ const SellentRead = () => {
         </>
     );
 }
-
 export default SellentRead;
+
+/* <CSS> */
 
 const Window = styled.div`
     width: 85%;
@@ -247,7 +268,6 @@ const Close = styled.div`
     display: flex;
     justify-content: right;
 `
-
 
 const Bind = styled.div`
     display: flex;
