@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+/* 주소 검색 inputBox */
+.user_enroll_text {
+    width: 89%;
+    height: 5vh;
+    font-size: 1.5em;
+    display: flex;
+    margin-top: 0.5em;
+    margin-left: 0.8em;
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+/* 주소 검색 버튼 */
+.searchBtn {
+    font-family: 'Do Hyeon', sans-serif;
+    margin-top: 0.5em;
+    margin-left: 1.5em;
+    height: 4vh;
+}
+
+/* 주소 선택 버튼 */
+.selectBtn {
+    font-family: 'Do Hyeon', sans-serif;
+    margin-top: 0.5em;
+    margin-left: 1.5em;
+    height: 4vh;
+}

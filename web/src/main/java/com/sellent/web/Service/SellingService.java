@@ -97,8 +97,13 @@ public class SellingService {
         } else {
             selling.setSellTitle((String) content.get("sellTitle"));
             selling.setSellContent((String) content.get("sellContent"));
-            selling.setSellPrice(Integer.parseInt((String) content.get("sellPrice")));
-            selling.setSellLocation((String) content.get("sellLocation"));
+
+            Object typeCheck = content.get("sellPrice");
+            if(typeCheck instanceof String){
+                selling.setSellPrice(Integer.parseInt((String) content.get("sellPrice")));
+            }else if(typeCheck instanceof Integer){
+                selling.setSellPrice((Integer) content.get("sellPrice"));
+            }
 
             sellingRepository.save(selling);
         }
