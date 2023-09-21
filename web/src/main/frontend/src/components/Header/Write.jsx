@@ -95,15 +95,15 @@ const Write = () => {
     }
 
     const [enroll_company, setEnroll_company] = useState({
-    	address:'',
+        address: '',
     });
 
     const [popup, setPopup] = useState(false);
 
     const handleInput = (e) => {
-    	setEnroll_company({
-        	...enroll_company,
-            [e.target.name]:e.target.value,
+        setEnroll_company({
+            ...enroll_company,
+            [e.target.name]: e.target.value,
         })
     }
     const handleComplete = (data) => {
@@ -220,7 +220,7 @@ const Write = () => {
                     <Right>
                         <CenterWhere>거래 희망장소</CenterWhere>
                         <div className="address_search" >
-                            <input className="user_enroll_text" placeholder="주소"  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
+                            <input className="user_enroll_text" placeholder="주소" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address} />
                             <button onClick={handleComplete}>주소 찾기</button>
                             <button onClick={handleSaveLocation}>주소저장</button>
                             {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
