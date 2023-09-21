@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "../fonts/Font.css";
+import "../fonts/Style.css";
 import { AiFillCloseCircle } from "react-icons/ai"
 import { useNavigate } from "react-router-dom";
 import Map from "./Map";
 import Post from "./Post";
 import axios from "axios";
 import DaumPostcode from 'react-daum-postcode';
+import Swal from "sweetalert2";
 
 const Write = () => {
 
@@ -40,10 +42,17 @@ const Write = () => {
         navigate("/search")
     }
 
+/* //////////////////////////////////////////////////////////////////////////////////// */
 
     const [purList, setPurList] = useState([]);
     const [locationX, setLocationX] = useState(null);
     const [locationY, setLocationY] = useState(null);
+    const [testResult, setTestResult] = useState(null);
+    const [sellTitle, setSellTitle] = useState("");
+    const [sellContent, setSellContent] = useState("");
+    const [sellType, setSellType] = useState("");
+    const [sellPrice, setSellPrice] = useState("");
+    const [sellLocation, setSellLocation] = useState("");
 
     useEffect(() => {
         const purchaseLoad = async () => {
@@ -56,19 +65,12 @@ const Write = () => {
                 console.log("재능 구매 불러오기 실패");
             }
         };
-
         purchaseLoad();
     }, []);
 
     const handleSellentRead = (sellIdx) => {
         navigate(`/sellentRead/${sellIdx}`); //sellIdx에 해당하는 글 읽기 페이지 이동
     }
-
-    const [sellTitle, setSellTitle] = useState("");
-    const [sellContent, setSellContent] = useState("");
-    const [sellType, setSellType] = useState("");
-    const [sellPrice, setSellPrice] = useState("");
-    const [sellLocation, setSellLocation] = useState("");
 
     const handleTitleChange = (e) => {
         setSellTitle(e.target.value);
@@ -82,16 +84,24 @@ const Write = () => {
     const handlePriceChange = (e) => {
         setSellPrice(e.target.value);
     };
+
     // 거래 장소
     const handleLocationChange = (e) => {
         setSellLocation(e.target.value);
     };
+
     // 거래 타입
     const handleSellTypeChange = (e) => {
         setSellType(e.target.value);
     };
-    const handleSaveLocation = (e) => {
 
+    const handleSubmitAddress = (e) => {
+        if(e.target.value ===''){
+            Swal.fire('주소를 선택해주세요.');
+        }else{
+            setSellLocation(e.target.value);
+            Swal.fire('주소가 선택되었습니다.');
+        }
     }
 
     const [enroll_company, setEnroll_company] = useState({
@@ -106,16 +116,28 @@ const Write = () => {
             [e.target.name]:e.target.value,
         })
     }
+
     const handleComplete = (data) => {
         setPopup(!popup);
     }
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if (!sellTitle || !sellContent) {
-            alert("제목과 내용을 모두 입력해주세요.");
+            Swal.fire("제목과 내용을 모두 입력해주세요.");
+            return;
+        }
+        if (!sellLocation) {
+            Swal.fire("주소를 입력해주세요.");
+            return;
+        }
+        if (!sellPrice) {
+            Swal.fire("가격을 입력해주세요.");
+            return;
+        }
+        if (!sellType) {
+            Swal.fire("거래을 입력해주세요.");
             return;
         }
 
@@ -130,15 +152,20 @@ const Write = () => {
                 sellLocation,
             },
         })
-            .then((response) => {
-                console.log(response);
-                navigate("/");
+        .then((response) => {
+            console.log(response);
+            Swal.fire({
+                title: '글이 게시되었습니다.',
+                icon: 'success'
             })
-            .catch((error) => {
-                console.log(error);
-            });
+            navigate("/");
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     };
 
+/* //////////////////////////////////////////////////////////////////////////////////// */
 
     return (
         <>
@@ -147,7 +174,6 @@ const Write = () => {
                     <AiFillCloseCircle />
                 </Close>
             </Window>
-
             <Back>
                 <Bind>
                     <Left>
@@ -160,9 +186,7 @@ const Write = () => {
                         <Cash>25,000원</Cash>
                         <Name>이재호</Name>
                     </Left>
-
                     <Center>
-
                         <CenterTop>글제목</CenterTop>
                         <form onSubmit={handleSubmit}>
                             <CenterTitle
@@ -191,7 +215,6 @@ const Write = () => {
                                     재능구매
                                 </CheckLabel>
                             </RadioGroup>
-
                             <CenterTop>글내용</CenterTop>
                             <CenterBoard
                                 type="text"
@@ -209,38 +232,29 @@ const Write = () => {
                                 <Upload type="submit">글올리기</Upload>
                                 <Cancel>취소하기</Cancel>
                             </ButtonBind>
-
                             <PictureBind>
                                 <Picture placeholder="*파일을 올리세요" />
                                 <PictureUpload>찾아보기</PictureUpload>
                             </PictureBind>
                         </form>
                     </Center>
-
                     <Right>
                         <CenterWhere>거래 희망장소</CenterWhere>
-                        <div className="address_search" >
-                            <input className="user_enroll_text" placeholder="주소"  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
-                            <button onClick={handleComplete}>주소 찾기</button>
-                            <button onClick={handleSaveLocation}>주소저장</button>
+                        <address_search>
+                            <input className="user_enroll_text" placeholder="주소를 검색해주세요."  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
+                            <button className="searchBtn" onClick={handleComplete}>주소 검색</button>
+                            <button className="selectBtn" onClick={handleSubmitAddress} value={enroll_company.address}>주소 선택</button>
                             {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
-                        </div>
-
-                        <Location
-                            type="text"
-                            onChange={handleLocationChange}
-                            value={sellLocation}
-                        />
-                        <Map locationX="33.450701" locationY="126.570667" />
+                        </address_search>
                     </Right>
                 </Bind>
             </Back>
         </>
     );
-
 }
-
 export default Write;
+
+/* <CSS> */
 
 const Window = styled.div`
     width: 85%;
@@ -571,4 +585,6 @@ const CheckLabel = styled.label`
     align-items: center;
     font-size: 1.5em;
     margin-left: 0.2em;
+`
+const address_search = styled.div`
 `

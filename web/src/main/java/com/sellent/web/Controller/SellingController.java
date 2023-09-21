@@ -83,6 +83,7 @@ public class SellingController {
             throws ParseException {
         UserList userList = userSession(request);
         sellingService.updateContent(content, userList);
+
     }
 
 

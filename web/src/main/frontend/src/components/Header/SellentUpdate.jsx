@@ -5,6 +5,8 @@ import { AiFillCloseCircle } from "react-icons/ai"
 import { useNavigate, useParams } from "react-router-dom";
 import Map from "./Map";
 import axios from "axios";
+import DaumPostcode from 'react-daum-postcode';
+import Swal from "sweetalert2";
 
 const SellentUpdate = () => {
 
@@ -58,7 +60,7 @@ const SellentUpdate = () => {
                     setSellTitle(response.data.Content.sellTitle || '');
                     setSellContent(response.data.Content.sellContent || '');
                     setSellPrice(response.data.Content.sellPrice || '');
-                    setSellLocation(response.data.Content.sellLocation || '');
+                    setSellLocation(response.data.Content.sellLocation);
                     setLocationX(response.data.Location.x);
                     setLocationY(response.data.Location.y);
                     console.log("게시물 불러오기 성공", sellentRead);
@@ -84,17 +86,18 @@ const SellentUpdate = () => {
         setSellPrice(e.target.value);
     };
 
-    // 거래 장소
-    const handleLocationChange = (e) => {
-        setSellLocation(e.target.value);
-    };
+
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         if (!sellTitle || !sellContent) {
             alert("제목과 내용을 모두 입력해주세요.");
+            return;
+        }
+
+        if (!sellPrice) {
+            Swal.fire("가격을 입력해주세요.");
             return;
         }
 
@@ -111,6 +114,7 @@ const SellentUpdate = () => {
         })
             .then((response) => {
                 console.log(response);
+                Swal.fire("수정되었습니다.");
                 navigate("/");
             })
             .catch((error) => {
@@ -159,13 +163,13 @@ const SellentUpdate = () => {
 
                             <ButtonBind>
                                 <Price
-                                    type="text" // 숫자만 들어갈 수 있게 Number로 설정
+                                    type="text"
                                     placeholder=" ₩"
                                     onChange={handlePriceChange}
                                     value={sellPrice}
                                 />
-                                <Upload type="submit">글올리기</Upload>
-                                <Cancel>취소하기</Cancel>
+                                <Upload type="submit">수정하기</Upload>
+                                <Cancel onClick={goHome}>취소하기</Cancel>
                             </ButtonBind>
 
                             <PictureBind>
@@ -179,11 +183,11 @@ const SellentUpdate = () => {
 
                     <Right>
                         <CenterWhere>거래 희망장소</CenterWhere>
-                        <Location
-                            type="text"
-                            onChange={handleLocationChange}
-                            value={sellLocation}
-                        />
+                        <Location>
+                            {sellLocation}
+                        </Location>
+
+                        <NoUpdate>(* 수정 불가능 *)</NoUpdate>
                         <Map locationX={locationX} locationY={locationY} />
                     </Right>
                 </Bind>
@@ -193,6 +197,8 @@ const SellentUpdate = () => {
 }
 
 export default SellentUpdate;
+
+/* <CSS> */
 
 const Window = styled.div`
     width: 85%;
@@ -483,12 +489,17 @@ const CenterWhere = styled.div`
     margin-top: 0.5em;
     margin-left: 0.5em;
 `
+
 // 거래 장소 inputBox
-const Location = styled.input`
+const Location = styled.div`
     width: 90%;
     height: 5vh;
     border: 2px solid black;
     font-size: 2rem;
     margin-top: 1rem;
     margin-left: 0.5em;
+`
+const NoUpdate = styled.div`
+    margin-top: 1rem;
+    margin-left: 1em;
 `
