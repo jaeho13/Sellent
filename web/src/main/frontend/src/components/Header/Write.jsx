@@ -42,7 +42,7 @@ const Write = () => {
         navigate("/search")
     }
 
-/* //////////////////////////////////////////////////////////////////////////////////// */
+    /* //////////////////////////////////////////////////////////////////////////////////// */
 
     const [purList, setPurList] = useState([]);
     const [locationX, setLocationX] = useState(null);
@@ -96,24 +96,24 @@ const Write = () => {
     };
 
     const handleSubmitAddress = (e) => {
-        if(e.target.value ===''){
+        if (e.target.value === '') {
             Swal.fire('주소를 선택해주세요.');
-        }else{
+        } else {
             setSellLocation(e.target.value);
             Swal.fire('주소가 선택되었습니다.');
         }
     }
 
     const [enroll_company, setEnroll_company] = useState({
-    	address:'',
+        address: '',
     });
 
     const [popup, setPopup] = useState(false);
 
     const handleInput = (e) => {
-    	setEnroll_company({
-        	...enroll_company,
-            [e.target.name]:e.target.value,
+        setEnroll_company({
+            ...enroll_company,
+            [e.target.name]: e.target.value,
         })
     }
 
@@ -152,20 +152,20 @@ const Write = () => {
                 sellLocation,
             },
         })
-        .then((response) => {
-            console.log(response);
-            Swal.fire({
-                title: '글이 게시되었습니다.',
-                icon: 'success'
+            .then((response) => {
+                console.log(response);
+                Swal.fire({
+                    title: '글이 게시되었습니다.',
+                    icon: 'success'
+                })
+                navigate("/");
             })
-            navigate("/");
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
-/* //////////////////////////////////////////////////////////////////////////////////// */
+    /* //////////////////////////////////////////////////////////////////////////////////// */
 
     return (
         <>
@@ -241,7 +241,7 @@ const Write = () => {
                     <Right>
                         <CenterWhere>거래 희망장소</CenterWhere>
                         <address_search>
-                            <input className="user_enroll_text" placeholder="주소를 검색해주세요."  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
+                            <input className="user_enroll_text" placeholder="주소를 검색해주세요." type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address} />
                             <button className="searchBtn" onClick={handleComplete}>주소 검색</button>
                             <button className="selectBtn" onClick={handleSubmitAddress} value={enroll_company.address}>주소 선택</button>
                             {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
