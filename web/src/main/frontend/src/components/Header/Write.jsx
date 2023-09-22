@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "../fonts/Font.css";
-import "../fonts/Style.css";
+// import "../fonts/Style.css";
 import { AiFillCloseCircle } from "react-icons/ai"
 import { useNavigate } from "react-router-dom";
 import Map from "./Map";
@@ -240,12 +240,13 @@ const Write = () => {
                     </Center>
                     <Right>
                         <CenterWhere>거래 희망장소</CenterWhere>
-                        <address_search>
-                            <input className="user_enroll_text" placeholder="주소를 검색해주세요." type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address} />
-                            <button className="searchBtn" onClick={handleComplete}>주소 검색</button>
-                            <button className="selectBtn" onClick={handleSubmitAddress} value={enroll_company.address}>주소 선택</button>
-                            {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
-                        </address_search>
+                        <AddressBind>
+                            <AddressLeft className="searchBtn" onClick={handleComplete}>주소 검색</AddressLeft>
+                            <AddressRight className="selectBtn" onClick={handleSubmitAddress} value={enroll_company.address}>주소 선택</AddressRight>
+                        </AddressBind>
+                        {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
+                        <AddressInput className="user_enroll_text" placeholder="주소 검색 후 선택 버튼을 눌러주세요." type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address} />
+
                     </Right>
                 </Bind>
             </Back>
@@ -546,15 +547,7 @@ const CenterWhere = styled.div`
     margin-top: 0.5em;
     margin-left: 0.5em;
 `
-// 거래 장소 inputBox
-const Location = styled.input`
-    width: 90%;
-    height: 5vh;
-    border: 2px solid black;
-    font-size: 2rem;
-    margin-top: 1rem;
-    margin-left: 0.5em;
-`
+
 // 재능 판매, 구매 라디오 버튼
 const RadioGroup = styled.div`
     display: flex;
@@ -586,5 +579,38 @@ const CheckLabel = styled.label`
     font-size: 1.5em;
     margin-left: 0.2em;
 `
-const address_search = styled.div`
+
+const AddressBind = styled.div`
+    width: 90%;
+    display: flex;
+    margin: 0 auto;
+`
+
+const AddressLeft = styled.button`
+    width: 30%;
+    height: 5vh;
+    border: 2px solid black;
+    font-size: 1.5em;
+    margin-top: 0.5em;
+    cursor: pointer;
+`
+
+const AddressRight = styled.button`
+    width: 30%;
+    height: 5vh;
+    border: 2px solid black;
+    font-size: 1.5em;
+    margin-top: 0.5em;
+    margin-left: 1em;
+    cursor: pointer;
+`
+
+const AddressInput = styled.input`
+    width: 90%;
+    height: 5vh;
+    border: 2px solid blue;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 0.5em;
+    font-size: 1.5em;
 `

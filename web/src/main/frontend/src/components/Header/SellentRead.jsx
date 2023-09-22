@@ -40,9 +40,9 @@ const SellentRead = () => {
         navigate("/search")
     }
 
-/* //////////////////////////////////////////////////////////////////////////////////// */
+    /* //////////////////////////////////////////////////////////////////////////////////// */
 
-    const {sellIdx} = useParams();
+    const { sellIdx } = useParams();
     const [sellentRead, setSellentRead] = useState({});
     const [sellentCommentRead, setSellentCommentRead] = useState([]);
     const [locationX, setLocationX] = useState(null);
@@ -69,14 +69,14 @@ const SellentRead = () => {
         loadBoard();
     }, [sellIdx]);
 
-/* </초기 값 불러오기 끝> */
+    /* </초기 값 불러오기 끝> */
 
-/* <확인> */
+    /* <확인> */
 
     const sellentUpdate = () => {
         sellentRead.userNm == sessionStorage.getItem("userNm") ?
             navigate(`/sellentUpdate/${sellIdx}`) :
-	        Swal.fire('내가 작성한 글만 수정할 수 있습니다.' , '', 'error');
+            Swal.fire('내가 작성한 글만 수정할 수 있습니다.', '', 'error');
     };
 
     const sellentDelete = async () => {
@@ -117,7 +117,7 @@ const SellentRead = () => {
     const commentsSubmit = (e) => {
         e.preventDefault();
         if (!sellCmtContent) {
-	        Swal.fire('내용을 입력해주세요.');
+            Swal.fire('내용을 입력해주세요.');
             return;
         }
         navigate(`/sellentRead/${sellIdx}`)
@@ -129,15 +129,15 @@ const SellentRead = () => {
                 sellCmtContent,
             }
         })
-        .then((response) => {
-            console.log(response);
-            window.location.reload();
-            // 댓글 입력 필드 초기화
-            setSellCmtContent("");
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+            .then((response) => {
+                console.log(response);
+                window.location.reload();
+                // 댓글 입력 필드 초기화
+                setSellCmtContent("");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     const nickSubmit = (e) => {
@@ -172,7 +172,7 @@ const SellentRead = () => {
         }
     };
 
-/* //////////////////////////////////////////////////////////////////////////////////// */
+    /* //////////////////////////////////////////////////////////////////////////////////// */
 
     return (
         <>
@@ -213,19 +213,19 @@ const SellentRead = () => {
                     <RightBind>
                         <Right>
                             <RightTop>댓글</RightTop>
-                                {sellentCommentRead.length > 0 && sellentCommentRead.map((Comment, index) => {
-                                    return (
-                                        <RightBoard key={index} ref={rightBoardRef}>
-                                            <RightBoardBind>
-                                                <RightBoardNick>
-                                                    닉네임 : {Comment.userNm}
-                                                </RightBoardNick>
-                                                <RightBoardDelete onClick={() => onDelete(Comment.sellCmtIdx)} >X</RightBoardDelete>
-                                            </RightBoardBind>
-                                            {Comment.sellCmtContent}
-                                        </RightBoard>
-                                    );
-                                })}
+                            {sellentCommentRead.length > 0 && sellentCommentRead.map((Comment, index) => {
+                                return (
+                                    <RightBoard key={index} ref={rightBoardRef}>
+                                        <RightBoardBind>
+                                            <RightBoardNick>
+                                                닉네임 : {Comment.userNm}
+                                            </RightBoardNick>
+                                            <RightBoardDelete onClick={() => onDelete(Comment.sellCmtIdx)} >X</RightBoardDelete>
+                                        </RightBoardBind>
+                                        {Comment.sellCmtContent}
+                                    </RightBoard>
+                                );
+                            })}
                         </Right>
                         <RightBottomBind>
                             <RightBottom
