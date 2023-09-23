@@ -79,11 +79,21 @@ public class SellingController {
     // Param : sellTitle, sellContent, sellPrice, sellLocation
     // 글 수정
     @PatchMapping("/sellent")
-    public void updateContent(@RequestBody Map<String, Object> content, HttpServletRequest request)
+    public ResponseEntity<String> updateContent(@RequestBody Map<String, Object> content, HttpServletRequest request)
             throws ParseException {
-        UserList userList = userSession(request);
-        sellingService.updateContent(content, userList);
+        try {
+            UserList userList = userSession(request);
+            Boolean bool = sellingService.updateContent(content, userList);
 
+            if (bool) {
+                return ResponseEntity.ok("글이 성공적으로 수정되었습니다.");
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("자신이 작성한 글만 수정할 수 있습니다.");
+            }
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("글 수정에 실패했습니다.");
+        }
     }
 
 

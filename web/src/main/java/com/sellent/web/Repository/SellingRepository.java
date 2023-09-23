@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface SellingRepository extends JpaRepository<Selling, Integer> {
     // sellIdx = ? 글 가져오기
-    @Query(value = "SELECT new com.sellent.web.Dto.ContentDTO(s.sellIdx, s.sellTitle, s.sellContent, s.userListVO.userNm, s.sellDate, s.sellPrice,  s.sellLocation, s.sellLike, s.sellType) " +
+    @Query(value = "SELECT new com.sellent.web.Dto.ContentDTO(s.sellIdx, s.sellTitle, s.sellContent, s.userListVO.userNm, s.userListVO.userEmail, s.sellDate, s.sellPrice,  s.sellLocation, s.sellLike, s.sellType) " +
             "FROM Selling s " +
             "WHERE s.sellIdx = :sellIdx")
     ContentDTO getSellingContent(@Param("sellIdx") int sellIdx);
