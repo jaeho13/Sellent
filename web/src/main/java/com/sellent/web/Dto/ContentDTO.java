@@ -15,6 +15,7 @@ public class ContentDTO {
     private String sellTitle;
     private String sellContent;
     private String userNm;
+    private String userEmail;
     private Date sellDate;
     private int sellPrice;
     private String sellLocation;

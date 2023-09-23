@@ -83,7 +83,7 @@ public class SellingService {
 
     // 글 수정
     // sellTitle, sellContent, sellPrice, sellLocation
-    public void updateContent(Map<String, Object> content, UserList userList) {
+    public Boolean updateContent(Map<String, Object> content, UserList userList) {
 
         int sellIdx = Integer.parseInt((String) content.get("sellIdx"));
         Selling selling = sellingRepository.findContent(sellIdx);
@@ -93,7 +93,8 @@ public class SellingService {
         String newWriter = userList.getUserEmail();
 
         if (!oldWriter.equals(newWriter)) {
-            return;
+
+            return false;
         } else {
             selling.setSellTitle((String) content.get("sellTitle"));
             selling.setSellContent((String) content.get("sellContent"));
@@ -106,6 +107,8 @@ public class SellingService {
             }
 
             sellingRepository.save(selling);
+
+            return true;
         }
     }
 
