@@ -267,18 +267,21 @@ export default SellentRead;
 const Window = styled.div`
     width: 85%;
     height: 3rem;
-    border: 2px solid red;
+    border: 2px solid black;
+    border-bottom: none;
     margin: 0 auto;
     margin-top: 4vh;
-    background-color: lightgrey;
+    background-color: #dcdcdc;
+    box-shadow: 1em 1em 1em 1em #6E6E6E;
 `
 
 const Back = styled.div`
     width: 85%;
     height: 85vh;
-    border: 2px solid green;
+    border: 2px solid black;
+    border-top: none;
     margin: 0 auto;
-    /* margin-top: 8vh; */
+    box-shadow: 1em 1em 1em 1em #6E6E6E;
 `
 
 const Close = styled.div`
@@ -295,7 +298,8 @@ const Bind = styled.div`
 const Left = styled.div`
     width: 15%;
     height: 85vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
+    border-right: 2px solid black;
     background-color: white;
 `
 
@@ -395,35 +399,20 @@ const Name = styled.div`
 const Center = styled.div`
     width: 55%;
     height: 85vh;
-    border: 2px solid red;
+    /* border: 2px solid red; */
+    border-bottom: 2px solid black;
     background-color: white;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
-`
-
-const Chat = styled.div`
-    width: 90%;
-    height: 65vh;
-    border: 2px solid black;
-    margin: 0 auto;
-    margin-top: 5rem;
-    display: flex;
-`
-
-const ChatInput = styled.input`
-    width: 90%;
-    height: 5vh;
-    border: 2px solid blue;
-    margin: 0 auto;
-    display: flex;
-    font-size: 2em;
 `
 
 const RightBind = styled.div`
     display: flex;
     flex-direction: column;
     width: 30%;
-    border: 2px solid red;
+    /* border: 2px solid black; */
+    border-top: none;
+    border-left: none;
 `
 
 const Right = styled.div`
@@ -439,12 +428,16 @@ const RightBottomBind = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
+    border: none;
+    
 `
 
 const RightBottom = styled.textarea`
     width: 80%;
     height: 14.5vh;
-    /* border: 2px solid red; */
+    border: 2px solid black;
+    border-bottom: none;
+    border-right: none;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
     background-color: white;
@@ -456,7 +449,9 @@ const RightBottom = styled.textarea`
 const RightComments = styled.button`
     width: 20%;
     height: 15vh;
-    /* border: 2px solid green; */
+    border: 2px solid black;
+    border-bottom: none;
+    border-right: none;
     background-color: white;
     font-size: 2em;
     display: flex;
@@ -481,7 +476,7 @@ const RightTop = styled.div`
 const RightBoard = styled.div`
     width: 90%;
     max-height: 100vh; /* 최대 높이 설정 */
-    border: 2px solid black;
+    border: 2px solid #595959;
     font-size: 1.5em;
     margin: 0 auto;
     margin-top: 1.5rem;
@@ -502,7 +497,10 @@ const RightBoardNick = styled.div`
     font-size: 1em;
     display: flex;
     align-items: center;
-    border: 1px solid red;
+    /* border: 2px solid #595959; */
+    border: none;
+    border-bottom: 2px solid #595959;
+    border-right: 2px solid #595959;
 `
 
 const RightBoardDelete = styled.div`
@@ -512,26 +510,27 @@ const RightBoardDelete = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid blue;
+    border-bottom: 2px solid #595959;
     cursor: pointer;
 `
 
 const CenterTopic = styled.div`
     width: 90%;
     height: 5vh;
-    border: 2px solid red;
+    border: 2px solid #595959;
     font-size: 2.5em;
     display: flex;
     align-items: center;
     margin-top: 0.5em;
     margin-left: 0.5em;
     font-weight: bolder;
+    color: #595959;
 `
 
 const CenterTitle = styled.div`
     width: 90%;
     height: 5vh;
-    border: 2px solid red;
+    border: 2px solid #595959;
     font-size: 2.5em;
     display: flex;
     align-items: center;
@@ -547,10 +546,11 @@ const LikeBind = styled.div`
 `
 
 const LikeButton = styled.button`
-    width: 20%;
+    width: 13%;
     height: 5vh;
-    border: 2px solid red;
-    font-size: 1em;
+    /* border: 2px solid #595959; */
+    border: none;
+    font-size: 2em;
     background-color: white;
     display: flex;
     justify-content: center;
@@ -559,9 +559,9 @@ const LikeButton = styled.button`
 `
 
 const LikeCount = styled.div`
-    width: 20%;
+    width: 10%;
     height: 5vh;
-    border: 2px solid red;
+    /* border: 2px solid #595959; */
     font-size: 1em;
     display: flex;
     justify-content: center;
@@ -576,7 +576,7 @@ const CenterBottomBind = styled.div`
 const CenterContents = styled.div`
     width: 90%;
     height: 50vh;
-    border: 2px solid red;
+    border: 2px solid #595959;
     font-size: 2.5em;
     display: flex;
     margin-top: 0.5em;
@@ -592,7 +592,7 @@ const ButtonBind = styled.div`
 const Price = styled.div`
     width: 50%;
     height: 5vh;
-    border: 2px solid black;
+    border: 2px solid #595959;
     margin-left: 0.7em;
     font-size: 1.8em;
     display: flex;
@@ -604,7 +604,7 @@ const Price = styled.div`
 const Upload = styled.button`
     width: 15%;
     height: 5vh;
-    border: 2px solid red;
+    border: 2px solid #595959;
     font-size: 1.5em;
     margin-left: 2.7em;
     display: flex;
@@ -617,7 +617,7 @@ const Upload = styled.button`
 const Cancel = styled.button`
     width: 15%;
     height: 5vh;
-    border: 2px solid red;
+    border: 2px solid #595959;
     font-size: 1.5em;
     margin-left: 1em;
     display: flex;
@@ -630,10 +630,11 @@ const Cancel = styled.button`
 const CenterWhere = styled.div`
     width: 90%;
     height: 5vh;
-    border: 2px solid red;
-    font-size: 2.5em;
+    border: 2px solid #595959;
+    font-size: 2em;
     display: flex;
     align-items: center;
+    font-weight: bold;
     margin-top: 0.5em;
-    margin-left: 0.5em;
+    margin-left: 0.6em;
 `
