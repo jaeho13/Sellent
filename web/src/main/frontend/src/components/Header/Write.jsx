@@ -137,7 +137,7 @@ const Write = () => {
             return;
         }
         if (!sellType) {
-            Swal.fire("거래을 입력해주세요.");
+            Swal.fire("거래 타입을 입력해주세요.");
             return;
         }
 
