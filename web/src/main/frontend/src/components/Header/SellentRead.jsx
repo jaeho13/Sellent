@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Map from "./Map";
 import Swal from "sweetalert2";
+import { FcLike } from "react-icons/fc"
 
 const SellentRead = () => {
 
@@ -74,7 +75,9 @@ const SellentRead = () => {
     /* <확인> */
 
     const sellentUpdate = () => {
-        sellentRead.userNm == sessionStorage.getItem("userNm") ?
+        console.log("이재호 국적1 : ", sellentRead.userEmail);
+        console.log("이재호 국적2 : ", sessionStorage.getItem("userEmail"));
+        sellentRead.userEmail === sessionStorage.getItem("userEmail") ?
             navigate(`/sellentUpdate/${sellIdx}`) :
             Swal.fire('내가 작성한 글만 수정할 수 있습니다.', '', 'error');
     };
@@ -172,7 +175,11 @@ const SellentRead = () => {
         }
     };
 
-    /* //////////////////////////////////////////////////////////////////////////////////// */
+    const [likeCount, setLikeCount] = useState(0);
+
+    const LikeCountUp = () => {
+        setLikeCount(likeCount + 1);
+    }
 
     return (
         <>
@@ -195,10 +202,19 @@ const SellentRead = () => {
                         <Name>이재호</Name>
                     </Left>
 
+
                     <Center>
                         <CenterTopic>{sellentRead.sellType === 0 ? "재능 판매" : "재능 구매"}</CenterTopic>
                         <CenterTitle>{sellentRead.sellTitle}</CenterTitle>
-                        <CenterTitle>닉네임 : {sellentRead.userNm}</CenterTitle>
+                        <CenterTitle>
+                            닉네임 : {sellentRead.userNm}
+                            <LikeBind>
+                                <LikeButton onClick={LikeCountUp}>
+                                    <FcLike />
+                                </LikeButton>
+                                <LikeCount>{likeCount}</LikeCount>
+                            </LikeBind>
+                        </CenterTitle>
                         <CenterBottomBind>
                             <CenterContents>{sellentRead.sellContent}</CenterContents>
                         </CenterBottomBind>
@@ -210,6 +226,8 @@ const SellentRead = () => {
                         <CenterWhere>거래 장소 : {sellentRead.sellLocation}</CenterWhere>
                         <Map locationX={locationX} locationY={locationY} />
                     </Center>
+
+
                     <RightBind>
                         <Right>
                             <RightTop>댓글</RightTop>
@@ -519,6 +537,35 @@ const CenterTitle = styled.div`
     align-items: center;
     margin-top: 0.5em;
     margin-left: 0.5em;
+    justify-content: space-between;
+`
+
+const LikeBind = styled.div`
+    width: 40%;
+    display: flex;
+    justify-content: right;
+`
+
+const LikeButton = styled.button`
+    width: 20%;
+    height: 5vh;
+    border: 2px solid red;
+    font-size: 1em;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+`
+
+const LikeCount = styled.div`
+    width: 20%;
+    height: 5vh;
+    border: 2px solid red;
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 const CenterBottomBind = styled.div`
