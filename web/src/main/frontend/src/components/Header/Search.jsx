@@ -147,7 +147,9 @@ const Search = () => {
                                                         이미지 넣기
                                                     </BoardImg>
                                                     <BoardTitle onClick={() => handleSellentRead(noItem.sellIdx)}>
-                                                        {noItem.sellTitle}
+                                                        {noItem.sellTitle.length > 6
+                                                            ? `${noItem.sellTitle.slice(0, 6)}...`
+                                                            : noItem.sellTitle}
                                                         <BoardLike>
                                                             <FcLike />
                                                             <LikeScore>
@@ -176,7 +178,9 @@ const Search = () => {
                                                         이미지 넣기
                                                     </BoardImg>
                                                     <BoardTitle onClick={() => handleSellentRead(purItem.sellIdx)}>
-                                                        {purItem.sellTitle}
+                                                        {purItem.sellTitle.length > 6
+                                                            ? `${purItem.sellTitle.slice(0, 6)}...`
+                                                            : purItem.sellTitle}
                                                         <BoardLike>
                                                             <FcLike />
                                                             <LikeScore>

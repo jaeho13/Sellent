@@ -190,8 +190,8 @@ const Home = () => {
                                                 <img src={NoImage} alt="No Image" />
                                             </BoardImg>
                                             <BoardTitle onClick={() => handleSellentRead(purItem.sellIdx)}>
-                                                {purItem.sellTitle.length > 5
-                                                    ? `${purItem.sellTitle.slice(0, 5)}...`
+                                                {purItem.sellTitle.length > 6
+                                                    ? `${purItem.sellTitle.slice(0, 6)}...`
                                                     : purItem.sellTitle}
                                                 <BoardLike>
                                                     <FcLike />
