@@ -88,10 +88,8 @@ const Chatting = () => {
                     <Center>
                         <Chat>채팅창</Chat>
                         <ChatInput type="text" placeholder="*메세지 보내기" />
-
-
-
                     </Center>
+
                     <Right>
                         <RightTop>재능구매</RightTop>
 
