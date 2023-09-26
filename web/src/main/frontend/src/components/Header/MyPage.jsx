@@ -141,18 +141,12 @@ export default MyPage;
 const Window = styled.div`
     width: 85%;
     height: 3rem;
-    border: 2px solid red;
+    border: 2px solid black;
+    border-bottom: none;
     margin: 0 auto;
     margin-top: 4vh;
-    background-color: lightgrey;
-`
-
-const Back = styled.div`
-    width: 85%;
-    height: 85vh;
-    border: 2px solid green;
-    margin: 0 auto;
-    /* margin-top: 8vh; */
+    background-color: #dcdcdc;
+    box-shadow: 1em 1em 1em 1em #6E6E6E;
 `
 
 const Close = styled.div`
@@ -161,6 +155,14 @@ const Close = styled.div`
     justify-content: right;
 `
 
+const Back = styled.div`
+    width: 85%;
+    height: 85vh;
+    border: 2px solid black;
+    border-top: none;
+    margin: 0 auto;
+    box-shadow: 1em 1em 1em 1em #6E6E6E;
+`
 
 const Bind = styled.div`
     display: flex;
@@ -170,7 +172,8 @@ const Bind = styled.div`
 const Left = styled.div`
     width: 15%;
     height: 85vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
+    border-right: 2px solid black;
     background-color: white;
 `
 
@@ -224,7 +227,6 @@ const LeftBoard = styled.div`
         font-size: 1em; /* 글씨 크기를 줄임 */
     }
 `
-
 const Cash = styled.div`
     width: 80%;
     height: 3vh;
@@ -267,10 +269,11 @@ const Name = styled.div`
         font-size: 1em; /* 글씨 크기를 줄임 */
     }
 `
+
 const Center = styled.div`
     width: 55%;
     height: 85vh;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     background-color: white;
 `
 
@@ -334,7 +337,6 @@ const Review = styled.div`
     align-items: center;
 `
 
-
 const Charge = styled.div`
     width: 28%;
     height: 5vh;
@@ -357,52 +359,12 @@ const Where = styled.div`
     align-items: center;
 `
 
-const BoardImg = styled.div`
-    width: 100%;
-    height: 15vh;
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    /* border: 2px solid red; */
-`
-
-const BoardTitle = styled.div`
-    width: 100%;
-    height: 4vh;
-    /* border: 2px solid red; */
-    border-top: 2px solid black;
-    font-size: 1.5em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-`
-
-const BoardLike = styled.div`
-    width: 30%;
-    height: 4vh;
-    /* border: 2px solid green; */
-    font-size: 1em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
-
-const LikeScore = styled.div`
-    width: 30%;
-    height: 4vh;
-    /* border: 2px solid black; */
-    display: flex;
-    align-items: center;
-`
-
-
 const Right = styled.div`
     width: 30%;
     height: 85vh;
-    border: 2px solid blue;
+    border: 2px solid black;
+    border-top: none;
+    border-right: none;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
     background-color: white;
@@ -445,4 +407,45 @@ const RightBoard = styled.div`
     /* margin-left: 5rem; */
     margin-left: 1rem;
     margin-right: 1rem;
+`
+
+const BoardImg = styled.div`
+    width: 100%;
+    height: 15vh;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    /* border: 2px solid red; */
+`
+
+const BoardTitle = styled.div`
+    width: 100%;
+    height: 4vh;
+    /* border: 2px solid red; */
+    border-top: 2px solid black;
+    font-size: 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+`
+
+const BoardLike = styled.div`
+    width: 30%;
+    height: 4vh;
+    /* border: 2px solid green; */
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+const LikeScore = styled.div`
+    width: 30%;
+    height: 4vh;
+    /* border: 2px solid black; */
+    display: flex;
+    align-items: center;
 `
