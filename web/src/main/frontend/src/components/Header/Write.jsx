@@ -234,8 +234,9 @@ const Write = () => {
                             </ButtonBind>
                             <PictureBind>
                                 <Picture placeholder="*파일을 올리세요" />
-                                <PictureUpload>찾아보기</PictureUpload>
+                                <PictureUpload>찾아보자</PictureUpload>
                             </PictureBind>
+
                         </form>
                     </Center>
                     <Right>
@@ -244,6 +245,8 @@ const Write = () => {
                             <AddressLeft className="searchBtn" onClick={handleComplete}>주소 검색</AddressLeft>
                             <AddressRight className="selectBtn" onClick={handleSubmitAddress} value={enroll_company.address}>주소 선택</AddressRight>
                         </AddressBind>
+
+
                         {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
                         <AddressInput className="user_enroll_text" placeholder="주소 검색 후 선택 버튼을 눌러주세요." type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address} />
 
@@ -277,7 +280,6 @@ const Back = styled.div`
     height: 85vh;
     border: 2px solid green;
     margin: 0 auto;
-    /* margin-top: 8vh; */
 `
 
 const Bind = styled.div`
