@@ -142,7 +142,7 @@ const Write = () => {
         }
 
         axios({
-            url: "/sellent", //주소 넣어줘야합니당 흑흑
+            url: "/sellent",
             method: "post",
             data: {
                 sellTitle,
@@ -164,8 +164,6 @@ const Write = () => {
                 console.log(error);
             });
     };
-
-    /* //////////////////////////////////////////////////////////////////////////////////// */
 
     return (
         <>
@@ -234,7 +232,7 @@ const Write = () => {
                             </ButtonBind>
                             <PictureBind>
                                 <Picture placeholder="*파일을 올리세요" />
-                                <PictureUpload>찾아보자</PictureUpload>
+                                <PictureUpload>찾아보기</PictureUpload>
                             </PictureBind>
 
                         </form>
