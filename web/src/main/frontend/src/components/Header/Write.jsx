@@ -256,7 +256,6 @@ const Write = () => {
 }
 export default Write;
 
-/* <CSS> */
 
 const Window = styled.div`
     width: 85%;
