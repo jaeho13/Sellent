@@ -547,7 +547,6 @@ const CenterWhere = styled.div`
     margin-left: 0.5em;
 `
 
-// 재능 판매, 구매 라디오 버튼
 const RadioGroup = styled.div`
     display: flex;
     flex-direction: row;
