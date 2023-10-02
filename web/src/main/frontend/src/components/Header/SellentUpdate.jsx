@@ -56,18 +56,18 @@ const SellentUpdate = () => {
                 const response = await axios.get(`/sellent?sellIdx=${sellIdx}`);
                 setSellentRead(response.data.Content);
 
-                    // 이전에 작성된 데이터 받아와 수정 가능하도록 셋팅
-                    setSellTitle(response.data.Content.sellTitle || '');
-                    setSellContent(response.data.Content.sellContent || '');
-                    setSellPrice(response.data.Content.sellPrice || '');
-                    setSellLocation(response.data.Content.sellLocation);
-                    setLocationX(response.data.Location.x);
-                    setLocationY(response.data.Location.y);
-                    console.log("게시물 불러오기 성공", sellentRead);
-                } catch (error) {
-                    console.log("게시물 불러오기 실패", error);
-                }
-            };
+                // 이전에 작성된 데이터 받아와 수정 가능하도록 셋팅
+                setSellTitle(response.data.Content.sellTitle || '');
+                setSellContent(response.data.Content.sellContent || '');
+                setSellPrice(response.data.Content.sellPrice || '');
+                setSellLocation(response.data.Content.sellLocation);
+                setLocationX(response.data.Location.x);
+                setLocationY(response.data.Location.y);
+                console.log("게시물 불러오기 성공", sellentRead);
+            } catch (error) {
+                console.log("게시물 불러오기 실패", error);
+            }
+        };
 
         loadBoard();
     }, [sellIdx]);
@@ -414,7 +414,6 @@ const Price = styled.input`
     margin-left: 0.7em;
     font-size: 1.8em;
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     font-weight: bold;
 `

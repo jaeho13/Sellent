@@ -476,22 +476,6 @@ const LikeScore = styled.div`
     align-items: center;
 `
 
-
-// const ScrollBind = styled.div`
-//     display: flex;
-//     justify-content: column;
-//     justify-content: space-around;
-//     margin-bottom: 2rem;
-// `
-
-// const Scroll = styled.div`
-//     width: 25%;
-//     height: 20vh;
-//     border: 2px solid blue;
-//     margin-top: 1rem;
-//     margin-left: 1rem;
-// `
-
 const Right = styled.div`
     width: 30%;
     height: 85vh;

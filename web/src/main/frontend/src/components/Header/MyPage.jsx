@@ -377,7 +377,6 @@ const RightTop = styled.div`
     border-bottom: 2px solid black;
     font-size: 2.5rem;
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     font-weight: bolder;
     padding-top: 0.5em;
@@ -404,7 +403,6 @@ const RightBoard = styled.div`
     height: 20vh;
     border: 2px solid black;
     margin-top: 2rem;
-    /* margin-left: 5rem; */
     margin-left: 1rem;
     margin-right: 1rem;
 `
