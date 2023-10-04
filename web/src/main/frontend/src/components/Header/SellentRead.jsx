@@ -596,7 +596,6 @@ const Price = styled.div`
     margin-left: 0.7em;
     font-size: 1.8em;
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     font-weight: bold;
 `

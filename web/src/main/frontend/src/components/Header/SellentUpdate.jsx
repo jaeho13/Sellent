@@ -489,7 +489,6 @@ const CenterWhere = styled.div`
     margin-left: 0.5em;
 `
 
-// 거래 장소 inputBox
 const Location = styled.div`
     width: 90%;
     height: 5vh;
