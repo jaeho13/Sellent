@@ -14,7 +14,7 @@ const Map = ({ locationX, locationY }) => {
             const map = new kakao.maps.Map(mapContainer, options);
 
             // 마커가 표시될 위치입니다
-            var markerPosition  = new kakao.maps.LatLng(locationX, locationY);
+            var markerPosition = new kakao.maps.LatLng(locationX, locationY);
 
             // 마커를 생성합니다
             var marker = new kakao.maps.Marker({
@@ -26,7 +26,7 @@ const Map = ({ locationX, locationY }) => {
 
             // 지도에 표시할 원을 생성합니다
             var circle = new kakao.maps.Circle({
-                center : new kakao.maps.LatLng(locationX, locationY),  // 원의 중심좌표 입니다
+                center: new kakao.maps.LatLng(locationX, locationY),  // 원의 중심좌표 입니다
                 radius: 50, // 미터 단위의 원의 반지름입니다
                 strokeWeight: 5, // 선의 두께입니다
                 strokeColor: '#75B8FA', // 선의 색깔입니다
@@ -77,3 +77,5 @@ const Exam = styled.div`
 `;
 
 export default Map;
+
+//여기 전체적으로 수정해야함
