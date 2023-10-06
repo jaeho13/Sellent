@@ -39,7 +39,6 @@ const Map = ({ locationX, locationY }) => {
             // 지도에 원을 표시합니다
             circle.setMap(map);
 
-
             // 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
             var linePath = [
                 new kakao.maps.LatLng(33.452344169439975, 126.56878163224233),
@@ -58,7 +57,6 @@ const Map = ({ locationX, locationY }) => {
 
             // 지도에 선을 표시합니다
             polyline.setMap(map);
-
 
         });
     }, [locationX, locationY]);
