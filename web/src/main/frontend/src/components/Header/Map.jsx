@@ -77,5 +77,3 @@ const Exam = styled.div`
 `;
 
 export default Map;
-
-//여기 전체적으로 수정해야함
