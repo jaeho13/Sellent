@@ -100,7 +100,6 @@ const BackgroundImg = styled.img`
 const ChromeIcon = styled.div`
     width: 5%;
     height: 6vh;
-    /* border: 2px solid red; */
     font-size: 3rem;
     display: flex;
     justify-content: center;
@@ -111,7 +110,6 @@ const ChromeIcon = styled.div`
 const KaKaoIcon = styled.div`
     width: 5%;
     height: 6vh;
-    /* border: 2px solid red; */
     font-size: 3rem;
     display: flex;
     justify-content: center;
@@ -123,7 +121,6 @@ const KaKaoIcon = styled.div`
 const VsCodeIcon = styled.div`
     width: 5%;
     height: 6vh;
-    /* border: 2px solid red; */
     font-size: 3rem;
     display: flex;
     justify-content: center;
@@ -147,7 +144,6 @@ const SellentIcon = styled.div`
 const IconName = styled.div`
     width: 5%;
     height: 3vh;
-    /* border: 2px solid red; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -156,7 +152,6 @@ const IconName = styled.div`
 const Bottom = styled.div`
     width: 100%;
     height: 5vh;
-    /* border: 2px solid green; */
     margin: 0 auto;
     margin-top: 36.5vh;
     display: flex;
@@ -168,7 +163,6 @@ const Bottom = styled.div`
 const BottomWindow = styled.div`
     width: 5%;
     height: 5vh;
-    /* border: 2px solid red; */
     font-size: 3rem;
     display: flex;
     justify-content: center;
@@ -179,7 +173,6 @@ const BottomWindow = styled.div`
 const BottomInput = styled.div`
     width: 20%;
     height: 4vh;
-    /* border: 2px solid red; */
     border-radius: 2em;
     font-size: 2rem;
     display: flex;
@@ -192,7 +185,6 @@ const BottomInput = styled.div`
 const BottomWindowEdge = styled.div`
     width: 5%;
     height: 5vh;
-    /* border: 2px solid red; */
     font-size: 2.5rem;
     display: flex;
     justify-content: center;
@@ -203,7 +195,6 @@ const BottomWindowEdge = styled.div`
 const BottomWindowKakao = styled.div`
     width: 5%;
     height: 5vh;
-    /* border: 2px solid red; */
     font-size: 3rem;
     display: flex;
     justify-content: center;
@@ -214,7 +205,6 @@ const BottomWindowKakao = styled.div`
 const BottomWindowChrome = styled.div`
     width: 5%;
     height: 5vh;
-    /* border: 2px solid red; */
     font-size: 2.5rem;
     display: flex;
     justify-content: center;
@@ -225,7 +215,6 @@ const BottomWindowChrome = styled.div`
 const BottomWindowFolder = styled.div`
     width: 5%;
     height: 5vh;
-    /* border: 2px solid red; */
     font-size: 3rem;
     display: flex;
     justify-content: center;
@@ -235,7 +224,6 @@ const BottomWindowFolder = styled.div`
 const BottomWindowVscode = styled.div`
     width: 5%;
     height: 5vh;
-    /* border: 2px solid red; */
     font-size: 2.5rem;
     display: flex;
     justify-content: center;
