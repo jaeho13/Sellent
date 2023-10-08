@@ -153,4 +153,8 @@ public class SellingService {
 
         sellingCmtService.insertCmt(comment, sellingVO, userVO);
     }
+
+    public void plusLikeCount(String likeCnt, UserList userList) {
+        //int LikeCnt = Integer.parseInt((String) )
+    }
 }
