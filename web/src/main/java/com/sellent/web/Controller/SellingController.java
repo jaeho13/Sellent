@@ -133,7 +133,7 @@ public class SellingController {
     }
 
     // 댓글 삭제
-    // Method : Delete
+    // Method : DELETE
     // Param : sellCmtIdx
     @DeleteMapping("/sellentCmt")
     public ResponseEntity<String> deleteComment(@RequestParam String sellCmtIdx, HttpServletRequest request) {
@@ -146,5 +146,16 @@ public class SellingController {
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("삭제 실패하였습니다.");
         }
+    }
+
+    // 좋아요
+    // Method : POST
+    // Param : sellIdx
+    @GetMapping("/likeCount")
+    public ResponseEntity<String> plusLikeCount(@RequestParam String likeCnt, HttpServletRequest request)
+            throws ParseException {
+        UserList userList = userSession(request);
+        //sellingService.plusLikeCount(likeCnt, userList);
+        return null;
     }
 }
