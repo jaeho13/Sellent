@@ -301,7 +301,6 @@ const Bind = styled.div`
 const Left = styled.div`
     width: 15%;
     height: 85vh;
-    /* border: 2px solid black; */
     border-right: 2px solid black;
     background-color: white;
 `
