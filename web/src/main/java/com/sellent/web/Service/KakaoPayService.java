@@ -16,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -59,7 +58,7 @@ public class KakaoPayService {
         try {
             kakaoPayDTO = restTemplate.postForObject(new URI(Host + "/v1/payment/ready"), body, KakaoPayDTO.class);
 
-            log.info(""+ kakaoPayDTO);
+            log.info("" + kakaoPayDTO);
             return kakaoPayDTO.getNext_redirect_pc_url();
 
         } catch (RestClientException e) {
