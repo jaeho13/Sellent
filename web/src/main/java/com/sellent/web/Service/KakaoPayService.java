@@ -1,8 +1,11 @@
 package com.sellent.web.Service;
 
-import com.sellent.web.Dto.KakaoPayDTO;
+import com.sellent.web.Dto.KakaoPayReadyDTO;
+import com.sellent.web.Dto.KakaoPayResultDTO;
+import com.sellent.web.Entiity.Selling;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -21,16 +24,25 @@ import java.net.URISyntaxException;
 @Transactional
 @Log
 public class KakaoPayService {
+    @Autowired
+    SellingService sellingService;
+
     private static final String Host = "https://kapi.kakao.com";
 
     @Value("#{sellentProperty['kakao.admin']}")
     private String kakaoAdminKey;
 
-    private KakaoPayDTO kakaoPayDTO;
+    private KakaoPayReadyDTO kakaoPayReadyDTO;
+    private KakaoPayResultDTO kakaoPayResultDTO;
 
-    public String kakaoPayReady() {
+    public String kakaoPayReady(String num, String userEmail) {
+    //public String kakaoPayReady() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory()); // 정확한 에러 파악을 위해 생성
+
+        int sellIdx = Integer.parseInt(num);
+        Selling selling = sellingService.findContent(sellIdx);
+        String price = String.valueOf(selling.getSellPrice());
 
         // Server Request Header : 서버 요청 헤더
         HttpHeaders headers = new HttpHeaders();
@@ -43,29 +55,72 @@ public class KakaoPayService {
 
         params.add("cid", "TC0ONETIME"); // 가맹점 코드 - 테스트용
         params.add("partner_order_id", "1001"); // 주문 번호
-        params.add("partner_user_id", "goguma"); // 회원 아이디
-        params.add("item_name", "비둘기"); // 상품 명
+        params.add("partner_user_id", "userEmail"); // 회원 아이디 uNick
+        params.add("item_name", "sellent"); // 상품 명
         params.add("quantity", "1"); // 상품 수량
-        params.add("total_amount", "20000"); // 상품 가격
-        params.add("tax_free_amount", "100"); // 상품 비과세 금액
-        params.add("approval_url", "http://localhost:8081/kakaoPaySuccess"); // 성공시 url
-        params.add("cancel_url", "http://localhost:8081/kakaoPayCancle"); // 실패시 url
-        params.add("fail_url", "http://localhost:8081/kakaoPayFail");
+        params.add("total_amount", "10000"); // 상품 가격 ---- sPrice
+        params.add("tax_free_amount", "1000"); // 상품 비과세 금액
+        params.add("approval_url", "http://localhost:3000/"); // 성공시 url
+        params.add("cancel_url", "http://localhost:8081/kakaoPayCancle"); // 실패시 url -- 실패했습니다 > 뒤로가기
+        params.add("fail_url", "http://localhost:8081/kakaoPayFail"); // 실패시 url --
 
         // 헤더와 바디 붙이기
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
         try {
-            kakaoPayDTO = restTemplate.postForObject(new URI(Host + "/v1/payment/ready"), body, KakaoPayDTO.class);
+            kakaoPayReadyDTO = restTemplate.postForObject(new URI(Host + "/v1/payment/ready"), body, KakaoPayReadyDTO.class);
 
-            log.info("" + kakaoPayDTO);
-            return kakaoPayDTO.getNext_redirect_pc_url();
+            log.info("받은 정보 1 "+ kakaoPayReadyDTO);
+            String result =  kakaoPayReadyDTO.getNext_redirect_pc_url();
 
+            return result;
         } catch (RestClientException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        return "/pay";
+        return null;
+    }
+
+
+    public KakaoPayResultDTO kakaoPayInfo(String pg_token) {
+
+        log.info("KakaoPayInfoVO............................................");
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        // 서버로 요청할 Header
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "KakaoAK " + kakaoAdminKey); // 어드민 키
+        headers.add("Accept", "application/json");
+        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+
+        // 서버로 요청할 Body
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+        params.add("cid", "TC0ONETIME");
+        params.add("tid", kakaoPayReadyDTO.getTid());
+        params.add("partner_order_id", "1001"); // 주문 번호
+        params.add("partner_user_id", "userEmail"); // 회원 아이디 uNick
+        params.add("pg_token", pg_token);
+        params.add("total_amount", "10000");
+
+        HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
+
+        try {
+            kakaoPayResultDTO = restTemplate.postForObject(new URI(Host + "/v1/payment/approve"), body, KakaoPayResultDTO.class);
+
+            log.info("받은 정보 2 " + kakaoPayResultDTO);
+
+            return kakaoPayResultDTO;
+
+        } catch (RestClientException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
