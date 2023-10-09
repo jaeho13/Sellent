@@ -19,7 +19,6 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -61,7 +60,7 @@ public class KakaoPayService {
         params.add("quantity", "1"); // 상품 수량
         params.add("total_amount", "10000"); // 상품 가격 ---- sPrice
         params.add("tax_free_amount", "1000"); // 상품 비과세 금액
-        params.add("approval_url", "http://localhost:8081/kakaoPaySuccess"); // 성공시 url
+        params.add("approval_url", "http://localhost:3000/"); // 성공시 url
         params.add("cancel_url", "http://localhost:8081/kakaoPayCancle"); // 실패시 url -- 실패했습니다 > 뒤로가기
         params.add("fail_url", "http://localhost:8081/kakaoPayFail"); // 실패시 url --
 

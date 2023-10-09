@@ -70,13 +70,16 @@ const SellentRead = () => {
         loadBoard();
     }, [sellIdx]);
 
-    /* </초기 값 불러오기 끝> */
-
-    /* <확인> */
+    const PaySubmit = async () => {
+        try {
+            await axios.post(`/kakaoPay?sellIdx=${sellIdx}`);
+            console.log("결제창 이동 성공");
+        } catch (error) {
+            console.log("결제창 이동 성공");
+        }
+    }
 
     const sellentUpdate = () => {
-        console.log("이재호 국적1 : ", sellentRead.userEmail);
-        console.log("이재호 국적2 : ", sessionStorage.getItem("userEmail"));
         sellentRead.userEmail === sessionStorage.getItem("userEmail") ?
             navigate(`/sellentUpdate/${sellIdx}`) :
             Swal.fire('내가 작성한 글만 수정할 수 있습니다.', '', 'error');
@@ -220,6 +223,7 @@ const SellentRead = () => {
                         </CenterBottomBind>
                         <ButtonBind>
                             <Price> 거래 가격 : {sellentRead.sellPrice}</Price>
+                            <KakaoPayButton onClick={PaySubmit}>결제하기</KakaoPayButton>
                             <Upload onClick={sellentUpdate}>수정하기</Upload>
                             <Cancel onClick={sellentDelete}>삭제하기</Cancel>
                         </ButtonBind>
@@ -590,7 +594,7 @@ const ButtonBind = styled.div`
 `
 
 const Price = styled.div`
-    width: 50%;
+    width: 32%;
     height: 5vh;
     border: 2px solid #595959;
     margin-left: 0.7em;
@@ -600,12 +604,25 @@ const Price = styled.div`
     font-weight: bold;
 `
 
-const Upload = styled.button`
+const KakaoPayButton = styled.button`
     width: 15%;
     height: 5vh;
     border: 2px solid #595959;
     font-size: 1.5em;
     margin-left: 2.7em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+`
+
+const Upload = styled.button`
+    width: 15%;
+    height: 5vh;
+    border: 2px solid #595959;
+    font-size: 1.5em;
+    margin-left: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -634,6 +651,6 @@ const CenterWhere = styled.div`
     display: flex;
     align-items: center;
     font-weight: bold;
-    margin-top: 0.5em;
+    margin-top: 1em;
     margin-left: 0.6em;
 `

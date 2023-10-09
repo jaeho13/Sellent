@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,20 +37,22 @@ public class KakaoPayController {
     }
 
     @GetMapping("/kakaoPay")
-    public String kakaoPay(@RequestParam String sellIdx, HttpServletRequest request)
+    public Map<String,Object> kakaoPay(@RequestParam String sellIdx, HttpServletRequest request)
             throws Exception {
-    //public String kakaoPay() {
+        Map<String, Object> map = new HashMap<>();
+
         UserList userList = userSession(request);
         String userEmail = userList.getUserEmail();
-
         String resultUrl = kakaoPay.kakaoPayReady(sellIdx, userEmail);
-        //return null;
-        return resultUrl;
+        map.put("Url", resultUrl);
+
+        return map;
     }
 
     @GetMapping("/kakaoPaySuccess")
     public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
-        log.info("kakaoPaySuccess get............................................");
+
+        log.info("kakaoPay Success get................");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
 
         model.addAttribute("info", kakaoPay.kakaoPayInfo(pg_token));
