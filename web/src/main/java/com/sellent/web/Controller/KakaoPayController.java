@@ -23,17 +23,16 @@ public class KakaoPayController {
     }
 
     @PostMapping("/kakaoPay")
-    public String kakaoPay(){
+    public String kakaoPay() {
         log.info("kakaoPay post.....................");
 
         return "redirect:" + kakaoPay.kakaoPayReady();
     }
 
     @GetMapping("/kakaoPaySuccess")
-    public void kakaoPaySuccess(@RequestParam("pg_token")String pg_token, Model model) {
+    public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
         log.info("kakaoPay Success get................");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
     }
-
 
 }
