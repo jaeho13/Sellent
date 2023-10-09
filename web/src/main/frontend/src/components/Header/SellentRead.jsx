@@ -594,7 +594,7 @@ const ButtonBind = styled.div`
 `
 
 const Price = styled.div`
-    width: 50%;
+    width: 32%;
     height: 5vh;
     border: 2px solid #595959;
     margin-left: 0.7em;
@@ -622,7 +622,7 @@ const Upload = styled.button`
     height: 5vh;
     border: 2px solid #595959;
     font-size: 1.5em;
-    margin-left: 2.7em;
+    margin-left: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -651,6 +651,6 @@ const CenterWhere = styled.div`
     display: flex;
     align-items: center;
     font-weight: bold;
-    margin-top: 0.5em;
+    margin-top: 1em;
     margin-left: 0.6em;
 `
