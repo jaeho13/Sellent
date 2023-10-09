@@ -72,8 +72,13 @@ const SellentRead = () => {
 
     const PaySubmit = async () => {
         try {
-            await axios.post(`/kakaoPay?sellIdx=${sellIdx}`);
-            console.log("결제창 이동 성공");
+            if (sellentRead.userEmail === sessionStorage.getItem("userEmail")) {
+                Swal.fire('내가 작성한 글은 구매할 수 없습니다.', '', 'error');
+            } else {
+                await axios.get(`/kakaoPay?sellIdx=${sellIdx}`);
+                console.log("결제창 이동 성공");
+                // navigate("/");
+            }
         } catch (error) {
             console.log("결제창 이동 성공");
         }
@@ -144,12 +149,6 @@ const SellentRead = () => {
             .catch((error) => {
                 console.log(error);
             });
-    }
-
-    const nickSubmit = (e) => {
-        e.preventDefault();
-        axios({
-        })
     }
 
     const onDelete = async (sellCmtIdx) => {
