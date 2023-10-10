@@ -43,6 +43,8 @@ public class KakaoPayService {
         int sellIdx = Integer.parseInt(num);
         Selling selling = sellingService.findContent(sellIdx);
         String price = String.valueOf(selling.getSellPrice());
+        String sellIdxToString = String.valueOf(sellIdx);
+
 
         // Server Request Header : 서버 요청 헤더
         HttpHeaders headers = new HttpHeaders();
@@ -54,15 +56,15 @@ public class KakaoPayService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
         params.add("cid", "TC0ONETIME"); // 가맹점 코드 - 테스트용
-        params.add("partner_order_id", "1001"); // 주문 번호
-        params.add("partner_user_id", "userEmail"); // 회원 아이디 uNick
+        params.add("partner_order_id", sellIdxToString); // 주문 번호
+        params.add("partner_user_id", userEmail); // 회원 아이디 uNick
         params.add("item_name", "sellent"); // 상품 명
         params.add("quantity", "1"); // 상품 수량
-        params.add("total_amount", "10000"); // 상품 가격 ---- sPrice
+        params.add("total_amount", price); // 상품 가격 ---- sPrice
         params.add("tax_free_amount", "1000"); // 상품 비과세 금액
         params.add("approval_url", "http://localhost:3000/"); // 성공시 url
-        params.add("cancel_url", "http://localhost:8081/kakaoPayCancle"); // 실패시 url -- 실패했습니다 > 뒤로가기
-        params.add("fail_url", "http://localhost:8081/kakaoPayFail"); // 실패시 url --
+        params.add("cancel_url", "http://localhost:3000/"); // 실패시 url -- 실패했습니다 > 뒤로가기
+        params.add("fail_url", "http://localhost:3000/"); // 실패시 url --
 
         // 헤더와 바디 붙이기
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
