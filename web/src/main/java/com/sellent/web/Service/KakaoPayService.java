@@ -36,7 +36,7 @@ public class KakaoPayService {
     private KakaoPayResultDTO kakaoPayResultDTO;
 
     public String kakaoPayReady(String num, String userEmail) {
-    //public String kakaoPayReady() {
+        // public String kakaoPayReady() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory()); // 정확한 에러 파악을 위해 생성
 
@@ -44,7 +44,6 @@ public class KakaoPayService {
         Selling selling = sellingService.findContent(sellIdx);
         String price = String.valueOf(selling.getSellPrice());
         String sellIdxToString = String.valueOf(sellIdx);
-
 
         // Server Request Header : 서버 요청 헤더
         HttpHeaders headers = new HttpHeaders();
@@ -62,7 +61,7 @@ public class KakaoPayService {
         params.add("quantity", "1"); // 상품 수량
         params.add("total_amount", price); // 상품 가격 ---- sPrice
         params.add("tax_free_amount", "1000"); // 상품 비과세 금액
-        params.add("approval_url", "http://localhost:3000/"); // 성공시 url
+        params.add("approval_url", "http://localhost:3000/buylist"); // 성공시 url
         params.add("cancel_url", "http://localhost:3000/"); // 실패시 url -- 실패했습니다 > 뒤로가기
         params.add("fail_url", "http://localhost:3000/"); // 실패시 url --
 
@@ -70,10 +69,11 @@ public class KakaoPayService {
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
         try {
-            kakaoPayReadyDTO = restTemplate.postForObject(new URI(Host + "/v1/payment/ready"), body, KakaoPayReadyDTO.class);
+            kakaoPayReadyDTO = restTemplate.postForObject(new URI(Host + "/v1/payment/ready"), body,
+                    KakaoPayReadyDTO.class);
 
-            log.info("받은 정보 1 "+ kakaoPayReadyDTO);
-            String result =  kakaoPayReadyDTO.getNext_redirect_pc_url();
+            log.info("받은 정보 1 " + kakaoPayReadyDTO);
+            String result = kakaoPayReadyDTO.getNext_redirect_pc_url();
 
             return result;
         } catch (RestClientException e) {
@@ -83,7 +83,6 @@ public class KakaoPayService {
         }
         return null;
     }
-
 
     public KakaoPayResultDTO kakaoPayInfo(String pg_token) {
 
@@ -109,7 +108,8 @@ public class KakaoPayService {
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
         try {
-            kakaoPayResultDTO = restTemplate.postForObject(new URI(Host + "/v1/payment/approve"), body, KakaoPayResultDTO.class);
+            kakaoPayResultDTO = restTemplate.postForObject(new URI(Host + "/v1/payment/approve"), body,
+                    KakaoPayResultDTO.class);
 
             log.info("받은 정보 2 " + kakaoPayResultDTO);
 
