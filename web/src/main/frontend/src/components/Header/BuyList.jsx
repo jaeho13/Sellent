@@ -63,6 +63,28 @@ const BuyList = () => {
         navigate(`/sellentRead/${sellIdx}`); //sellIdx에 해당하는 글 읽기 페이지 이동
     }
 
+    // URL에서 "pg_token" 파라미터 가져오기
+    const pg_token = new URL(window.location.href).searchParams.get("pg_token");
+    console.log(pg_token);
+
+    useEffect(() => {
+        // 결제 성공시 pg_token을 카카오페이 서버에서 반환 받고,
+        // 받은 URL에서 pg_token을 꺼내와서 서버로 보낸다.
+        const url = `/kakaoPaySuccess?pg_token=${pg_token}`;
+
+        // axios를 사용하여 서버에 요청 보내기
+        axios
+            .get(url)
+            .then((response) => {
+                // 요청이 성공한 경우 서버 응답을 처리할 수 있습니다.
+                console.log("서버 응답:", response.data);
+            })
+            .catch((error) => {
+                // 요청이 실패한 경우 에러를 처리할 수 있습니다.
+                console.error("에러 발생:", error);
+            });
+    }, [pg_token]); // pg_token이 변경될 때마다 useEffect 실행
+
     return (
         <>
             <Window>
