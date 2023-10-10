@@ -17,6 +17,7 @@ import Search from "./components/Header/Search";
 import SellentRead from "./components/Header/SellentRead";
 import SellentUpdate from "./components/Header/SellentUpdate";
 import Post from "./components/Header/Post";
+import BuyList from "./components/Header/BuyList";
 
 function App() {
   return (
@@ -42,7 +43,7 @@ function App() {
           <Route path="/sellentUpdate" element={<SellentUpdate />} />
           <Route path="/sellentUpdate/:sellIdx" element={<SellentUpdate />} />
           <Route path="/Post" element={<Post />} />
-
+          <Route path="/buylist" element={<BuyList />} />
         </Routes>
       </Router>
     

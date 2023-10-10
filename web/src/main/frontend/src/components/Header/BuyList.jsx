@@ -8,9 +8,10 @@ import Map from "./Map";
 import axios from "axios";
 import NoImage from "../Image/no_img.png";
 
-const MyPage = () => {
+const BuyList = () => {
 
     const navigate = useNavigate();
+
 
     const goHome = () => {
         navigate("/")
@@ -40,9 +41,6 @@ const MyPage = () => {
         navigate("/search")
     }
 
-    const goBuyList = () => {
-        navigate("/buylist")
-    }
 
     const [purList, setPurList] = useState([]);
 
@@ -73,6 +71,7 @@ const MyPage = () => {
                 </Close>
             </Window>
 
+
             <Back>
                 <Bind>
                     <Left>
@@ -87,23 +86,6 @@ const MyPage = () => {
                     </Left>
 
                     <Center>
-
-                        <CenterTop>닉네임</CenterTop>
-
-                        <DetailsBind>
-                            <BuyDetails onClick={goBuyList}>재능 구매 내역</BuyDetails>
-                            <SellDetails>재능 판매 내역</SellDetails>
-                            <Favorite>재능 즐겨찾기</Favorite>
-                        </DetailsBind>
-
-                        <DetailsBind>
-                            <Review>받은 후기</Review>
-                            <Charge>포인트 충전</Charge>
-                        </DetailsBind>
-
-                        <Where>내 지역</Where>
-                        <Map />
-
                     </Center>
 
                     <Right>
@@ -140,7 +122,7 @@ const MyPage = () => {
     );
 }
 
-export default MyPage;
+export default BuyList;
 
 const Window = styled.div`
     width: 85%;
@@ -180,7 +162,6 @@ const Left = styled.div`
     border-right: 2px solid black;
     background-color: white;
 `
-
 
 const LeftTop = styled.div`
     width: 100%;
@@ -231,6 +212,7 @@ const LeftBoard = styled.div`
         font-size: 1em; /* 글씨 크기를 줄임 */
     }
 `
+
 const Cash = styled.div`
     width: 80%;
     height: 3vh;
@@ -277,90 +259,8 @@ const Name = styled.div`
 const Center = styled.div`
     width: 55%;
     height: 85vh;
-    /* border: 2px solid red; */
+    border: 2px solid red;
     background-color: white;
-`
-
-const CenterTop = styled.div`
-    width: 50%;
-    height: 5vh;
-    border: 2px solid black;
-    font-size: 2rem;
-    margin-top: 1rem;
-    margin-left: 2rem;
-    display: flex;
-    align-items: center;
-`
-
-const DetailsBind = styled.div`
-    display: flex;
-    justify-content: row;
-`
-
-const BuyDetails = styled.div`
-    width: 28%;
-    height: 5vh;
-    border: 2px solid black;
-    font-size: 2em;
-    margin-top: 1em;
-    margin-left: 1em;
-    display: flex;
-    align-items: center;
-`
-
-const SellDetails = styled.div`
-    width: 28%;
-    height: 5vh;
-    border: 2px solid black;
-    font-size: 2em;
-    margin-top: 1em;
-    margin-left: 1em;
-    display: flex;
-    align-items: center;
-`
-
-const Favorite = styled.div`
-    width: 28%;
-    height: 5vh;
-    border: 2px solid black;
-    font-size: 2em;
-    margin-top: 1em;
-    margin-left: 1em;
-    display: flex;
-    align-items: center;
-`
-
-const Review = styled.div`
-    width: 28%;
-    height: 5vh;
-    border: 2px solid black;
-    font-size: 2em;
-    margin-top: 1em;
-    margin-left: 1em;
-    display: flex;
-    align-items: center;
-`
-
-const Charge = styled.div`
-    width: 28%;
-    height: 5vh;
-    border: 2px solid black;
-    font-size: 2em;
-    margin-top: 1em;
-    margin-left: 1em;
-    display: flex;
-    align-items: center;
-`
-
-const Where = styled.div`
-    width: 28%;
-    height: 5vh;
-    border: 2px solid black;
-    font-size: 2em;
-    margin-top: 1em;
-    margin-left: 1em;
-    display: flex;
-    align-items: center;
 `
 
 const Right = styled.div`
@@ -381,6 +281,7 @@ const RightTop = styled.div`
     border-bottom: 2px solid black;
     font-size: 2.5rem;
     display: flex;
+    /* justify-content: center; */
     align-items: center;
     font-weight: bolder;
     padding-top: 0.5em;
@@ -407,9 +308,11 @@ const RightBoard = styled.div`
     height: 20vh;
     border: 2px solid black;
     margin-top: 2rem;
+    /* margin-left: 5rem; */
     margin-left: 1rem;
     margin-right: 1rem;
 `
+
 
 const BoardImg = styled.div`
     width: 100%;
