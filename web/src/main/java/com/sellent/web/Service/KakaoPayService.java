@@ -24,6 +24,7 @@ import java.net.URISyntaxException;
 @Transactional
 @Log
 public class KakaoPayService {
+
     @Autowired
     SellingService sellingService;
 
@@ -36,7 +37,6 @@ public class KakaoPayService {
     private KakaoPayResultDTO kakaoPayResultDTO;
 
     public String kakaoPayReady(String num, String userEmail) {
-    //public String kakaoPayReady() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory()); // 정확한 에러 파악을 위해 생성
 
@@ -45,9 +45,9 @@ public class KakaoPayService {
         String price = String.valueOf(selling.getSellPrice());
         String sellIdxToString = String.valueOf(sellIdx);
 
-
         // Server Request Header : 서버 요청 헤더
         HttpHeaders headers = new HttpHeaders();
+
         headers.add("Authorization", "KakaoAK " + kakaoAdminKey); // 어드민 키
         headers.add("Accept", "application/json");
         headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
@@ -62,7 +62,7 @@ public class KakaoPayService {
         params.add("quantity", "1"); // 상품 수량
         params.add("total_amount", price); // 상품 가격 ---- sPrice
         params.add("tax_free_amount", "1000"); // 상품 비과세 금액
-        params.add("approval_url", "http://localhost:3000/"); // 성공시 url
+        params.add("approval_url", "http://localhost:3000/buylist"); // 성공시 url
         params.add("cancel_url", "http://localhost:3000/"); // 실패시 url -- 실패했습니다 > 뒤로가기
         params.add("fail_url", "http://localhost:3000/"); // 실패시 url --
 
@@ -85,7 +85,7 @@ public class KakaoPayService {
     }
 
 
-    public KakaoPayResultDTO kakaoPayInfo(String pg_token) {
+    public KakaoPayResultDTO kakaoPayInfo(String pg_token, String userEmail) {
 
         log.info("KakaoPayInfoVO............................................");
 
@@ -101,10 +101,10 @@ public class KakaoPayService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
         params.add("cid", "TC0ONETIME");
         params.add("tid", kakaoPayReadyDTO.getTid());
-        params.add("partner_order_id", "1001"); // 주문 번호
-        params.add("partner_user_id", "userEmail"); // 회원 아이디 uNick
+        params.add("partner_order_id", kakaoPayResultDTO.getPartner_order_id()); // 주문 번호
+        params.add("partner_user_id", kakaoPayResultDTO.getPartner_user_id()); // 회원 아이디 uNick
         params.add("pg_token", pg_token);
-        params.add("total_amount", "10000");
+        params.add("total_amount", String.valueOf(kakaoPayResultDTO.getAmount()));
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 

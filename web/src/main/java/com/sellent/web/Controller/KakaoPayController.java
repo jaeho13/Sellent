@@ -54,11 +54,17 @@ public class KakaoPayController {
     }
 
     @GetMapping("/kakaoPaySuccess")
-    public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
+    public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, HttpServletRequest request)
+            throws Exception {
 
         log.info("kakaoPay Success get................");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
 
-        model.addAttribute("info", kakaoPay.kakaoPayInfo(pg_token));
+        Map<String, Object> map = new HashMap<>();
+
+        UserList userList = userSession(request);
+        String userEmail = userList.getUserEmail();
+        kakaoPay.kakaoPayInfo(pg_token, userEmail);
+        //model.addAttribute("info", kakaoPay.kakaoPayInfo(pg_token));
     }
 }
