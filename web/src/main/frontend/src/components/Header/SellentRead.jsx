@@ -70,8 +70,6 @@ const SellentRead = () => {
         loadBoard();
     }, [sellIdx]);
 
-    const [url, setUrl] = useState([]);
-
     const PaySubmit = async () => {
         try {
             if (sellentRead.userEmail === sessionStorage.getItem("userEmail")) {
@@ -79,7 +77,8 @@ const SellentRead = () => {
             } else {
                 const response = await axios.get(`/kakaoPay?sellIdx=${sellIdx}`);
                 console.log("결제창 이동 성공");
-                setUrl(response.data.Url);
+                const kakaoPayUrl = response.data.Url;
+                window.location.href = kakaoPayUrl;  // Redirect to KakaoPay page
                 console.log("@@@", response.data);
             }
         } catch (error) {
