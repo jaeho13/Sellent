@@ -70,14 +70,17 @@ const SellentRead = () => {
         loadBoard();
     }, [sellIdx]);
 
+    const [url, setUrl] = useState([]);
+
     const PaySubmit = async () => {
         try {
             if (sellentRead.userEmail === sessionStorage.getItem("userEmail")) {
                 Swal.fire('내가 작성한 글은 구매할 수 없습니다.', '', 'error');
             } else {
-                await axios.get(`/kakaoPay?sellIdx=${sellIdx}`);
+                const response = await axios.get(`/kakaoPay?sellIdx=${sellIdx}`);
                 console.log("결제창 이동 성공");
-                // navigate("/");
+                setUrl(response.data.Url);
+                console.log("@@@", response.data);
             }
         } catch (error) {
             console.log("결제창 이동 성공");
