@@ -39,11 +39,13 @@ public class KakaoPayController {
     @GetMapping("/kakaoPay")
     public Map<String,Object> kakaoPay(@RequestParam String sellIdx, HttpServletRequest request)
             throws Exception {
+        System.out.println("카카오페이 Get 요청 성공!!");
         Map<String, Object> map = new HashMap<>();
 
         UserList userList = userSession(request);
         String userEmail = userList.getUserEmail();
         String resultUrl = kakaoPay.kakaoPayReady(sellIdx, userEmail);
+
         map.put("Url", resultUrl);
 
         return map;
