@@ -20,6 +20,4 @@ public class SellingList { // 구매 내역 관리 테이블
     @SequenceGenerator(name = "sellListSeq", sequenceName = "sellListSeq", allocationSize = 1)
     private int sellListIdx; // 구매 내역 관리 번호
 
-
-
 }
