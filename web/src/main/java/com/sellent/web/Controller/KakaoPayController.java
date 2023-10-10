@@ -15,7 +15,8 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller
+@RestController
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @Log
 public class KakaoPayController {
@@ -40,6 +41,7 @@ public class KakaoPayController {
     public Map<String,Object> kakaoPay(@RequestParam String sellIdx, HttpServletRequest request)
             throws Exception {
         System.out.println("카카오페이 Get 요청 성공!!");
+
         Map<String, Object> map = new HashMap<>();
 
         UserList userList = userSession(request);
