@@ -383,7 +383,8 @@ const CenterTop = styled.div`
     align-items: center;
     font-weight: bolder;
     color: #595959;
-font-family: 'Do Hyeon', sans-serif;`
+    font-family: 'Do Hyeon', sans-serif;
+`
 
 const LiveChapter = styled.div`
     width: 50%;
