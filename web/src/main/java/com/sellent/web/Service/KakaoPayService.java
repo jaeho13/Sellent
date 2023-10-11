@@ -86,11 +86,16 @@ public class KakaoPayService {
     }
 
 
-    public KakaoPayResultDTO kakaoPayInfo(String pg_token, String userEmail) {
+    public KakaoPayResultDTO kakaoPayInfo(String pg_token, String userEmail, String num) {
 
         log.info("KakaoPayInfoVO............................................");
 
         RestTemplate restTemplate = new RestTemplate();
+
+        int sellIdx = Integer.parseInt(num);
+        Selling selling = sellingService.findContent(sellIdx);
+        String price = String.valueOf(selling.getSellPrice());
+        String sellIdxToString = String.valueOf(sellIdx);
 
         // 서버로 요청할 Header
         HttpHeaders headers = new HttpHeaders();
@@ -100,12 +105,13 @@ public class KakaoPayService {
 
         // 서버로 요청할 Body
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+
         params.add("cid", "TC0ONETIME");
         params.add("tid", kakaoPayReadyDTO.getTid());
-        params.add("partner_order_id", kakaoPayResultDTO.getPartner_order_id()); // 주문 번호
-        params.add("partner_user_id", kakaoPayResultDTO.getPartner_user_id()); // 회원 아이디 uNick
+        params.add("partner_order_id", sellIdxToString); // 주문 번호
+        params.add("partner_user_id", userEmail); // 회원 아이디 uNick
         params.add("pg_token", pg_token);
-        params.add("total_amount", String.valueOf(kakaoPayResultDTO.getAmount()));
+        params.add("total_amount", price);
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
@@ -124,6 +130,7 @@ public class KakaoPayService {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
         return null;
     }
 }
