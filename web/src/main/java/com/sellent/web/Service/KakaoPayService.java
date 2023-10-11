@@ -70,10 +70,11 @@ public class KakaoPayService {
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
         try {
-            kakaoPayReadyDTO = restTemplate.postForObject(new URI(Host + "/v1/payment/ready"), body, KakaoPayReadyDTO.class);
+            kakaoPayReadyDTO = restTemplate.postForObject(new URI(Host + "/v1/payment/ready"), body,
+                    KakaoPayReadyDTO.class);
 
-            log.info("받은 정보 1 "+ kakaoPayReadyDTO);
-            String result =  kakaoPayReadyDTO.getNext_redirect_pc_url();
+            log.info("받은 정보 1 " + kakaoPayReadyDTO);
+            String result = kakaoPayReadyDTO.getNext_redirect_pc_url();
 
             return result;
         } catch (RestClientException e) {
@@ -109,7 +110,8 @@ public class KakaoPayService {
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
         try {
-            kakaoPayResultDTO = restTemplate.postForObject(new URI(Host + "/v1/payment/approve"), body, KakaoPayResultDTO.class);
+            kakaoPayResultDTO = restTemplate.postForObject(new URI(Host + "/v1/payment/approve"), body,
+                    KakaoPayResultDTO.class);
 
             log.info("받은 정보 2 " + kakaoPayResultDTO);
 
@@ -122,7 +124,6 @@ public class KakaoPayService {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         return null;
     }
 }
