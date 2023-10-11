@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -44,6 +45,7 @@ public class KakaoPayController {
 
         Map<String, Object> map = new HashMap<>();
 
+
         UserList userList = userSession(request);
         String userEmail = userList.getUserEmail();
         String resultUrl = kakaoPay.kakaoPayReady(sellIdx, userEmail);
@@ -54,11 +56,18 @@ public class KakaoPayController {
     }
 
     @GetMapping("/kakaoPaySuccess")
-    public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
+    public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, @RequestParam("sellIdx") String sellIdx,HttpServletRequest request)
+            throws Exception {
 
         log.info("kakaoPay Success get................");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
 
-        model.addAttribute("info", kakaoPay.kakaoPayInfo(pg_token));
+        Map<String, Object> map = new HashMap<>();
+
+
+        UserList userList = userSession(request);
+        String userEmail = userList.getUserEmail();
+        kakaoPay.kakaoPayInfo(pg_token, userEmail, sellIdx);
+        //model.addAttribute("info", kakaoPay.kakaoPayInfo(pg_token));
     }
 }

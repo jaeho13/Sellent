@@ -24,6 +24,7 @@ import java.net.URISyntaxException;
 @Transactional
 @Log
 public class KakaoPayService {
+
     @Autowired
     SellingService sellingService;
 
@@ -36,7 +37,6 @@ public class KakaoPayService {
     private KakaoPayResultDTO kakaoPayResultDTO;
 
     public String kakaoPayReady(String num, String userEmail) {
-        // public String kakaoPayReady() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory()); // 정확한 에러 파악을 위해 생성
 
@@ -47,6 +47,7 @@ public class KakaoPayService {
 
         // Server Request Header : 서버 요청 헤더
         HttpHeaders headers = new HttpHeaders();
+
         headers.add("Authorization", "KakaoAK " + kakaoAdminKey); // 어드민 키
         headers.add("Accept", "application/json");
         headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
@@ -84,11 +85,17 @@ public class KakaoPayService {
         return null;
     }
 
-    public KakaoPayResultDTO kakaoPayInfo(String pg_token) {
+
+    public KakaoPayResultDTO kakaoPayInfo(String pg_token, String userEmail, String num) {
 
         log.info("KakaoPayInfoVO............................................");
 
         RestTemplate restTemplate = new RestTemplate();
+
+        int sellIdx = Integer.parseInt(num);
+        Selling selling = sellingService.findContent(sellIdx);
+        String price = String.valueOf(selling.getSellPrice());
+        String sellIdxToString = String.valueOf(sellIdx);
 
         // 서버로 요청할 Header
         HttpHeaders headers = new HttpHeaders();
@@ -98,12 +105,13 @@ public class KakaoPayService {
 
         // 서버로 요청할 Body
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+
         params.add("cid", "TC0ONETIME");
         params.add("tid", kakaoPayReadyDTO.getTid());
-        params.add("partner_order_id", "1001"); // 주문 번호
-        params.add("partner_user_id", "userEmail"); // 회원 아이디 uNick
+        params.add("partner_order_id", sellIdxToString); // 주문 번호
+        params.add("partner_user_id", userEmail); // 회원 아이디 uNick
         params.add("pg_token", pg_token);
-        params.add("total_amount", "10000");
+        params.add("total_amount", price);
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
