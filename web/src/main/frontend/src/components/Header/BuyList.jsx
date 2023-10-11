@@ -70,7 +70,7 @@ const BuyList = () => {
     useEffect(() => {
         // 결제 성공시 pg_token을 카카오페이 서버에서 반환 받고,
         // 받은 URL에서 pg_token을 꺼내와서 서버로 보낸다.
-        const url = `/kakaoPaySuccess?pg_token=${pg_token}&sellIdx=${sellIdx}`;
+        const url = `/kakaoPaySuccess?pg_token=${pg_token}`;
 
         // axios를 사용하여 서버에 요청 보내기
         axios
