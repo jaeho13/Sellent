@@ -71,7 +71,7 @@ const BuyList = () => {
         // 결제 성공시 pg_token을 카카오페이 서버에서 반환 받고,
         // 받은 URL에서 pg_token을 꺼내와서 서버로 보낸다.
         const url = `/kakaoPaySuccess?pg_token=${pg_token}`;
-
+        // &sellIdx=${sellIdx}
         // axios를 사용하여 서버에 요청 보내기
         axios
             .get(url)
@@ -109,20 +109,63 @@ const BuyList = () => {
 
                     <Center>
                         <CenterTop>재능구매내역</CenterTop>
-                        <CenterHalfTop />
+                        <CenterHalfTop>
 
-                        <CenterBoardTopic>재능 구매명
-                            <CenterBoardPriceTopic>가격</CenterBoardPriceTopic>
-                        </CenterBoardTopic>
+                            <CenterBoardTopic>재능 구매명
+                                <CenterBoardPriceTopic>가격</CenterBoardPriceTopic>
+                            </CenterBoardTopic>
 
-                        <CenterBoard>너 사람 무시하지마
-                            <CenterBoardPrice>$2000</CenterBoardPrice>
-                        </CenterBoard>
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                            </CenterBoard>
 
-                        <CenterBoard>너 사람 무시하지마
-                            <CenterBoardPrice>$2000</CenterBoardPrice>
-                        </CenterBoard>
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                            </CenterBoard>
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                            </CenterBoard>
 
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                            </CenterBoard>
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                            </CenterBoard>
+
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                            </CenterBoard>
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                            </CenterBoard>
+
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                            </CenterBoard>
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                            </CenterBoard>
+
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                            </CenterBoard>
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                            </CenterBoard>
+
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                            </CenterBoard>
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                            </CenterBoard>
+
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                            </CenterBoard>
+
+                        </CenterHalfTop>
                     </Center>
 
                     <Right>
@@ -316,8 +359,10 @@ const CenterTop = styled.div`
 `
 const CenterHalfTop = styled.div`
     width: 100%;
-    height: 3.5vh;
+    height: 77vh;
     border-top: 2px solid black;
+    overflow: auto; /* 스크롤 추가 */
+    overflow-x: hidden; /* 가로 스크롤 제거 */
 `
 
 const CenterBoardTopic = styled.div`
@@ -325,7 +370,7 @@ const CenterBoardTopic = styled.div`
     height: 5vh;
     border: 2px solid black;
     margin: 0 auto;
-    margin-bottom: 1em;
+    margin-top: 0.5em;
     font-size: 2.5em;
     display: flex;
     align-items: center;
@@ -340,13 +385,12 @@ const CenterBoardPriceTopic = styled.div`
     justify-content: center;
 `
 
-
 const CenterBoard = styled.div`
     width: 90%;
     height: 5vh;
     border: 2px solid black;
     margin: 0 auto;
-    margin-top: 0.5em;
+    margin-top: 0.8em;
     font-size: 2.5em;
     display: flex;
     align-items: center;
