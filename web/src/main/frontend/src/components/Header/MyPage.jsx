@@ -306,6 +306,7 @@ const BuyDetails = styled.div`
     margin-left: 1em;
     display: flex;
     align-items: center;
+    cursor: pointer;
 `
 
 const SellDetails = styled.div`

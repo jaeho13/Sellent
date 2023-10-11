@@ -267,8 +267,6 @@ const SellentRead = () => {
 }
 export default SellentRead;
 
-/* <CSS> */
-
 const Window = styled.div`
     width: 85%;
     height: 3rem;
