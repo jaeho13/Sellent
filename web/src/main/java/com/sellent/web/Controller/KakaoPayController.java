@@ -56,7 +56,7 @@ public class KakaoPayController {
     }
 
     @GetMapping("/kakaoPaySuccess")
-    public List<SellingList> kakaoPaySuccess(@RequestParam("pg_token") String pg_token, HttpServletRequest request)
+    public List<SellingList> kakaoPaySuccess(@RequestParam("pg_token") String pg_token, @RequestParam("sellIdx") String sellIdx, HttpServletRequest request)
             throws Exception {
 
         log.info("kakaoPay Success get................");
@@ -64,10 +64,7 @@ public class KakaoPayController {
 
         UserList userList = userSession(request);
         String userEmail = userList.getUserEmail();
-        String sellIdx = "50";
+
         return kakaoPay.kakaoPayInfo(pg_token, userEmail, sellIdx);
-
-        //todo : 거래장부 테이블 생성 후 회원에 맞는 거래정보 내려주기
-
     }
 }
