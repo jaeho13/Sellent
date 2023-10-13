@@ -120,7 +120,6 @@ const Search = () => {
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
                         <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
-                        <Cash>25,000원</Cash>
                         <Name>이재호</Name>
                     </Left>
 
@@ -210,24 +209,27 @@ export default Search;
 const Window = styled.div`
     width: 85%;
     height: 3rem;
-    border: 2px solid red;
+    border: 2px solid black;
+    border-bottom: none;
     margin: 0 auto;
     margin-top: 4vh;
     background-color: lightgrey;
-`
-
-const Back = styled.div`
-    width: 85%;
-    height: 85vh;
-    border: 2px solid green;
-    margin: 0 auto;
-    /* margin-top: 8vh; */
+    box-shadow: 1em 1em 1em 1em #6E6E6E;
 `
 
 const Close = styled.div`
     font-size: 3rem;
     display: flex;
     justify-content: right;
+`
+
+const Back = styled.div`
+    width: 85%;
+    height: 85vh;
+    border: 2px solid black;
+    border-top: none;
+    margin: 0 auto;
+    box-shadow: 1em 1em 1em 1em #6E6E6E;
 `
 
 
@@ -239,7 +241,8 @@ const Bind = styled.div`
 const Left = styled.div`
     width: 15%;
     height: 85vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
+    border-right: 2px solid black;
     background-color: white;
 `
 
@@ -318,9 +321,11 @@ const Cash = styled.div`
 
 const Name = styled.div`
     width: 80%;
-    height: 3vh;
+    height: 6vh;
     border: 2px solid black;
+    border-radius: 0.5em;
     margin: 0 auto;
+    margin-top: 4em;
     font-size: 2rem;
     display: flex;
     justify-content: center;
@@ -341,7 +346,7 @@ const Name = styled.div`
 const Center = styled.div`
     width: 85%;
     height: 85vh;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     background-color: white;
 `
 
@@ -410,9 +415,9 @@ const CenterBoardBind = styled.div`
 `
 
 const CenterBoard = styled.div`
-    width: 100%;
+    width: 80%;
     height: 20vh;
-    border: 2px solid blue;
+    border: 2px solid black;
     margin-top: 2rem;
     margin-left: 5rem;
     /* margin-left: 1rem; */
@@ -421,13 +426,18 @@ const CenterBoard = styled.div`
 const BoardImg = styled.div`
     width: 100%;
     height: 15vh;
-    border: 2px solid red;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    /* border: 2px solid red; */
 `
 
 const BoardTitle = styled.div`
     width: 100%;
     height: 4vh;
-    border: 2px solid red;
+    border-top: 2px solid black;
     font-size: 1.5em;
     display: flex;
     justify-content: space-between;
@@ -446,7 +456,7 @@ const BoardLike = styled.div`
 `
 
 const LikeScore = styled.div`
-    width: 60%;
+    width: 30%;
     height: 4vh;
     /* border: 2px solid black; */
     display: flex;

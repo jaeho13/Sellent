@@ -181,7 +181,6 @@ const Write = () => {
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
                         <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
-                        <Cash>25,000원</Cash>
                         <Name>이재호</Name>
                     </Left>
                     <Center>
@@ -260,10 +259,12 @@ export default Write;
 const Window = styled.div`
     width: 85%;
     height: 3rem;
-    border: 2px solid red;
+    border: 2px solid black;
+    border-bottom: none;
     margin: 0 auto;
     margin-top: 4vh;
-    background-color: lightgrey;
+    background-color: #dcdcdc;
+    box-shadow: 1em 1em 1em 1em #6E6E6E;
 `
 
 const Close = styled.div`
@@ -275,8 +276,10 @@ const Close = styled.div`
 const Back = styled.div`
     width: 85%;
     height: 85vh;
-    border: 2px solid green;
+    border: 2px solid black;
+    border-top: none;
     margin: 0 auto;
+    box-shadow: 1em 1em 1em 1em #6E6E6E;
 `
 
 const Bind = styled.div`
@@ -287,7 +290,8 @@ const Bind = styled.div`
 const Left = styled.div`
     width: 15%;
     height: 85vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
+    border-right: 2px solid black;
     background-color: white;
 `
 
@@ -365,9 +369,11 @@ const Cash = styled.div`
 
 const Name = styled.div`
     width: 80%;
-    height: 3vh;
+    height: 6vh;
     border: 2px solid black;
+    border-radius: 0.5em;
     margin: 0 auto;
+    margin-top: 4em;
     font-size: 2rem;
     display: flex;
     justify-content: center;
@@ -387,7 +393,7 @@ const Name = styled.div`
 const Center = styled.div`
     width: 55%;
     height: 85vh;
-    border: 2px solid red;
+    border-right: 2px solid black;
     background-color: white;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
@@ -396,7 +402,7 @@ const Center = styled.div`
 const CenterTop = styled.div`
     width: 90%;
     height: 5vh;
-    border: 2px solid red;
+    border: 2px solid black;
     font-size: 2.5em;
     display: flex;
     align-items: center;
@@ -408,7 +414,7 @@ const CenterTop = styled.div`
 const CenterTitle = styled.input`
     width: 90%;
     height: 5vh;
-    border: 2px solid red;
+    border: 2px solid black;
     font-size: 2.5em;
     display: flex;
     align-items: center;
@@ -419,7 +425,7 @@ const CenterTitle = styled.input`
 const CenterBoard = styled.textarea`
     width: 90%;
     height: 50vh;
-    border: 2px solid red;
+    border: 2px solid black;
     font-size: 2.5em;
     display: flex;
     margin-top: 0.5em;
@@ -437,8 +443,8 @@ const PictureBind = styled.div`
 const Picture = styled.input`
     width: 70%;
     height: 5vh;
-    border: 2px solid blue;
-    margin-left: 0.5em;
+    border: 2px solid black;
+    margin-left: 0.6em;
     font-size: 2rem;
     display: flex;
     align-items: center;
@@ -447,7 +453,7 @@ const Picture = styled.input`
 const PictureUpload = styled.div`
     width: 15%;
     height: 5vh;
-    border: 2px solid green;
+    border: 2px solid black;
     margin-left: 1.3em;
     margin-bottom: 1em;
     font-size: 2rem;
@@ -478,7 +484,7 @@ const Price = styled.input`
 const Upload = styled.button`
     width: 15%;
     height: 5vh;
-    border: 2px solid red;
+    border: 2px solid black;
     font-size: 1.5em;
     margin-left: 2.7em;
     display: flex;
@@ -491,7 +497,7 @@ const Upload = styled.button`
 const Cancel = styled.button`
     width: 15%;
     height: 5vh;
-    border: 2px solid red;
+    border: 2px solid black;
     font-size: 1.5em;
     margin-left: 1em;
     display: flex;
@@ -504,7 +510,7 @@ const Cancel = styled.button`
 const Right = styled.div`
     width: 30%;
     height: 85vh;
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
     background-color: white;
@@ -538,7 +544,7 @@ const RightBoard = styled.div`
 const CenterWhere = styled.div`
     width: 90%;
     height: 5vh;
-    border: 2px solid red;
+    border: 2px solid black;
     font-size: 2.5em;
     display: flex;
     align-items: center;
@@ -562,7 +568,7 @@ const RadioGroup = styled.div`
 `
 
 const CheckRadio = styled.input`
-    border: 2px solid red;
+    border: 2px solid black;
     width: 10%;
     height: 2em;
     display: flex;
@@ -570,7 +576,7 @@ const CheckRadio = styled.input`
 
 const CheckLabel = styled.label`
     width: 30%;
-    border: 2px solid red;
+    border: 2px solid black;
     display: flex;
     align-items: center;
     font-size: 1.5em;
@@ -578,7 +584,7 @@ const CheckLabel = styled.label`
 `
 
 const AddressBind = styled.div`
-    width: 90%;
+    width: 100%;
     display: flex;
     margin: 0 auto;
 `
@@ -589,6 +595,7 @@ const AddressLeft = styled.button`
     border: 2px solid black;
     font-size: 1.5em;
     margin-top: 0.5em;
+    margin-left: 0.8em;
     cursor: pointer;
 `
 
@@ -599,13 +606,14 @@ const AddressRight = styled.button`
     font-size: 1.5em;
     margin-top: 0.5em;
     margin-left: 1em;
+    /* margin-right: 1em; */
     cursor: pointer;
 `
 
 const AddressInput = styled.input`
     width: 90%;
     height: 5vh;
-    border: 2px solid blue;
+    border: 2px solid black;
     display: flex;
     margin: 0 auto;
     margin-top: 0.5em;
