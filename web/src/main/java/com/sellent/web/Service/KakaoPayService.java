@@ -3,6 +3,8 @@ package com.sellent.web.Service;
 import com.sellent.web.Dto.KakaoPayReadyDTO;
 import com.sellent.web.Dto.KakaoPayResultDTO;
 import com.sellent.web.Entiity.Selling;
+import com.sellent.web.Entiity.SellingList;
+import com.sellent.web.Repository.SellingListRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +30,9 @@ public class KakaoPayService {
 
     @Autowired
     SellingService sellingService;
+
+    @Autowired
+    SellingListRepository sellingListRepository;
 
     private static final String Host = "https://kapi.kakao.com";
 
@@ -86,7 +92,7 @@ public class KakaoPayService {
     }
 
 
-    public KakaoPayResultDTO kakaoPayInfo(String pg_token, String userEmail, String num) {
+    public List<SellingList> kakaoPayInfo(String pg_token, String userEmail, String num) {
 
         log.info("KakaoPayInfoVO............................................");
 
@@ -121,7 +127,20 @@ public class KakaoPayService {
 
             log.info("받은 정보 2 " + kakaoPayResultDTO);
 
-            return kakaoPayResultDTO;
+            SellingList sellingList = new SellingList();
+            int sellOriginIdx = Integer.parseInt(kakaoPayResultDTO.getPartner_order_id());
+
+            sellingList.setSellOriginIdx(sellOriginIdx);
+            sellingList.setUserEmail(kakaoPayResultDTO.getPartner_user_id());
+            sellingList.setAmount(kakaoPayResultDTO.getAmount().getTotal());
+            sellingList.setSellDate(kakaoPayResultDTO.getApproved_at());
+
+            sellingListRepository.save(sellingList);
+
+            List<SellingList> list = sellingListRepository.findUserSellList(kakaoPayResultDTO.getPartner_user_id());
+            System.out.println(kakaoPayResultDTO.getPartner_user_id() + "의 구매 정보 : " + list);
+
+            return list;
 
         } catch (RestClientException e) {
             // TODO Auto-generated catch block
