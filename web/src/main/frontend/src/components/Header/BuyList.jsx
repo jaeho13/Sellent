@@ -103,7 +103,6 @@ const BuyList = () => {
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
                         <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
-                        <Cash>25,000원</Cash>
                         <Name>이재호</Name>
                     </Left>
 
@@ -116,54 +115,44 @@ const BuyList = () => {
                             </CenterBoardTopic>
 
                             <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
                             </CenterBoard>
 
                             <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
                             </CenterBoard>
                             <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
                             </CenterBoard>
 
                             <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
                             </CenterBoard>
                             <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
                             </CenterBoard>
 
                             <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
                             </CenterBoard>
                             <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
                             </CenterBoard>
 
                             <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
                             </CenterBoard>
                             <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
                             </CenterBoard>
 
                             <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
                             </CenterBoard>
                             <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>$2000</CenterBoardPrice>
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
                             </CenterBoard>
 
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>$2000</CenterBoardPrice>
-                            </CenterBoard>
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>$2000</CenterBoardPrice>
-                            </CenterBoard>
-
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>$2000</CenterBoardPrice>
-                            </CenterBoard>
 
                         </CenterHalfTop>
                     </Center>
@@ -317,9 +306,11 @@ const Cash = styled.div`
 
 const Name = styled.div`
     width: 80%;
-    height: 3vh;
+    height: 6vh;
     border: 2px solid black;
+    border-radius: 0.5em;
     margin: 0 auto;
+    margin-top: 4em;
     font-size: 2rem;
     display: flex;
     justify-content: center;

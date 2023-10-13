@@ -140,7 +140,6 @@ const SellentUpdate = () => {
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
                         <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
-                        <Cash>25,000원</Cash>
                         <Name>이재호</Name>
                     </Left>
 
@@ -309,9 +308,11 @@ const Cash = styled.div`
 
 const Name = styled.div`
     width: 80%;
-    height: 3vh;
+    height: 6vh;
     border: 2px solid black;
+    border-radius: 0.5em;
     margin: 0 auto;
+    margin-top: 4em;
     font-size: 2rem;
     display: flex;
     justify-content: center;
