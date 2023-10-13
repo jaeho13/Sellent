@@ -92,7 +92,7 @@ public class KakaoPayService {
     }
 
 
-    public KakaoPayResultDTO kakaoPayInfo(String pg_token, String userEmail, String num) {
+    public List<SellingList> kakaoPayInfo(String pg_token, String userEmail, String num) {
 
         log.info("KakaoPayInfoVO............................................");
 
@@ -140,7 +140,7 @@ public class KakaoPayService {
             List<SellingList> list = sellingListRepository.findUserSellList(kakaoPayResultDTO.getPartner_user_id());
             System.out.println(kakaoPayResultDTO.getPartner_user_id() + "의 구매 정보 : " + list);
 
-            return kakaoPayResultDTO;
+            return list;
 
         } catch (RestClientException e) {
             // TODO Auto-generated catch block

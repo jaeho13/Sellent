@@ -1,5 +1,6 @@
 package com.sellent.web.Controller;
 
+import com.sellent.web.Entiity.SellingList;
 import com.sellent.web.Entiity.UserList;
 import com.sellent.web.Service.KakaoPayService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -54,7 +56,7 @@ public class KakaoPayController {
     }
 
     @GetMapping("/kakaoPaySuccess")
-    public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, HttpServletRequest request)
+    public List<SellingList> kakaoPaySuccess(@RequestParam("pg_token") String pg_token, HttpServletRequest request)
             throws Exception {
 
         log.info("kakaoPay Success get................");
@@ -63,7 +65,7 @@ public class KakaoPayController {
         UserList userList = userSession(request);
         String userEmail = userList.getUserEmail();
         String sellIdx = "50";
-        kakaoPay.kakaoPayInfo(pg_token, userEmail, sellIdx);
+        return kakaoPay.kakaoPayInfo(pg_token, userEmail, sellIdx);
 
         //todo : 거래장부 테이블 생성 후 회원에 맞는 거래정보 내려주기
 
