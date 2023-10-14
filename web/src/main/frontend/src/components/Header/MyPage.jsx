@@ -108,30 +108,32 @@ const MyPage = () => {
                     <Right>
                         <RightTop>재능구매</RightTop>
 
-                        <RightContents>
-                            {purList.length > 0 && purList.map((purItem, index) => {
-                                return (
-                                    <RightBoardBind key={purItem.sellIdx}>
-                                        <RightBoard>
-                                            <BoardImg>
-                                                <img src={NoImage} alt="No Image" />
-                                            </BoardImg>
-                                            <BoardTitle onClick={() => handleSellentRead(purItem.sellIdx)}>
-                                                {purItem.sellTitle.length > 6
-                                                    ? `${purItem.sellTitle.slice(0, 6)}...`
-                                                    : purItem.sellTitle}
-                                                <BoardLike>
-                                                    <FcLike />
-                                                    <LikeScore>
-                                                        {purItem.sellLike}
-                                                    </LikeScore>
-                                                </BoardLike>
-                                            </BoardTitle>
-                                        </RightBoard>
-                                    </RightBoardBind>
-                                )
-                            })}
-                        </RightContents>
+                        <RightContentsBind>
+                            <RightContents>
+                                {purList.length > 0 && purList.map((purItem, index) => {
+                                    return (
+                                        <RightBoardBind key={purItem.sellIdx}>
+                                            <RightBoard>
+                                                <BoardImg>
+                                                    <img src={NoImage} alt="No Image" />
+                                                </BoardImg>
+                                                <BoardTitle onClick={() => handleSellentRead(purItem.sellIdx)}>
+                                                    {purItem.sellTitle.length > 6
+                                                        ? `${purItem.sellTitle.slice(0, 6)}...`
+                                                        : purItem.sellTitle}
+                                                    <BoardLike>
+                                                        <FcLike />
+                                                        <LikeScore>
+                                                            {purItem.sellLike}
+                                                        </LikeScore>
+                                                    </BoardLike>
+                                                </BoardTitle>
+                                            </RightBoard>
+                                        </RightBoardBind>
+                                    )
+                                })}
+                            </RightContents>
+                        </RightContentsBind>
                     </Right>
                 </Bind>
             </Back>
@@ -371,8 +373,6 @@ const Right = styled.div`
     border: 2px solid black;
     border-top: none;
     border-right: none;
-    overflow: auto; /* 스크롤 추가 */
-    overflow-x: hidden; /* 가로 스크롤 제거 */
     background-color: white;
 `
 
@@ -380,14 +380,25 @@ const RightTop = styled.div`
     width: 100%;
     height: 5vh;
     /* border: 2px solid black; */
-    border-bottom: 2px solid black;
+    /* border-bottom: 2px solid black; */
     font-size: 2.5rem;
     display: flex;
+    /* justify-content: center; */
     align-items: center;
     font-weight: bolder;
     padding-top: 0.5em;
     padding-left: 0.5rem;
     color: #595959;
+`
+
+const RightContentsBind = styled.div`
+    width: 100%;
+    height: 77vh;
+    /* border: 2px solid red; */
+    border-top: 2px solid black;
+    display: flex;
+    overflow: auto; /* 스크롤 추가 */
+    overflow-x: hidden; /* 가로 스크롤 제거 */
 `
 
 const RightContents = styled.div`
@@ -408,7 +419,8 @@ const RightBoard = styled.div`
     width: 100%;
     height: 20vh;
     border: 2px solid black;
-    margin-top: 2rem;
+    margin-top: 2em;
+    /* margin-left: 5rem; */
     margin-left: 1rem;
     margin-right: 1rem;
 `
