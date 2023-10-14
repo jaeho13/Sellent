@@ -8,7 +8,8 @@ import Map from "./Map";
 import axios from "axios";
 import NoImage from "../Image/no_img.png";
 
-const BuyList = () => {
+const BuySuccess = () => {
+
 
     const navigate = useNavigate();
 
@@ -41,6 +42,10 @@ const BuyList = () => {
         navigate("/search")
     }
 
+    const goBuyList = () => {
+        navigate("/buylist")
+    }
+
 
     const [purList, setPurList] = useState([]);
 
@@ -62,31 +67,6 @@ const BuyList = () => {
     const handleSellentRead = (sellIdx) => {
         navigate(`/sellentRead/${sellIdx}`); //sellIdx에 해당하는 글 읽기 페이지 이동
     }
-
-    // URL에서 "pg_token" 파라미터 가져오기
-    const pg_token = new URL(window.location.href).searchParams.get("pg_token");
-    console.log(pg_token);
-
-    const sellIdx = new URL(window.location.href).searchParams.get("sellIdx");
-    console.log(sellIdx);
-
-    useEffect(() => {
-        // 결제 성공시 pg_token을 카카오페이 서버에서 반환 받고,
-        // 받은 URL에서 pg_token을 꺼내와서 서버로 보낸다.
-        const url = `/kakaoPaySuccess?pg_token=${pg_token}&sellIdx=${sellIdx}`;
-        // &sellIdx=${sellIdx}
-        // axios를 사용하여 서버에 요청 보내기 
-        axios
-            .get(url)
-            .then((response) => {
-                // 요청이 성공한 경우 서버 응답을 처리할 수 있습니다.
-                console.log("서버 응답:", response.data);
-            })
-            .catch((error) => {
-                // 요청이 실패한 경우 에러를 처리할 수 있습니다.
-                console.error("에러 발생:", error);
-            });
-    }, [pg_token]); // pg_token이 변경될 때마다 useEffect 실행
 
     return (
         <>
@@ -112,51 +92,12 @@ const BuyList = () => {
                     <Center>
                         <CenterTop>재능구매내역</CenterTop>
                         <CenterHalfTop>
-
-                            <CenterBoardTopic>재능 구매명
-                                <CenterBoardPriceTopic>가격</CenterBoardPriceTopic>
-                            </CenterBoardTopic>
-
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-
-
+                            <CenterCenter>
+                                재능 구매에 성공하였습니다.
+                            </CenterCenter>
+                            <CenterBottom onClick={goBuyList}>
+                                구매한 재능 내역 보러 가기
+                            </CenterBottom>
                         </CenterHalfTop>
                     </Center>
 
@@ -191,10 +132,11 @@ const BuyList = () => {
                 </Bind>
             </Back>
         </>
-    );
+    )
 }
 
-export default BuyList;
+export default BuySuccess;
+
 
 const Window = styled.div`
     width: 85%;
@@ -359,44 +301,30 @@ const CenterHalfTop = styled.div`
     overflow-x: hidden; /* 가로 스크롤 제거 */
 `
 
-const CenterBoardTopic = styled.div`
-    width: 90%;
-    height: 5vh;
+const CenterCenter = styled.div`
+    width: 40%;
+    height: 25vh;
     border: 2px solid black;
+    font-size: 2em;
     margin: 0 auto;
-    margin-top: 0.5em;
-    font-size: 2.5em;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-`
-
-const CenterBoardPriceTopic = styled.div`
-    width: 20%;
-    height: 5vh;
-    border-left: 2px solid black;
+    margin-top: 15vh;
     display: flex;
     justify-content: center;
-`
-
-const CenterBoard = styled.div`
-    width: 90%;
-    height: 5vh;
-    border: 2px solid black;
-    margin: 0 auto;
-    margin-top: 0.8em;
-    font-size: 2.5em;
-    display: flex;
     align-items: center;
-    justify-content: space-between;
 `
 
-const CenterBoardPrice = styled.div`
-    width: 20%;
-    height: 5vh;
-    border-left: 2px solid black;
+const CenterBottom = styled.div`
+    width: 80%;
+    height: 10vh;
+    border: 2px solid black;
+    font-size: 2em;
+    margin: 0 auto;
+    margin-top: 10vh;
     display: flex;
     justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
 `
 
 const Right = styled.div`
