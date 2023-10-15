@@ -46,6 +46,7 @@ const BuySuccess = () => {
         navigate("/buylist")
     }
 
+    const userName = sessionStorage.getItem("userNm")
 
     const [purList, setPurList] = useState([]);
 
@@ -104,7 +105,7 @@ const BuySuccess = () => {
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
                         <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
-                        <Name>이재호</Name>
+                        <Name>{userName}</Name>
                     </Left>
 
 
@@ -288,7 +289,7 @@ const Cash = styled.div`
 const Name = styled.div`
     width: 80%;
     height: 6vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 0.5em;
     margin: 0 auto;
     margin-top: 4em;
