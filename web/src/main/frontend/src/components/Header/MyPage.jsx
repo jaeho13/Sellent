@@ -44,6 +44,10 @@ const MyPage = () => {
         navigate("/buylist")
     }
 
+    const goBuySuccess = () => {
+        navigate("/buysuccess")
+    }
+
     const [purList, setPurList] = useState([]);
 
     useEffect(() => {
@@ -90,7 +94,7 @@ const MyPage = () => {
                         <CenterTop>닉네임</CenterTop>
 
                         <DetailsBind>
-                            <BuyDetails onClick={goBuyList}>재능 구매 내역</BuyDetails>
+                            <BuyDetails onClick={goBuySuccess}>재능 구매 내역</BuyDetails>
                             <SellDetails>재능 판매 내역</SellDetails>
                             <Favorite>재능 즐겨찾기</Favorite>
                         </DetailsBind>
