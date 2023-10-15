@@ -137,11 +137,8 @@ public class KakaoPayService {
         try {
             kakaoPayResultDTO = restTemplate.postForObject(new URI(Host + "/v1/payment/approve"), body,
                     KakaoPayResultDTO.class);
-
-            List<SellingList> list = sellingListRepository.findUserSellList(kakaoPayResultDTO.getPartner_user_id());
+            List<SellingList> list = sellingListRepository.findUserSellList(userEmail);
             log.info(kakaoPayResultDTO.getPartner_user_id() + "의 구매 정보 : " + list);
-
-            return list;
 
         } catch (RestClientException e) {
             // TODO 에러처리
@@ -150,7 +147,11 @@ public class KakaoPayService {
             // TODO 에러처리
             e.printStackTrace();
         }
-
         return null;
+    }
+
+    public List<SellingList> findMySellList(String userEmail) {
+        List<SellingList> list = sellingListRepository.findUserSellList(userEmail);
+        return list;
     }
 }

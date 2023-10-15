@@ -56,7 +56,7 @@ public class KakaoPayController {
     }
 
     @GetMapping("/kakaoPaySuccess")
-    public List<SellingList> kakaoPaySuccess(@RequestParam("pg_token") String pg_token
+    public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token
             , HttpServletRequest request)
             throws Exception {
 
@@ -67,6 +67,13 @@ public class KakaoPayController {
         UserList userList = userSession(request);
         String userEmail = userList.getUserEmail();
 
-        return kakaoPay.kakaoPayInfo(pg_token, userEmail);
+        kakaoPay.kakaoPayInfo(pg_token, userEmail);
+    }
+
+    @GetMapping("/mySellList")
+    public List<SellingList> kakaoSellList (HttpServletRequest request)
+    throws Exception {
+        UserList userList = userSession(request);
+        return kakaoPay.findMySellList(userList.getUserEmail());
     }
 }
