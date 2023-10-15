@@ -64,9 +64,27 @@ const BuySuccess = () => {
         purchaseLoad();
     }, []);
 
-    const handleSellentRead = (sellIdx) => {
-        navigate(`/sellentRead/${sellIdx}`); //sellIdx에 해당하는 글 읽기 페이지 이동
-    }
+    const [purchase, setPurchase] = useState([]);
+
+    useEffect(() => {
+        const purchaseList = async () => {
+            try {
+                const response = await axios.get("/mySellList");
+                setPurchase(response.data);
+                console.log("구매 리스트 불러오기 성공")
+            } catch (error) {
+                console.log("구매 리스트 불러오기 실패")
+            }
+        };
+
+        purchaseList();
+    }, []);
+
+    const handleSellentRead = (sellOriginIdx) => {
+        navigate(`/sellentRead/${sellOriginIdx}`); //sellIdx에 해당하는 글 읽기 페이지 이동
+    };
+
+
 
     return (
         <>
@@ -98,44 +116,20 @@ const BuySuccess = () => {
                                 <CenterBoardPriceTopic>가격</CenterBoardPriceTopic>
                             </CenterBoardTopic>
 
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
+                            {/* <CenterBoard key={item.sellListIdx}>
+                                <CenterBoardPrice>{item.}</CenterBoardPrice>
+                            </CenterBoard> */}
 
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
+                            {purchase.length > 0 && purchase.map((item, index) => {
+                                return (
+                                    <CenterList key={item.sellListIdx}>
+                                        <CenterBoard onClick={() => handleSellentRead(item.sellOriginIdx)} >{item.sellTitle}</CenterBoard>
+                                        <CenterBoardPrice>￦{item.amount}</CenterBoardPrice>
+                                    </CenterList>
+                                );
+                            })}
 
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
 
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
-                            <CenterBoard>너 사람 무시하지마
-                                <CenterBoardPrice>￦2000</CenterBoardPrice>
-                            </CenterBoard>
 
 
                         </CenterHalfTop>
@@ -390,7 +384,7 @@ const CenterBoardPriceTopic = styled.div`
     justify-content: center;
 `
 
-const CenterBoard = styled.div`
+const CenterList = styled.div`
     width: 90%;
     height: 5vh;
     border: 2px solid black;
@@ -402,12 +396,23 @@ const CenterBoard = styled.div`
     justify-content: space-between;
 `
 
+const CenterBoard = styled.div`
+    width: 80%;
+    height: 5vh;
+    /* border: 2px solid red; */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+`
+
 const CenterBoardPrice = styled.div`
     width: 20%;
     height: 5vh;
+    /* border: 2px solid red; */
     border-left: 2px solid black;
     display: flex;
     justify-content: center;
+    align-items: center;
 `
 
 const Right = styled.div`

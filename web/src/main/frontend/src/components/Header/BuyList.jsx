@@ -120,6 +120,10 @@ const BuyList = () => {
                     <Center>
                         <CenterTop>재능구매내역</CenterTop>
                         <CenterHalfTop>
+
+                            <CenterCheck>
+                                <img alt="구매 성공" src="/images/check-out.png" />
+                            </CenterCheck>
                             <CenterCenter>
                                 재능 구매에 성공하였습니다.
                             </CenterCenter>
@@ -129,7 +133,7 @@ const BuyList = () => {
                         </CenterHalfTop>
                     </Center>
 
-                    <Right>
+                    {/* <Right>
                         <RightTop>재능구매</RightTop>
 
                         <RightContentsBind>
@@ -158,7 +162,7 @@ const BuyList = () => {
                                 })}
                             </RightContents>
                         </RightContentsBind>
-                    </Right>
+                    </Right> */}
                 </Bind>
             </Back>
         </>
@@ -281,7 +285,7 @@ const Cash = styled.div`
 const Name = styled.div`
     width: 80%;
     height: 6vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 0.5em;
     margin: 0 auto;
     margin-top: 4em;
@@ -302,7 +306,7 @@ const Name = styled.div`
 `
 
 const Center = styled.div`
-    width: 55%;
+    width: 85%;
     height: 85vh;
     /* border: 2px solid red; */
     background-color: white;
@@ -370,14 +374,26 @@ const CenterBoardPrice = styled.div`
     justify-content: center;
 `
 
-
-const CenterCenter = styled.div`
+const CenterCheck = styled.div`
     width: 40%;
     height: 25vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     font-size: 2em;
     margin: 0 auto;
-    margin-top: 15vh;
+    margin-top: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+
+const CenterCenter = styled.div`
+    width: 80%;
+    height: 5vh;
+    /* border: 2px solid black; */
+    font-size: 2em;
+    margin: 0 auto;
+    margin-top: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
