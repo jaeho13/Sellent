@@ -5,6 +5,7 @@ import com.sellent.web.Dto.KakaoPayResultDTO;
 import com.sellent.web.Entiity.Selling;
 import com.sellent.web.Entiity.SellingList;
 import com.sellent.web.Repository.SellingListRepository;
+import com.sellent.web.Repository.SellingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class KakaoPayService {
 
     @Autowired
     SellingListRepository sellingListRepository;
+
+    @Autowired
+    SellingRepository sellingRepository;
 
     private static final String Host = "https://kapi.kakao.com";
 
@@ -88,6 +92,8 @@ public class KakaoPayService {
             sellingList.setSellOriginIdx(Integer.parseInt(sellIdxToString));
             sellingList.setUserEmail(userEmail);
             sellingList.setAmount(Integer.parseInt(price));
+            Selling sell = sellingRepository.findContent(Integer.parseInt(sellIdxToString));
+            sellingList.setSellTitle(sell.getSellTitle());
 
             sellingListRepository.save(sellingList);
 
@@ -137,11 +143,8 @@ public class KakaoPayService {
         try {
             kakaoPayResultDTO = restTemplate.postForObject(new URI(Host + "/v1/payment/approve"), body,
                     KakaoPayResultDTO.class);
-
-            List<SellingList> list = sellingListRepository.findUserSellList(kakaoPayResultDTO.getPartner_user_id());
+            List<SellingList> list = sellingListRepository.findUserSellList(userEmail);
             log.info(kakaoPayResultDTO.getPartner_user_id() + "의 구매 정보 : " + list);
-
-            return list;
 
         } catch (RestClientException e) {
             // TODO 에러처리
@@ -150,7 +153,11 @@ public class KakaoPayService {
             // TODO 에러처리
             e.printStackTrace();
         }
-
         return null;
+    }
+
+    public List<SellingList> findMySellList(String userEmail) {
+        List<SellingList> list = sellingListRepository.findUserSellList(userEmail);
+        return list;
     }
 }
