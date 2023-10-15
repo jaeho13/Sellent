@@ -89,45 +89,87 @@ const BuySuccess = () => {
                         <Name>이재호</Name>
                     </Left>
 
+
                     <Center>
                         <CenterTop>재능구매내역</CenterTop>
                         <CenterHalfTop>
-                            <CenterCenter>
-                                재능 구매에 성공하였습니다.
-                            </CenterCenter>
-                            <CenterBottom onClick={goBuyList}>
-                                구매한 재능 내역 보러 가기
-                            </CenterBottom>
+
+                            <CenterBoardTopic>재능 구매명
+                                <CenterBoardPriceTopic>가격</CenterBoardPriceTopic>
+                            </CenterBoardTopic>
+
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
+                            </CenterBoard>
+
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
+                            </CenterBoard>
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
+                            </CenterBoard>
+
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
+                            </CenterBoard>
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
+                            </CenterBoard>
+
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
+                            </CenterBoard>
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
+                            </CenterBoard>
+
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
+                            </CenterBoard>
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
+                            </CenterBoard>
+
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
+                            </CenterBoard>
+                            <CenterBoard>너 사람 무시하지마
+                                <CenterBoardPrice>￦2000</CenterBoardPrice>
+                            </CenterBoard>
+
+
                         </CenterHalfTop>
                     </Center>
 
                     <Right>
                         <RightTop>재능구매</RightTop>
 
-                        <RightContents>
-                            {purList.length > 0 && purList.map((purItem, index) => {
-                                return (
-                                    <RightBoardBind key={purItem.sellIdx}>
-                                        <RightBoard>
-                                            <BoardImg>
-                                                <img src={NoImage} alt="No Image" />
-                                            </BoardImg>
-                                            <BoardTitle onClick={() => handleSellentRead(purItem.sellIdx)}>
-                                                {purItem.sellTitle.length > 6
-                                                    ? `${purItem.sellTitle.slice(0, 6)}...`
-                                                    : purItem.sellTitle}
-                                                <BoardLike>
-                                                    <FcLike />
-                                                    <LikeScore>
-                                                        {purItem.sellLike}
-                                                    </LikeScore>
-                                                </BoardLike>
-                                            </BoardTitle>
-                                        </RightBoard>
-                                    </RightBoardBind>
-                                )
-                            })}
-                        </RightContents>
+                        <RightContentsBind>
+                            <RightContents>
+                                {purList.length > 0 && purList.map((purItem, index) => {
+                                    return (
+                                        <RightBoardBind key={purItem.sellIdx}>
+                                            <RightBoard>
+                                                <BoardImg>
+                                                    <img src={NoImage} alt="No Image" />
+                                                </BoardImg>
+                                                <BoardTitle onClick={() => handleSellentRead(purItem.sellIdx)}>
+                                                    {purItem.sellTitle.length > 6
+                                                        ? `${purItem.sellTitle.slice(0, 6)}...`
+                                                        : purItem.sellTitle}
+                                                    <BoardLike>
+                                                        <FcLike />
+                                                        <LikeScore>
+                                                            {purItem.sellLike}
+                                                        </LikeScore>
+                                                    </BoardLike>
+                                                </BoardTitle>
+                                            </RightBoard>
+                                        </RightBoardBind>
+                                    )
+                                })}
+                            </RightContents>
+                        </RightContentsBind>
                     </Right>
                 </Bind>
             </Back>
@@ -327,14 +369,53 @@ const CenterBottom = styled.div`
 
 `
 
+
+const CenterBoardTopic = styled.div`
+    width: 90%;
+    height: 5vh;
+    border: 2px solid black;
+    margin: 0 auto;
+    margin-top: 0.5em;
+    font-size: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
+
+const CenterBoardPriceTopic = styled.div`
+    width: 20%;
+    height: 5vh;
+    border-left: 2px solid black;
+    display: flex;
+    justify-content: center;
+`
+
+const CenterBoard = styled.div`
+    width: 90%;
+    height: 5vh;
+    border: 2px solid black;
+    margin: 0 auto;
+    margin-top: 0.8em;
+    font-size: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
+
+const CenterBoardPrice = styled.div`
+    width: 20%;
+    height: 5vh;
+    border-left: 2px solid black;
+    display: flex;
+    justify-content: center;
+`
+
 const Right = styled.div`
     width: 30%;
     height: 85vh;
     border: 2px solid black;
     border-top: none;
     border-right: none;
-    overflow: auto; /* 스크롤 추가 */
-    overflow-x: hidden; /* 가로 스크롤 제거 */
     background-color: white;
 `
 
@@ -342,7 +423,7 @@ const RightTop = styled.div`
     width: 100%;
     height: 5vh;
     /* border: 2px solid black; */
-    border-bottom: 2px solid black;
+    /* border-bottom: 2px solid black; */
     font-size: 2.5rem;
     display: flex;
     /* justify-content: center; */
@@ -351,6 +432,16 @@ const RightTop = styled.div`
     padding-top: 0.5em;
     padding-left: 0.5rem;
     color: #595959;
+`
+
+const RightContentsBind = styled.div`
+    width: 100%;
+    height: 77vh;
+    /* border: 2px solid red; */
+    border-top: 2px solid black;
+    display: flex;
+    overflow: auto; /* 스크롤 추가 */
+    overflow-x: hidden; /* 가로 스크롤 제거 */
 `
 
 const RightContents = styled.div`
@@ -371,7 +462,7 @@ const RightBoard = styled.div`
     width: 100%;
     height: 20vh;
     border: 2px solid black;
-    margin-top: 2rem;
+    margin-top: 2em;
     /* margin-left: 5rem; */
     margin-left: 1rem;
     margin-right: 1rem;
