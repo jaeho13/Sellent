@@ -5,6 +5,7 @@ import com.sellent.web.Dto.KakaoPayResultDTO;
 import com.sellent.web.Entiity.Selling;
 import com.sellent.web.Entiity.SellingList;
 import com.sellent.web.Repository.SellingListRepository;
+import com.sellent.web.Repository.SellingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class KakaoPayService {
 
     @Autowired
     SellingListRepository sellingListRepository;
+
+    @Autowired
+    SellingRepository sellingRepository;
 
     private static final String Host = "https://kapi.kakao.com";
 
@@ -88,6 +92,8 @@ public class KakaoPayService {
             sellingList.setSellOriginIdx(Integer.parseInt(sellIdxToString));
             sellingList.setUserEmail(userEmail);
             sellingList.setAmount(Integer.parseInt(price));
+            Selling sell = sellingRepository.findContent(Integer.parseInt(sellIdxToString));
+            sellingList.setSellTitle(sell.getSellTitle());
 
             sellingListRepository.save(sellingList);
 

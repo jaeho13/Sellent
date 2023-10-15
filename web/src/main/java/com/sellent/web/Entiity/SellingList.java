@@ -32,4 +32,7 @@ public class SellingList { // 구매 내역 관리 테이블
 
     @Column(nullable = false)
     private String tId; // 구매번호
+
+    @Column(nullable = false)
+    private String sellTitle;
 }
