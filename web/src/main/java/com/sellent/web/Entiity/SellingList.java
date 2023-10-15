@@ -31,6 +31,5 @@ public class SellingList { // 구매 내역 관리 테이블
     private int amount;
 
     @Column(nullable = false)
-    private Date sellDate; //구매 시간
-
+    private String tId; // 구매번호
 }

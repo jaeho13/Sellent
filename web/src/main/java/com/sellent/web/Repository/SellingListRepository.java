@@ -10,7 +10,10 @@ import java.util.List;
 
 @Repository
 public interface SellingListRepository extends JpaRepository<SellingList, Integer> {
-    @Query(value = "SELECT * FROM selling_list WHERE user_email = :userEmail", nativeQuery = true)
-    List<SellingList> findUserSellList(@Param("userEmail")String userEmail);
 
+    @Query(value = "SELECT * FROM selling_list WHERE user_email = :userEmail", nativeQuery = true)
+    List<SellingList> findUserSellList(@Param("userEmail") String userEmail);
+
+    @Query(value = "SELECT * FROM selling_list WHERE t_Id = :tId", nativeQuery = true)
+    SellingList findByTid(@Param("tId") String tId);
 }

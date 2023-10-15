@@ -82,6 +82,15 @@ public class KakaoPayService {
             log.info("받은 정보 1 " + kakaoPayReadyDTO);
             String result = kakaoPayReadyDTO.getNext_redirect_pc_url();
 
+            SellingList sellingList = new SellingList();
+
+            sellingList.setTId(kakaoPayReadyDTO.getTid());
+            sellingList.setSellOriginIdx(Integer.parseInt(sellIdxToString));
+            sellingList.setUserEmail(userEmail);
+            sellingList.setAmount(Integer.parseInt(price));
+
+            sellingListRepository.save(sellingList);
+
             return result;
         } catch (RestClientException e) {
             e.printStackTrace();
@@ -92,16 +101,20 @@ public class KakaoPayService {
     }
 
 
-    public List<SellingList> kakaoPayInfo(String pg_token, String userEmail, String num) {
+    public List<SellingList> kakaoPayInfo(String pg_token, String userEmail) {
 
         log.info("KakaoPayInfoVO............................................");
 
         RestTemplate restTemplate = new RestTemplate();
+        String tId = kakaoPayReadyDTO.getTid();
+        System.out.println("tId is------- " + tId);
 
-        int sellIdx = Integer.parseInt(num);
-        Selling selling = sellingService.findContent(sellIdx);
-        String price = String.valueOf(selling.getSellPrice());
-        String sellIdxToString = String.valueOf(sellIdx);
+        SellingList originSellList = sellingListRepository.findByTid(tId);
+        String orderId = String.valueOf(originSellList.getSellOriginIdx());
+
+        System.out.println("origin selling number is------ " + orderId);
+        String amount = String.valueOf(originSellList.getAmount());
+
 
         // 서버로 요청할 Header
         HttpHeaders headers = new HttpHeaders();
@@ -113,27 +126,17 @@ public class KakaoPayService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
         params.add("cid", "TC0ONETIME");
-        params.add("tid", kakaoPayReadyDTO.getTid());
-        params.add("partner_order_id", sellIdxToString); // 주문 번호
+        params.add("tid", tId);
+        params.add("partner_order_id", orderId); // 주문 번호
         params.add("partner_user_id", userEmail); // 회원 아이디 uNick
         params.add("pg_token", pg_token);
-        params.add("total_amount", price);
+        params.add("total_amount", amount);
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
         try {
             kakaoPayResultDTO = restTemplate.postForObject(new URI(Host + "/v1/payment/approve"), body,
                     KakaoPayResultDTO.class);
-
-            SellingList sellingList = new SellingList();
-            int sellOriginIdx = Integer.parseInt(kakaoPayResultDTO.getPartner_order_id());
-
-            sellingList.setSellOriginIdx(sellOriginIdx);
-            sellingList.setUserEmail(kakaoPayResultDTO.getPartner_user_id());
-            sellingList.setAmount(kakaoPayResultDTO.getAmount().getTotal());
-            sellingList.setSellDate(kakaoPayResultDTO.getApproved_at());
-
-            sellingListRepository.save(sellingList);
 
             List<SellingList> list = sellingListRepository.findUserSellList(kakaoPayResultDTO.getPartner_user_id());
             log.info(kakaoPayResultDTO.getPartner_user_id() + "의 구매 정보 : " + list);
