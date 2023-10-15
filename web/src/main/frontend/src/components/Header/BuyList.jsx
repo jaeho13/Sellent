@@ -49,6 +49,7 @@ const BuyList = () => {
         navigate("/buysuccess")
     }
 
+    const userName = sessionStorage.getItem("userNm")
 
     const [purList, setPurList] = useState([]);
 
@@ -114,7 +115,7 @@ const BuyList = () => {
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
                         <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
-                        <Name>이재호</Name>
+                        <Name>{userName}</Name>
                     </Left>
 
                     <Center>

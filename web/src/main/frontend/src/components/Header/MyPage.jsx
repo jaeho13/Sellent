@@ -48,6 +48,8 @@ const MyPage = () => {
         navigate("/buysuccess")
     }
 
+    const userName = sessionStorage.getItem("userNm")
+
     const [purList, setPurList] = useState([]);
 
     useEffect(() => {
@@ -86,59 +88,32 @@ const MyPage = () => {
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
                         <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
-                        <Name>이재호</Name>
+                        <Name>{userName}</Name>
                     </Left>
 
                     <Center>
+                        <CenterTop>마이페이지</CenterTop>
+                        <CenterHalfTop>
+                            <DetailsBind>
+                                <BuyDetails onClick={goBuySuccess}>재능 구매 내역</BuyDetails>
+                                <SellDetails>재능 판매 내역</SellDetails>
+                                <Favorite>재능 즐겨찾기</Favorite>
+                            </DetailsBind>
 
-                        <CenterTop>닉네임</CenterTop>
-
-                        <DetailsBind>
-                            <BuyDetails onClick={goBuySuccess}>재능 구매 내역</BuyDetails>
-                            <SellDetails>재능 판매 내역</SellDetails>
-                            <Favorite>재능 즐겨찾기</Favorite>
-                        </DetailsBind>
-
-                        <DetailsBind>
-                            <Review>받은 후기</Review>
-                            <Charge>포인트 충전</Charge>
-                        </DetailsBind>
-
-                        <Where>내 지역</Where>
-                        <Map />
-
+                            <DetailsBind>
+                                <Review>받은 후기</Review>
+                                <Charge>포인트 충전</Charge>
+                            </DetailsBind>
+                        </CenterHalfTop>
                     </Center>
 
-                    <Right>
+                    {/* <Right>
                         <RightTop>재능구매</RightTop>
 
                         <RightContentsBind>
-                            <RightContents>
-                                {purList.length > 0 && purList.map((purItem, index) => {
-                                    return (
-                                        <RightBoardBind key={purItem.sellIdx}>
-                                            <RightBoard>
-                                                <BoardImg>
-                                                    <img src={NoImage} alt="No Image" />
-                                                </BoardImg>
-                                                <BoardTitle onClick={() => handleSellentRead(purItem.sellIdx)}>
-                                                    {purItem.sellTitle.length > 6
-                                                        ? `${purItem.sellTitle.slice(0, 6)}...`
-                                                        : purItem.sellTitle}
-                                                    <BoardLike>
-                                                        <FcLike />
-                                                        <LikeScore>
-                                                            {purItem.sellLike}
-                                                        </LikeScore>
-                                                    </BoardLike>
-                                                </BoardTitle>
-                                            </RightBoard>
-                                        </RightBoardBind>
-                                    )
-                                })}
-                            </RightContents>
+
                         </RightContentsBind>
-                    </Right>
+                    </Right> */}
                 </Bind>
             </Back>
         </>
@@ -261,7 +236,7 @@ const Cash = styled.div`
 const Name = styled.div`
     width: 80%;
     height: 6vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 0.5em;
     margin: 0 auto;
     margin-top: 4em;
@@ -282,7 +257,7 @@ const Name = styled.div`
 `
 
 const Center = styled.div`
-    width: 55%;
+    width: 85%;
     height: 85vh;
     /* border: 2px solid red; */
     background-color: white;
@@ -291,12 +266,25 @@ const Center = styled.div`
 const CenterTop = styled.div`
     width: 50%;
     height: 5vh;
-    border: 2px solid black;
-    font-size: 2rem;
-    margin-top: 1rem;
-    margin-left: 2rem;
+    /* border: 2px solid black; */
+    font-size: 2.5rem;
+    /* margin-left: 1rem; */
+    padding-left: 0.5em;
+    margin-top: 0.5em;
     display: flex;
     align-items: center;
+    font-weight: bolder;
+    color: #595959;
+    font-family: 'Do Hyeon', sans-serif;
+`
+
+const CenterHalfTop = styled.div`
+    width: 100%;
+    height: 35vh;
+    /* border: 2px solid black; */
+    border-top: 2px solid black;
+    overflow: auto; /* 스크롤 추가 */
+    overflow-x: hidden; /* 가로 스크롤 제거 */
 `
 
 const DetailsBind = styled.div`
