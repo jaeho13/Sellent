@@ -56,17 +56,17 @@ public class KakaoPayController {
     }
 
     @GetMapping("/kakaoPaySuccess")
-    public List<SellingList> kakaoPaySuccess(@RequestParam("pg_token") String pg_token,
-            @RequestParam("sellIdx") String sellIdx, HttpServletRequest request)
+    public List<SellingList> kakaoPaySuccess(@RequestParam("pg_token") String pg_token
+            , HttpServletRequest request)
             throws Exception {
 
         log.info("kakaoPay Success get................");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
-        log.info("kakaoPaySuccess sellIdx : " + sellIdx);
+
 
         UserList userList = userSession(request);
         String userEmail = userList.getUserEmail();
 
-        return kakaoPay.kakaoPayInfo(pg_token, userEmail, sellIdx);
+        return kakaoPay.kakaoPayInfo(pg_token, userEmail);
     }
 }
