@@ -165,6 +165,8 @@ const Write = () => {
             });
     };
 
+    const [tempFile, setTempFile] = useState();
+
     return (
         <>
             <Window>
@@ -226,12 +228,21 @@ const Write = () => {
                                     onChange={handlePriceChange}
                                     value={sellPrice}
                                 />
-                                <Upload type="submit">글올리기</Upload>
-                                <Cancel>취소하기</Cancel>
+                                {/* <Upload type="submit">글올리기</Upload> */}
+                                {/* <Cancel>취소하기</Cancel> */}
                             </ButtonBind>
+
+
                             <PictureBind>
-                                <Picture placeholder="*파일을 올리세요" />
-                                <PictureUpload>찾아보기</PictureUpload>
+                                <Picture
+                                    type="file"
+                                    multiple
+                                    onChange={(e) => {
+                                        setTempFile(e.target.files);
+                                    }}
+                                />
+                                {/* <button type="submit">submit</button> */}
+                                <PictureUpload type="submit" >찾아보기</PictureUpload>
                             </PictureBind>
 
                         </form>
@@ -450,7 +461,7 @@ const Picture = styled.input`
     align-items: center;
 `
 
-const PictureUpload = styled.div`
+const PictureUpload = styled.button`
     width: 15%;
     height: 5vh;
     border: 2px solid black;
