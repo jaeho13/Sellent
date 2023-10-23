@@ -167,6 +167,22 @@ const Write = () => {
 
     const [tempFile, setTempFile] = useState();
 
+    const uploadFile = (e) => {
+        var data = new FormData();
+        for (let i = 0; i < tempFile.length; i++) {
+            data.append("files", tempFile[i]);
+        }
+
+        axios.post("/file", data, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        }).then((error) => {
+            console.log("파일 연동 실패");
+        });
+
+    }
+
     return (
         <>
             <Window>
@@ -465,9 +481,9 @@ const PictureUpload = styled.button`
     width: 15%;
     height: 5vh;
     border: 2px solid black;
-    margin-left: 1.3em;
+    margin-left: 2em;
     margin-bottom: 1em;
-    font-size: 2rem;
+    font-size: 1.5em;
     display: flex;
     justify-content: center;
     align-items: center;
