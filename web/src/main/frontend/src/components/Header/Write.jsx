@@ -258,7 +258,7 @@ const Write = () => {
                                     }}
                                 />
                                 {/* <button type="submit">submit</button> */}
-                                <PictureUpload type="submit" >찾아보기</PictureUpload>
+                                <PictureUpload type="submit" >글올리기</PictureUpload>
                             </PictureBind>
 
                         </form>
@@ -472,7 +472,7 @@ const Picture = styled.input`
     height: 5vh;
     border: 2px solid black;
     margin-left: 0.6em;
-    font-size: 2rem;
+    font-size: 2em;
     display: flex;
     align-items: center;
 `
