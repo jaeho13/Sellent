@@ -67,7 +67,9 @@ public class SellingService {
     // 글 작성
     public void insertContent(Map<String, Object> content, UserList userList) {
         Selling selling = new Selling();
+        System.out.println("들어오긴 하는거니 ^^ㅣ발");
 
+        System.out.println(content.get("files") + "@@@@@@@@@");
         String userEmail = (String) userList.getUserEmail();
 
         selling.setUserListVO(userService.findUserVO(userEmail));
@@ -100,9 +102,9 @@ public class SellingService {
             selling.setSellContent((String) content.get("sellContent"));
 
             Object typeCheck = content.get("sellPrice");
-            if(typeCheck instanceof String){
+            if (typeCheck instanceof String) {
                 selling.setSellPrice(Integer.parseInt((String) content.get("sellPrice")));
-            }else if(typeCheck instanceof Integer){
+            } else if (typeCheck instanceof Integer) {
                 selling.setSellPrice((Integer) content.get("sellPrice"));
             }
 
@@ -155,6 +157,6 @@ public class SellingService {
     }
 
     public void plusLikeCount(String likeCnt, UserList userList) {
-        //int LikeCnt = Integer.parseInt((String) )
+        // int LikeCnt = Integer.parseInt((String) )
     }
 }
