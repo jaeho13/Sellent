@@ -233,6 +233,9 @@ const SellentRead = () => {
 
 
                     <RightBind>
+                        <RightImage>
+
+                        </RightImage>
                         <Right>
                             <RightTop>댓글</RightTop>
                             {sellentCommentRead.length > 0 && sellentCommentRead.map((Comment, index) => {
@@ -262,8 +265,8 @@ const SellentRead = () => {
                                     </RightBoard>
                                 );
                             })}
-
                         </Right>
+
                         <RightBottomBind>
                             <RightBottom
                                 type="text"
@@ -433,9 +436,15 @@ const RightBind = styled.div`
     border-left: none;
 `
 
+const RightImage = styled.div`
+    width: 100%;
+    height: 35vh;
+`
+
+
 const Right = styled.div`
     width: 100%;
-    height: 70vh;
+    height: 35vh;
     /* border: 2px solid blue; */
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
@@ -481,9 +490,9 @@ const RightComments = styled.button`
 const RightTop = styled.div`
     width: 100%;
     height: 5vh;
-    border: 2px solid black;
+    border-bottom: 2px solid black;
     font-size: 2.5em;
-    margin-top: 0.5em;
+    margin-top: 0.1em;
     display: flex;
     justify-content: center;
     align-items: center;
