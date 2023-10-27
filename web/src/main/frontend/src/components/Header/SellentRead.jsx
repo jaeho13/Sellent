@@ -236,18 +236,33 @@ const SellentRead = () => {
                         <Right>
                             <RightTop>댓글</RightTop>
                             {sellentCommentRead.length > 0 && sellentCommentRead.map((Comment, index) => {
+                                // Comment.sellCmtDate를 날짜 문자열로 파싱
+                                const dDate = new Date(Comment.sellCmtDate);
+
+                                // 연도, 월, 일을 추출
+                                const year = dDate.getFullYear();
+                                const month = String(dDate.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1, 1자리 수일 경우 앞에 0 추가
+                                const date = String(dDate.getDate()).padStart(2, '0'); // 일자도 2자리로 표시
+
+                                // 날짜를 "YYYY-MM-DD" 형식으로 조합
+                                const formattedDate = `${year}-${month}-${date}`;
+
                                 return (
-                                    <RightBoard key={index} ref={rightBoardRef}>
+                                    <RightBoard key={Comment.index} ref={rightBoardRef}>
                                         <RightBoardBind>
                                             <RightBoardNick>
-                                                닉네임 : {Comment.userNm}
+                                                닉네임: {Comment.userNm}
+                                                <RightDate>
+                                                    {formattedDate}
+                                                </RightDate>
                                             </RightBoardNick>
-                                            <RightBoardDelete onClick={() => onDelete(Comment.sellCmtIdx)} >X</RightBoardDelete>
+                                            <RightBoardDelete onClick={() => onDelete(Comment.sellCmtIdx)}>X</RightBoardDelete>
                                         </RightBoardBind>
                                         {Comment.sellCmtContent}
                                     </RightBoard>
                                 );
                             })}
+
                         </Right>
                         <RightBottomBind>
                             <RightBottom
@@ -432,7 +447,6 @@ const RightBottomBind = styled.div`
     display: flex;
     flex-direction: row;
     border: none;
-    
 `
 
 const RightBottom = styled.textarea`
@@ -500,10 +514,21 @@ const RightBoardNick = styled.div`
     font-size: 1em;
     display: flex;
     align-items: center;
-    /* border: 2px solid #595959; */
     border: none;
     border-bottom: 2px solid #595959;
     border-right: 2px solid #595959;
+`
+
+const RightDate = styled.div`
+    width: 50%;
+    height: 3vh;
+    /* border: 1px solid black; */
+    color: #999999;
+    font-size: 0.7em;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-left: 1em;
 `
 
 const RightBoardDelete = styled.div`
