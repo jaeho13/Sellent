@@ -121,6 +121,9 @@ const Write = () => {
         setPopup(!popup);
     }
 
+
+    const [tempFile, setTempFile] = useState();
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -140,48 +143,55 @@ const Write = () => {
             Swal.fire("거래 타입을 입력해주세요.");
             return;
         }
-
-        axios({
-            url: "/sellent",
-            method: "post",
-            data: {
-                sellTitle,
-                sellContent,
-                sellType,
-                sellPrice,
-                sellLocation,
-            },
-        })
-            .then((response) => {
-                console.log(response);
-                Swal.fire({
-                    title: '글이 게시되었습니다.',
-                    icon: 'success'
-                })
-                navigate("/");
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        uploadFile();
     };
 
-    const [tempFile, setTempFile] = useState();
 
     const uploadFile = (e) => {
         var data = new FormData();
         for (let i = 0; i < tempFile.length; i++) {
             data.append("files", tempFile[i]);
         }
-
-        axios.post("/file", data, {
+        data.append("sellTitle", sellTitle);
+        data.append("sellContent", sellContent);
+        data.append("sellType", sellType);
+        data.append("sellPrice", sellPrice);
+        data.append("sellLocation", sellLocation);
+        axios.post("/sellent", data, {
             headers: {
-                "Content-Type": "multipart/form-data",
+                "Content-Type": "application/json",
             },
-        }).then((error) => {
-            console.log("파일 연동 실패");
-        });
-
+        })
+            .then((response) => {
+                navigate("/")
+                console.log("파일 연동 성공");
+            }
+            ).catch((error) => {
+                console.log("파일 연동 실패")
+            });
     }
+    // axios({
+    //     url: "/sellent",
+    //     method: "post",
+    //     data: {
+    //         "sellTitle": "",
+    //         sellContent,
+    //         sellType,
+    //         sellPrice,
+    //         sellLocation,
+    //     },
+    // })
+    //     .then((response) => {
+    //         console.log(response);
+    //         Swal.fire({
+    //             title: '글이 게시되었습니다.',
+    //             icon: 'success'
+    //         })
+    //         navigate("/");
+    //     })
+    //     .catch((error) => {
+    //         console.log(error);
+    //     });
 
     return (
         <>
@@ -258,9 +268,9 @@ const Write = () => {
                                     }}
                                 />
                                 {/* <button type="submit">submit</button> */}
+                                {/* <PictureUpload type="handleSubmit" >글올리기</PictureUpload> */}
                                 <PictureUpload type="submit" >글올리기</PictureUpload>
                             </PictureBind>
-
                         </form>
                     </Center>
                     <Right>
