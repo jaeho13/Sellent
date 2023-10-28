@@ -157,9 +157,10 @@ const Write = () => {
         data.append("sellType", sellType);
         data.append("sellPrice", sellPrice);
         data.append("sellLocation", sellLocation);
+
         axios.post("/sellent", data, {
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "multipart/form-data",
             },
         })
             .then((response) => {
