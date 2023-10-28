@@ -52,20 +52,22 @@ public class SellingService {
         int sellIdx = Integer.parseInt(num);
 
         try {
-            //원 글 내용 가져오기
+            // 원 글 내용 가져오기
             ContentDTO contentDTO = sellingRepository.getSellingContent(sellIdx);
 
-            //댓글 리스트 가져오기
+            // 댓글 리스트 가져오기
             List<CommentDTO> commentDTO = sellingCmtService.getSellingCmt(sellIdx);
 
-            //이미지 이름 가져오기
+            // 이미지 이름 가져오기
             String imageRelativePath = contentDTO.getUploadedFileNames();
 
-            //이미지 절대경로 + 이미지 이름
-            String imageUrl = "/Users/pizzay/Documents/sellent/sellent/web/src/main/frontend/src/image"+ imageRelativePath;
-            //String imageUrl = "" + imageRelativePath;
+            // 이미지 절대경로 + 이미지 이름
+            // String imageUrl =
+            // "/Users/pizzay/Documents/sellent/sellent/web/src/main/frontend/src/image"+
+            // imageRelativePath;
+            String imageUrl = "/image" + imageRelativePath;
 
-            //map > put
+            // map > put
             map.put("Content", contentDTO);
             map.put("Comment", commentDTO);
             map.put("Location", addressService.getAddress(contentDTO.getSellLocation()));

@@ -51,6 +51,7 @@ const SellentRead = () => {
     const [sellCmtContent, setSellCmtContent] = useState("");
     const [userNm, setUserNm] = useState("");
     const rightBoardRef = useRef(null);
+    const [downloadImage, setDownloadImage] = useState({});
 
     useEffect(() => {
         const loadBoard = async () => {
@@ -60,6 +61,7 @@ const SellentRead = () => {
                 setSellentCommentRead(response.data.Comment);
                 setLocationX(response.data.Location.x);
                 setLocationY(response.data.Location.y);
+                setDownloadImage(response.data.Image);
 
                 console.log("게시물 불러오기 성공", sellentRead);
             } catch (error) {
@@ -237,7 +239,9 @@ const SellentRead = () => {
                             <RightImageTitle>
                                 사진
                             </RightImageTitle>
-                            <RightImage src="/images/BackgroundImage.png" alt="배경화면" />
+                            {/* <RightImage src="/images/BackgroundImage.png" alt="배경화면" /> */}
+                            <RightImage src="`${downloadImage}`" alt="배경화면" />
+
                         </RightImageBind>
                         <Right>
                             <RightTop>댓글</RightTop>

@@ -98,7 +98,7 @@ public class SellingController {
                     // String uploadDir =
                     // "/Users/pizzay/Documents/sellent/sellent/web/src/main/frontend/src/image"; //
                     // 저장 경로를 설정해야 합니다.
-                    String uploadDir = "/D:\\Sellent\\sellent\\web\\src\\main\\frontend\\src\\image";
+                    String uploadDir = "/D:\\Sellent\\sellent\\web\\src\\main\\frontend\\public\\image";
                     File uploadPath = new File(uploadDir);
                     if (!uploadPath.exists()) {
                         uploadPath.mkdirs();
