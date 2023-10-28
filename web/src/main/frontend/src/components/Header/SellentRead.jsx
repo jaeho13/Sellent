@@ -41,7 +41,8 @@ const SellentRead = () => {
         navigate("/search")
     }
 
-    /* //////////////////////////////////////////////////////////////////////////////////// */
+
+    const userName = sessionStorage.getItem("userNm")
 
     const { sellIdx } = useParams();
     const [sellentRead, setSellentRead] = useState({});
@@ -205,7 +206,7 @@ const SellentRead = () => {
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
                         <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
-                        <Name>이재호</Name>
+                        <Name>{userName}</Name>
                     </Left>
 
 
@@ -366,12 +367,12 @@ const LeftBoard = styled.div`
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    
+
     @media (max-width: 1280px) {
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1.5em; /* 글씨 크기를 줄임 */
     }
-    
+
     @media (max-width: 900px) {
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1em; /* 글씨 크기를 줄임 */
@@ -393,7 +394,7 @@ const Cash = styled.div`
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1.5em; /* 글씨 크기를 줄임 */
     }
-    
+
     @media (max-width: 1080px) {
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1em; /* 글씨 크기를 줄임 */
@@ -403,7 +404,7 @@ const Cash = styled.div`
 const Name = styled.div`
     width: 80%;
     height: 6vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 0.5em;
     margin: 0 auto;
     margin-top: 4em;
@@ -416,7 +417,7 @@ const Name = styled.div`
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1.5em; /* 글씨 크기를 줄임 */
     }
-    
+
     @media (max-width: 900px) {
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1em; /* 글씨 크기를 줄임 */
@@ -463,6 +464,12 @@ const RightImageTitle = styled.div`
 const RightImage = styled.img`
     width: 100%;
     height: 30vh;
+`
+
+const RightNoImage = styled.div`
+    width: 100%;
+    height: 30vh;
+    background-color: white;
 `
 
 
@@ -515,6 +522,7 @@ const RightTop = styled.div`
     width: 100%;
     height: 5vh;
     border-bottom: 2px solid black;
+    border-top: 2px solid black;
     font-size: 2.5em;
     margin-top: 0.1em;
     display: flex;

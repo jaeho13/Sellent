@@ -31,6 +31,7 @@ public class SellingService {
 
         // 판매 글 목록 저장
         result.put("sellList", sellingRepository.findBySelling());
+
         // 구매 글 목록 저장
         result.put("purList", sellingRepository.findByPurchase());
 
