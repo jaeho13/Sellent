@@ -189,6 +189,8 @@ const SellentRead = () => {
         setLikeCount(likeCount + 1);
     }
 
+    const images = "/images/"
+
     return (
         <>
             <Window>
@@ -241,7 +243,12 @@ const SellentRead = () => {
                             <RightImageTitle>
                                 사진
                             </RightImageTitle>
-                            <RightImage src={downloadImage} alt="이미지" />
+                            <RightImageBack>
+                                {
+                                    downloadImage == null ? <RightImageBack />
+                                        : <RightImage src={images + downloadImage} alt="이미지" />
+                                }
+                            </RightImageBack>
                         </RightImageBind>
                         <Right>
                             <RightTop>댓글</RightTop>
@@ -284,8 +291,8 @@ const SellentRead = () => {
                             <RightComments onClick={commentsSubmit} >확인</RightComments>
                         </RightBottomBind>
                     </RightBind>
-                </Bind>
-            </Back>
+                </Bind >
+            </Back >
         </>
     );
 }
@@ -461,11 +468,16 @@ const RightImageTitle = styled.div`
     font-weight: bolder;
 `
 
+const RightImageBack = styled.div`
+    width: 100%;
+    height: 30vh;
+    background-color: white;
+`
+
 const RightImage = styled.img`
     width: 100%;
     height: 30vh;
 `
-
 
 const Right = styled.div`
     width: 100%;

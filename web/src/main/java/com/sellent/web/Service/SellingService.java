@@ -71,7 +71,7 @@ public class SellingService {
             map.put("Content", contentDTO);
             map.put("Comment", commentDTO);
             map.put("Location", addressService.getAddress(contentDTO.getSellLocation()));
-            map.put("Image", "/images/" + imageUrl);
+            map.put("Image", imageUrl);
             return map;
 
         } catch (NullPointerException e) {
