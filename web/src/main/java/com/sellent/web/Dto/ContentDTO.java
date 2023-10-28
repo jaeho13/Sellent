@@ -21,5 +21,6 @@ public class ContentDTO {
     private String sellLocation;
     private int sellLike;
     private int sellType;
+    private String uploadedFileNames;
 
 }
