@@ -41,7 +41,8 @@ const SellentRead = () => {
         navigate("/search")
     }
 
-    /* //////////////////////////////////////////////////////////////////////////////////// */
+
+    const userName = sessionStorage.getItem("userNm")
 
     const { sellIdx } = useParams();
     const [sellentRead, setSellentRead] = useState({});
@@ -205,7 +206,7 @@ const SellentRead = () => {
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
                         <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
-                        <Name>이재호</Name>
+                        <Name>{userName}</Name>
                     </Left>
 
 
@@ -403,7 +404,7 @@ const Cash = styled.div`
 const Name = styled.div`
     width: 80%;
     height: 6vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 0.5em;
     margin: 0 auto;
     margin-top: 4em;
@@ -515,6 +516,7 @@ const RightTop = styled.div`
     width: 100%;
     height: 5vh;
     border-bottom: 2px solid black;
+    border-top: 2px solid black;
     font-size: 2.5em;
     margin-top: 0.1em;
     display: flex;

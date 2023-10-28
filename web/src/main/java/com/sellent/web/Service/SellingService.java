@@ -66,7 +66,7 @@ public class SellingService {
             // "/Users/pizzay/Documents/sellent/sellent/web/src/main/frontend/src/image"+
             // imageRelativePath;
             String imageUrl = imageRelativePath;
-            System.out.println("파일 이름" + imageUrl );
+            System.out.println("파일 이름" + imageUrl);
             // map > put
             map.put("Content", contentDTO);
             map.put("Comment", commentDTO);

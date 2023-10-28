@@ -42,6 +42,8 @@ const Home = () => {
 
     const userName = sessionStorage.getItem("userNm")
 
+    const images = "/images/";
+
     const [likeList, setLikeList] = useState([]);
 
     useEffect(() => {
@@ -128,9 +130,11 @@ const Home = () => {
                                     return (
                                         <CenterBoardBind key={item.sellIdx}>
                                             <CenterBoard>
-                                                <BoardImg>
-                                                    <img src={NoImage} alt="No Image" />
-                                                </BoardImg>
+                                                {
+                                                    item.uploadedFileNames == null ?
+                                                        <BoardImg src={NoImage} alt="No Image" />
+                                                        : <BoardImg img src={images + item.uploadedFileNames} alt="No Image" />
+                                                }
                                                 <BoardTitle onClick={() => handleSellentRead(item.sellIdx)}>
                                                     {item.sellTitle.length > 5
                                                         ? `${item.sellTitle.slice(0, 5)}...`
@@ -156,9 +160,11 @@ const Home = () => {
                                     return (
                                         <CenterBoardBind key={noItem.sellIdx}>
                                             <CenterBoard>
-                                                <BoardImg>
-                                                    <img src={NoImage} alt="No Image" />
-                                                </BoardImg>
+                                                {
+                                                    noItem.uploadedFileNames == null ?
+                                                        <BoardImg src={NoImage} alt="No Image" />
+                                                        : <BoardImg img src={images + noItem.uploadedFileNames} alt="No Image" />
+                                                }
                                                 <BoardTitle onClick={() => handleSellentRead(noItem.sellIdx)}>
                                                     {noItem.sellTitle.length > 5
                                                         ? `${noItem.sellTitle.slice(0, 5)}...`
@@ -188,9 +194,11 @@ const Home = () => {
                                     return (
                                         <RightBoardBind key={purItem.sellIdx}>
                                             <RightBoard>
-                                                <BoardImg>
-                                                    <img src={NoImage} alt="No Image" />
-                                                </BoardImg>
+                                                {
+                                                    purItem.uploadedFileNames == null ?
+                                                        <BoardImg src={NoImage} alt="No Image" />
+                                                        : <BoardImg img src={images + purItem.uploadedFileNames} alt="No Image" />
+                                                }
                                                 <BoardTitle onClick={() => handleSellentRead(purItem.sellIdx)}>
                                                     {purItem.sellTitle.length > 6
                                                         ? `${purItem.sellTitle.slice(0, 6)}...`
@@ -441,15 +449,10 @@ const CenterBoard = styled.div`
     /* margin-left: 1rem; */
 `
 
-const BoardImg = styled.div`
+const BoardImg = styled.img`
     width: 100%;
     height: 15vh;
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    /* border: 2px solid red; */
+    object-fit: cover;
 `
 
 const BoardTitle = styled.div`
