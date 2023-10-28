@@ -103,7 +103,7 @@ public class SellingController {
                     // 파일명 생성 (예시: 원본 파일명에 타임스탬프 추가)
                     String originalFileName = file.getOriginalFilename();
                     String timeStamp = String.valueOf(System.currentTimeMillis());
-                    String uniqueFileName = timeStamp;
+                    String uniqueFileName = timeStamp + "_" + originalFileName;
 
                     File dest = new File(uploadPath + File.separator + uniqueFileName);
                     file.transferTo(dest); // 파일 저장
@@ -123,6 +123,8 @@ public class SellingController {
         map.put("sellType", sellType);
         map.put("sellPrice", sellPrice);
         map.put("sellLocation", sellLocation);
+
+        // 업로드한 파일명을 데이터베이스에 저장하거나 다른 용도로 사용할 수 있습니다.
 
         sellingService.insertFile(userList, uploadedFileNames, map);
     }
