@@ -71,21 +71,22 @@ public class SellingController {
     // Method : POST/sellent
     // Param : sellTitle, sellContent, sellType, sellPrice, sellLocation,
     // 글 작성
-//    @PostMapping("/sellent")
-//    public void insertContent(@RequestBody Map<String, Object> content, HttpServletRequest request)
-//            throws ParseException {
-//        UserList userList = userSession(request);
-//        sellingService.insertContent(content, userList);
-//    }
+    // @PostMapping("/sellent")
+    // public void insertContent(@RequestBody Map<String, Object> content,
+    // HttpServletRequest request)
+    // throws ParseException {
+    // UserList userList = userSession(request);
+    // sellingService.insertContent(content, userList);
+    // }
 
     @PostMapping("/sellent")
     public void insertFile(@RequestParam("files") MultipartFile[] files,
-                           @RequestParam("sellTitle") String sellTitle,
-                           @RequestParam("sellContent") String sellContent,
-                           @RequestParam("sellType") String sellType,
-                           @RequestParam("sellPrice") String sellPrice,
-                           @RequestParam("sellLocation") String sellLocation,
-                           HttpServletRequest request) {
+            @RequestParam("sellTitle") String sellTitle,
+            @RequestParam("sellContent") String sellContent,
+            @RequestParam("sellType") String sellType,
+            @RequestParam("sellPrice") String sellPrice,
+            @RequestParam("sellLocation") String sellLocation,
+            HttpServletRequest request) {
         // 다른 파라미터 처리 코드와 마찬가지로 파일 업로드 파라미터를 처리합니다.
 
         // 파일 업로드 및 저장
@@ -94,7 +95,10 @@ public class SellingController {
             if (!file.isEmpty()) {
                 try {
                     // 파일 저장 경로 설정
-                    String uploadDir = "/Users/pizzay/Documents/sellent/sellent/web/src/main/frontend/src/image"; // 저장 경로를 설정해야 합니다.
+                    // String uploadDir =
+                    // "/Users/pizzay/Documents/sellent/sellent/web/src/main/frontend/src/image"; //
+                    // 저장 경로를 설정해야 합니다.
+                    String uploadDir = "/D:\\Sellent\\sellent\\web\\src\\main\\frontend\\src\\image";
                     File uploadPath = new File(uploadDir);
                     if (!uploadPath.exists()) {
                         uploadPath.mkdirs();
@@ -129,7 +133,6 @@ public class SellingController {
         sellingService.insertFile(userList, uploadedFileNames, map);
     }
 
-
     // Method : PATCH/sellent
     // Param : sellTitle, sellContent, sellPrice, sellLocation
     // 글 수정
@@ -151,7 +154,6 @@ public class SellingController {
         }
     }
 
-
     // Method : DELETE/sellent
     // Param : sellIdx
     // 글 삭제
@@ -170,7 +172,6 @@ public class SellingController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("글 삭제에 실패했습니다.");
         }
     }
-
 
     // ------------------------------------------------
     // 댓글 작성
@@ -210,7 +211,7 @@ public class SellingController {
     public ResponseEntity<String> plusLikeCount(@RequestParam String likeCnt, HttpServletRequest request)
             throws ParseException {
         UserList userList = userSession(request);
-        //sellingService.plusLikeCount(likeCnt, userList);
+        // sellingService.plusLikeCount(likeCnt, userList);
         return null;
     }
 }

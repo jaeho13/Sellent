@@ -233,9 +233,12 @@ const SellentRead = () => {
 
 
                     <RightBind>
-                        <RightImage>
-
-                        </RightImage>
+                        <RightImageBind>
+                            <RightImageTitle>
+                                사진
+                            </RightImageTitle>
+                            <RightImage src="/images/BackgroundImage.png" alt="배경화면" />
+                        </RightImageBind>
                         <Right>
                             <RightTop>댓글</RightTop>
                             {sellentCommentRead.length > 0 && sellentCommentRead.map((Comment, index) => {
@@ -436,9 +439,27 @@ const RightBind = styled.div`
     border-left: none;
 `
 
-const RightImage = styled.div`
+const RightImageBind = styled.div`
     width: 100%;
     height: 35vh;
+`
+
+const RightImageTitle = styled.div`
+    width: 100%;
+    height: 5vh;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    background-color: white;
+    font-size: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+`
+
+const RightImage = styled.img`
+    width: 100%;
+    height: 30vh;
 `
 
 
