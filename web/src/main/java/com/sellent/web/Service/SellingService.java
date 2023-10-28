@@ -52,14 +52,27 @@ public class SellingService {
         int sellIdx = Integer.parseInt(num);
 
         try {
+            //원 글 내용 가져오기
             ContentDTO contentDTO = sellingRepository.getSellingContent(sellIdx);
+
+            //댓글 리스트 가져오기
             List<CommentDTO> commentDTO = sellingCmtService.getSellingCmt(sellIdx);
 
+            //이미지 이름 가져오기
+            String imageRelativePath = contentDTO.getUploadedFileNames();
+
+            //이미지 절대경로 + 이미지 이름
+            String imageUrl = "/Users/pizzay/Documents/sellent/sellent/web/src/main/frontend/src/image"+ imageRelativePath;
+            //String imageUrl = "" + imageRelativePath;
+
+            //map > put
             map.put("Content", contentDTO);
             map.put("Comment", commentDTO);
             map.put("Location", addressService.getAddress(contentDTO.getSellLocation()));
+            map.put("Image", imageUrl);
 
             return map;
+
         } catch (NullPointerException e) {
             e.printStackTrace();
             throw e;
@@ -163,7 +176,6 @@ public class SellingService {
     }
 
     public void insertFile(UserList userList, List<String> uploadedFileNames, Map<String, String> map) {
-        // 기존 코드와 마찬가지로 데이터 처리를 수행합니다.
 
         Selling selling = new Selling();
         String userEmail = (String) userList.getUserEmail();

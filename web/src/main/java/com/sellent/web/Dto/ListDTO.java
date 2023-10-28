@@ -15,4 +15,5 @@ public class ListDTO {
     private String sellTitle;
     private int sellLike;
     private Date sellDate;
+    private String uploadedFileNames;
 }
