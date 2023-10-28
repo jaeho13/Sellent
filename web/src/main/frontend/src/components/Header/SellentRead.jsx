@@ -64,6 +64,7 @@ const SellentRead = () => {
                 setDownloadImage(response.data.Image);
 
                 console.log("게시물 불러오기 성공", sellentRead);
+                console.log("test", response.data.Image);
             } catch (error) {
                 console.log("게시물 불러오기 실패", error);
             }
@@ -239,9 +240,7 @@ const SellentRead = () => {
                             <RightImageTitle>
                                 사진
                             </RightImageTitle>
-                            {/* <RightImage src="/images/BackgroundImage.png" alt="배경화면" /> */}
-                            <RightImage src="`${downloadImage}`" alt="배경화면" />
-
+                            <RightImage src={downloadImage} alt="이미지" />
                         </RightImageBind>
                         <Right>
                             <RightTop>댓글</RightTop>

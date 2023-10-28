@@ -95,11 +95,11 @@ public class SellingController {
             if (!file.isEmpty()) {
                 try {
                     // 파일 저장 경로 설정
-                    // String uploadDir =
-                    // "/Users/pizzay/Documents/sellent/sellent/web/src/main/frontend/src/image"; //
-                    // 저장 경로를 설정해야 합니다.
-                    String uploadDir = "/D:\\Sellent\\sellent\\web\\src\\main\\frontend\\public\\image";
+                     String uploadDir = "/Users/pizzay/Documents/sellent/sellent/web/src/main/frontend/public/images";
+                    //저장 경로를 설정해야 합니다.
+                    //String uploadDir = "/D:\\Sellent\\sellent\\web\\src\\main\\frontend\\public\\image";
                     File uploadPath = new File(uploadDir);
+
                     if (!uploadPath.exists()) {
                         uploadPath.mkdirs();
                     }
@@ -107,7 +107,7 @@ public class SellingController {
                     // 파일명 생성 (예시: 원본 파일명에 타임스탬프 추가)
                     String originalFileName = file.getOriginalFilename();
                     String timeStamp = String.valueOf(System.currentTimeMillis());
-                    String uniqueFileName = timeStamp;
+                    String uniqueFileName = timeStamp + "_" + originalFileName;
 
                     File dest = new File(uploadPath + File.separator + uniqueFileName);
                     file.transferTo(dest); // 파일 저장
@@ -127,6 +127,8 @@ public class SellingController {
         map.put("sellType", sellType);
         map.put("sellPrice", sellPrice);
         map.put("sellLocation", sellLocation);
+
+        // 업로드한 파일명을 데이터베이스에 저장하거나 다른 용도로 사용할 수 있습니다.
 
         sellingService.insertFile(userList, uploadedFileNames, map);
     }

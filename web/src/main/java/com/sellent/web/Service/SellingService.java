@@ -65,14 +65,13 @@ public class SellingService {
             // String imageUrl =
             // "/Users/pizzay/Documents/sellent/sellent/web/src/main/frontend/src/image"+
             // imageRelativePath;
-            String imageUrl = "/image" + imageRelativePath;
-
+            String imageUrl = imageRelativePath;
+            System.out.println("파일 이름" + imageUrl );
             // map > put
             map.put("Content", contentDTO);
             map.put("Comment", commentDTO);
             map.put("Location", addressService.getAddress(contentDTO.getSellLocation()));
-            map.put("Image", imageUrl);
-
+            map.put("Image", "/images/" + imageUrl);
             return map;
 
         } catch (NullPointerException e) {
