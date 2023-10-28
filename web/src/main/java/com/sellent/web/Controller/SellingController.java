@@ -95,11 +95,11 @@ public class SellingController {
             if (!file.isEmpty()) {
                 try {
                     // 파일 저장 경로 설정
-                    // String uploadDir =
-                    // "/Users/pizzay/Documents/sellent/sellent/web/src/main/frontend/src/image"; //
-                    // 저장 경로를 설정해야 합니다.
-                    String uploadDir = "/D:\\Sellent\\sellent\\web\\src\\main\\frontend\\public\\image";
+                     String uploadDir = "/Users/pizzay/Documents/sellent/sellent/web/src/main/frontend/public/images";
+                    //저장 경로를 설정해야 합니다.
+                    //String uploadDir = "/D:\\Sellent\\sellent\\web\\src\\main\\frontend\\public\\image";
                     File uploadPath = new File(uploadDir);
+
                     if (!uploadPath.exists()) {
                         uploadPath.mkdirs();
                     }
