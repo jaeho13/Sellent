@@ -8,6 +8,8 @@ import com.sellent.web.Entiity.UserList;
 import com.sellent.web.Repository.SellingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -158,5 +160,25 @@ public class SellingService {
 
     public void plusLikeCount(String likeCnt, UserList userList) {
         // int LikeCnt = Integer.parseInt((String) )
+    }
+
+    public void insertFile(UserList userList, List<String> uploadedFileNames, Map<String, String> map) {
+        // 기존 코드와 마찬가지로 데이터 처리를 수행합니다.
+
+        Selling selling = new Selling();
+        String userEmail = (String) userList.getUserEmail();
+
+        selling.setUserListVO(userService.findUserVO(userEmail));
+        selling.setSellTitle((String) map.get("sellTitle"));
+        selling.setSellContent((String) map.get("sellContent"));
+        selling.setSellDate(new Date());
+        selling.setSellLocation((String) map.get("sellLocation"));
+        selling.setSellType(Integer.parseInt((String) map.get("sellType")));
+        selling.setSellPrice(Integer.parseInt((String) map.get("sellPrice")));
+
+        // 업로드한 파일 이름을 설정
+        selling.setUploadedFileNames(String.join(",", uploadedFileNames)); // 업로드한 파일 이름을 쉼표로 구분하여 저장합니다.
+
+        sellingRepository.save(selling); // 데이터베이스에 저장
     }
 }

@@ -122,7 +122,7 @@ public class KakaoPayService {
         String amount = String.valueOf(originSellList.getAmount());
 
 
-        // 서버로 요청할 Header
+        // 서버인로 요청할 Header
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "KakaoAK " + kakaoAdminKey); // 어드민 키
         headers.add("Accept", "application/json");

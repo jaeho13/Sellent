@@ -45,4 +45,7 @@ public class Selling {
     @Column(nullable = false)
     private int sellType; // 0: 판매 1: 구매
 
+    @Column
+    private String uploadedFileNames;
+
 }

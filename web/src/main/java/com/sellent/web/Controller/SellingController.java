@@ -13,12 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.text.ParseException;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -68,12 +71,64 @@ public class SellingController {
     // Method : POST/sellent
     // Param : sellTitle, sellContent, sellType, sellPrice, sellLocation,
     // 글 작성
+//    @PostMapping("/sellent")
+//    public void insertContent(@RequestBody Map<String, Object> content, HttpServletRequest request)
+//            throws ParseException {
+//        UserList userList = userSession(request);
+//        sellingService.insertContent(content, userList);
+//    }
+
     @PostMapping("/sellent")
-    public void insertContent(@RequestBody Map<String, Object> content, HttpServletRequest request)
-            throws ParseException {
+    public void insertFile(@RequestParam("files") MultipartFile[] files,
+                           @RequestParam("sellTitle") String sellTitle,
+                           @RequestParam("sellContent") String sellContent,
+                           @RequestParam("sellType") String sellType,
+                           @RequestParam("sellPrice") String sellPrice,
+                           @RequestParam("sellLocation") String sellLocation,
+                           HttpServletRequest request) {
+        // 다른 파라미터 처리 코드와 마찬가지로 파일 업로드 파라미터를 처리합니다.
+
+        // 파일 업로드 및 저장
+        List<String> uploadedFileNames = new ArrayList<>();
+        for (MultipartFile file : files) {
+            if (!file.isEmpty()) {
+                try {
+                    // 파일 저장 경로 설정
+                    String uploadDir = "/Users/pizzay/Documents/sellent/sellent/web/src/main/frontend/src/image"; // 저장 경로를 설정해야 합니다.
+                    File uploadPath = new File(uploadDir);
+                    if (!uploadPath.exists()) {
+                        uploadPath.mkdirs();
+                    }
+
+                    // 파일명 생성 (예시: 원본 파일명에 타임스탬프 추가)
+                    String originalFileName = file.getOriginalFilename();
+                    String timeStamp = String.valueOf(System.currentTimeMillis());
+                    String uniqueFileName = timeStamp + "_" + originalFileName;
+
+                    File dest = new File(uploadPath + File.separator + uniqueFileName);
+                    file.transferTo(dest); // 파일 저장
+
+                    uploadedFileNames.add(uniqueFileName); // 업로드한 파일 이름 저장
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        // 나머지 데이터 처리 코드 (DB에 저장 등) 추가
         UserList userList = userSession(request);
-        sellingService.insertContent(content, userList);
+        Map<String, String> map = new HashMap<>();
+        map.put("sellTitle", sellTitle);
+        map.put("sellContent", sellContent);
+        map.put("sellType", sellType);
+        map.put("sellPrice", sellPrice);
+        map.put("sellLocation", sellLocation);
+
+        // 업로드한 파일명을 데이터베이스에 저장하거나 다른 용도로 사용할 수 있습니다.
+
+        sellingService.insertFile(userList, uploadedFileNames, map);
     }
+
 
     // Method : PATCH/sellent
     // Param : sellTitle, sellContent, sellPrice, sellLocation
