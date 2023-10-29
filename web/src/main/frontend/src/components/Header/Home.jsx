@@ -116,7 +116,6 @@ const Home = () => {
                         <LeftBoardTitle onClick={goLogin}>로그인</LeftBoardTitle>
                         <LeftBoard onClick={goWrite}>재능판매</LeftBoard>
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
-                        <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
                         <Name>{userName}</Name>
                     </Left>
