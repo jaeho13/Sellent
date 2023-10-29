@@ -458,7 +458,7 @@ const BoardTitle = styled.div`
     width: 100%;
     height: 4vh;
     /* border: 2px solid red; */
-    border-top: 2px solid black;
+    /* border-top: 2px solid black; */
     font-size: 1.5em;
     display: flex;
     justify-content: space-between;
