@@ -374,12 +374,12 @@ const LeftBoard = styled.div`
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    
+
     @media (max-width: 1280px) {
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1.5em; /* 글씨 크기를 줄임 */
     }
-    
+
     @media (max-width: 900px) {
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1em; /* 글씨 크기를 줄임 */
@@ -401,7 +401,7 @@ const Cash = styled.div`
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1.5em; /* 글씨 크기를 줄임 */
     }
-    
+
     @media (max-width: 1080px) {
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1em; /* 글씨 크기를 줄임 */
@@ -424,7 +424,7 @@ const Name = styled.div`
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1.5em; /* 글씨 크기를 줄임 */
     }
-    
+
     @media (max-width: 900px) {
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1em; /* 글씨 크기를 줄임 */
@@ -479,6 +479,11 @@ const RightImage = styled.img`
     height: 30vh;
 `
 
+const RightNoImage = styled.div`
+    width: 100%;
+    height: 30vh;
+    background-color: white;
+`
 const Right = styled.div`
     width: 100%;
     height: 35vh;
