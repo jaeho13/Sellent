@@ -171,28 +171,6 @@ const Write = () => {
                 console.log("파일 연동 실패")
             });
     }
-    // axios({
-    //     url: "/sellent",
-    //     method: "post",
-    //     data: {
-    //         "sellTitle": "",
-    //         sellContent,
-    //         sellType,
-    //         sellPrice,
-    //         sellLocation,
-    //     },
-    // })
-    //     .then((response) => {
-    //         console.log(response);
-    //         Swal.fire({
-    //             title: '글이 게시되었습니다.',
-    //             icon: 'success'
-    //         })
-    //         navigate("/");
-    //     })
-    //     .catch((error) => {
-    //         console.log(error);
-    //     });
 
     return (
         <>
