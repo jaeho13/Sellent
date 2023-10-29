@@ -206,7 +206,7 @@ public class SellingController {
     }
 
     // 좋아요
-    // Method : POST
+    // Method : POST    d
     // Param : sellIdx
     @GetMapping("/likeCount")
     public ResponseEntity<String> plusLikeCount(@RequestParam String likeCnt, HttpServletRequest request)
