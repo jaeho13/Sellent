@@ -6,6 +6,7 @@ import { FcLike } from "react-icons/fc"
 import { useNavigate } from "react-router-dom";
 import Map from "./Map";
 import axios from "axios";
+import NoImage from "../Image/no_img.png";
 
 const Search = () => {
 
@@ -104,6 +105,7 @@ const Search = () => {
         navigate(`/sellentRead/${sellIdx}`); //sellIdx에 해당하는 글 읽기 페이지 이동
     }
 
+    const images = "/images/";
 
     return (
         <>
@@ -120,7 +122,6 @@ const Search = () => {
                         <LeftBoardTitle onClick={goLogin}>로그인</LeftBoardTitle>
                         <LeftBoard onClick={goWrite}>재능판매</LeftBoard>
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
-                        <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
                         <Name>{userName}</Name>
                     </Left>
@@ -145,7 +146,11 @@ const Search = () => {
                                             <CenterBoardBind key={noItem.sellIdx}>
                                                 <CenterBoard>
                                                     <BoardImg>
-                                                        이미지 넣기
+                                                        {
+                                                            noItem.uploadedFileNames == null ?
+                                                                <BoardImg src={NoImage} alt="No Image" />
+                                                                : <BoardImg img src={images + noItem.uploadedFileNames} alt="No Image" />
+                                                        }
                                                     </BoardImg>
                                                     <BoardTitle onClick={() => handleSellentRead(noItem.sellIdx)}>
                                                         {noItem.sellTitle.length > 6
@@ -176,7 +181,11 @@ const Search = () => {
                                             <CenterBoardBind key={purItem.sellIdx}>
                                                 <CenterBoard>
                                                     <BoardImg>
-                                                        이미지 넣기
+                                                        {
+                                                            purItem.uploadedFileNames == null ?
+                                                                <BoardImg src={NoImage} alt="No Image" />
+                                                                : <BoardImg img src={images + purItem.uploadedFileNames} alt="No Image" />
+                                                        }
                                                     </BoardImg>
                                                     <BoardTitle onClick={() => handleSellentRead(purItem.sellIdx)}>
                                                         {purItem.sellTitle.length > 6
@@ -425,15 +434,10 @@ const CenterBoard = styled.div`
     /* margin-left: 1rem; */
 `
 
-const BoardImg = styled.div`
+const BoardImg = styled.img`
     width: 100%;
     height: 15vh;
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    /* border: 2px solid red; */
+    object-fit: cover;
 `
 
 const BoardTitle = styled.div`
