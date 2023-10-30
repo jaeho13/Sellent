@@ -399,7 +399,7 @@ const CenterHalfTop = styled.div`
 
 const CenterHalfBottom = styled.div`
     width: 100%;
-    height: 36vh;
+    height: 40vh;
     /* border: 2px solid black; */
     border-top: 2px solid black;
     overflow: auto; /* 스크롤 추가 */
@@ -416,13 +416,13 @@ const CenterContents = styled.div`
 `
 
 const CenterBoardBind = styled.div`
-    width: 21%;
+    width: 25%;
     display: flex;
     margin-bottom: 2rem;
 `
 
 const CenterBoard = styled.div`
-    width: 80%;
+    width: 60%;
     height: 20vh;
     border: 2px solid black;
     margin-top: 2rem;
@@ -439,7 +439,6 @@ const BoardImg = styled.img`
 const BoardTitle = styled.div`
     width: 100%;
     height: 4vh;
-    border-top: 2px solid black;
     font-size: 1.5em;
     display: flex;
     justify-content: space-between;
@@ -536,8 +535,6 @@ const Where = styled.div`
     display: flex;
     align-items: center;
 `
-
-
 
 const Right = styled.div`
     width: 25%;

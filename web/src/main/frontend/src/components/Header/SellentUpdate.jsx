@@ -4,6 +4,7 @@ import "../fonts/Font.css";
 import { AiFillCloseCircle } from "react-icons/ai"
 import { useNavigate, useParams } from "react-router-dom";
 import Map from "./Map";
+import Post from "./Post";
 import axios from "axios";
 import DaumPostcode from 'react-daum-postcode';
 import Swal from "sweetalert2";
@@ -89,6 +90,31 @@ const SellentUpdate = () => {
     };
 
 
+    const [enroll_company, setEnroll_company] = useState({
+        address: '',
+    });
+
+    const [popup, setPopup] = useState(false);
+
+    const handleInput = (e) => {
+        setEnroll_company({
+            ...enroll_company,
+            [e.target.name]: e.target.value,
+        })
+    }
+
+    const handleComplete = (data) => {
+        setPopup(!popup);
+    }
+
+    const handleSubmitAddress = (e) => {
+        if (e.target.value === '') {
+            Swal.fire('주소를 선택해주세요.');
+        } else {
+            setSellLocation(e.target.value);
+            Swal.fire('주소가 선택되었습니다.');
+        }
+    }
 
 
     const handleSubmit = (e) => {
@@ -125,6 +151,8 @@ const SellentUpdate = () => {
     };
 
 
+    const [tempFile, setTempFile] = useState();
+
     return (
         <>
             <Window>
@@ -145,22 +173,41 @@ const SellentUpdate = () => {
                     </Left>
 
                     <Center>
-
                         <CenterTop>글제목</CenterTop>
                         <form onSubmit={handleSubmit}>
                             <CenterTitle
                                 type="text"
+                                placeholder="*제목을 입력하세요"
                                 onChange={handleTitleChange}
                                 value={sellTitle}
-                            ></CenterTitle>
-
-                            <CenterTop>글내용</CenterTop>
+                            />
+                            <RadioGroup>
+                                {/* <CheckLabel>
+                                    <CheckRadio
+                                        type="checkbox"
+                                        value="0"
+                                        checked={sellType === "0"}
+                                        onChange={(e) => setSellType(e.target.value)}
+                                    />
+                                    재능판매
+                                </CheckLabel>
+                                <CheckLabel>
+                                    <CheckRadio
+                                        type="checkbox"
+                                        value="1"
+                                        checked={sellType === "1"}
+                                        onChange={(e) => setSellType(e.target.value)}
+                                    />
+                                    재능구매
+                                </CheckLabel> */}
+                            </RadioGroup>
+                            <CenterTopBoard>글내용</CenterTopBoard>
                             <CenterBoard
                                 type="text"
+                                placeholder="*글을 입력하세요"
                                 onChange={handleContentChange}
                                 value={sellContent}
                             />
-
                             <ButtonBind>
                                 <Price
                                     type="text"
@@ -168,45 +215,52 @@ const SellentUpdate = () => {
                                     onChange={handlePriceChange}
                                     value={sellPrice}
                                 />
-                                <Upload type="submit">수정하기</Upload>
-                                <Cancel onClick={goHome}>취소하기</Cancel>
+                                <PictureUpload type="submit" >글올리기</PictureUpload>
                             </ButtonBind>
 
-                            <PictureBind>
-                                <Picture placeholder="*파일을 올리세요" />
-                                <PictureUpload>찾아보기</PictureUpload>
-                            </PictureBind>
+
+                            {/* <PictureBind>
+                                <Picture
+                                    type="file"
+                                    multiple
+                                    onChange={(e) => {
+                                        setTempFile(e.target.files);
+                                    }}
+                                />
+                            </PictureBind> */}
                         </form>
-
-
                     </Center>
 
                     <Right>
                         <CenterWhere>거래 희망장소</CenterWhere>
-                        <Location>
-                            {sellLocation}
-                        </Location>
+                        <AddressBind>
+                            <AddressLeft className="searchBtn" onClick={handleComplete}>주소 검색</AddressLeft>
+                            <AddressRight className="selectBtn" onClick={handleSubmitAddress} value={enroll_company.address}>주소 선택</AddressRight>
+                        </AddressBind>
 
-                        <NoUpdate>(* 수정 불가능 *)</NoUpdate>
-                        <Map locationX={locationX} locationY={locationY} />
+
+                        {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
+                        <AddressInput className="user_enroll_text" placeholder="주소 검색 후 선택 버튼을 눌러주세요." type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address} />
+
                     </Right>
                 </Bind>
-            </Back>
+            </Back >
         </>
     );
 }
 
 export default SellentUpdate;
 
-/* <CSS> */
 
 const Window = styled.div`
     width: 85%;
     height: 3rem;
-    border: 2px solid red;
+    border: 2px solid black;
+    border-bottom: none;
     margin: 0 auto;
     margin-top: 4vh;
-    background-color: lightgrey;
+    background-color: #dcdcdc;
+    box-shadow: 1em 1em 1em 1em #6E6E6E;
 `
 
 const Close = styled.div`
@@ -218,9 +272,10 @@ const Close = styled.div`
 const Back = styled.div`
     width: 85%;
     height: 85vh;
-    border: 2px solid green;
+    border: 2px solid black;
+    border-top: none;
     margin: 0 auto;
-    /* margin-top: 8vh; */
+    box-shadow: 1em 1em 1em 1em #6E6E6E;
 `
 
 const Bind = styled.div`
@@ -231,7 +286,8 @@ const Bind = styled.div`
 const Left = styled.div`
     width: 15%;
     height: 85vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
+    border-right: 2px solid black;
     background-color: white;
 `
 
@@ -273,12 +329,12 @@ const LeftBoard = styled.div`
     align-items: center;
     justify-content: center;
     cursor: pointer;
-
+    
     @media (max-width: 1280px) {
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1.5em; /* 글씨 크기를 줄임 */
     }
-
+    
     @media (max-width: 900px) {
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1em; /* 글씨 크기를 줄임 */
@@ -300,7 +356,7 @@ const Cash = styled.div`
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1.5em; /* 글씨 크기를 줄임 */
     }
-
+    
     @media (max-width: 1080px) {
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1em; /* 글씨 크기를 줄임 */
@@ -323,16 +379,17 @@ const Name = styled.div`
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1.5em; /* 글씨 크기를 줄임 */
     }
-
+    
     @media (max-width: 900px) {
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1em; /* 글씨 크기를 줄임 */
     }
 `
+
 const Center = styled.div`
     width: 55%;
     height: 85vh;
-    border: 2px solid red;
+    border-right: 2px solid black;
     background-color: white;
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
@@ -341,7 +398,7 @@ const Center = styled.div`
 const CenterTop = styled.div`
     width: 90%;
     height: 5vh;
-    border: 2px solid red;
+    border: 2px solid black;
     font-size: 2.5em;
     display: flex;
     align-items: center;
@@ -350,10 +407,22 @@ const CenterTop = styled.div`
     font-weight: bolder;
 `
 
+const CenterTopBoard = styled.div`
+    width: 90%;
+    height: 5vh;
+    border: 2px solid black;
+    font-size: 2.5em;
+    display: flex;
+    align-items: center;
+    margin-left: 0.5em;
+    font-weight: bolder;
+`
+
+
 const CenterTitle = styled.input`
     width: 90%;
     height: 5vh;
-    border: 2px solid red;
+    border: 2px solid black;
     font-size: 2.5em;
     display: flex;
     align-items: center;
@@ -364,7 +433,7 @@ const CenterTitle = styled.input`
 const CenterBoard = styled.textarea`
     width: 90%;
     height: 50vh;
-    border: 2px solid red;
+    border: 2px solid black;
     font-size: 2.5em;
     display: flex;
     margin-top: 0.5em;
@@ -372,6 +441,7 @@ const CenterBoard = styled.textarea`
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
 `
+
 
 const PictureBind = styled.div`
     display: flex;
@@ -382,20 +452,20 @@ const PictureBind = styled.div`
 const Picture = styled.input`
     width: 70%;
     height: 5vh;
-    border: 2px solid blue;
+    border: 2px solid black;
     margin-left: 0.6em;
     font-size: 2rem;
     display: flex;
     align-items: center;
 `
 
-const PictureUpload = styled.div`
+const PictureUpload = styled.button`
     width: 15%;
     height: 5vh;
-    border: 2px solid green;
-    margin-left: 1.3em;
+    border: 2px solid black;
+    margin-left: 9em;
     margin-bottom: 1em;
-    font-size: 2rem;
+    font-size: 1.5em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -413,6 +483,7 @@ const Price = styled.input`
     height: 5vh;
     border: 2px solid black;
     margin-left: 0.7em;
+    margin-bottom: 1em;
     font-size: 1.8em;
     display: flex;
     align-items: center;
@@ -448,7 +519,7 @@ const Cancel = styled.button`
 const Right = styled.div`
     width: 30%;
     height: 85vh;
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     overflow: auto; /* 스크롤 추가 */
     overflow-x: hidden; /* 가로 스크롤 제거 */
     background-color: white;
@@ -482,7 +553,7 @@ const RightBoard = styled.div`
 const CenterWhere = styled.div`
     width: 90%;
     height: 5vh;
-    border: 2px solid red;
+    border: 2px solid black;
     font-size: 2.5em;
     display: flex;
     align-items: center;
@@ -490,15 +561,70 @@ const CenterWhere = styled.div`
     margin-left: 0.5em;
 `
 
-const Location = styled.div`
+const RadioGroup = styled.div`
+    display: flex;
+    flex-direction: row;
+    font-size: 1.5rem;
+    margin-left: 0.5em;
+    margin-top: 0.8em;
+    color: #595959;
+    label {
+        margin-right: 1rem;
+        input[type="radio"] {
+        margin-right: 0.3rem;
+        }
+    }
+`
+
+const CheckRadio = styled.input`
+    border: 2px solid black;
+    width: 10%;
+    height: 2em;
+    display: flex;
+`
+
+const CheckLabel = styled.label`
+    width: 30%;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    margin-left: 0.2em;
+`
+
+const AddressBind = styled.div`
+    width: 100%;
+    display: flex;
+    margin: 0 auto;
+`
+
+const AddressLeft = styled.button`
+    width: 30%;
+    height: 5vh;
+    border: 2px solid black;
+    font-size: 1.5em;
+    margin-top: 0.5em;
+    margin-left: 0.8em;
+    cursor: pointer;
+`
+
+const AddressRight = styled.button`
+    width: 30%;
+    height: 5vh;
+    border: 2px solid black;
+    font-size: 1.5em;
+    margin-top: 0.5em;
+    margin-left: 1em;
+    /* margin-right: 1em; */
+    cursor: pointer;
+`
+
+const AddressInput = styled.input`
     width: 90%;
     height: 5vh;
     border: 2px solid black;
-    font-size: 2rem;
-    margin-top: 1rem;
-    margin-left: 0.5em;
-`
-const NoUpdate = styled.div`
-    margin-top: 1rem;
-    margin-left: 1em;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 0.5em;
+    font-size: 1.5em;
 `
