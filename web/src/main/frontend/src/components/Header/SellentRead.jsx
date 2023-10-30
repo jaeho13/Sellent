@@ -206,7 +206,6 @@ const SellentRead = () => {
                         <LeftBoardTitle onClick={goLogin}>로그인</LeftBoardTitle>
                         <LeftBoard onClick={goWrite}>재능판매</LeftBoard>
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
-                        <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
                         <Name>{userName}</Name>
                     </Left>
@@ -414,7 +413,7 @@ const Name = styled.div`
     /* border: 2px solid black; */
     border-radius: 0.5em;
     margin: 0 auto;
-    margin-top: 4em;
+    margin-top: 7em;
     font-size: 2rem;
     display: flex;
     justify-content: center;
@@ -533,7 +532,7 @@ const RightTop = styled.div`
     width: 100%;
     height: 5vh;
     border-bottom: 2px solid black;
-    border-top: 2px solid black;
+    /* border-top: 2px solid black; */
     font-size: 2.5em;
     margin-top: 0.1em;
     display: flex;
@@ -722,11 +721,11 @@ const Cancel = styled.button`
 const CenterWhere = styled.div`
     width: 90%;
     height: 5vh;
-    border: 2px solid #595959;
+    /* border: 2px solid #595959; */
     font-size: 2em;
     display: flex;
     align-items: center;
     font-weight: bold;
     margin-top: 1em;
-    margin-left: 0.6em;
+    margin-left: 0.7em;
 `

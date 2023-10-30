@@ -341,7 +341,7 @@ const Name = styled.div`
     /* border: 2px solid black; */
     border-radius: 0.5em;
     margin: 0 auto;
-    margin-top: 4em;
+    margin-top: 7em;
     font-size: 2rem;
     display: flex;
     justify-content: center;
@@ -451,7 +451,7 @@ const CenterBoard = styled.div`
 const BoardImg = styled.img`
     width: 100%;
     height: 15vh;
-    object-fit: cover;
+    /* object-fit: cover; */
 `
 
 const BoardTitle = styled.div`
@@ -536,7 +536,7 @@ const RightBoard = styled.div`
     width: 100%;
     height: 20vh;
     border: 2px solid black;
-    margin-top: 2em;
+    margin-top: 1em;
     /* margin-left: 5rem; */
     margin-left: 1rem;
     margin-right: 1rem;

@@ -145,13 +145,11 @@ const Search = () => {
                                         return (
                                             <CenterBoardBind key={noItem.sellIdx}>
                                                 <CenterBoard>
-                                                    <BoardImg>
-                                                        {
-                                                            noItem.uploadedFileNames == null ?
-                                                                <BoardImg src={NoImage} alt="No Image" />
-                                                                : <BoardImg img src={images + noItem.uploadedFileNames} alt="No Image" />
-                                                        }
-                                                    </BoardImg>
+                                                    {
+                                                        noItem.uploadedFileNames == null ?
+                                                            <BoardImg src={NoImage} alt="No Image" />
+                                                            : <BoardImg img src={images + noItem.uploadedFileNames} alt="No Image" />
+                                                    }
                                                     <BoardTitle onClick={() => handleSellentRead(noItem.sellIdx)}>
                                                         {noItem.sellTitle.length > 6
                                                             ? `${noItem.sellTitle.slice(0, 6)}...`
@@ -180,13 +178,11 @@ const Search = () => {
                                         return (
                                             <CenterBoardBind key={purItem.sellIdx}>
                                                 <CenterBoard>
-                                                    <BoardImg>
-                                                        {
-                                                            purItem.uploadedFileNames == null ?
-                                                                <BoardImg src={NoImage} alt="No Image" />
-                                                                : <BoardImg img src={images + purItem.uploadedFileNames} alt="No Image" />
-                                                        }
-                                                    </BoardImg>
+                                                    {
+                                                        purItem.uploadedFileNames == null ?
+                                                            <BoardImg src={NoImage} alt="No Image" />
+                                                            : <BoardImg img src={images + purItem.uploadedFileNames} alt="No Image" />
+                                                    }
                                                     <BoardTitle onClick={() => handleSellentRead(purItem.sellIdx)}>
                                                         {purItem.sellTitle.length > 6
                                                             ? `${purItem.sellTitle.slice(0, 6)}...`
@@ -336,7 +332,7 @@ const Name = styled.div`
     /* border: 2px solid black; */
     border-radius: 0.5em;
     margin: 0 auto;
-    margin-top: 4em;
+    margin-top: 7em;
     font-size: 2rem;
     display: flex;
     justify-content: center;

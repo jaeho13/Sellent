@@ -238,7 +238,7 @@ const Name = styled.div`
     /* border: 2px solid black; */
     border-radius: 0.5em;
     margin: 0 auto;
-    margin-top: 4em;
+    margin-top: 7em;
     font-size: 2rem;
     display: flex;
     justify-content: center;
