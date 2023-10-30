@@ -40,6 +40,8 @@ const SellentUpdate = () => {
         navigate("/search")
     }
 
+    const userName = sessionStorage.getItem("userNm")
+
     const { sellIdx } = useParams();
     const [sellTitle, setSellTitle] = useState("");
     const [sellContent, setSellContent] = useState("");
@@ -138,9 +140,8 @@ const SellentUpdate = () => {
                         <LeftBoardTitle onClick={goLogin}>로그인</LeftBoardTitle>
                         <LeftBoard onClick={goWrite}>재능판매</LeftBoard>
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
-                        <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
-                        <Name>이재호</Name>
+                        <Name>{userName}</Name>
                     </Left>
 
                     <Center>
@@ -272,12 +273,12 @@ const LeftBoard = styled.div`
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    
+
     @media (max-width: 1280px) {
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1.5em; /* 글씨 크기를 줄임 */
     }
-    
+
     @media (max-width: 900px) {
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1em; /* 글씨 크기를 줄임 */
@@ -299,7 +300,7 @@ const Cash = styled.div`
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1.5em; /* 글씨 크기를 줄임 */
     }
-    
+
     @media (max-width: 1080px) {
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1em; /* 글씨 크기를 줄임 */
@@ -309,10 +310,10 @@ const Cash = styled.div`
 const Name = styled.div`
     width: 80%;
     height: 6vh;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 0.5em;
     margin: 0 auto;
-    margin-top: 4em;
+    margin-top: 7em;
     font-size: 2rem;
     display: flex;
     justify-content: center;
@@ -322,13 +323,12 @@ const Name = styled.div`
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1.5em; /* 글씨 크기를 줄임 */
     }
-    
+
     @media (max-width: 900px) {
         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
         font-size: 1em; /* 글씨 크기를 줄임 */
     }
 `
-
 const Center = styled.div`
     width: 55%;
     height: 85vh;
