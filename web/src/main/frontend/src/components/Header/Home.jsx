@@ -72,6 +72,9 @@ const Home = () => {
         likeBoardLoad();
     }, []);
 
+    function checkLogin() {
+        Swal.fire("로그인이 필요한 서비스입니다.")
+    }
     function handleLogout() {
         sessionStorage.removeItem('userEmail');
         sessionStorage.removeItem("userNm")
@@ -119,7 +122,6 @@ const Home = () => {
     const handleSellentRead = (sellIdx) => {
         navigate(`/sellentRead/${sellIdx}`); //sellIdx에 해당하는 글 읽기 페이지 이동
     }
-
     return (
         <>
             <Window>
@@ -135,9 +137,9 @@ const Home = () => {
                         <LeftBoardTitle onClick={isLogin ? handleLogout : goLogin}>
                             {isLogin ? '로그아웃' : '로그인'}
                         </LeftBoardTitle>
-                        <LeftBoard onClick={goWrite}>재능판매</LeftBoard>
+                        <LeftBoard onClick={isLogin ? goWrite : checkLogin}>재능판매</LeftBoard>
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
-                        <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
+                        <LeftBoard onClick={isLogin ? goMypage : checkLogin} >마이페이지</LeftBoard>
                         <Name>{userName}</Name>
                     </Left>
 
