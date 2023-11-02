@@ -7,6 +7,7 @@ import { FcLike } from "react-icons/fc"
 import { useNavigate } from "react-router-dom"
 import axios from "axios";
 import NoImage from "../Image/no_img.png";
+import Swal from "sweetalert2";
 
 const Home = () => {
 
@@ -49,10 +50,10 @@ const Home = () => {
 
 
     useEffect(() => {
-      const userEmail = sessionStorage.getItem('userEmail');
-      const userIsLogin = userEmail !== null;
+        const userEmail = sessionStorage.getItem('userEmail');
+        const userIsLogin = userEmail !== null;
 
-      setIsLogin(userIsLogin);
+        setIsLogin(userIsLogin);
     }, []);
 
 
@@ -72,9 +73,12 @@ const Home = () => {
     }, []);
 
     function handleLogout() {
-      sessionStorage.removeItem('userEmail');
-      setIsLogin(false);
-        //로그아웃 url 넣기!
+        sessionStorage.removeItem('userEmail');
+        sessionStorage.removeItem("userNm")
+        setIsLogin(false);
+        Swal.fire("로그아웃 되었습니다.")
+        navigate("/")
+
     }
 
 
@@ -129,7 +133,7 @@ const Home = () => {
                     <Left>
                         <LeftTop onClick={goHome}>SELLENT</LeftTop>
                         <LeftBoardTitle onClick={isLogin ? handleLogout : goLogin}>
-                          {isLogin ? '로그아웃' : '로그인'}
+                            {isLogin ? '로그아웃' : '로그인'}
                         </LeftBoardTitle>
                         <LeftBoard onClick={goWrite}>재능판매</LeftBoard>
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
