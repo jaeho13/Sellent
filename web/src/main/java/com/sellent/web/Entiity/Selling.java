@@ -13,6 +13,7 @@ import java.util.Date;
 @Getter
 @ToString
 @DynamicInsert
+@Table
 public class Selling {
 
     @Id
