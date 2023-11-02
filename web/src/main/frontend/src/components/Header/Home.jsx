@@ -45,6 +45,16 @@ const Home = () => {
     const images = "/images/";
 
     const [likeList, setLikeList] = useState([]);
+    const [isLogin, setIsLogin] = useState(false); // 유저 로그인 상태 확인 용 > default : false
+
+
+    useEffect(() => {
+      const userEmail = sessionStorage.getItem('userEmail');
+      const userIsLogin = userEmail !== null;
+
+      setIsLogin(userIsLogin);
+    }, []);
+
 
     useEffect(() => {
         const likeBoardLoad = async () => {
@@ -61,6 +71,11 @@ const Home = () => {
         likeBoardLoad();
     }, []);
 
+    function handleLogout() {
+      sessionStorage.removeItem('userEmail');
+      setIsLogin(false);
+        //로그아웃 url 넣기!
+    }
 
 
     const [sellList, setSellList] = useState([]);
@@ -113,7 +128,9 @@ const Home = () => {
                 <Bind>
                     <Left>
                         <LeftTop onClick={goHome}>SELLENT</LeftTop>
-                        <LeftBoardTitle onClick={goLogin}>로그인</LeftBoardTitle>
+                        <LeftBoardTitle onClick={isLogin ? handleLogout : goLogin}>
+                          {isLogin ? '로그아웃' : '로그인'}
+                        </LeftBoardTitle>
                         <LeftBoard onClick={goWrite}>재능판매</LeftBoard>
                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
