@@ -81,12 +81,12 @@ public class SellingController {
 
     @PostMapping("/sellent")
     public void insertFile(@RequestParam("files") MultipartFile[] files,
-                           @RequestParam("sellTitle") String sellTitle,
-                           @RequestParam("sellContent") String sellContent,
-                           @RequestParam("sellType") String sellType,
-                           @RequestParam("sellPrice") String sellPrice,
-                           @RequestParam("sellLocation") String sellLocation,
-                           HttpServletRequest request) {
+            @RequestParam("sellTitle") String sellTitle,
+            @RequestParam("sellContent") String sellContent,
+            @RequestParam("sellType") String sellType,
+            @RequestParam("sellPrice") String sellPrice,
+            @RequestParam("sellLocation") String sellLocation,
+            HttpServletRequest request) {
         // 다른 파라미터 처리 코드와 마찬가지로 파일 업로드 파라미터를 처리합니다.
 
         // 파일 업로드 및 저장
@@ -104,6 +104,8 @@ public class SellingController {
                     System.out.println("2 : " + files.length);
 
                     File uploadPath = new File(uploadDir);
+                    System.out.println("1:" + file.getSize());
+                    System.out.println("2:" + files.length);
 
                     if (!uploadPath.exists()) {
                         uploadPath.mkdirs();
@@ -211,7 +213,7 @@ public class SellingController {
     }
 
     // 좋아요
-    // Method : POST    d
+    // Method : POST d
     // Param : sellIdx
     @GetMapping("/likeCount")
     public ResponseEntity<String> plusLikeCount(@RequestParam String likeCnt, HttpServletRequest request)
