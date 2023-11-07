@@ -96,9 +96,13 @@ public class SellingController {
                 try {
                     // 파일 저장 경로 설정
                     // String uploadDir =
-                    // "/Users/pizzay/Documents/sellent/sellent/web/src/main/frontend/public/images";
+                    // "/Users/pizzay/Documents/sellent/sellent1/web/src/main/frontend/public/images";
+                    // "/D:\Sellent\sellent\web\src\main\frontend\public\images"
                     // 저장 경로를 설정해야 합니다.
-                    String uploadDir = "/D:\\Sellent\\sellent\\web\\src\\main\\frontend\\public\\images";
+                    String uploadDir = "/Users/pizzay/Documents/sellent/sellent1/web/src/main/frontend/public/images";
+                    System.out.println("1 : " + file.getSize());
+                    System.out.println("2 : " + files.length);
+
                     File uploadPath = new File(uploadDir);
                     System.out.println("1:" + file.getSize());
                     System.out.println("2:" + files.length);
@@ -116,6 +120,7 @@ public class SellingController {
                     file.transferTo(dest); // 파일 저장
 
                     uploadedFileNames.add(uniqueFileName); // 업로드한 파일 이름 저장
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
