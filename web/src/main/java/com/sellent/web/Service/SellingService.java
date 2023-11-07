@@ -72,8 +72,9 @@ public class SellingService {
             map.put("Comment", commentDTO);
             map.put("Location", addressService.getAddress(contentDTO.getSellLocation()));
             map.put("Image", imageUrl);
-            return map;
 
+            return map;
+  
         } catch (NullPointerException e) {
             e.printStackTrace();
             throw e;
@@ -189,6 +190,8 @@ public class SellingService {
         selling.setSellType(Integer.parseInt((String) map.get("sellType")));
         selling.setSellPrice(Integer.parseInt((String) map.get("sellPrice")));
 
+        System.out.println("=== 파일의 크기 : " + uploadedFileNames.size());
+        System.out.println("=== 내용 : " + uploadedFileNames);
         // 업로드한 파일 이름을 설정
         selling.setUploadedFileNames(String.join(",", uploadedFileNames)); // 업로드한 파일 이름을 쉼표로 구분하여 저장합니다.
 
