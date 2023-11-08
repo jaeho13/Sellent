@@ -190,6 +190,7 @@ const SellentRead = () => {
         try {
             await axios.post(`/likeCnt?sellIdx=${sellIdx}`);
 
+            //const response = await axios.post(`/likeCnt?sellIdx=${sellIdx}`);
             console.log("좋아요 증가");
         } catch (error) {
             console.log("좋아요 실패")
@@ -246,7 +247,7 @@ const SellentRead = () => {
                                 <LikeButton onClick={LikeCountUp}>
                                     <FcLike />
                                 </LikeButton>
-                                <LikeCount>{sellentRead.sellLike}</LikeCount>
+                                <LikeCount>{likeCount}</LikeCount>
                             </LikeBind>
                         </CenterTitle>
                         <CenterBottomBind>
