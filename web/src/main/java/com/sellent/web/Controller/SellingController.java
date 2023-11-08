@@ -214,7 +214,7 @@ public class SellingController {
     // 좋아요
     // Method : POST
     // Param : sellIdx
-    @GetMapping("/likeCnt")
+    @PostMapping("/likeCnt")
     public ResponseEntity<String> plusLikeCount(String sellIdx, HttpServletRequest request)
             throws ParseException {
         UserList userList = userSession(request);
