@@ -64,7 +64,6 @@ public class SellingController {
             throws Exception {
         UserList userList = userSession(request);
         Map<String, Object> result = sellingService.selectContent(sellIdx);
-
         return result;
     }
 
