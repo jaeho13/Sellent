@@ -212,13 +212,13 @@ public class SellingController {
     }
 
     // 좋아요
-    // Method : POST d
+    // Method : POST
     // Param : sellIdx
-    @GetMapping("/likeCount")
-    public ResponseEntity<String> plusLikeCount(@RequestParam String likeCnt, HttpServletRequest request)
+    @GetMapping("/likeCnt")
+    public ResponseEntity<String> plusLikeCount(String sellIdx, HttpServletRequest request)
             throws ParseException {
         UserList userList = userSession(request);
-        // sellingService.plusLikeCount(likeCnt, userList);
+        sellingService.plusLikeCount(sellIdx, userList);
         return null;
     }
 }
