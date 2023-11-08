@@ -74,7 +74,7 @@ public class SellingService {
             map.put("Image", imageUrl);
 
             return map;
-  
+
         } catch (NullPointerException e) {
             e.printStackTrace();
             throw e;
@@ -173,8 +173,18 @@ public class SellingService {
         sellingCmtService.insertCmt(comment, sellingVO, userVO);
     }
 
-    public void plusLikeCount(String likeCnt, UserList userList) {
-        // int LikeCnt = Integer.parseInt((String) )
+    public void plusLikeCount(String sellIdx, UserList userList) {
+        Selling selling = new Selling();
+        int num = Integer.parseInt(sellIdx);
+        selling = sellingRepository.findContent(num);
+//        String userEmail = (String) userList.getUserEmail();
+//        selling.setUserListVO(userService.findUserVO(userEmail));
+        int likeCnt = selling.getSellLike();
+        System.out.println("좋아요 수 : " + likeCnt);
+        likeCnt++;
+        selling.setSellLike(likeCnt);
+
+        sellingRepository.save(selling);
     }
 
     public void insertFile(UserList userList, List<String> uploadedFileNames, Map<String, String> map) {
