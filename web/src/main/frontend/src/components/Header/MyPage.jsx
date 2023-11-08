@@ -117,11 +117,6 @@ const MyPage = () => {
                                 <SellDetails>재능 판매 내역</SellDetails>
                                 <Favorite>재능 즐겨찾기</Favorite>
                             </DetailsBind>
-
-                            <DetailsBind>
-                                <Review>받은 후기</Review>
-                                <Charge>포인트 충전</Charge>
-                            </DetailsBind>
                         </CenterHalfTop>
                     </Center>
 
