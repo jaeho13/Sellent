@@ -189,7 +189,6 @@ const SellentRead = () => {
     const LikeCountUp = async () => {
         try {
             await axios.post(`/likeCnt?sellIdx=${sellIdx}`);
-
             console.log("좋아요 증가");
         } catch (error) {
             console.log("좋아요 실패")
