@@ -9,6 +9,8 @@ import Post from "./Post";
 import axios from "axios";
 import DaumPostcode from 'react-daum-postcode';
 import Swal from "sweetalert2";
+import noImage from "../Image/no_img.png"
+
 
 const Write = () => {
 
@@ -143,15 +145,21 @@ const Write = () => {
             Swal.fire("거래 타입을 입력해주세요.");
             return;
         }
+
         uploadFile();
     };
 
 
     const uploadFile = (e) => {
         var data = new FormData();
+        if (tempFile.length === 0) {
+            data.append("files", noImage);
+        }
+        // else {
         for (let i = 0; i < tempFile.length; i++) {
             data.append("files", tempFile[i]);
         }
+        // }
         data.append("sellTitle", sellTitle);
         data.append("sellContent", sellContent);
         data.append("sellType", sellType);
@@ -252,10 +260,7 @@ const Write = () => {
                                     onChange={handlePriceChange}
                                     value={sellPrice}
                                 />
-                                {/* <Upload type="submit">글올리기</Upload> */}
-                                {/* <Cancel>취소하기</Cancel> */}
                             </ButtonBind>
-
 
                             <PictureBind>
                                 <Picture
@@ -265,8 +270,6 @@ const Write = () => {
                                         setTempFile(e.target.files);
                                     }}
                                 />
-                                {/* <button type="submit">submit</button> */}
-                                {/* <PictureUpload type="handleSubmit" >글올리기</PictureUpload> */}
                                 <PictureUpload type="submit" >글올리기</PictureUpload>
                             </PictureBind>
                         </form>
