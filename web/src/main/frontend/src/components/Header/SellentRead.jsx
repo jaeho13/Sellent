@@ -245,7 +245,7 @@ const SellentRead = () => {
                                 <LikeButton onClick={LikeCountUp}>
                                     <FcLike />
                                 </LikeButton>
-                                <LikeCount>{likeCount}</LikeCount>
+                                <LikeCount>{sellentRead.sellLike}</LikeCount>
                             </LikeBind>
                         </CenterTitle>
                         <CenterBottomBind>
