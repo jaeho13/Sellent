@@ -153,7 +153,7 @@ const Home = () => {
                                         <CenterBoardBind key={item.sellIdx}>
                                             <CenterBoard>
                                                 {
-                                                    item.uploadedFileNames == null ?
+                                                    item.uploadedFileNames === "null" ?
                                                         <BoardImg src={NoImage} alt="No Image" />
                                                         : <BoardImg img src={images + item.uploadedFileNames} alt="No Image" />
                                                 }
