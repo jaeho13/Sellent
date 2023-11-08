@@ -183,10 +183,16 @@ const SellentRead = () => {
         }
     };
 
-    const [likeCount, setLikeCount] = useState(0);
+    const [likeCount, setLikeCount] = useState("");
 
-    const LikeCountUp = () => {
-        setLikeCount(likeCount + 1);
+
+    const LikeCountUp = async () => {
+        try {
+            const response = await axios.post(`/likeCnt?sellIdx=${sellIdx}`);
+            console.log("좋아요 증가");
+        } catch (error) {
+            console.log("좋아요 실패")
+        }
     }
 
     const images = "/images/"
