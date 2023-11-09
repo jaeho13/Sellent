@@ -235,7 +235,6 @@ const SellentRead = () => {
                         <Name>{userName}</Name>
                     </Left>
 
-
                     <Center>
                         <CenterTopic>{sellentRead.sellType === 0 ? "재능 판매" : "재능 구매"}</CenterTopic>
                         <CenterTitle>{sellentRead.sellTitle}</CenterTitle>
