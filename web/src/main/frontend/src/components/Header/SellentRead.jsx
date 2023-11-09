@@ -183,7 +183,7 @@ const SellentRead = () => {
         }
     };
 
-    const [likeCount, setLikeCount] = useState(0);
+    const [likeCount, setLikeCount] = useState();
 
 
     const LikeCountUp = async () => {
@@ -235,7 +235,6 @@ const SellentRead = () => {
                         <Name>{userName}</Name>
                     </Left>
 
-
                     <Center>
                         <CenterTopic>{sellentRead.sellType === 0 ? "재능 판매" : "재능 구매"}</CenterTopic>
                         <CenterTitle>{sellentRead.sellTitle}</CenterTitle>
@@ -245,7 +244,7 @@ const SellentRead = () => {
                                 <LikeButton onClick={LikeCountUp}>
                                     <FcLike />
                                 </LikeButton>
-                                <LikeCount>{likeCount}</LikeCount>
+                                <LikeCount>{sellentRead.sellLike}</LikeCount>
                             </LikeBind>
                         </CenterTitle>
                         <CenterBottomBind>
