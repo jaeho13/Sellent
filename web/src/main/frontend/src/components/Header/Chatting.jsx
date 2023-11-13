@@ -1,388 +1,388 @@
-// import React, { useEffect, useState } from "react";
-// import styled from "styled-components";
-// import "../fonts/Font.css";
-// import { AiFillCloseCircle } from "react-icons/ai"
-// import { FcLike } from "react-icons/fc"
-// import { useNavigate } from "react-router-dom";
-// import Map from "./Map";
-// import axios from "axios";
-// import NoImage from "../Image/no_img.png";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import "../fonts/Font.css";
+import { AiFillCloseCircle } from "react-icons/ai"
+import { FcLike } from "react-icons/fc"
+import { useNavigate } from "react-router-dom";
+import Map from "./Map";
+import axios from "axios";
+import NoImage from "../Image/no_img.png";
 
-// const Chatting = () => {
+const Chatting = () => {
 
-//     const navigate = useNavigate();
-
-
-//     const goHome = () => {
-//         navigate("/")
-//     }
-
-//     const goLogin = () => {
-//         navigate("/login")
-//     }
-
-//     const goWrite = () => {
-//         navigate("/write")
-//     }
-
-//     const goMypage = () => {
-//         navigate("/mypage")
-//     }
-
-//     const goChat = () => {
-//         navigate("/chatting")
-//     }
-
-//     const goBack = () => {
-//         navigate("/background")
-//     }
-
-//     const goSearch = () => {
-//         navigate("/search")
-//     }
-
-//     const userName = sessionStorage.getItem("userNm")
-
-//     const [purList, setPurList] = useState([]);
-
-//     useEffect(() => {
-//         const purchaseLoad = async () => {
-//             try {
-//                 const response = await axios.get("/list");
-//                 setPurList(response.data.purList);
-//                 console.log("재능 구매 불러오기 성공")
-//                 console.log(response.data)
-//             } catch (error) {
-//                 console.log("재능 구매 불러오기 실패");
-//             }
-//         };
-
-//         purchaseLoad();
-//     }, []);
-
-//     const handleSellentRead = (sellIdx) => {
-//         navigate(`/sellentRead/${sellIdx}`); //sellIdx에 해당하는 글 읽기 페이지 이동
-//     }
-
-//     return (
-//         <>
-//             <Window>
-//                 <Close>
-//                     <AiFillCloseCircle onClick={goBack} />
-//                 </Close>
-//             </Window>
+    const navigate = useNavigate();
 
 
-//             <Back>
-//                 <Bind>
-//                     <Left>
-//                         <LeftTop onClick={goHome}>SELLENT</LeftTop>
-//                         <LeftBoardTitle onClick={goLogin}>로그인</LeftBoardTitle>
-//                         <LeftBoard onClick={goWrite}>재능판매</LeftBoard>
-//                         <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
-//                         <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
-//                         <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
-//                         <Name>{userName}</Name>
-//                     </Left>
+    const goHome = () => {
+        navigate("/")
+    }
 
-//                     <Center>
-//                         <Chat>채팅창</Chat>
-//                         <ChatInput type="text" placeholder="*메세지 보내기" />
-//                     </Center>
+    const goLogin = () => {
+        navigate("/login")
+    }
 
-//                     <Right>
-//                         <RightTop>재능구매</RightTop>
+    const goWrite = () => {
+        navigate("/write")
+    }
 
-//                         <RightContentsBind>
-//                             <RightContents>
-//                                 {purList.length > 0 && purList.map((purItem, index) => {
-//                                     return (
-//                                         <RightBoardBind key={purItem.sellIdx}>
-//                                             <RightBoard>
-//                                                 <BoardImg>
-//                                                     <img src={NoImage} alt="No Image" />
-//                                                 </BoardImg>
-//                                                 <BoardTitle onClick={() => handleSellentRead(purItem.sellIdx)}>
-//                                                     {purItem.sellTitle.length > 6
-//                                                         ? `${purItem.sellTitle.slice(0, 6)}...`
-//                                                         : purItem.sellTitle}
-//                                                     <BoardLike>
-//                                                         <FcLike />
-//                                                         <LikeScore>
-//                                                             {purItem.sellLike}
-//                                                         </LikeScore>
-//                                                     </BoardLike>
-//                                                 </BoardTitle>
-//                                             </RightBoard>
-//                                         </RightBoardBind>
-//                                     )
-//                                 })}
-//                             </RightContents>
-//                         </RightContentsBind>
-//                     </Right>
-//                 </Bind>
-//             </Back>
-//         </>
-//     );
-// }
+    const goMypage = () => {
+        navigate("/mypage")
+    }
 
-// export default Chatting;
+    const goChat = () => {
+        navigate("/chatting")
+    }
 
-// const Window = styled.div`
-//     width: 85%;
-//     height: 3rem;
-//     border: 2px solid black;
-//     border-bottom: none;
-//     margin: 0 auto;
-//     margin-top: 4vh;
-//     background-color: #dcdcdc;
-//     box-shadow: 1em 1em 1em 1em #6E6E6E;
-// `
+    const goBack = () => {
+        navigate("/background")
+    }
 
-// const Close = styled.div`
-//     font-size: 3rem;
-//     display: flex;
-//     justify-content: right;
-// `
+    const goSearch = () => {
+        navigate("/search")
+    }
 
-// const Back = styled.div`
-//     width: 85%;
-//     height: 85vh;
-//     border: 2px solid black;
-//     border-top: none;
-//     margin: 0 auto;
-//     box-shadow: 1em 1em 1em 1em #6E6E6E;
-// `
+    const userName = sessionStorage.getItem("userNm")
 
-// const Bind = styled.div`
-//     display: flex;
-//     justify-content: row;
-// `
+    const [purList, setPurList] = useState([]);
 
-// const Left = styled.div`
-//     width: 15%;
-//     height: 85vh;
-//     /* border: 2px solid black; */
-//     border-right: 2px solid black;
-//     background-color: white;
-// `
+    useEffect(() => {
+        const purchaseLoad = async () => {
+            try {
+                const response = await axios.get("/list");
+                setPurList(response.data.purList);
+                console.log("재능 구매 불러오기 성공")
+                console.log(response.data)
+            } catch (error) {
+                console.log("재능 구매 불러오기 실패");
+            }
+        };
 
-// const LeftTop = styled.div`
-//     width: 100%;
-//     height: 13vh;
-//     border-bottom: 2px solid black;
-//     font-size: 3.5rem;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     cursor: pointer;
-//     font-family: 'Lilita One', cursive;
-// `
+        purchaseLoad();
+    }, []);
 
-// const LeftBoardTitle = styled.div`
-//     width: 80%;
-//     height: 6vh;
-//     border: 2px solid black;
-//     border-radius: 0.5em;
-//     margin: 0 auto;
-//     margin-top: 2rem;
-//     font-size: 2rem;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     cursor: pointer;
-// `
+    const handleSellentRead = (sellIdx) => {
+        navigate(`/sellentRead/${sellIdx}`); //sellIdx에 해당하는 글 읽기 페이지 이동
+    }
 
-// const LeftBoard = styled.div`
-//     width: 80%;
-//     height: 6vh;
-//     border: 2px solid black;
-//     border-radius: 0.5em;
-//     margin: 0 auto;
-//     margin-top: 2rem;
-//     font-size: 2rem;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     cursor: pointer;
+    return (
+        <>
+            <Window>
+                <Close>
+                    <AiFillCloseCircle onClick={goBack} />
+                </Close>
+            </Window>
+
+
+            <Back>
+                <Bind>
+                    <Left>
+                        <LeftTop onClick={goHome}>SELLENT</LeftTop>
+                        <LeftBoardTitle onClick={goLogin}>로그인</LeftBoardTitle>
+                        <LeftBoard onClick={goWrite}>재능판매</LeftBoard>
+                        <LeftBoard onClick={goSearch} >재능검색</LeftBoard>
+                        <LeftBoard onClick={goChat} >채팅내역</LeftBoard>
+                        <LeftBoard onClick={goMypage} >마이페이지</LeftBoard>
+                        <Name>{userName}</Name>
+                    </Left>
+
+                    <Center>
+                        <Chat>채팅창</Chat>
+                        <ChatInput type="text" placeholder="*메세지 보내기" />
+                    </Center>
+
+                    <Right>
+                        <RightTop>재능구매</RightTop>
+
+                        <RightContentsBind>
+                            <RightContents>
+                                {purList.length > 0 && purList.map((purItem, index) => {
+                                    return (
+                                        <RightBoardBind key={purItem.sellIdx}>
+                                            <RightBoard>
+                                                <BoardImg>
+                                                    <img src={NoImage} alt="No Image" />
+                                                </BoardImg>
+                                                <BoardTitle onClick={() => handleSellentRead(purItem.sellIdx)}>
+                                                    {purItem.sellTitle.length > 6
+                                                        ? `${purItem.sellTitle.slice(0, 6)}...`
+                                                        : purItem.sellTitle}
+                                                    <BoardLike>
+                                                        <FcLike />
+                                                        <LikeScore>
+                                                            {purItem.sellLike}
+                                                        </LikeScore>
+                                                    </BoardLike>
+                                                </BoardTitle>
+                                            </RightBoard>
+                                        </RightBoardBind>
+                                    )
+                                })}
+                            </RightContents>
+                        </RightContentsBind>
+                    </Right>
+                </Bind>
+            </Back>
+        </>
+    );
+}
+
+export default Chatting;
+
+const Window = styled.div`
+    width: 85%;
+    height: 3rem;
+    border: 2px solid black;
+    border-bottom: none;
+    margin: 0 auto;
+    margin-top: 4vh;
+    background-color: #dcdcdc;
+    box-shadow: 1em 1em 1em 1em #6E6E6E;
+`
+
+const Close = styled.div`
+    font-size: 3rem;
+    display: flex;
+    justify-content: right;
+`
+
+const Back = styled.div`
+    width: 85%;
+    height: 85vh;
+    border: 2px solid black;
+    border-top: none;
+    margin: 0 auto;
+    box-shadow: 1em 1em 1em 1em #6E6E6E;
+`
+
+const Bind = styled.div`
+    display: flex;
+    justify-content: row;
+`
+
+const Left = styled.div`
+    width: 15%;
+    height: 85vh;
+    /* border: 2px solid black; */
+    border-right: 2px solid black;
+    background-color: white;
+`
+
+const LeftTop = styled.div`
+    width: 100%;
+    height: 13vh;
+    border-bottom: 2px solid black;
+    font-size: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-family: 'Lilita One', cursive;
+`
+
+const LeftBoardTitle = styled.div`
+    width: 80%;
+    height: 6vh;
+    border: 2px solid black;
+    border-radius: 0.5em;
+    margin: 0 auto;
+    margin-top: 2rem;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+`
+
+const LeftBoard = styled.div`
+    width: 80%;
+    height: 6vh;
+    border: 2px solid black;
+    border-radius: 0.5em;
+    margin: 0 auto;
+    margin-top: 2rem;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
     
-//     @media (max-width: 1280px) {
-//         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
-//         font-size: 1.5em; /* 글씨 크기를 줄임 */
-//     }
+    @media (max-width: 1280px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1.5em; /* 글씨 크기를 줄임 */
+    }
     
-//     @media (max-width: 900px) {
-//         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
-//         font-size: 1em; /* 글씨 크기를 줄임 */
-//     }
-// `
+    @media (max-width: 900px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1em; /* 글씨 크기를 줄임 */
+    }
+`
 
-// const Cash = styled.div`
-//     width: 80%;
-//     height: 3vh;
-//     border: 2px solid black;
-//     margin: 0 auto;
-//     margin-top: 4em;
-//     font-size: 2em;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
+const Cash = styled.div`
+    width: 80%;
+    height: 3vh;
+    border: 2px solid black;
+    margin: 0 auto;
+    margin-top: 4em;
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-//     @media (max-width: 1400px) {
-//         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
-//         font-size: 1.5em; /* 글씨 크기를 줄임 */
-//     }
+    @media (max-width: 1400px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1.5em; /* 글씨 크기를 줄임 */
+    }
     
-//     @media (max-width: 1080px) {
-//         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
-//         font-size: 1em; /* 글씨 크기를 줄임 */
-//     }
-// `
+    @media (max-width: 1080px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1em; /* 글씨 크기를 줄임 */
+    }
+`
 
-// const Name = styled.div`
-//    width: 80%;
-//     height: 6vh;
-//     /* border: 2px solid black; */
-//     border-radius: 0.5em;
-//     margin: 0 auto;
-//     margin-top: 4em;
-//     font-size: 2rem;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
+const Name = styled.div`
+   width: 80%;
+    height: 6vh;
+    /* border: 2px solid black; */
+    border-radius: 0.5em;
+    margin: 0 auto;
+    margin-top: 4em;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-//     @media (max-width: 1280px) {
-//         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
-//         font-size: 1.5em; /* 글씨 크기를 줄임 */
-//     }
+    @media (max-width: 1280px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1.5em; /* 글씨 크기를 줄임 */
+    }
     
-//     @media (max-width: 900px) {
-//         /* 화면 너비가 1280px 미만일 때 스타일 적용 */
-//         font-size: 1em; /* 글씨 크기를 줄임 */
-//     }
-// `
+    @media (max-width: 900px) {
+        /* 화면 너비가 1280px 미만일 때 스타일 적용 */
+        font-size: 1em; /* 글씨 크기를 줄임 */
+    }
+`
 
-// const Center = styled.div`
-//     width: 55%;
-//     height: 85vh;
-//     border: 2px solid red;
-//     background-color: white;
-// `
+const Center = styled.div`
+    width: 55%;
+    height: 85vh;
+    border: 2px solid red;
+    background-color: white;
+`
 
-// const Chat = styled.div`
-//     width: 90%;
-//     height: 65vh;
-//     border: 2px solid black;
-//     margin: 0 auto;
-//     margin-top: 5rem;
-//     display: flex;
-// `
+const Chat = styled.div`
+    width: 90%;
+    height: 65vh;
+    border: 2px solid black;
+    margin: 0 auto;
+    margin-top: 5rem;
+    display: flex;
+`
 
-// const ChatInput = styled.input`
-//     width: 90%;
-//     height: 5vh;
-//     border: 2px solid blue;
-//     margin: 0 auto;
-//     display: flex;
-//     font-size: 2em;
-// `
+const ChatInput = styled.input`
+    width: 90%;
+    height: 5vh;
+    border: 2px solid blue;
+    margin: 0 auto;
+    display: flex;
+    font-size: 2em;
+`
 
-// const Right = styled.div`
-//     width: 30%;
-//     height: 85vh;
-//     border: 2px solid black;
-//     border-top: none;
-//     border-right: none;
-//     background-color: white;
-// `
+const Right = styled.div`
+    width: 30%;
+    height: 85vh;
+    border: 2px solid black;
+    border-top: none;
+    border-right: none;
+    background-color: white;
+`
 
-// const RightTop = styled.div`
-//     width: 100%;
-//     height: 5vh;
-//     /* border: 2px solid black; */
-//     /* border-bottom: 2px solid black; */
-//     font-size: 2.5rem;
-//     display: flex;
-//     /* justify-content: center; */
-//     align-items: center;
-//     font-weight: bolder;
-//     padding-top: 0.5em;
-//     padding-left: 0.5rem;
-//     color: #595959;
-// `
+const RightTop = styled.div`
+    width: 100%;
+    height: 5vh;
+    /* border: 2px solid black; */
+    /* border-bottom: 2px solid black; */
+    font-size: 2.5rem;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    font-weight: bolder;
+    padding-top: 0.5em;
+    padding-left: 0.5rem;
+    color: #595959;
+`
 
-// const RightContentsBind = styled.div`
-//     width: 100%;
-//     height: 77vh;
-//     /* border: 2px solid red; */
-//     border-top: 2px solid black;
-//     display: flex;
-//     overflow: auto; /* 스크롤 추가 */
-//     overflow-x: hidden; /* 가로 스크롤 제거 */
-// `
+const RightContentsBind = styled.div`
+    width: 100%;
+    height: 77vh;
+    /* border: 2px solid red; */
+    border-top: 2px solid black;
+    display: flex;
+    overflow: auto; /* 스크롤 추가 */
+    overflow-x: hidden; /* 가로 스크롤 제거 */
+`
 
-// const RightContents = styled.div`
-//     display: flex;
-//     flex-direction: row;
-//     flex-wrap: wrap;
-//     justify-content: space-between;
-//     /* 넘치는 경우 줄바꿈 */
-// `
+const RightContents = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* 넘치는 경우 줄바꿈 */
+`
 
-// const RightBoardBind = styled.div`
-//     width: 50%;
-//     display: flex;
-//     margin-bottom: 2rem;
-// `
+const RightBoardBind = styled.div`
+    width: 50%;
+    display: flex;
+    margin-bottom: 2rem;
+`
 
-// const RightBoard = styled.div`
-//     width: 100%;
-//     height: 20vh;
-//     border: 2px solid black;
-//     margin-top: 2em;
-//     /* margin-left: 5rem; */
-//     margin-left: 1rem;
-//     margin-right: 1rem;
-// `
+const RightBoard = styled.div`
+    width: 100%;
+    height: 20vh;
+    border: 2px solid black;
+    margin-top: 2em;
+    /* margin-left: 5rem; */
+    margin-left: 1rem;
+    margin-right: 1rem;
+`
 
 
-// const BoardImg = styled.div`
-//     width: 100%;
-//     height: 15vh;
-//     img {
-//         width: 100%;
-//         height: 100%;
-//         object-fit: cover;
-//     }
-//     /* border: 2px solid red; */
-// `
+const BoardImg = styled.div`
+    width: 100%;
+    height: 15vh;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    /* border: 2px solid red; */
+`
 
-// const BoardTitle = styled.div`
-//     width: 100%;
-//     height: 4vh;
-//     /* border: 2px solid red; */
-//     border-top: 2px solid black;
-//     font-size: 1.5em;
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: center;
-//     cursor: pointer;
-// `
+const BoardTitle = styled.div`
+    width: 100%;
+    height: 4vh;
+    /* border: 2px solid red; */
+    border-top: 2px solid black;
+    font-size: 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+`
 
-// const BoardLike = styled.div`
-//     width: 30%;
-//     height: 4vh;
-//     /* border: 2px solid green; */
-//     font-size: 1em;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-// `
+const BoardLike = styled.div`
+    width: 30%;
+    height: 4vh;
+    /* border: 2px solid green; */
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
 
-// const LikeScore = styled.div`
-//     width: 30%;
-//     height: 4vh;
-//     /* border: 2px solid black; */
-//     display: flex;
-//     align-items: center;
-// `
+const LikeScore = styled.div`
+    width: 30%;
+    height: 4vh;
+    /* border: 2px solid black; */
+    display: flex;
+    align-items: center;
+`
