@@ -542,6 +542,7 @@ const RightContentsBind = styled.div`
 `
 
 const RightContents = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
