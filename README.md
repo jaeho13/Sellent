@@ -30,9 +30,26 @@
 ### 3. 로그인 성공 시 마이페이지에 들어가서 구매 혹은 판매 재능을 볼 수 있습니다.
 <br />
 
+## 🚀 프로젝트 구상도
+![think](https://github.com/user-attachments/assets/98806db6-33f0-4bbf-9725-7f2045c0363f)
+<br />
 
 ## 🚀 프로젝트 결과
+### 메인화면
+![main](https://github.com/user-attachments/assets/9d0f1420-1de1-42b5-8586-471fb0b609ed)
+
+### 게시판
+![board0](https://github.com/user-attachments/assets/d918b3b4-a8e5-4ed4-9695-f140797b2be0)
+![board](https://github.com/user-attachments/assets/b7399383-ea0c-4605-a399-4353c451feb4)
+
+### 게시판 검색
+![search](https://github.com/user-attachments/assets/7cba6af9-5dc5-4343-83d7-caca685cc8f9)
+
+### 재능 결제
+![bind_purchase](https://github.com/user-attachments/assets/3029e072-6281-45bf-9490-d7202dc7ac61)
+
 <br />
+
 
 ## 🚀 느낀점
 <br />
