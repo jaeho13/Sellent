@@ -39,11 +39,15 @@
 ![main](https://github.com/user-attachments/assets/9d0f1420-1de1-42b5-8586-471fb0b609ed)
 
 ### 게시판
-![board0](https://github.com/user-attachments/assets/d918b3b4-a8e5-4ed4-9695-f140797b2be0)
-![board](https://github.com/user-attachments/assets/b7399383-ea0c-4605-a399-4353c451feb4)
+![board0](https://github.com/user-attachments/assets/3cf39fde-da06-41f1-8de7-2baf1a27667d)
+![board](https://github.com/user-attachments/assets/b94f02e0-d686-4dfa-9e9c-4e203ee654af)
 
 ### 게시판 검색
 ![search](https://github.com/user-attachments/assets/7cba6af9-5dc5-4343-83d7-caca685cc8f9)
+
+### 거래 장소 지정
+![map](https://github.com/user-attachments/assets/8cb62988-516c-4a8f-b1af-00a93ee09ca0)
+
 
 ### 재능 결제
 ![bind_purchase](https://github.com/user-attachments/assets/3029e072-6281-45bf-9490-d7202dc7ac61)
